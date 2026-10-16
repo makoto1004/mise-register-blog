@@ -5,6 +5,7 @@ import ProductCard from '@/components/ProductCard';
 import ServiceCard from '@/components/ServiceCard';
 import PickCard from '@/components/PickCard';
 import ThemeBackground from '@/components/ThemeBackground';
+import CostSimulator from '@/components/CostSimulator';
 import { getPostSlugs, getPostBySlug } from '@/lib/posts';
 import { CATEGORIES } from '@/lib/site';
 
@@ -120,6 +121,8 @@ export default async function PostPage({ params }) {
         }
         return <div key={index} className="post-body" dangerouslySetInnerHTML={{ __html: section.html }} />;
       })}
+
+      <CostSimulator category={post.category} />
 
       <p className="price-note">
         ※ 価格・在庫・仕様は変わることがあります。購入前に各商品ページ・公式サイトで最新情報を確認してください。
