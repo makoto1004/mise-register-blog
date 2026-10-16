@@ -3,6 +3,7 @@ import TagList from '@/components/TagList';
 import ComparisonTable from '@/components/ComparisonTable';
 import ProductCard from '@/components/ProductCard';
 import ServiceCard from '@/components/ServiceCard';
+import PickCard from '@/components/PickCard';
 import { getPostSlugs, getPostBySlug } from '@/lib/posts';
 import { CATEGORIES } from '@/lib/site';
 
@@ -56,6 +57,22 @@ function ServicesBlock({ services, nested }) {
   );
 }
 
+function PicksBlock({ picks, nested }) {
+  const Heading = nested ? 'h3' : 'h2';
+  const shops = [...new Set(picks.map((p) => p.shop))].join('・');
+  return (
+    <>
+      <Heading className="products-heading">実際の商品の例（{shops}）</Heading>
+      <div className="pick-grid">
+        {picks.map((pick) => (
+          <PickCard key={pick.url} pick={pick} />
+        ))}
+      </div>
+      <p className="service-note">※ 価格・在庫・仕様は変わることがあります。購入前に商品ページで最新の情報を確認してください。</p>
+    </>
+  );
+}
+
 // 記事詳細ページ
 export default async function PostPage({ params }) {
   const { slug } = await params;
@@ -67,7 +84,7 @@ export default async function PostPage({ params }) {
       {/* ステマ規制対応：広告を含む記事であることを冒頭で明示する */}
       <p className="pr-notice">
         <span className="pr-label">PR</span>
-        本記事にはアフィリエイト広告（Amazonアソシエイト・A8.netなど）を含みます。
+        本記事にはアフィリエイト広告（Amazonアソシエイト・楽天アフィリエイト・A8.netなど）を含みます。
       </p>
       <nav className="breadcrumb" aria-label="パンくずリスト">
         <Link href="/">ホーム</Link>
@@ -92,6 +109,9 @@ export default async function PostPage({ params }) {
         }
         if (section.type === 'services') {
           return <ServicesBlock key={index} services={post.services} nested={nested} />;
+        }
+        if (section.type === 'picks') {
+          return <PicksBlock key={index} picks={post.picks} nested={nested} />;
         }
         return <div key={index} className="post-body" dangerouslySetInnerHTML={{ __html: section.html }} />;
       })}

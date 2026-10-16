@@ -345,6 +345,45 @@ a:hover { text-decoration: underline; }
   border: 1px solid var(--line);
   margin-bottom: 4px;
 }
+/* 実際の商品の例（楽天アフィリエイトなど） */
+.pick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 16px 0; }
+.pick-card {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  padding: 12px;
+  color: var(--text);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.pick-card:hover { text-decoration: none; }
+@media (hover: hover) {
+  .pick-card:hover { transform: translate(-3px, -3px); box-shadow: 3px 3px 0 var(--border); }
+}
+.pick-image {
+  flex: 0 0 auto;
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+.pick-body { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.pick-name { font-size: 0.85rem; font-weight: 700; line-height: 1.6; }
+.pick-note { font-size: 0.75rem; color: var(--muted); line-height: 1.6; }
+.pick-button {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #fff;
+  background: #bf0000;
+  padding: 3px 12px;
+}
+@media (max-width: 480px) {
+  .pick-image { width: 88px; height: 88px; }
+}
+
 .service-banner-link { display: block; margin-bottom: 10px; }
 .service-banner { display: block; max-width: 100%; max-height: 120px; width: auto; margin: 0 auto; }
 @media (max-width: 480px) {

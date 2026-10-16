@@ -109,6 +109,12 @@ services:
     note: 北欧・ナチュラルなど、さまざまなテイストの家具・インテリアがそろう通販ショップ。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
   - id: lowya
     note: ラック・シェルフ・ミラーなど、売り場づくりに使える家具を探せる通販ブランド。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
+picks:
+  - name: 'LOWYA 6灯スポットライト型シーリングライト（LED対応・リモコン付き・スチール）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flow-ya%2F2c78w%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=1209653&item_id=10013341&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Flow-ya%2Fcabinet%2Fitem_cart%2Flighting%2F01%2F2c78w_01.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '家庭向けの商品です。店舗で使う場合は、耐荷重や使い方の条件を商品ページで確認しましょう。'
 ---
 
 アイアンの黒と、使い込んだような木を組み合わせた**ブルックリンスタイル**は、服屋やセレクトショップで人気の店づくりです。ただ、雰囲気のある家具を置きすぎると、主役であるはずの商品が目立たなくなってしまいます。
@@ -160,6 +166,8 @@ services:
 | 雰囲気を仕上げる | パイプハンガー、インダストリアル系の照明 |
 
 会計や在庫管理の仕組みは[アパレル向けPOSレジ比較](/posts/apparel-pos-comparison)で解説しています。
+
+<!-- picks -->
 
 <!-- services -->
 
