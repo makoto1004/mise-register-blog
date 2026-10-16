@@ -296,6 +296,35 @@ a:hover { text-decoration: underline; }
 .affiliate-buttons-title { margin: 0; font-weight: 800; }
 .post-body .affiliate-buttons a.amazon-button { color: var(--amazon-text); }
 
+/* サービス紹介のカード（A8.net など） */
+.service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 16px 0; }
+.service-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  padding: 16px 18px 18px;
+}
+.service-group { margin: 0; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; color: var(--muted); }
+.service-card .service-name { margin: 4px 0 8px; font-size: 1.05rem; font-weight: 800; border: none; padding: 0; }
+.service-summary { margin: 0 0 14px; font-size: 0.85rem; flex: 1; }
+.service-button {
+  display: block;
+  text-align: center;
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 800;
+  border: 1px solid var(--text);
+  padding: 9px 16px;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.service-button:hover { text-decoration: none; }
+@media (hover: hover) {
+  .service-button:hover { transform: translate(-3px, -3px); box-shadow: 3px 3px 0 var(--muted); }
+}
+.service-pixel { position: absolute; width: 1px; height: 1px; border: 0; }
+.service-note { font-size: 0.75rem; color: var(--muted); }
+
 .price-note { margin-top: 32px; font-size: 0.8rem; color: var(--muted); }
 .back-link { margin-top: 32px; }
 

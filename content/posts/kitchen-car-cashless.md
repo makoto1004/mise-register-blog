@@ -32,6 +32,7 @@ products:
       - 端末がなくても受けられる決済方法がある
     cons:
       - 支払い完了の確認を確実に行う必要がある
+services: [square, airpay, storesPayment]
 ---
 
 キッチンカーでは、お店とは違い、**限られた電源と、電波が弱いことがある場所**でキャッシュレス決済を使います。イベントでは行列ができやすいので、会計の速さも大切です。
@@ -63,6 +64,8 @@ products:
 POSレジの選び方は[キッチンカー向けPOSレジ比較](/posts/kitchen-car-pos-comparison)で解説しています。
 
 <!-- products -->
+
+<!-- services -->
 
 ## よくある質問
 

@@ -42,6 +42,7 @@ products:
       - サイズの問い合わせが減る
     cons:
       - 採寸に時間がかかる
+services: [superdelivery, netsea]
 ---
 
 アパレルショップの品ぞろえは、**仕入れ方法**で大きく変わります。この記事では、主な仕入れ方法の違いと、サイズ・カラーの仕入れ量の決め方を解説します。
@@ -75,6 +76,8 @@ products:
 必要な道具は[アパレルショップ開業に必要なもの一覧](/posts/apparel-opening-checklist)で紹介しています。
 
 <!-- products -->
+
+<!-- services -->
 
 ## よくある質問
 
