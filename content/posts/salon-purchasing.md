@@ -43,6 +43,18 @@ products:
       - 手荒れを防げる
     cons:
       - 毎日使うので消費が早い
+  - name: Bluetoothのバーコードスキャナー
+    keyword: バーコードリーダー Bluetooth 2次元 POS
+    summary: シャンプーなど店販商品のバーコードを読み取って会計・在庫管理するための機器。iPadのPOSレジならBluetoothタイプが基本です。
+    specs:
+      用途: 店販商品の会計・在庫管理
+      選び方: POSレジの対応機種か
+      注意点: 商品にバーコードがあるか
+    pros:
+      - 打ち間違いが減る
+      - 在庫の数え直し（棚卸し）にも使える
+    cons:
+      - POSレジの対応機種でないと正しく入力されない
 services: [netsea]
 ---
 
