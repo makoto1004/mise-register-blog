@@ -162,6 +162,29 @@ a:hover { text-decoration: underline; }
 .thumb-headline { font-size: 1.15rem; font-weight: 800; line-height: 1.5; }
 .thumb-category { font-size: 0.75rem; font-weight: 700; color: var(--muted); }
 
+/* 記事のテーマのイラスト背景（ThemeBackground）。文字の後ろに敷く */
+.thumb-text, .article-hero { position: relative; overflow: hidden; }
+.theme-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--text);
+  pointer-events: none;
+}
+.thumb-text > span, .article-hero > :not(.theme-bg) { position: relative; }
+
+/* 記事ページの見出し部分 */
+.article-hero {
+  border: 1px solid var(--border);
+  padding: 56px 28px 52px;
+  margin: 4px 0 8px;
+}
+.article .article-hero h1 { margin: 0 0 12px; }
+@media (max-width: 480px) {
+  .article-hero { padding: 48px 18px 44px; }
+}
+
 .card-title {
   display: block;
   margin-top: 10px;

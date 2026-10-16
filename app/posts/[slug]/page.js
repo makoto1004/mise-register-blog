@@ -4,6 +4,7 @@ import ComparisonTable from '@/components/ComparisonTable';
 import ProductCard from '@/components/ProductCard';
 import ServiceCard from '@/components/ServiceCard';
 import PickCard from '@/components/PickCard';
+import ThemeBackground from '@/components/ThemeBackground';
 import { getPostSlugs, getPostBySlug } from '@/lib/posts';
 import { CATEGORIES } from '@/lib/site';
 
@@ -95,12 +96,16 @@ export default async function PostPage({ params }) {
           </>
         )}
       </nav>
-      <h1>{post.title}</h1>
-      <div className="post-meta">
-        <time dateTime={post.date}>公開 {post.date}</time>
-        {post.updated && <time dateTime={post.updated}>更新 {post.updated}</time>}
-        <TagList tags={post.tags} />
-      </div>
+      {/* 記事の見出し部分。背景に記事のテーマのイラストを入れる（中央は文字のために空ける） */}
+      <header className={`article-hero thumb-${post.category}`}>
+        <ThemeBackground post={post} width={760} height={260} />
+        <h1>{post.title}</h1>
+        <div className="post-meta">
+          <time dateTime={post.date}>公開 {post.date}</time>
+          {post.updated && <time dateTime={post.updated}>更新 {post.updated}</time>}
+          <TagList tags={post.tags} />
+        </div>
+      </header>
 
       {post.sections.map((section, index) => {
         const nested = endsWithH2(post.sections[index - 1]);
