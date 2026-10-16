@@ -20,6 +20,10 @@ export default function ComparisonTable({ products }) {
           {products.map((product, index) => (
             <tr key={product.name}>
               <th scope="row">
+                {product.image && (
+                  // eslint-disable-next-line @next/next/no-img-element -- 外部の広告画像をそのまま表示する
+                  <img src={product.image} alt="" className="table-thumb" loading="lazy" />
+                )}
                 <a href={`#product-${index + 1}`}>{product.name}</a>
                 {product.badge && <span className="badge">{product.badge}</span>}
               </th>

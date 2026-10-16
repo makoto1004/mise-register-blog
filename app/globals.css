@@ -323,6 +323,33 @@ a:hover { text-decoration: underline; }
   .service-button:hover { transform: translate(-3px, -3px); box-shadow: 3px 3px 0 var(--muted); }
 }
 .service-pixel { position: absolute; width: 1px; height: 1px; border: 0; }
+
+/* 商品・サービスの画像（文章のじゃまにならない小さめのサイズ） */
+.product-body.has-image { display: flex; gap: 14px; align-items: flex-start; margin: 10px 0 4px; }
+.product-body.has-image .product-summary { margin: 0; }
+.product-thumb-link { flex: 0 0 auto; }
+.product-thumb {
+  display: block;
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+.table-thumb {
+  display: block;
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--line);
+  margin-bottom: 4px;
+}
+.service-banner-link { display: block; margin-bottom: 10px; }
+.service-banner { display: block; max-width: 100%; max-height: 120px; width: auto; margin: 0 auto; }
+@media (max-width: 480px) {
+  .product-thumb { width: 72px; height: 72px; }
+}
 .service-note { font-size: 0.75rem; color: var(--muted); }
 
 .price-note { margin-top: 32px; font-size: 0.8rem; color: var(--muted); }
