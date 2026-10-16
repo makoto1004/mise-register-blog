@@ -1,0 +1,24 @@
+{
+  "name": "markdown-blog",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "npx serve out",
+    "draft": "node --env-file-if-exists=.env.local scripts/generate-draft.mjs",
+    "draft:daily": "node --env-file-if-exists=.env.local scripts/daily-draft.mjs"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "next": "^16.4.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "remark": "^15.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-html": "^16.0.1"
+  },
+  "devDependencies": {
+    "@anthropic-ai/sdk": "^0.135.0"
+  }
+}
