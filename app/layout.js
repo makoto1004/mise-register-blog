@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Cormorant_Garamond } from 'next/font/google';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import Logo from '@/components/Logo';
 import { SITE, CATEGORIES, OG_IMAGE } from '@/lib/site';
 import './globals.css';
@@ -23,6 +24,9 @@ export const metadata = {
   // Google Search Console の所有権確認（HTML タグ方式）
   ...(googleVerification() ? { verification: { google: googleVerification() } } : {}),
 };
+
+// Google アナリティクスの測定 ID（G-XXXXXXXXXX）。未設定なら読み込まない
+const GA_ID = (process.env.NEXT_PUBLIC_GA_ID ?? '').trim();
 
 // 環境変数の確認用の値を取り出す。<meta … content="…"> のタグをまるごと入れた場合も、content の中身だけを使う
 function googleVerification() {
@@ -105,6 +109,7 @@ export default function RootLayout({ children }) {
           <a href="#top" aria-label="ページの先頭へ">↑</a>
         </nav>
       </body>
+      {/^G-[A-Z0-9]+$/.test(GA_ID) && <GoogleAnalytics gaId={GA_ID} />}
     </html>
   );
 }

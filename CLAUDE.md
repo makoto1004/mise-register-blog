@@ -130,7 +130,7 @@ npm run og      # OGP 画像（public/og-image.png）を作り直す
 
 公開前に、プライバシーポリシー（`/about`）にツール名・Cookie の利用・取得する情報の扱いを追記する。
 
-- アクセス解析ツール（例: Google アナリティクス、Vercel Analytics）
+- ~~アクセス解析ツール~~ → Google アナリティクス（GA4）を導入済み。測定 ID は環境変数 `NEXT_PUBLIC_GA_ID`。プライバシーポリシーにも記載済み
 - コメント欄・お問い合わせフォーム
 - 簡易アンケート
 

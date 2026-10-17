@@ -31,7 +31,39 @@ export default function AboutPage() {
       </p>
 
       <h2>アクセス解析について</h2>
-      <p>【アクセス解析ツールを使う場合は、ツール名と Cookie の利用について記載してください】</p>
+      <p>
+        当サイトでは、Google LLC が提供するアクセス解析ツール「Google アナリティクス」を利用しています。Google
+        アナリティクスは、Cookie（クッキー）を使って、閲覧されたページ・滞在時間・おおよその地域・利用している端末やブラウザの種類などの情報を収集します。これらの情報は個人を特定するものではありません。
+      </p>
+      <p>
+        収集した情報は、サイトの利用状況を把握し、記事やサイトの使いやすさを改善するために使います。情報は Google
+        のプライバシーポリシーにもとづいて管理されます。
+      </p>
+      <ul>
+        <li>
+          Google によるデータの使用について：
+          <a href="https://policies.google.com/technologies/partner-sites?hl=ja" target="_blank" rel="noopener noreferrer">
+            Google のサービスを使用するサイトやアプリから収集した情報の Google による使用
+          </a>
+        </li>
+        <li>
+          Google のプライバシーポリシー：
+          <a href="https://policies.google.com/privacy?hl=ja" target="_blank" rel="noopener noreferrer">
+            https://policies.google.com/privacy
+          </a>
+        </li>
+      </ul>
+      <p>
+        Cookie はブラウザの設定で無効にできます。また、
+        <a href="https://tools.google.com/dlpage/gaoptout?hl=ja" target="_blank" rel="noopener noreferrer">
+          Google アナリティクス オプトアウト アドオン
+        </a>
+        を使うと、Google アナリティクスによる情報の収集を止めることができます。
+      </p>
+      <p>
+        なお、当サイトで利用しているアフィリエイトサービス（Amazon アソシエイト・楽天アフィリエイト・A8.net
+        など）も、成果を計測するために Cookie を使うことがあります。
+      </p>
 
       <h2>免責事項</h2>
       <p>
