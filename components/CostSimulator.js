@@ -17,13 +17,26 @@ const COMMON_INITIAL = [
   { id: 'supplies', label: 'ロール紙などの消耗品' },
 ];
 
+// 店舗を借りる業種の物件まわりの初期費用（キッチンカー以外）
+const STORE_INITIAL = [
+  { id: 'property', label: '物件の取得費（保証金・敷金・礼金・仲介手数料など）' },
+  { id: 'interior', label: '内装工事費' },
+];
+
 const CATEGORY_INITIAL = {
   cafe: [
+    ...STORE_INITIAL,
+    { id: 'kitchen', label: '厨房機器（冷蔵庫・製氷機など）' },
+    { id: 'coffee', label: 'コーヒーマシン・グラインダー' },
     { id: 'furniture', label: 'テーブル・チェア' },
     { id: 'tableware', label: '食器・テイクアウト容器' },
     { id: 'order', label: 'モバイルオーダーなどの導入費用' },
   ],
   salon: [
+    ...STORE_INITIAL,
+    { id: 'shampoo', label: 'シャンプー台（給排水・給湯の工事を含む）' },
+    { id: 'station', label: 'セット椅子・鏡（セット面）' },
+    { id: 'beautytools', label: 'ドライヤー・スチーマーなどの美容機器' },
     { id: 'waiting', label: '待合のソファ・テーブル' },
     { id: 'karte', label: 'カルテ用のiPad・ケース' },
     { id: 'reserve', label: '予約システムの導入費用' },
@@ -44,22 +57,59 @@ const CATEGORY_INITIAL = {
     { id: 'permit', label: '営業許可の手数料など' },
   ],
   apparel: [
+    ...STORE_INITIAL,
     { id: 'fixtures', label: 'ハンガーラック・棚などの什器' },
     { id: 'fitting', label: '試着室・鏡' },
     { id: 'lighting', label: '照明' },
     { id: 'label', label: 'ラベルプリンター・タグガン' },
     { id: 'stock', label: '最初の仕入れ' },
   ],
-  devices: [],
+  devices: [...STORE_INITIAL],
 };
 
+// 毎月の費用（全業種共通）
 const MONTHLY = [
   { id: 'pos', label: 'POSレジの月額', hint: '無料プランなら0円' },
   { id: 'line', label: '通信費（回線・モバイルルーター）' },
   { id: 'accounting', label: '会計ソフトの月額（年額 ÷ 12）' },
+  { id: 'staff', label: '人件費（アルバイト・スタッフ）', hint: '1人で営業するなら0円' },
 ];
 
-const KITCHEN_CAR_MONTHLY = [{ id: 'insurance', label: '自動車保険（年額 ÷ 12）' }];
+// 店舗を借りる業種の毎月の費用（キッチンカー以外）
+const STORE_MONTHLY = [
+  { id: 'rent', label: '家賃（共益費・管理費を含む）' },
+  { id: 'utilities', label: '水道光熱費' },
+];
+
+// 業種ごとの毎月の費用
+const CATEGORY_MONTHLY = {
+  cafe: [
+    ...STORE_MONTHLY,
+    { id: 'food', label: '食材費（コーヒー豆・牛乳・フードの材料など）' },
+    { id: 'packaging', label: 'テイクアウト容器・紙ナプキンなどの消耗品' },
+  ],
+  salon: [
+    ...STORE_MONTHLY,
+    { id: 'materials', label: '材料費（カラー剤・パーマ液・シャンプーなど）' },
+    { id: 'retail', label: '店販商品の仕入れ' },
+    { id: 'linen', label: 'タオル・ケープなどのリネン・洗濯代' },
+  ],
+  'kitchen-car': [
+    { id: 'food', label: '食材費' },
+    { id: 'packaging', label: '容器・割り箸などの消耗品' },
+    { id: 'venue', label: '出店料（イベント・場所の利用料）' },
+    { id: 'fuel', label: '燃料費（ガソリン・調理用のガスなど）' },
+    { id: 'parking', label: '駐車場代' },
+    { id: 'kitchen', label: '仕込み場所の利用料', hint: '自前の施設なら0円' },
+    { id: 'insurance', label: '自動車保険（年額 ÷ 12）' },
+  ],
+  apparel: [
+    ...STORE_MONTHLY,
+    { id: 'restock', label: '商品の仕入れ' },
+    { id: 'shopper', label: 'ショッパー・値札などの消耗品' },
+  ],
+  devices: [...STORE_MONTHLY],
+};
 
 const yen = (n) => `${Math.round(n).toLocaleString('ja-JP')}円`;
 const toNumber = (value) => {
@@ -99,7 +149,7 @@ export default function CostSimulator({ category }) {
     [category],
   );
   const monthlyItems = useMemo(
-    () => [...MONTHLY, ...(category === 'kitchen-car' ? KITCHEN_CAR_MONTHLY : [])],
+    () => [...(CATEGORY_MONTHLY[category] ?? STORE_MONTHLY), ...MONTHLY],
     [category],
   );
 
