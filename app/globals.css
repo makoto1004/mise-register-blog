@@ -734,3 +734,18 @@ a:hover { text-decoration: underline; }
 .x-button:hover { text-decoration: none; opacity: 0.85; }
 .x-share { background: var(--bg); color: var(--text); }
 .x-share:hover { background: var(--text); color: var(--bg); opacity: 1; }
+
+/* X のタイムラインの埋め込み */
+.x-timeline {
+  max-width: 560px;
+  min-height: 120px;
+  margin: 8px 0 16px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+}
+.x-timeline > a.twitter-timeline {
+  display: block;
+  padding: 16px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}

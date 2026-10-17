@@ -3,6 +3,7 @@ import PostThumbnail from '@/components/PostThumbnail';
 import StoreScenes from '@/components/StoreScenes';
 import JsonLd from '@/components/JsonLd';
 import { XFollow } from '@/components/XLinks';
+import XTimeline from '@/components/XTimeline';
 import { getPostsByCategory } from '@/lib/posts';
 import { SITE, CATEGORIES, CATEGORY_DESCRIPTIONS } from '@/lib/site';
 
@@ -97,6 +98,7 @@ export default function Home() {
         <div className="section-head">
           <h2>X でもお知らせしています</h2>
         </div>
+        <XTimeline account={SITE.xAccount} />
         <XFollow />
       </section>
     </>
