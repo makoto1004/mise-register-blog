@@ -32,7 +32,8 @@ export const metadata = {
 };
 
 // Google アナリティクスの測定 ID（G-XXXXXXXXXX）。未設定なら読み込まない
-const GA_ID = (process.env.NEXT_PUBLIC_GA_ID ?? '').trim();
+// 測定用のタグをまるごと貼った場合や、前後に空白・引用符がある場合も、G- で始まる部分だけを取り出す
+const GA_ID = ((process.env.NEXT_PUBLIC_GA_ID ?? '').toUpperCase().match(/G-[A-Z0-9]+/) ?? [''])[0];
 
 // 環境変数の確認用の値を取り出す。<meta … content="…"> のタグをまるごと入れた場合も、content の中身だけを使う
 function googleVerification() {
