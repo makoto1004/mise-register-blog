@@ -5,6 +5,7 @@ import { CATEGORIES, PURPOSES } from '@/lib/site';
 export const metadata = {
   title: 'サイトマップ',
   description: 'すべての記事を、業種別・目的別に一覧できるページです。',
+  alternates: { canonical: '/site-map' },
 };
 
 // サイトマップ（人が読むための全記事一覧）。業種別と目的別の 2 つの入り口を用意する

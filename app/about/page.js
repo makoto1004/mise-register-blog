@@ -1,6 +1,9 @@
 import { SITE } from '@/lib/site';
 
-export const metadata = { title: '運営者情報・プライバシーポリシー' };
+export const metadata = {
+  title: '運営者情報・プライバシーポリシー',
+  alternates: { canonical: '/about' },
+};
 
 // 運営者情報・プライバシーポリシー・免責事項（【】の部分は公開前に書き換える）
 export default function AboutPage() {

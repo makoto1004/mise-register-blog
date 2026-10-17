@@ -15,6 +15,7 @@ export async function generateMetadata({ params }) {
   return {
     title: `${CATEGORIES[category]}の記事一覧`,
     description: CATEGORY_DESCRIPTIONS[category],
+    alternates: { canonical: `/category/${category}` },
   };
 }
 

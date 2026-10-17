@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import PostThumbnail from '@/components/PostThumbnail';
 import StoreScenes from '@/components/StoreScenes';
+import JsonLd from '@/components/JsonLd';
 import { getPostsByCategory } from '@/lib/posts';
 import { SITE, CATEGORIES, CATEGORY_DESCRIPTIONS } from '@/lib/site';
 
@@ -16,6 +17,16 @@ export default function Home() {
 
   return (
     <>
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: SITE.name,
+          url: `${SITE.url}/`,
+          description: SITE.description,
+          inLanguage: 'ja',
+        }}
+      />
       <section className="home-hero">
         <StoreScenes />
         <p className="home-kicker">小さなお店のための、レジまわりの教科書</p>

@@ -19,6 +19,11 @@ export const metadata = {
   description: SITE.description,
   openGraph: { siteName: SITE.name, locale: 'ja_JP', type: 'website', images: [OG_IMAGE] },
   twitter: { card: 'summary_large_image', images: [OG_IMAGE.url] },
+  alternates: { canonical: '/' },
+  // Google Search Console の所有権確認（HTML タグ方式）。content の値を環境変数に入れる
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION.trim() } }
+    : {}),
 };
 
 export default function RootLayout({ children }) {

@@ -7,7 +7,8 @@ import PickCard from '@/components/PickCard';
 import ThemeBackground from '@/components/ThemeBackground';
 import CostSimulator from '@/components/CostSimulator';
 import { getPostSlugs, getPostBySlug } from '@/lib/posts';
-import { CATEGORIES, OG_IMAGE } from '@/lib/site';
+import JsonLd from '@/components/JsonLd';
+import { SITE, CATEGORIES, OG_IMAGE } from '@/lib/site';
 
 // ビルド時に生成するページの一覧（Static Export では必須）
 export function generateStaticParams() {
@@ -24,8 +25,48 @@ export async function generateMetadata({ params }) {
     title: post.title,
     description: post.description,
     // openGraph は親（layout）の設定を上書きするので、共有用の画像もここで指定する
-    openGraph: { title: post.title, description: post.description, type: 'article', images: [OG_IMAGE] },
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      type: 'article',
+      publishedTime: post.date,
+      ...(post.updated ? { modifiedTime: post.updated } : {}),
+      images: [OG_IMAGE],
+    },
+    alternates: { canonical: `/posts/${slug}` },
   };
+}
+
+// 記事の構造化データ（記事の情報 + パンくずリスト）
+function articleJsonLd(post, categoryName) {
+  const url = `${SITE.url}/posts/${post.slug}`;
+  const publisher = { '@type': 'Organization', name: SITE.name, url: SITE.url };
+  return [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: post.title,
+      description: post.description,
+      datePublished: post.date,
+      dateModified: post.updated || post.date,
+      image: [`${SITE.url}${OG_IMAGE.url}`],
+      author: publisher,
+      publisher,
+      mainEntityOfPage: url,
+      inLanguage: 'ja',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'ホーム', item: `${SITE.url}/` },
+        ...(categoryName
+          ? [{ '@type': 'ListItem', position: 2, name: categoryName, item: `${SITE.url}/category/${post.category}` }]
+          : []),
+        { '@type': 'ListItem', position: categoryName ? 3 : 2, name: post.title, item: url },
+      ],
+    },
+  ];
 }
 
 // 直前の本文が H2 見出しで終わっていれば、差し込むブロックの見出しを 1 段下げる
@@ -84,6 +125,7 @@ export default async function PostPage({ params }) {
 
   return (
     <article className="article">
+      <JsonLd data={articleJsonLd(post, categoryName)} />
       {/* ステマ規制対応：広告を含む記事であることを冒頭で明示する */}
       <p className="pr-notice">
         <span className="pr-label">PR</span>
