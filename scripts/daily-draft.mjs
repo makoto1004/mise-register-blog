@@ -1,5 +1,5 @@
 // keywords.txt の先頭のキーワードを 1 つ取り出して記事の下書きを生成し、drafts/ に保存する
-// 毎朝 8 時にタスク スケジューラから実行する想定（scripts/register-daily-task.ps1 で登録）
+// 毎朝 7 時にタスク スケジューラから実行する想定（scripts/register-daily-task.ps1 で登録）
 //
 // 使い方（手動で試すとき）:
 //   npm run draft:daily

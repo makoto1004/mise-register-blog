@@ -69,13 +69,13 @@ npm run draft -- "スマレジ 周辺機器 Amazon" --tag yourname-22   # トラ
 - 価格・ASIN は書かせない設定にしている。リンクはすべて Amazon の検索結果ページ
 - API の利用料がかかる（1記事あたりの目安は実行後に Claude Console の Usage で確認する）
 
-### 毎朝 8 時に自動で下書きを作る
+### 毎朝 7 時に自動で下書きを作る
 
-`keywords.txt` に 1 行 1 キーワードで書いておくと、毎朝 8 時に上から 1 つずつ下書きを生成して `drafts/` に保存する（`scripts/daily-draft.mjs`）。
+`keywords.txt` に 1 行 1 キーワードで書いておくと、毎朝 7 時に上から 1 つずつ下書きを生成して `drafts/` に保存する（`scripts/daily-draft.mjs`）。
 
 ```bash
 npm run draft:daily                          # 手動で 1 件だけ試す
-.\scripts\register-daily-task.ps1            # タスク スケジューラに毎日 08:00 で登録
+.\scripts\register-daily-task.ps1            # タスク スケジューラに毎日 07:00 で登録
 .\scripts\register-daily-task.ps1 -Remove    # 登録を解除
 ```
 
@@ -83,7 +83,7 @@ npm run draft:daily                          # 手動で 1 件だけ試す
 - 成功した行は `keywords.txt` から消える。失敗したら行が残るので、翌朝もう一度試される
 - 結果は `logs/daily-draft.log` に残る
 - 自動では公開しない。`reviewNotes` を確認してから `content/posts/` に移す
-- PC がログオン中のときだけ動く。8 時に電源が切れていた場合は、次に起動したときに実行される
+- PC がログオン中のときだけ動く。7 時に電源が切れていた場合は、次に起動したときに実行される
 
 ## A8.net のリンクを設定する
 
