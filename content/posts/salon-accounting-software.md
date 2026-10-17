@@ -1,6 +1,7 @@
 ---
 title: 美容室・サロンの会計ソフトの選び方｜歩合・業務委託スタッフへの支払いと店販の売上を管理する
 date: 2026-10-17
+updated: 2026-10-17
 category: salon
 order: 7
 tags: [美容院, サロン, 会計ソフト, 確定申告, 業務委託, 歩合]
@@ -78,3 +79,17 @@ POSレジの売上を自動で取り込めると、毎日の入力が不要に�
 - サロンの会計ソフトは、POSレジ連携で施術と店販を分けて取り込めるかで選ぶ
 - スタッフ別の売上はPOSレジで集計し、給与計算と組み合わせる
 - 業務委託スタッフへの支払いは、源泉徴収やインボイスの扱いを確認する
+
+## 参考にした情報
+
+- 国税庁「[インボイス制度特設サイト](https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice.htm)」
+- 国税庁 タックスアンサー「[No.2070 青色申告制度](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2070.htm)」
+- 国税庁 タックスアンサー「[No.2792 源泉徴収が必要な報酬・料金等とは](https://www.nta.go.jp/taxes/shiraberu/taxanswer/gensen/2792.htm)」
+
+紹介したサービスの最新の料金・機能は、各公式サイトで確認できます。
+
+- freee「[公式サイト](https://www.freee.co.jp/)」
+- マネーフォワード クラウド会計「[公式サイト](https://biz.moneyforward.com/accounting/)」
+- 弥生「[公式サイト](https://www.yayoi-kk.co.jp/)」
+
+※ 確認日：2026年10月17日。制度や料金は変わることがあるため、最新の情報は各ページと、お店のある地域の保健所・税務署・消防署などで確認してください。

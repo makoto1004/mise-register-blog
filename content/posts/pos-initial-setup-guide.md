@@ -1,6 +1,7 @@
 ---
 title: POSレジの初期設定ガイド｜開店前にやることを順番どおりに解説
 date: 2026-10-17
+updated: 2026-10-17
 category: devices
 order: 8
 tags: [POSレジ, 初期設定, 開業, 商品登録, インボイス]
@@ -103,3 +104,10 @@ POSレジの選び方や費用を抑える方法は、[POSレジの初期費用�
 - 初期設定は「店舗情報 → 税率 → 商品 → スタッフ → 周辺機器 → レシート → 決済 → テスト」の順に進める
 - 商品登録が一番時間がかかるので、早めに始める
 - 開店前にテスト会計と締めの練習をして、レシートの記載内容も確認する
+
+## 参考にした情報
+
+- 国税庁「[インボイス制度特設サイト](https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice.htm)」
+- 国税庁「[消費税の軽減税率制度・インボイス制度](https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/index.htm)」
+
+※ 確認日：2026年10月17日。制度や料金は変わることがあるため、最新の情報は各ページと、お店のある地域の保健所・税務署・消防署などで確認してください。

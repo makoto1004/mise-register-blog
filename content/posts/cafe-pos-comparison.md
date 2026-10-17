@@ -1,6 +1,7 @@
 ---
 title: カフェ・飲食店向けPOSレジおすすめ比較｜Airレジ・Square・スマレジの選び方
 date: 2026-10-16
+updated: 2026-10-17
 category: cafe
 order: 1
 tags: [カフェ, 飲食店, POSレジ, Airレジ, Square, スマレジ]
@@ -76,3 +77,15 @@ POSレジの公式ストアのほか、Amazonでも購入できます。どち�
 - POSレジは「先払いか後払いか」「キャッシュレスの比率」「将来の店舗展開」で選ぶ
 - 軽減税率の切り替えやすさは、テイクアウトがあるお店ほど重要
 - 周辺機器は、POSレジ公式の対応機種一覧を確認してから購入する
+
+## 参考にした情報
+
+- 国税庁「[消費税の軽減税率制度・インボイス制度](https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/index.htm)」
+
+紹介したサービスの最新の料金・機能は、各公式サイトで確認できます。
+
+- Airレジ「[公式サイト](https://airregi.jp/)」
+- Square「[公式サイト](https://squareup.com/jp/ja)」
+- スマレジ「[公式サイト](https://smaregi.jp/)」
+
+※ 確認日：2026年10月17日。制度や料金は変わることがあるため、最新の情報は各ページと、お店のある地域の保健所・税務署・消防署などで確認してください。

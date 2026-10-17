@@ -1,6 +1,7 @@
 ---
 title: キッチンカーの会計ソフトの選び方｜出店料・燃料費・車両の経費と出店場所別の売上を管理する
 date: 2026-10-17
+updated: 2026-10-17
 category: kitchen-car
 order: 7
 tags: [キッチンカー, 移動販売, 会計ソフト, 確定申告, 経費, 個人事業主]
@@ -102,3 +103,18 @@ POSレジで会計していれば、現金の売上も記録されます。毎�
 - キッチンカーは出店料・燃料費・車両の費用など経費の種類が多い
 - 出先で領収書を撮影できる、スマホ対応の会計ソフトが便利
 - 出店場所ごとの利益を比べて、出店先の選び方に生かす
+
+## 参考にした情報
+
+- 国税庁 タックスアンサー「[No.2070 青色申告制度](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2070.htm)」
+- 国税庁 タックスアンサー「[No.2100 減価償却のあらまし](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2100.htm)」
+- 国税庁 タックスアンサー「[No.2210 やさしい必要経費の知識](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2210.htm)」
+- 厚生労働省「[食品衛生法の改正について](https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000197196.html)」（営業許可制度の見直しなど）
+
+紹介したサービスの最新の料金・機能は、各公式サイトで確認できます。
+
+- freee「[公式サイト](https://www.freee.co.jp/)」
+- マネーフォワード クラウド会計「[公式サイト](https://biz.moneyforward.com/accounting/)」
+- 弥生「[公式サイト](https://www.yayoi-kk.co.jp/)」
+
+※ 確認日：2026年10月17日。制度や料金は変わることがあるため、最新の情報は各ページと、お店のある地域の保健所・税務署・消防署などで確認してください。

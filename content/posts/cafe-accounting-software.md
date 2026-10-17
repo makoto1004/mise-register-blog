@@ -1,6 +1,7 @@
 ---
 title: カフェの会計ソフトの選び方｜軽減税率・毎日の現金売上・POSレジ連携で経理を楽にする
 date: 2026-10-17
+updated: 2026-10-17
 category: cafe
 order: 7
 tags: [カフェ, 飲食店, 会計ソフト, 確定申告, 軽減税率, インボイス]
@@ -98,3 +99,17 @@ POSレジの締めの流れは[POSレジの初期設定ガイド](/posts/pos-ini
 - カフェの会計ソフトは、POSレジ連携と税率ごとの売上の取り込みで選ぶ
 - 銀行・カード連携とインボイス対応も確認する
 - レジ締めとレシートの記録を毎日の習慣にすると、確定申告が楽になる
+
+## 参考にした情報
+
+- 国税庁「[インボイス制度特設サイト](https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/invoice.htm)」
+- 国税庁「[消費税の軽減税率制度・インボイス制度](https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/index.htm)」
+- 国税庁 タックスアンサー「[No.2070 青色申告制度](https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/2070.htm)」
+
+紹介したサービスの最新の料金・機能は、各公式サイトで確認できます。
+
+- freee「[公式サイト](https://www.freee.co.jp/)」
+- マネーフォワード クラウド会計「[公式サイト](https://biz.moneyforward.com/accounting/)」
+- 弥生「[公式サイト](https://www.yayoi-kk.co.jp/)」
+
+※ 確認日：2026年10月17日。制度や料金は変わることがあるため、最新の情報は各ページと、お店のある地域の保健所・税務署・消防署などで確認してください。
