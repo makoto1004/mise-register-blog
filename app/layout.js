@@ -91,6 +91,11 @@ export default function RootLayout({ children }) {
                 </Link>
               </li>
               <li>
+                <Link href="/contact" className="underline-link">
+                  お問い合わせ
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="underline-link">
                   運営者情報・プライバシーポリシー
                 </Link>

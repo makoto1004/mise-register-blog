@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" font-family="'Noto Sans JP','Hiragino Sans','Yu Gothic','Meiryo',sans-serif">
+  <title>アパレル・雑貨店（約10坪）のレイアウト例</title>
+  <rect width="800" height="600" fill="#f8f7fb"/>
+  <text x="40" y="40" font-size="20" font-weight="700" fill="#2f2725">アパレル・雑貨店（約10坪）のレイアウト例</text>
+  <text x="40" y="62" font-size="12" fill="#6f6866">路面店・中央の什器のまわりをぐるりと回れる配置</text>
+
+  <!-- 外壁（下辺はガラス張り、中央が入口） -->
+  <path d="M60 500V90H740V500" fill="none" stroke="#2f2725" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M60 500H350 M450 500H740" stroke="#8fb0c4" stroke-width="6"/>
+  <path d="M350 500a50 50 0 0 1 50-50 M450 500a50 50 0 0 0-50-50" fill="none" stroke="#b4532a" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="400" y="530" font-size="13" font-weight="700" fill="#b4532a" text-anchor="middle">入口（ガラス張り）</text>
+
+  <!-- 左壁：ハンガーラック -->
+  <rect x="70" y="160" width="26" height="250" fill="#e6e1ef" stroke="#2f2725"/>
+  <g stroke="#2f2725" stroke-width="1.5">
+    <path d="M83 175V395"/>
+    <path d="M78 185h20M78 205h20M78 225h20M78 245h20M78 265h20M78 285h20M78 305h20M78 325h20M78 345h20M78 365h20M78 385h20"/>
+  </g>
+  <text x="110" y="290" font-size="12" fill="#2f2725">ハンガーラック</text>
+  <text x="110" y="306" font-size="11" fill="#6f6866">（服を横向きに）</text>
+
+  <!-- 右壁：雑貨用の棚 -->
+  <rect x="706" y="160" width="26" height="200" fill="#e6e1ef" stroke="#2f2725"/>
+  <g stroke="#2f2725"><path d="M706 200h26M706 240h26M706 280h26M706 320h26"/></g>
+  <text x="696" y="260" font-size="12" fill="#2f2725" text-anchor="end">雑貨の壁面棚</text>
+
+  <!-- 中央の什器・入口の丸テーブル -->
+  <rect x="320" y="240" width="160" height="70" fill="#fff" stroke="#2f2725"/>
+  <text x="400" y="280" font-size="12" fill="#2f2725" text-anchor="middle">中央の平台（ローテーブル）</text>
+  <circle cx="400" cy="400" r="34" fill="#fff" stroke="#2f2725"/>
+  <text x="400" y="404" font-size="11" fill="#2f2725" text-anchor="middle">おすすめ</text>
+  <text x="400" y="350" font-size="11" fill="#6f6866" text-anchor="middle">入ってすぐの低い丸テーブル ↓</text>
+
+  <!-- 左奥：試着室・ミラー -->
+  <rect x="70" y="100" width="100" height="50" fill="#fff" stroke="#2f2725"/>
+  <path d="M70 150h100" stroke="#b4532a" stroke-width="3" stroke-dasharray="6 3"/>
+  <text x="120" y="130" font-size="12" fill="#2f2725" text-anchor="middle">試着室</text>
+  <rect x="185" y="102" width="10" height="46" fill="#cfdbe6" stroke="#2f2725"/>
+  <text x="205" y="130" font-size="11" fill="#6f6866">全身ミラー</text>
+
+  <!-- 右奥：レジ -->
+  <rect x="580" y="100" width="140" height="34" fill="#d9d1e6" stroke="#2f2725"/>
+  <rect x="595" y="108" width="18" height="16" fill="#2f2725"/>
+  <text x="650" y="155" font-size="12" fill="#2f2725" text-anchor="middle">レジ（店内を見渡せる位置）</text>
+
+  <!-- お客様の動線（8 の字に回遊） -->
+  <defs>
+    <marker id="c1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#b4532a"/></marker>
+  </defs>
+  <path d="M400 490C330 470 250 420 230 340C210 240 280 190 400 190C520 190 590 240 570 340C555 420 480 455 440 470" fill="none" stroke="#b4532a" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#c1)"/>
+
+  <g font-size="12" fill="#2f2725">
+    <path d="M500 560H540" stroke="#b4532a" stroke-width="2.5" stroke-dasharray="7 5"/><text x="548" y="564">お客様の動線（中央の什器を回遊）</text>
+  </g>
+  <text x="40" y="585" font-size="11" fill="#6f6866">※ イメージ図です。手前の什器は低く、奥と壁は高くすると、外から店の奥まで見通せます。</text>
+</svg>

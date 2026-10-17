@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" font-family="'Noto Sans JP','Hiragino Sans','Yu Gothic','Meiryo',sans-serif">
+  <title>キッチンカー（軽トラックベース）の車内レイアウト例</title>
+  <rect width="800" height="600" fill="#f6f9f5"/>
+  <text x="40" y="40" font-size="20" font-weight="700" fill="#2f2725">キッチンカーの車内レイアウト例</text>
+  <text x="40" y="62" font-size="12" fill="#6f6866">軽トラックベース・片側に販売窓・1〜2人で営業する想定</text>
+
+  <!-- お客様側（販売窓の外） -->
+  <text x="400" y="110" font-size="13" font-weight="700" fill="#b4532a" text-anchor="middle">お客様側（販売窓）</text>
+  <rect x="220" y="160" width="400" height="22" fill="#d6e5d1" stroke="#2f2725"/>
+  <text x="420" y="152" font-size="11" fill="#6f6866" text-anchor="middle">外付けカウンター</text>
+
+  <!-- 運転席（左） -->
+  <path d="M60 220H130V430H60C40 430 30 410 30 390V260C30 240 40 220 60 220z" fill="#ece9e6" stroke="#2f2725" stroke-width="2"/>
+  <text x="82" y="330" font-size="12" fill="#2f2725" text-anchor="middle">運転席</text>
+
+  <!-- 荷台（車内） -->
+  <rect x="140" y="190" width="600" height="250" fill="#fff" stroke="#2f2725" stroke-width="6"/>
+  <!-- 販売窓（上辺） -->
+  <path d="M220 190H620" stroke="#8fb0c4" stroke-width="8"/>
+
+  <!-- 窓の内側：レジ・受け渡し -->
+  <rect x="230" y="200" width="70" height="40" fill="#dfeadb" stroke="#2f2725"/>
+  <rect x="240" y="208" width="18" height="14" fill="#2f2725"/>
+  <text x="265" y="258" font-size="11" fill="#2f2725" text-anchor="middle">注文・会計（POS）</text>
+  <rect x="520" y="200" width="90" height="40" fill="#dfeadb" stroke="#2f2725"/>
+  <text x="565" y="258" font-size="11" fill="#2f2725" text-anchor="middle">受け渡し</text>
+
+  <!-- 左：シンク・タンク -->
+  <rect x="150" y="260" width="60" height="120" fill="#e3eef4" stroke="#2f2725"/>
+  <rect x="158" y="272" width="44" height="40" rx="4" fill="#fff" stroke="#2f2725"/>
+  <rect x="158" y="322" width="44" height="40" rx="4" fill="#fff" stroke="#2f2725"/>
+  <text x="180" y="398" font-size="11" fill="#2f2725" text-anchor="middle">2槽シンク</text>
+  <text x="180" y="412" font-size="10" fill="#6f6866" text-anchor="middle">給水・排水</text>
+  <text x="180" y="425" font-size="10" fill="#6f6866" text-anchor="middle">タンク</text>
+
+  <!-- 右：熱調理機器・換気扇 -->
+  <rect x="650" y="250" width="80" height="140" fill="#f3e3d6" stroke="#2f2725"/>
+  <circle cx="690" cy="290" r="16" fill="#fff" stroke="#2f2725"/>
+  <circle cx="690" cy="345" r="16" fill="#fff" stroke="#2f2725"/>
+  <text x="690" y="408" font-size="11" fill="#2f2725" text-anchor="middle">鉄板・フライヤー</text>
+  <text x="690" y="423" font-size="10" fill="#6f6866" text-anchor="middle">（上に換気扇）</text>
+
+  <!-- 下（奥の壁）：作業台兼冷蔵庫 -->
+  <rect x="230" y="385" width="400" height="45" fill="#dfeadb" stroke="#2f2725"/>
+  <text x="430" y="413" font-size="12" fill="#2f2725" text-anchor="middle">作業台を兼ねた冷蔵庫（コールドテーブル）</text>
+
+  <!-- 中央の立ち位置 -->
+  <circle cx="430" cy="320" r="18" fill="none" stroke="#6f6866" stroke-width="2" stroke-dasharray="4 3"/>
+  <text x="405" y="324" font-size="11" fill="#6f6866" text-anchor="end">立ち位置</text>
+  <defs>
+    <marker id="d1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#6f6866"/></marker>
+    <marker id="d2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#b4532a"/></marker>
+  </defs>
+  <!-- スタッフの動き：冷蔵庫 → 調理 → 受け渡し -->
+  <g fill="none" stroke="#6f6866" stroke-width="2" stroke-dasharray="3 4" marker-end="url(#d1)">
+    <path d="M430 380V342"/>
+    <path d="M450 315C540 300 600 300 640 310"/>
+    <path d="M640 280C620 260 600 250 590 245"/>
+  </g>
+  <!-- お客様の並び：左で注文 → 右で受け取り -->
+  <path d="M250 135C350 125 470 125 560 135" fill="none" stroke="#b4532a" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#d2)"/>
+
+  <g font-size="12" fill="#2f2725">
+    <path d="M140 500H180" stroke="#b4532a" stroke-width="2.5" stroke-dasharray="7 5"/><text x="188" y="504">お客様（左で注文 → 右で受け取り）</text>
+    <path d="M460 500H500" stroke="#6f6866" stroke-width="2" stroke-dasharray="3 4"/><text x="508" y="504">スタッフ（冷蔵 → 調理 → 受け渡し）</text>
+  </g>
+  <text x="40" y="575" font-size="11" fill="#6f6866">※ イメージ図です。設備の基準は、営業する地域の保健所に確認してください。</text>
+</svg>

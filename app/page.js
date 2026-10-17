@@ -29,11 +29,13 @@ export default function Home() {
       />
       <section className="home-hero">
         <StoreScenes />
-        <p className="home-kicker">小さなお店のための、レジまわりの教科書</p>
+        {/* 見出しのデザインは Gemini の提案（雑誌の特集タイトル風）をもとにしている */}
+        <p className="home-kicker-en">For small shops</p>
         <h1 className="home-title">
-          小さなお店のレジ選びを、
-          <br />
-          すっきり、納得。
+          <span className="home-title-sub">小さなお店のレジ選びを、</span>
+          <span className="home-title-main">
+            すっきり、<span className="home-title-accent">納得！</span>
+          </span>
         </h1>
         <p className="home-lead">{SITE.description}</p>
       </section>

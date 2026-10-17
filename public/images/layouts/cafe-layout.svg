@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" font-family="'Noto Sans JP','Hiragino Sans','Yu Gothic','Meiryo',sans-serif">
+  <title>カフェ（約10坪）のレイアウト例</title>
+  <rect width="800" height="600" fill="#fbf8f4"/>
+  <text x="40" y="40" font-size="20" font-weight="700" fill="#2f2725">カフェ（約10坪）のレイアウト例</text>
+  <text x="40" y="62" font-size="12" fill="#6f6866">テイクアウトもあるイートイン中心・客席12〜14席の想定</text>
+
+  <!-- ゾーン -->
+  <rect x="500" y="90" width="240" height="170" fill="#efe3d3"/>
+  <rect x="60" y="90" width="110" height="80" fill="#ece9e6"/>
+
+  <!-- 外壁（下辺中央が入口） -->
+  <path d="M360 500H60V90H740V500H440" fill="none" stroke="#2f2725" stroke-width="6" stroke-linejoin="round"/>
+  <!-- 窓（左手前） -->
+  <path d="M90 500H330" stroke="#8fb0c4" stroke-width="6"/>
+  <!-- 入口のドア -->
+  <path d="M360 500a80 80 0 0 1 80-80" fill="none" stroke="#b4532a" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <path d="M440 500V420" stroke="#b4532a" stroke-width="2"/>
+  <text x="400" y="530" font-size="13" font-weight="700" fill="#b4532a" text-anchor="middle">入口</text>
+
+  <!-- 厨房 -->
+  <text x="620" y="130" font-size="14" font-weight="700" fill="#2f2725" text-anchor="middle">厨房・バー</text>
+  <rect x="520" y="150" width="90" height="34" fill="#fff" stroke="#2f2725"/>
+  <text x="565" y="172" font-size="11" fill="#2f2725" text-anchor="middle">作業台冷蔵庫</text>
+  <rect x="630" y="150" width="90" height="34" fill="#fff" stroke="#2f2725"/>
+  <text x="675" y="172" font-size="11" fill="#2f2725" text-anchor="middle">シンク</text>
+  <rect x="630" y="200" width="90" height="34" fill="#fff" stroke="#2f2725"/>
+  <text x="675" y="222" font-size="11" fill="#2f2725" text-anchor="middle">エスプレッソ</text>
+
+  <!-- レジ・受取カウンター（L字） -->
+  <path d="M500 260H530V440H500z" fill="#d8c3a5" stroke="#2f2725"/>
+  <path d="M530 260H740V290H530z" fill="#d8c3a5" stroke="#2f2725"/>
+  <rect x="505" y="300" width="20" height="16" fill="#2f2725"/>
+  <text x="545" y="340" font-size="12" fill="#2f2725">← レジ（POS）</text>
+  <rect x="505" y="380" width="20" height="50" fill="#fff" stroke="#2f2725"/>
+  <text x="545" y="410" font-size="12" fill="#2f2725">← 焼き菓子ケース・受取口</text>
+
+  <!-- トイレ -->
+  <text x="115" y="135" font-size="13" fill="#2f2725" text-anchor="middle">トイレ</text>
+
+  <!-- 2人掛けテーブル×4 -->
+  <g fill="#fff" stroke="#2f2725">
+    <rect x="130" y="210" width="56" height="56"/>
+    <rect x="290" y="210" width="56" height="56"/>
+    <rect x="130" y="320" width="56" height="56"/>
+    <rect x="290" y="320" width="56" height="56"/>
+    <circle cx="112" cy="238" r="12"/><circle cx="204" cy="238" r="12"/>
+    <circle cx="272" cy="238" r="12"/><circle cx="364" cy="238" r="12"/>
+    <circle cx="112" cy="348" r="12"/><circle cx="204" cy="348" r="12"/>
+    <circle cx="272" cy="348" r="12"/><circle cx="364" cy="348" r="12"/>
+  </g>
+  <text x="238" y="200" font-size="12" fill="#6f6866" text-anchor="middle">2人掛けテーブル×4（つなげて4人席にも）</text>
+
+  <!-- 窓際カウンター席 -->
+  <rect x="90" y="462" width="240" height="22" fill="#d8c3a5" stroke="#2f2725"/>
+  <g fill="#fff" stroke="#2f2725">
+    <circle cx="120" cy="446" r="11"/><circle cx="180" cy="446" r="11"/><circle cx="240" cy="446" r="11"/><circle cx="300" cy="446" r="11"/>
+  </g>
+  <text x="210" y="425" font-size="12" fill="#6f6866" text-anchor="middle">窓際カウンター席×4</text>
+
+  <!-- お客様の動線（テラコッタ） -->
+  <path d="M400 490C400 430 440 400 488 380" fill="none" stroke="#b4532a" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#a1)"/>
+  <path d="M470 330C420 300 360 300 300 290" fill="none" stroke="#b4532a" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#a1)"/>
+  <!-- スタッフの動線（グレー） -->
+  <path d="M600 245V275" fill="none" stroke="#6f6866" stroke-width="2.5" stroke-dasharray="3 4" marker-end="url(#a2)"/>
+  <defs>
+    <marker id="a1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#b4532a"/></marker>
+    <marker id="a2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#6f6866"/></marker>
+  </defs>
+
+  <!-- 凡例 -->
+  <g font-size="12" fill="#2f2725">
+    <path d="M500 535H540" stroke="#b4532a" stroke-width="2.5" stroke-dasharray="7 5"/><text x="548" y="539">お客様の動線</text>
+    <path d="M640 535H680" stroke="#6f6866" stroke-width="2.5" stroke-dasharray="3 4"/><text x="688" y="539">スタッフ</text>
+  </g>
+  <text x="40" y="580" font-size="11" fill="#6f6866">※ イメージ図です。実際の配置・寸法は物件と保健所の基準に合わせて設計してください。</text>
+</svg>

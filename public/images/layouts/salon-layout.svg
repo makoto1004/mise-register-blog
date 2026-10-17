@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" font-family="'Noto Sans JP','Hiragino Sans','Yu Gothic','Meiryo',sans-serif">
+  <title>美容室（約10坪）のレイアウト例</title>
+  <rect width="800" height="600" fill="#fbf7f7"/>
+  <text x="40" y="40" font-size="20" font-weight="700" fill="#2f2725">美容室（約10坪）のレイアウト例</text>
+  <text x="40" y="62" font-size="12" fill="#6f6866">セット面3台・シャンプー台2台の想定</text>
+
+  <!-- ゾーン -->
+  <rect x="60" y="90" width="270" height="170" fill="#f3e1e4"/>
+  <rect x="560" y="90" width="180" height="80" fill="#ece9e6"/>
+  <rect x="440" y="90" width="120" height="80" fill="#ece9e6"/>
+
+  <!-- 外壁（下辺左が入口） -->
+  <path d="M80 500H60V90H740V500H170" fill="none" stroke="#2f2725" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M80 500a90 90 0 0 1 90-90" fill="none" stroke="#b4532a" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <path d="M170 500V410" stroke="#b4532a" stroke-width="2"/>
+  <text x="125" y="530" font-size="13" font-weight="700" fill="#b4532a" text-anchor="middle">入口</text>
+
+  <!-- シャンプーゾーンの間仕切り -->
+  <path d="M60 260H330V180" fill="none" stroke="#2f2725" stroke-width="3"/>
+  <text x="195" y="115" font-size="14" font-weight="700" fill="#2f2725" text-anchor="middle">シャンプー台×2（半個室）</text>
+  <g fill="#fff" stroke="#2f2725">
+    <rect x="95" y="135" width="40" height="30" rx="10"/><rect x="88" y="165" width="54" height="70" rx="8"/>
+    <rect x="215" y="135" width="40" height="30" rx="10"/><rect x="208" y="165" width="54" height="70" rx="8"/>
+  </g>
+
+  <!-- バックルーム・トイレ -->
+  <text x="650" y="135" font-size="13" fill="#2f2725" text-anchor="middle">バックルーム</text>
+  <text x="650" y="153" font-size="11" fill="#6f6866" text-anchor="middle">調合・洗濯・スタッフ</text>
+  <text x="500" y="135" font-size="13" fill="#2f2725" text-anchor="middle">トイレ</text>
+
+  <!-- セット面×3（右壁沿い・鏡に向かう） -->
+  <g fill="#fff" stroke="#2f2725">
+    <rect x="726" y="195" width="10" height="60" fill="#cfdbe6"/>
+    <rect x="726" y="285" width="10" height="60" fill="#cfdbe6"/>
+    <rect x="726" y="375" width="10" height="60" fill="#cfdbe6"/>
+    <circle cx="680" cy="225" r="20"/><circle cx="680" cy="315" r="20"/><circle cx="680" cy="405" r="20"/>
+    <rect x="620" y="210" width="22" height="22"/><rect x="620" y="300" width="22" height="22"/><rect x="620" y="390" width="22" height="22"/>
+  </g>
+  <text x="660" y="458" font-size="12" fill="#6f6866" text-anchor="middle">セット面×3</text>
+  <text x="660" y="473" font-size="11" fill="#6f6866" text-anchor="middle">（鏡・チェア・ワゴン）</text>
+
+  <!-- 受付・待合 -->
+  <rect x="70" y="370" width="110" height="28" fill="#e7cfd4" stroke="#2f2725"/>
+  <rect x="80" y="376" width="18" height="16" fill="#2f2725"/>
+  <text x="125" y="360" font-size="12" fill="#2f2725" text-anchor="middle">受付・レジ</text>
+  <rect x="300" y="440" width="150" height="40" rx="8" fill="#fff" stroke="#2f2725"/>
+  <circle cx="480" cy="460" r="14" fill="#fff" stroke="#2f2725"/>
+  <text x="375" y="430" font-size="12" fill="#2f2725" text-anchor="middle">待合ソファ＋サイドテーブル</text>
+
+  <!-- 動線 -->
+  <defs>
+    <marker id="b1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#b4532a"/></marker>
+  </defs>
+  <g fill="none" stroke="#b4532a" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#b1)">
+    <path d="M125 490C125 450 130 420 128 404"/>
+    <path d="M190 400C250 420 280 440 296 452"/>
+    <path d="M455 440C520 400 580 360 650 320"/>
+    <path d="M640 290C520 260 380 230 268 205"/>
+  </g>
+
+  <g font-size="12" fill="#2f2725">
+    <path d="M330 535H370" stroke="#b4532a" stroke-width="2.5" stroke-dasharray="7 5"/><text x="378" y="539">お客様の動線（受付 → 待合 → セット面 → シャンプー）</text>
+  </g>
+  <text x="40" y="580" font-size="11" fill="#6f6866">※ イメージ図です。実際の配置・寸法は物件と美容所の基準（保健所）に合わせて設計してください。</text>
+</svg>
