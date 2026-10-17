@@ -19,7 +19,12 @@ export const metadata = {
   title: { default: SITE.name, template: `%s | ${SITE.name}` },
   description: SITE.description,
   openGraph: { siteName: SITE.name, locale: 'ja_JP', type: 'website', images: [OG_IMAGE] },
-  twitter: { card: 'summary_large_image', images: [OG_IMAGE.url] },
+  twitter: {
+    card: 'summary_large_image',
+    site: `@${SITE.xAccount}`,
+    creator: `@${SITE.xAccount}`,
+    images: [OG_IMAGE.url],
+  },
   alternates: { canonical: '/' },
   // Google Search Console の所有権確認（HTML タグ方式）
   ...(googleVerification() ? { verification: { google: googleVerification() } } : {}),
@@ -89,6 +94,16 @@ export default function RootLayout({ children }) {
                 <Link href="/site-map" className="underline-link">
                   サイトマップ
                 </Link>
+              </li>
+              <li>
+                <a
+                  href={`https://x.com/${SITE.xAccount}`}
+                  className="underline-link"
+                  target="_blank"
+                  rel="noopener noreferrer me"
+                >
+                  X（@{SITE.xAccount}）
+                </a>
               </li>
               <li>
                 <Link href="/contact" className="underline-link">
