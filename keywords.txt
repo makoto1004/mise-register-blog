@@ -1,4 +1,4 @@
-# 毎朝 8 時に、上から 1 行ずつ記事の下書きを生成する（scripts/daily-draft.mjs）
+# 毎朝 7 時に、上から 1 行ずつ記事の下書きを生成する（scripts/daily-draft.mjs）
 # 1 行 1 記事。「キーワード | カテゴリー」でカテゴリーを指定できる（cafe / salon / kitchen-car / apparel / devices）
 # # で始まる行と空行は無視される。生成に成功した行は自動で消える
 #
