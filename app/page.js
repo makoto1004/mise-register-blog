@@ -2,6 +2,7 @@ import Link from 'next/link';
 import PostThumbnail from '@/components/PostThumbnail';
 import StoreScenes from '@/components/StoreScenes';
 import JsonLd from '@/components/JsonLd';
+import { XFollow } from '@/components/XLinks';
 import { getPostsByCategory } from '@/lib/posts';
 import { SITE, CATEGORIES, CATEGORY_DESCRIPTIONS } from '@/lib/site';
 
@@ -91,6 +92,13 @@ export default function Home() {
           </section>
         );
       })}
+
+      <section className="home-section x-section" aria-label="X のお知らせ">
+        <div className="section-head">
+          <h2>X でもお知らせしています</h2>
+        </div>
+        <XFollow />
+      </section>
     </>
   );
 }

@@ -702,3 +702,35 @@ a:hover { text-decoration: underline; }
 @media (min-width: 768px) {
   .bottom-bar { display: none; }
 }
+
+/* X（旧 Twitter）へのリンク */
+.x-logo { width: 1em; height: 1em; flex: 0 0 auto; }
+.x-header-link {
+  margin-left: auto;
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 15px;
+}
+.x-header-link:hover { background: var(--text); color: var(--bg); text-decoration: none; }
+.x-section { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 40px; }
+.home-section.x-section { display: block; }
+.x-follow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+.x-follow p { margin: 0; font-size: 0.85rem; color: var(--muted); }
+.x-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border: 1px solid var(--border);
+  background: var(--text);
+  color: var(--bg);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+.x-button:hover { text-decoration: none; opacity: 0.85; }
+.x-share { background: var(--bg); color: var(--text); }
+.x-share:hover { background: var(--text); color: var(--bg); opacity: 1; }

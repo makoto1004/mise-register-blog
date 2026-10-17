@@ -8,6 +8,7 @@ import VideoCard from '@/components/VideoCard';
 import ThemeBackground from '@/components/ThemeBackground';
 import CostSimulator from '@/components/CostSimulator';
 import QuickSurvey from '@/components/QuickSurvey';
+import { XFollow, XShare } from '@/components/XLinks';
 import { getPostSlugs, getPostBySlug } from '@/lib/posts';
 import JsonLd from '@/components/JsonLd';
 import { SITE, CATEGORIES, OG_IMAGE } from '@/lib/site';
@@ -188,6 +189,11 @@ export default async function PostPage({ params }) {
       })}
 
       <CostSimulator category={post.category} />
+
+      <section className="x-section" aria-label="X でシェア・フォロー">
+        <XShare title={post.title} path={`/posts/${post.slug}`} />
+        <XFollow lead="記事の更新は X でもお知らせしています。" />
+      </section>
 
       <QuickSurvey slug={post.slug} />
 

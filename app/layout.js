@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Cormorant_Garamond } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Logo from '@/components/Logo';
+import { XHeaderLink } from '@/components/XLinks';
 import { SITE, CATEGORIES, OG_IMAGE } from '@/lib/site';
 import './globals.css';
 
@@ -50,6 +51,7 @@ export default function RootLayout({ children }) {
               <Logo />
             </Link>
             <p className="site-catch">{SITE.catchphrase}</p>
+            <XHeaderLink />
           </div>
           <nav className="menu-bar" aria-label="カテゴリー">
             <ul>
