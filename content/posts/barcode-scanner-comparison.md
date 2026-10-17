@@ -1,10 +1,11 @@
 ---
-title: POSレジ用バーコードリーダーの比較｜有線・Bluetooth・2次元コード対応の違い
+title: POSレジ用バーコードリーダー比較｜有線・Bluetooth・2次元コード
 date: 2026-10-08
+updated: 2026-10-17
 category: devices
 order: 4
 tags: [バーコードリーダー, Bluetooth, スマレジ]
-description: 小売店のレジ作業を速くするバーコードリーダー。有線とBluetoothの違い、QRコード（2次元コード）対応が必要かどうか、選び方とおすすめを紹介します。
+description: 小売店のレジ作業を速くするバーコードリーダーの選び方を紹介します。有線とBluetoothの違い、QRコード（2次元コード）に対応した機種が必要かどうか、お店に合ったおすすめを解説します。
 products:
   - name: Socket Mobile S700
     keyword: Socket Mobile S700

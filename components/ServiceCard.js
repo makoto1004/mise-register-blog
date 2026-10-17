@@ -23,6 +23,8 @@ export default function ServiceCard({ service, headingLevel = 'h3' }) {
         target="_blank"
         rel={service.isAffiliate ? 'sponsored nofollow noopener' : 'noopener'}
       >
+        {/* A8.net の広告リンクのときだけ PR を表示する */}
+        {service.isAffiliate && <span className="ad-tag">PR</span>}
         公式サイトを見る
       </a>
       {service.pixel && (

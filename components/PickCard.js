@@ -9,7 +9,10 @@ export default function PickCard({ pick }) {
       <span className="pick-body">
         <span className="pick-name">{pick.name}</span>
         {pick.note && <span className="pick-note">{pick.note}</span>}
-        <span className="pick-button">{pick.shop}で見る</span>
+        <span className="pick-button">
+          <span className="ad-tag">PR</span>
+          {pick.shop}で見る
+        </span>
       </span>
     </a>
   );

@@ -1,5 +1,5 @@
 ---
-title: カフェ・飲食店向けPOSレジおすすめ比較｜Airレジ・Square・スマレジの選び方
+title: カフェ向けPOSレジ比較｜Airレジ・Square・スマレジの選び方
 date: 2026-10-16
 updated: 2026-10-17
 category: cafe
