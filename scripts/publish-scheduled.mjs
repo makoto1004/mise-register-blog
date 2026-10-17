@@ -1,5 +1,5 @@
 // 予約公開：scheduled/ に置いた記事のうち、publishAt の時刻を過ぎたものを content/posts/ に移してプッシュする
-// 毎日 7:00 / 12:00 / 18:00 にタスク スケジューラから実行する想定（scripts/register-publish-task.ps1 で登録）
+// 毎日 8:00 / 12:00 / 18:00 にタスク スケジューラから実行する想定（タスクの登録は運営者が行う）
 //
 // 使い方:
 //   npm run publish:scheduled          # 時刻を過ぎた記事を公開する
