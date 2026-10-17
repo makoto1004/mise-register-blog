@@ -7,7 +7,7 @@ import PickCard from '@/components/PickCard';
 import ThemeBackground from '@/components/ThemeBackground';
 import CostSimulator from '@/components/CostSimulator';
 import { getPostSlugs, getPostBySlug } from '@/lib/posts';
-import { CATEGORIES } from '@/lib/site';
+import { CATEGORIES, OG_IMAGE } from '@/lib/site';
 
 // ビルド時に生成するページの一覧（Static Export では必須）
 export function generateStaticParams() {
@@ -23,7 +23,8 @@ export async function generateMetadata({ params }) {
   return {
     title: post.title,
     description: post.description,
-    openGraph: { title: post.title, description: post.description, type: 'article' },
+    // openGraph は親（layout）の設定を上書きするので、共有用の画像もここで指定する
+    openGraph: { title: post.title, description: post.description, type: 'article', images: [OG_IMAGE] },
   };
 }
 

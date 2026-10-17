@@ -1,33 +1,77 @@
 import Link from 'next/link';
-import PostCard from '@/components/PostCard';
+import PostThumbnail from '@/components/PostThumbnail';
+import StoreScenes from '@/components/StoreScenes';
 import { getPostsByCategory } from '@/lib/posts';
-import { CATEGORIES, CATEGORY_DESCRIPTIONS } from '@/lib/site';
+import { SITE, CATEGORIES, CATEGORY_DESCRIPTIONS } from '@/lib/site';
 
-// トップページ：業種（カテゴリー）ごとに記事のカードを並べる
+// トップページ
+// 上部：4 業種の線画を背景にした見出しと、業種へのジャンプ
+// 各業種：最初の 1 本だけ大きく見せ、残りは文字の一覧（同じ形のカードを並べ続けない）
 export default function Home() {
+  const sections = Object.entries(CATEGORIES).map(([slug, name]) => ({
+    slug,
+    name,
+    posts: getPostsByCategory(slug),
+  }));
+
   return (
     <>
-      <h1 className="page-title">業種から探す</h1>
-      {Object.entries(CATEGORIES).map(([slug, name], index) => {
-        const posts = getPostsByCategory(slug);
+      <section className="home-hero">
+        <StoreScenes />
+        <p className="home-kicker">小さなお店のための、レジまわりの教科書</p>
+        <h1 className="home-title">
+          小さなお店のレジ選びを、
+          <br />
+          すっきり、納得。
+        </h1>
+        <p className="home-lead">{SITE.description}</p>
+      </section>
+
+      <nav className="jump-links home-jump" aria-label="業種から探す">
+          {sections.map((s) => (
+            <a key={s.slug} href={`#cat-${s.slug}`}>
+              {s.name.replace('向け', '').replace('（共通）', '')}
+            </a>
+          ))}
+          <Link href="/site-map#purpose">目的から探す →</Link>
+      </nav>
+
+      {sections.map(({ slug, name, posts }) => {
+        const [featured, ...rest] = posts;
         return (
-          <section key={slug} className="category-section">
+          <section key={slug} id={`cat-${slug}`} className="home-section">
             <div className="section-head">
-              <h2>
-                <span className="section-number">{String(index + 1).padStart(2, '0')}</span>
-                {name}
-              </h2>
+              <h2>{name}</h2>
               <Link href={`/category/${slug}`} className="underline-link more-link">
-                すべて見る →
+                すべて見る（{posts.length}本）
               </Link>
             </div>
             <p className="category-description">{CATEGORY_DESCRIPTIONS[slug]}</p>
-            {posts.length === 0 ? (
-              <p>記事は準備中です。</p>
-            ) : (
-              <ul className="card-grid">
-                {posts.map((post) => (
-                  <PostCard key={post.slug} post={post} showCategory={false} />
+
+            {featured && (
+              <Link href={`/posts/${featured.slug}`} className="featured-post">
+                <span className="featured-thumb">
+                  <PostThumbnail post={featured} />
+                </span>
+                <span className="featured-body">
+                  <span className="featured-label">まず読みたい記事</span>
+                  <span className="featured-title">{featured.title}</span>
+                  {featured.description && <span className="featured-desc">{featured.description}</span>}
+                </span>
+              </Link>
+            )}
+
+            {rest.length > 0 && (
+              <ul className="post-rows">
+                {rest.map((post) => (
+                  <li key={post.slug}>
+                    <Link href={`/posts/${post.slug}`} className="post-row">
+                      <span className="post-row-title">{post.title}</span>
+                      <time dateTime={post.date} className="post-row-date">
+                        {post.date.replaceAll('-', '/')}
+                      </time>
+                    </Link>
+                  </li>
                 ))}
               </ul>
             )}

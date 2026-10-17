@@ -12,5 +12,5 @@ export default function sitemap() {
   const categories = Object.keys(CATEGORIES).map((slug) => ({
     url: `${SITE.url}/category/${slug}`,
   }));
-  return [{ url: `${SITE.url}/` }, ...categories, ...posts];
+  return [{ url: `${SITE.url}/` }, { url: `${SITE.url}/site-map` }, ...categories, ...posts];
 }
