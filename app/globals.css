@@ -749,3 +749,11 @@ a:hover { text-decoration: underline; }
   font-size: 0.85rem;
   color: var(--muted);
 }
+.x-posts { display: grid; gap: 12px; max-width: 560px; }
+.x-posts .twitter-tweet { margin: 0 !important; }
+.x-posts blockquote.twitter-tweet {
+  border: 1px solid var(--line);
+  padding: 14px 16px;
+  font-size: 0.85rem;
+}
+.x-embed-section { margin-top: 40px; }

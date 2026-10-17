@@ -4,6 +4,7 @@ import StoreScenes from '@/components/StoreScenes';
 import JsonLd from '@/components/JsonLd';
 import { XFollow } from '@/components/XLinks';
 import XTimeline from '@/components/XTimeline';
+import XPostEmbeds from '@/components/XPostEmbeds';
 import { getPostsByCategory } from '@/lib/posts';
 import { SITE, CATEGORIES, CATEGORY_DESCRIPTIONS } from '@/lib/site';
 
@@ -98,7 +99,8 @@ export default function Home() {
         <div className="section-head">
           <h2>X でもお知らせしています</h2>
         </div>
-        <XTimeline account={SITE.xAccount} />
+        {/* 選んだ投稿があればそれを埋め込み（最大 3 件）、なければタイムラインを表示する */}
+        {SITE.homeXPosts.length > 0 ? <XPostEmbeds urls={SITE.homeXPosts} /> : <XTimeline account={SITE.xAccount} />}
         <XFollow />
       </section>
     </>

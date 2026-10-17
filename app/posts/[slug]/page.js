@@ -9,6 +9,7 @@ import ThemeBackground from '@/components/ThemeBackground';
 import CostSimulator from '@/components/CostSimulator';
 import QuickSurvey from '@/components/QuickSurvey';
 import { XFollow, XShare } from '@/components/XLinks';
+import XPostEmbeds from '@/components/XPostEmbeds';
 import { getPostSlugs, getPostBySlug } from '@/lib/posts';
 import JsonLd from '@/components/JsonLd';
 import { SITE, CATEGORIES, OG_IMAGE } from '@/lib/site';
@@ -189,6 +190,14 @@ export default async function PostPage({ params }) {
       })}
 
       <CostSimulator category={post.category} />
+
+      {/* フロントマターの xPosts で選んだ投稿だけを埋め込む（最大 3 件） */}
+      {post.xPosts.length > 0 && (
+        <section className="x-embed-section" aria-label="関連する X の投稿">
+          <h2 className="products-heading">関連する X の投稿</h2>
+          <XPostEmbeds urls={post.xPosts} />
+        </section>
+      )}
 
       <section className="x-section" aria-label="X でシェア・フォロー">
         <XShare title={post.title} path={`/posts/${post.slug}`} />
