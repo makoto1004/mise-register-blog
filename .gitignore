@@ -4,3 +4,6 @@ out/
 .env*
 !.env.example
 logs/
+
+# 予約公開の前の記事（scripts/publish-scheduled.mjs が時刻どおりに content/posts/ へ移す）
+scheduled/
