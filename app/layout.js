@@ -20,11 +20,16 @@ export const metadata = {
   openGraph: { siteName: SITE.name, locale: 'ja_JP', type: 'website', images: [OG_IMAGE] },
   twitter: { card: 'summary_large_image', images: [OG_IMAGE.url] },
   alternates: { canonical: '/' },
-  // Google Search Console の所有権確認（HTML タグ方式）。content の値を環境変数に入れる
-  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
-    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION.trim() } }
-    : {}),
+  // Google Search Console の所有権確認（HTML タグ方式）
+  ...(googleVerification() ? { verification: { google: googleVerification() } } : {}),
 };
+
+// 環境変数の確認用の値を取り出す。<meta … content="…"> のタグをまるごと入れた場合も、content の中身だけを使う
+function googleVerification() {
+  const raw = (process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? process.env.GOOGLE_SITE_VERIFICATION ?? '').trim();
+  const match = raw.match(/content\s*=\s*["']([^"']+)["']/i);
+  return match ? match[1].trim() : raw;
+}
 
 export default function RootLayout({ children }) {
   return (
