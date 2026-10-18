@@ -31,14 +31,27 @@ const ICONS = {
   battery: 'M3 8h16v8H3z M19 10.5h2v3h-2 M5.5 10.5h3v3h-3',
   bell: 'M6 16V11a6 6 0 0 1 12 0v5l2 2H4z M10 20.5h4',
   clock: 'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z M12 7v5l3 2',
+  // ここから下は Gemini が下書きしたデザイン（hotdog・pouch は見やすく描き直した）
+  apron: 'M9 7a3 3 0 0 1 6 0 M8 7h8l1.5 5v8a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1v-8L8 7z M9 14h6v3a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1z M6.5 12H4 M17.5 12h2', // エプロン
+  bread: 'M5 12c0-3 1.5-5 3.5-5s3.5 1.5 3.5 3.5c0-2 1.5-3.5 3.5-3.5s3.5 2 3.5 5v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z M8.5 8.5v2 M15.5 8.5v2', // 食パン
+  lunch: 'M12 5a7 7 0 1 0 7 7 7 7 0 0 0-7-7 M12 8a4 4 0 1 0 4 4 4 4 0 0 0-4-4 M3.5 6v3a1 1 0 0 0 2 0V6 M4.5 6v12 M19.5 6v12 M19.5 6c1.5 0 1.5 3.5 0 5', // ランチプレート
+  shampoo: 'M6 6.5V5h8v1 M11 5v3 M9 8h6v2H9z M6 12a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z M12 13.5c-1 1.2-1 2.2 0 3 1-.8 1-1.8 0-3', // シャンプーボトル
+  dryer: 'M8 6h11a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H8a4 4 0 0 1-4-4 4 4 0 0 1 4-4z M10 12l1.5 7.5a1 1 0 0 0 1 .7h1.5a1 1 0 0 0 1-1.2L13.5 12 M7 8v4 M12.5 20.2c0 .8-.5 1.5-1.5 1.5', // ドライヤー
+  foodtruck: 'M3 17V8a1 1 0 0 1 1-1h10l3 3h4a1 1 0 0 1 1 1v6h-2 M15 17H10 M4 17H2 M5 17a2 2 0 1 0 4 0 2 2 0 0 0-4 0 M16 17a2 2 0 1 0 4 0 2 2 0 0 0-4 0 M14 10.5h3l2 2.5h-5z M4 11l.8-2h6.4l.8 2H4z M6.5 9v2 M9.5 9v2 M5 14h6', // キッチンカー
+  hotdog: 'M3 12.5h18c0 3-2.5 5-5.5 5h-7c-3 0-5.5-2-5.5-5z M4.5 9h15a1.75 1.75 0 0 1 0 3.5h-15a1.75 1.75 0 0 1 0-3.5z M7 10.75c1-1 2 1 3 0s2 1 3 0 2 1 3 0', // ホットドッグ
+  pizza: 'M12 21.5L4 6.5c3.5-2 12.5-2 16 0z M5 8.5c3-1.5 11-1.5 14 0 M10.5 11.5a1.5 1.5 0 1 0 3 0 1.5 1.5 0 0 0-3 0 M8 14.5a1.2 1.2 0 1 0 2.4 0 1.2 1.2 0 0 0-2.4 0 M13.5 16a1.2 1.2 0 1 0 2.4 0 1.2 1.2 0 0 0-2.4 0', // ピザ
+  burger: 'M4 9.5c0-4 3.5-6.5 8-6.5s8 2.5 8 6.5H4z M9 6h.5 M14.5 6h.5 M12 5h.5 M3 11.5c1.5.8 3 .8 4.5 0s3-.8 4.5 0 3 .8 4.5 0 3-.8 4.5 0 M10 13.5l2 2.5 2.5-2.5 M4 15.5h16v1.5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z', // ハンバーガー
+  shirt: 'M9 4h6l4 2 3 4-3 1.5-2-2V20H7V9.5l-2 2-3-1.5 3-4z M9 4a3 3 0 0 0 6 0', // Tシャツ
+  bag: 'M9 8V5.5a3 3 0 0 1 6 0V8 M5 8h14a1 1 0 0 1 1 1l-1.5 10a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2L4 9a1 1 0 0 1 1-1z M4.5 12h15 M11 12a1 1 0 1 0 2 0 1 1 0 0 0-2 0', // ハンドバッグ
+  pouch: 'M4 9c0-1.5 1-2.5 2.5-2.5h11C19 6.5 20 7.5 20 9l-1 9a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z M5 10h14 M15 10v3.5 M14 13.5h2', // 小物入れ（ポーチ）
 };
 
 // カテゴリーごとの基本のモチーフ
 const CATEGORY_ICONS = {
-  cafe: ['cup', 'table'],
-  salon: ['scissors', 'mirror'],
-  'kitchen-car': ['truck', 'sign'],
-  apparel: ['hanger', 'store'],
+  cafe: ['cup', 'bread', 'apron', 'lunch', 'table'],
+  salon: ['scissors', 'dryer', 'shampoo', 'mirror'],
+  'kitchen-car': ['foodtruck', 'hotdog', 'pizza', 'burger', 'truck', 'sign'],
+  apparel: ['shirt', 'bag', 'pouch', 'hanger', 'store'],
   devices: ['receipt', 'tablet'],
 };
 
@@ -98,20 +111,22 @@ function seededRandom(seed) {
   };
 }
 
-function pickIcons(post, max) {
+function pickIcons(post, max, dense) {
   const text = `${post.slug} ${(post.tags ?? []).join(' ')}`;
   const themed = THEME_RULES.filter(([re]) => re.test(text)).flatMap(([, icons]) => icons);
   const base = CATEGORY_ICONS[post.category] ?? ['store'];
-  // テーマのモチーフを優先し、カテゴリーのモチーフで補う（多めに描くときは共通のモチーフも足す）
-  const extra = max > 4 ? EXTRA_ICONS : [];
-  return [...new Set([...themed, ...base, ...extra])].slice(0, max);
+  // テーマのモチーフを少し先に入れ、業種のモチーフ（エプロン・ピザなど）が必ず混ざるようにする
+  // 多めに描くときは、残りのテーマのモチーフと共通のモチーフも足す
+  const lead = dense ? 3 : 2;
+  const extra = max > 5 ? EXTRA_ICONS : [];
+  return [...new Set([...themed.slice(0, lead), ...base, ...themed, ...extra])].slice(0, max);
 }
 
 // dense を付けると、横長のサムネイル向けに絵を多め・小さめに散らす
 export default function ThemeBackground({ post, width = 400, height = 350, dense = false }) {
   const random = seededRandom(post.slug);
   const slots = dense ? DENSE_SLOTS : SLOTS;
-  const icons = pickIcons(post, dense ? 7 : 4);
+  const icons = pickIcons(post, dense ? 8 : 5, dense);
   // 配置の候補をずらして、記事ごとに違う並びにする（候補の数と互いに素な数ずつ進めて、全部の候補を使う）
   const offset = Math.floor(random() * slots.length);
   const count = slots.length;
