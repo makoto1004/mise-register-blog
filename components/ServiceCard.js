@@ -6,6 +6,8 @@ export default function ServiceCard({ service, headingLevel = 'h3' }) {
     <section className="service-card">
       {service.banner && (
         <a href={service.banner.href} target="_blank" rel="sponsored nofollow noopener" className="service-banner-link">
+          {/* 広告のバナーであることが分かるように PR を表示する */}
+          <span className="ad-tag service-banner-tag">PR</span>
           {/* eslint-disable-next-line @next/next/no-img-element -- A8.net のバナー画像 */}
           <img src={service.banner.image} alt={service.name} className="service-banner" loading="lazy" />
           {service.banner.pixel && (

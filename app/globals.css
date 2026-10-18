@@ -707,6 +707,7 @@ a:hover { text-decoration: underline; }
 .contact-frame { width: 100%; min-height: 900px; border: 1px solid var(--line); background: #fff; }
 
 .service-banner-link { display: block; margin-bottom: 10px; }
+.service-banner-tag { display: block; width: fit-content; margin: 0 0 4px; color: var(--muted); }
 .service-banner { display: block; max-width: 100%; max-height: 120px; width: auto; margin: 0 auto; }
 @media (max-width: 480px) {
   .product-thumb { width: 72px; height: 72px; }
