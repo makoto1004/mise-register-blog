@@ -8,6 +8,8 @@
 // - scheduled/ は .gitignore 済み。公開前の記事は GitHub に上がらない
 // - 記事のフロントマターに publishAt: 2026-10-18T12:00 のように書く（日本時間）
 // - 公開時に date を公開日に書き換え、publishAt は publishedAt（公開した日時）に書き換える
+// - フロントマターに reviewed: false がある記事（自動で作って、運営者がまだ確認していない記事）は公開しない
+//   運営者が確認したら reviewed: false の行を消す（または true にする）と、次の実行で公開される
 // - PC が止まっていて時刻を過ぎた記事は、次に実行したときにまとめて公開される
 // - 結果は logs/publish-scheduled.log に残る
 
@@ -52,7 +54,7 @@ const entries = fs
   .map((file) => {
     const raw = fs.readFileSync(path.join(SCHEDULED_DIR, file), 'utf8');
     const { data } = matter(raw);
-    return { file, raw, title: data.title, publishAt: parsePublishAt(data.publishAt) };
+    return { file, raw, title: data.title, publishAt: parsePublishAt(data.publishAt), reviewed: data.reviewed !== false };
   })
   .sort((a, b) => (a.publishAt?.text ?? '').localeCompare(b.publishAt?.text ?? ''));
 
@@ -60,12 +62,17 @@ for (const e of entries) {
   if (!e.publishAt) log(`スキップ: ${e.file}（publishAt が「2026-10-18T12:00」の形ではありません）`);
 }
 
-const due = entries.filter((e) => e.publishAt && e.publishAt.date <= now);
+const timeReached = entries.filter((e) => e.publishAt && e.publishAt.date <= now);
+const due = timeReached.filter((e) => e.reviewed);
 if (DRY_RUN) {
   for (const e of entries.filter((x) => x.publishAt)) {
-    console.log(`${e.publishAt.text}  ${e.publishAt.date <= now ? '公開する' : '待ち'}  ${e.file}  ${e.title}`);
+    const status = !e.reviewed ? '未確認（公開しない）' : e.publishAt.date <= now ? '公開する' : '待ち';
+    console.log(`${e.publishAt.text}  ${status}  ${e.file}  ${e.title}`);
   }
   process.exit(0);
+}
+for (const e of timeReached.filter((x) => !x.reviewed)) {
+  log(`スキップ: ${e.file}（運営者が未確認のため公開しません。確認したら reviewed: false の行を消してください）`);
 }
 if (due.length === 0) {
   log('公開時刻を過ぎた記事はありません');
@@ -83,7 +90,8 @@ for (const e of due) {
   // 公開日を date に入れ、publishAt を publishedAt（公開した日時。同じ日の記事の並び順に使う）に書き換える
   text = text
     .replace(/^date:.*$/m, `date: ${e.publishAt.text.slice(0, 10)}`)
-    .replace(/^publishAt:.*$/m, `publishedAt: ${e.publishAt.text}`);
+    .replace(/^publishAt:.*$/m, `publishedAt: ${e.publishAt.text}`)
+    .replace(/^reviewed:.*\n/m, '');
   if (crlf) text = text.replace(/\n/g, '\r\n');
   fs.writeFileSync(dest, text);
   fs.unlinkSync(path.join(SCHEDULED_DIR, e.file));
