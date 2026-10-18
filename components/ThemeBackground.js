@@ -27,6 +27,10 @@ const ICONS = {
   key: 'M14 8a4 4 0 1 1-8 0 4 4 0 0 1 8 0z M12.8 10.8 20 18 M17 15l2-2',
   book: 'M4 4h7a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4z M20 4h-7a2 2 0 0 0-2 2v14a2 2 0 0 1 2-2h7z',
   mirror: 'M12 3c3.3 0 6 3.6 6 8s-2.7 8-6 8-6-3.6-6-8 2.7-8 6-8z M12 19v2 M8 21h8',
+  phone: 'M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z',
+  battery: 'M3 8h16v8H3z M19 10.5h2v3h-2 M5.5 10.5h3v3h-3',
+  bell: 'M6 16V11a6 6 0 0 1 12 0v5l2 2H4z M10 20.5h4',
+  clock: 'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z M12 7v5l3 2',
 };
 
 // カテゴリーごとの基本のモチーフ
@@ -59,13 +63,28 @@ const THEME_RULES = [
   [/pos|POS/, ['tablet', 'receipt']],
   [/mobile-order|モバイルオーダー/, ['tablet']],
   [/reservation|予約|顧客/, ['book']],
+  [/aruaru|あるある/, ['clock', 'receipt', 'coin']],
+  [/reception|受付|電話/, ['phone', 'bell']],
+  [/レシート用紙|釣り銭/, ['receipt', 'coin']],
+  [/試着室/, ['mirror', 'bell']],
+  [/イベント出店/, ['battery', 'wifi']],
 ];
+
+// 背景の絵を多めに描くときに足すモチーフ（テーマとカテゴリーのモチーフで足りないとき）
+const EXTRA_ICONS = ['store', 'coin', 'receipt', 'card'];
 
 // 文字をよけた配置の候補（0〜1 の割合。x, y）
 // 中央の帯（タイトル）と、左上・左下（ラベル・カテゴリー名）には置かず、上下の帯の右寄りに散らす
 const SLOTS = [
   [0.44, 0.1], [0.62, 0.07], [0.79, 0.12], [0.94, 0.08],
   [0.52, 0.91], [0.69, 0.94], [0.85, 0.89], [0.96, 0.76],
+];
+
+// 横長のサムネイル（新着記事のカードなど）で絵を多めに散らすときの配置の候補
+// 上下の帯に間をあけて並べる。中央のタイトルと、左上・左下の文字の位置はよける
+const DENSE_SLOTS = [
+  [0.36, 0.1], [0.48, 0.16], [0.6, 0.08], [0.71, 0.17], [0.82, 0.08], [0.93, 0.15],
+  [0.55, 0.9], [0.65, 0.84], [0.75, 0.92], [0.85, 0.84], [0.95, 0.91],
 ];
 
 // slug から決まる簡単な乱数（毎回同じ結果になる）
@@ -79,23 +98,27 @@ function seededRandom(seed) {
   };
 }
 
-function pickIcons(post) {
+function pickIcons(post, max) {
   const text = `${post.slug} ${(post.tags ?? []).join(' ')}`;
   const themed = THEME_RULES.filter(([re]) => re.test(text)).flatMap(([, icons]) => icons);
   const base = CATEGORY_ICONS[post.category] ?? ['store'];
-  // テーマのモチーフを優先し、カテゴリーのモチーフで補う
-  return [...new Set([...themed, ...base])].slice(0, 4);
+  // テーマのモチーフを優先し、カテゴリーのモチーフで補う（多めに描くときは共通のモチーフも足す）
+  const extra = max > 4 ? EXTRA_ICONS : [];
+  return [...new Set([...themed, ...base, ...extra])].slice(0, max);
 }
 
-export default function ThemeBackground({ post, width = 400, height = 350 }) {
+// dense を付けると、横長のサムネイル向けに絵を多め・小さめに散らす
+export default function ThemeBackground({ post, width = 400, height = 350, dense = false }) {
   const random = seededRandom(post.slug);
-  const icons = pickIcons(post);
-  // 配置の候補をずらして、記事ごとに違う並びにする
-  const offset = Math.floor(random() * SLOTS.length);
-  const count = SLOTS.length;
+  const slots = dense ? DENSE_SLOTS : SLOTS;
+  const icons = pickIcons(post, dense ? 7 : 4);
+  // 配置の候補をずらして、記事ごとに違う並びにする（候補の数と互いに素な数ずつ進めて、全部の候補を使う）
+  const offset = Math.floor(random() * slots.length);
+  const count = slots.length;
+  const step = dense ? 5 : 3;
   const items = Array.from({ length: count }, (_, i) => {
-    const [sx, sy] = SLOTS[(offset + i * 3) % SLOTS.length];
-    const size = 30 + random() * 26;
+    const [sx, sy] = slots[(offset + i * step) % slots.length];
+    const size = dense ? 22 + random() * 16 : 30 + random() * 26;
     return {
       icon: icons[i % icons.length],
       x: sx * width + (random() - 0.5) * 18 - size / 2,

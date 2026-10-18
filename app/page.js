@@ -67,7 +67,7 @@ export default function Home() {
               <li key={post.slug} className={index === 0 ? 'latest-card latest-card-top' : 'latest-card'}>
                 <Link href={`/posts/${post.slug}`} className="latest-link">
                   <span className="latest-thumb">
-                    <PostThumbnail post={post} />
+                    <PostThumbnail post={post} wide />
                   </span>
                   <span className="latest-meta">
                     <span className="latest-label">{index === 0 ? '最新' : '新着'}</span>
