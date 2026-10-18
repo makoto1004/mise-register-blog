@@ -237,6 +237,38 @@ a:hover { text-decoration: underline; }
   .featured-post { grid-template-columns: 1fr; gap: 12px; }
 }
 
+/* 新着記事（トップページ）。いちばん新しい記事は枠と影で目立たせる */
+.latest-grid { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 20px; }
+@media (min-width: 768px) { .latest-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.latest-card { border: 1px solid var(--line); background: var(--surface); padding: 12px; }
+.latest-card-top { border: 2px solid var(--warm); box-shadow: 4px 4px 0 var(--warm); }
+.latest-link { display: flex; flex-direction: column; gap: 8px; height: 100%; color: var(--text); }
+.latest-link:hover { text-decoration: none; }
+.latest-link:hover .latest-title { text-decoration: underline; }
+.latest-thumb .thumb { aspect-ratio: 16 / 9; }
+.latest-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; font-size: 0.75rem; color: var(--muted); }
+.latest-label { background: var(--warm); color: var(--bg); padding: 1px 8px; font-weight: 800; letter-spacing: 0.1em; }
+.latest-title { font-size: 0.95rem; font-weight: 800; line-height: 1.6; }
+.latest-card-top .latest-title { font-size: 1.05rem; }
+.latest-date { margin-top: auto; font-size: 0.75rem; color: var(--muted); }
+
+/* 公開から 7 日以内の記事の「NEW」（components/NewBadge.js） */
+.new-badge {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 0 6px;
+  border: 1px solid var(--warm);
+  border-radius: 3px;
+  color: var(--warm);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  vertical-align: 0.1em;
+}
+.latest-meta .new-badge, .card-meta .new-badge { margin-right: 0; }
+.featured-label .new-badge { margin: 0 0 0 8px; }
+
 .post-rows { list-style: none; margin: 20px 0 0; padding: 0; border-top: 1px solid var(--line); }
 .post-row {
   display: flex;

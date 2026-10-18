@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import PostCard from '@/components/PostCard';
-import { getPostsByCategory } from '@/lib/posts';
+import { getPostsByCategory, getLatestPosts } from '@/lib/posts';
 import { CATEGORIES, CATEGORY_DESCRIPTIONS } from '@/lib/site';
 
 // カテゴリー別の記事一覧。slug は ASCII にして静的ホスティングでの文字化けを避ける
@@ -22,6 +22,7 @@ export async function generateMetadata({ params }) {
 export default async function CategoryPage({ params }) {
   const { category } = await params;
   const posts = getPostsByCategory(category);
+  const latestSlugs = new Set(getLatestPosts().map((post) => post.slug));
 
   return (
     <>
@@ -33,7 +34,7 @@ export default async function CategoryPage({ params }) {
       {posts.length === 0 && <p>このカテゴリーの記事はまだありません。</p>}
       <ul className="card-grid">
         {posts.map((post) => (
-          <PostCard key={post.slug} post={post} showCategory={false} />
+          <PostCard key={post.slug} post={post} showCategory={false} isLatest={latestSlugs.has(post.slug)} />
         ))}
       </ul>
     </>

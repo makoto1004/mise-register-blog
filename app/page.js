@@ -5,7 +5,8 @@ import JsonLd from '@/components/JsonLd';
 import { XFollow } from '@/components/XLinks';
 import XTimeline from '@/components/XTimeline';
 import XPostEmbeds from '@/components/XPostEmbeds';
-import { getPostsByCategory } from '@/lib/posts';
+import NewBadge from '@/components/NewBadge';
+import { getPostsByCategory, getLatestPosts } from '@/lib/posts';
 import { SITE, CATEGORIES, CATEGORY_DESCRIPTIONS } from '@/lib/site';
 
 // トップページ
@@ -17,6 +18,9 @@ export default function Home() {
     name,
     posts: getPostsByCategory(slug),
   }));
+  const latest = getLatestPosts();
+  // NEW の印は、新着の 3 本（かつ公開から 7 日以内）だけに付ける
+  const latestSlugs = new Set(latest.map((post) => post.slug));
 
   return (
     <>
@@ -52,6 +56,35 @@ export default function Home() {
           <Link href="/site-map#purpose">目的から探す →</Link>
       </nav>
 
+      {/* 新着記事：全カテゴリーから新しい順に 3 本を目立たせて表示する */}
+      {latest.length > 0 && (
+        <section className="home-section latest-section" aria-labelledby="latest-heading">
+          <div className="section-head">
+            <h2 id="latest-heading">新着記事</h2>
+          </div>
+          <ul className="latest-grid">
+            {latest.map((post, index) => (
+              <li key={post.slug} className={index === 0 ? 'latest-card latest-card-top' : 'latest-card'}>
+                <Link href={`/posts/${post.slug}`} className="latest-link">
+                  <span className="latest-thumb">
+                    <PostThumbnail post={post} />
+                  </span>
+                  <span className="latest-meta">
+                    <span className="latest-label">{index === 0 ? '最新' : '新着'}</span>
+                    <NewBadge date={post.date} />
+                    {CATEGORIES[post.category] && <span className="latest-category">{CATEGORIES[post.category]}</span>}
+                  </span>
+                  <span className="latest-title">{post.title}</span>
+                  <time dateTime={post.date} className="latest-date">
+                    {post.date.replaceAll('-', '/')}
+                  </time>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {sections.map(({ slug, name, posts }) => {
         const [featured, ...rest] = posts;
         return (
@@ -70,7 +103,10 @@ export default function Home() {
                   <PostThumbnail post={featured} />
                 </span>
                 <span className="featured-body">
-                  <span className="featured-label">まず読みたい記事</span>
+                  <span className="featured-label">
+                    まず読みたい記事
+                    {latestSlugs.has(featured.slug) && <NewBadge date={featured.date} />}
+                  </span>
                   <span className="featured-title">{featured.title}</span>
                   {featured.description && <span className="featured-desc">{featured.description}</span>}
                 </span>
@@ -82,7 +118,10 @@ export default function Home() {
                 {rest.map((post) => (
                   <li key={post.slug}>
                     <Link href={`/posts/${post.slug}`} className="post-row">
-                      <span className="post-row-title">{post.title}</span>
+                      <span className="post-row-title">
+                        {latestSlugs.has(post.slug) && <NewBadge date={post.date} />}
+                        {post.title}
+                      </span>
                       <time dateTime={post.date} className="post-row-date">
                         {post.date.replaceAll('-', '/')}
                       </time>

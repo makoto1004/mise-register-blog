@@ -7,7 +7,7 @@
 //
 // - scheduled/ は .gitignore 済み。公開前の記事は GitHub に上がらない
 // - 記事のフロントマターに publishAt: 2026-10-18T12:00 のように書く（日本時間）
-// - 公開時に date を公開日に書き換え、publishAt の行は消す
+// - 公開時に date を公開日に書き換え、publishAt は publishedAt（公開した日時）に書き換える
 // - PC が止まっていて時刻を過ぎた記事は、次に実行したときにまとめて公開される
 // - 結果は logs/publish-scheduled.log に残る
 
@@ -80,8 +80,10 @@ for (const e of due) {
   }
   const crlf = e.raw.includes('\r\n');
   let text = e.raw.replace(/\r\n/g, '\n');
-  // 公開日を date に入れ、publishAt の行を消す
-  text = text.replace(/^date:.*$/m, `date: ${e.publishAt.text.slice(0, 10)}`).replace(/^publishAt:.*\n/m, '');
+  // 公開日を date に入れ、publishAt を publishedAt（公開した日時。同じ日の記事の並び順に使う）に書き換える
+  text = text
+    .replace(/^date:.*$/m, `date: ${e.publishAt.text.slice(0, 10)}`)
+    .replace(/^publishAt:.*$/m, `publishedAt: ${e.publishAt.text}`);
   if (crlf) text = text.replace(/\n/g, '\r\n');
   fs.writeFileSync(dest, text);
   fs.unlinkSync(path.join(SCHEDULED_DIR, e.file));
