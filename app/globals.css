@@ -6,10 +6,10 @@
   --text: #2f2725;
   --muted: #6f6866;
   --border: #2f2725;
-  --line: #dcd9d8;
+  --line: #e0d8ce;
   --accent: #0062db;
-  --bg: #fafafa;
-  --surface: #f1f1f1;
+  --bg: #f7f4ef;
+  --surface: #efe9e1;
   --amazon: #ff9900;
   --amazon-hover: #f08804;
   --amazon-text: #111111;
@@ -27,27 +27,8 @@
   --thumb-devices: #dfe5ee;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #f2efee;
-    --muted: #a8a2a0;
-    --border: #f2efee;
-    --line: #3a3634;
-    --accent: #6aa8ff;
-    --bg: #171514;
-    --surface: #24211f;
-    --pros: #3fb950;
-    --cons: #f85149;
-    --badge-bg: #3d2a0f;
-    --badge-text: #f0b45a;
-    --warm: #e2895f;
-    --thumb-cafe: #3a2f24;
-    --thumb-salon: #3b2a2e;
-    --thumb-kitchen-car: #283427;
-    --thumb-apparel: #2e2a38;
-    --thumb-devices: #262d38;
-  }
-}
+/* ダークモードの端末でも、いつも明るい色で表示する（ブランドの画像・OGP 画像と色をそろえる） */
+:root { color-scheme: light; }
 
 * { box-sizing: border-box; }
 
