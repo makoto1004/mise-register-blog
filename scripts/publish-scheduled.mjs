@@ -32,7 +32,28 @@ function log(message) {
   fs.appendFileSync(LOG_FILE, `${line}\n`);
 }
 
-const git = (...args) => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' }).trim();
+// git の操作。ほかの処理（OneDrive の同期・同時に動いた別の実行など）とぶつかって失敗したときは、少し待って 1 回だけやり直す
+function git(...args) {
+  try {
+    return execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' }).trim();
+  } catch {
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 5000);
+    return execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' }).trim();
+  }
+}
+
+// 同時に 2 回動かないようにする（タスク スケジューラと手動の実行が重なったときなど）
+// 10 分より古い印は、前の実行が途中で止まった残りとみなして無視する
+const LOCK_FILE = path.join(ROOT, 'logs', 'publish-scheduled.lock');
+if (!DRY_RUN) {
+  if (fs.existsSync(LOCK_FILE) && Date.now() - fs.statSync(LOCK_FILE).mtimeMs < 10 * 60 * 1000) {
+    log('ほかの公開の処理が動いているため、今回は何もしません');
+    process.exit(0);
+  }
+  fs.mkdirSync(path.dirname(LOCK_FILE), { recursive: true });
+  fs.writeFileSync(LOCK_FILE, String(process.pid));
+  process.on('exit', () => fs.rmSync(LOCK_FILE, { force: true }));
+}
 
 // publishAt（日本時間の「YYYY-MM-DDTHH:mm」）を Date にする
 function parsePublishAt(value) {
