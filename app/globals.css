@@ -4,12 +4,12 @@
 
 :root {
   --text: #2f2725;
-  --muted: #6f6866;
+  --muted: #625955;
   --border: #2f2725;
-  --line: #e0d8ce;
-  --accent: #0062db;
-  --bg: #f7f4ef;
-  --surface: #efe9e1;
+  --line: #e6d3bd;
+  --accent: #a4441d;
+  --bg: #fbf1e4;
+  --surface: #f4e4d0;
   --amazon: #ff9900;
   --amazon-hover: #f08804;
   --amazon-text: #111111;
