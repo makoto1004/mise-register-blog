@@ -685,7 +685,7 @@ a:hover { text-decoration: underline; }
 /* お問い合わせ・ご意見 */
 .feedback-box { margin: 24px 0 0; padding: 14px 18px; background: var(--surface); font-size: 0.85rem; }
 .feedback-box p { margin: 0; }
-.contact-frame { width: 100%; min-height: 900px; border: 1px solid var(--line); background: #fff; }
+.contact-frame { width: 100%; min-height: 1150px; border: 1px solid var(--line); background: #fff; }
 
 .service-banner-link { display: block; margin-bottom: 10px; }
 .service-banner-tag { display: block; width: fit-content; margin: 0 0 4px; color: var(--muted); }
