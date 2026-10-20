@@ -4,6 +4,7 @@ date: 2026-10-16
 updated: 2026-10-17
 category: cafe
 order: 3
+services: [funfo]
 tags: [カフェ, 飲食店, オーダーシステム, モバイルオーダー, POSレジ]
 description: オーダーエントリーシステム（OES）とモバイルオーダーの違い、POSレジと連携するメリット、導入前に確認したい費用や端末・スタッフの運用のポイントを、カフェなど小さな飲食店向けに解説します。
 reviewNotes:
@@ -78,6 +79,8 @@ OES（Order Entry System）は、スタッフが入力した注文を厨房と�
 注文はWi-Fiで送られるため、店内のどこでも電波が届くかを確認しておきましょう。
 
 <!-- products -->
+
+<!-- services -->
 
 ## よくある質問
 
