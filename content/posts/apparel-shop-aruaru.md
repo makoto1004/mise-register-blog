@@ -125,7 +125,7 @@ products:
 
 <!-- products -->
 
-在庫やセール価格の管理まで見直すなら[アパレル向けPOSレジ比較](/posts/apparel-pos-comparison)、開業時にそろえる備品は[アパレルショップ開業に必要なもの一覧](/posts/apparel-opening-checklist)を参考にしてください。
+在庫やセール価格の管理まで見直すなら[アパレル向けPOSレジ比較](/posts/apparel-pos-comparison)、開業時にそろえる備品は[アパレルショップ開業に必要なもの一覧](/posts/apparel-opening-checklist)を参考にしてみてください。
 
 ## よくある質問
 
@@ -147,4 +147,4 @@ products:
 
 - Fashion HR（HR TALKS）「[思わず頷く！ 店員やお客様など、アパレル業界のあるあるネタ26連発](https://fashion-hr.com/hr-talks/working_in_fashion/20379/)」（2020年3月30日）
 
-※ 確認日：2026年10月18日。最新の情報は各ページで確認してください。
+※ 確認日：2026年10月18日。最新の情報は各ページで確かめてみてください。

@@ -125,7 +125,7 @@ products:
 
 <!-- products -->
 
-予約・顧客管理と一緒にPOSレジを選ぶ場合は[美容院・サロン向けPOSレジおすすめ比較](/posts/salon-pos-comparison)、受付で使う機材は[美容室の周辺機器とカルテ用iPadの選び方](/posts/salon-ipad-peripherals)を参考にしてください。
+予約・顧客管理と一緒にPOSレジを選ぶ場合は[美容院・サロン向けPOSレジおすすめ比較](/posts/salon-pos-comparison)、受付で使う機材は[美容室の周辺機器とカルテ用iPadの選び方](/posts/salon-ipad-peripherals)を参考にしてみてください。
 
 ## よくある質問
 
@@ -147,4 +147,4 @@ products:
 
 - ホットペッパービューティーワーク「[美容室のレセプションとは？業務内容や必要な資格、向いている人などを解説【美容師監修】](https://work.beauty.hotpepper.jp/guide/article/00033/)」（2024年6月3日）
 
-※ 確認日：2026年10月18日。最新の情報は各ページで確認してください。
+※ 確認日：2026年10月18日。最新の情報は各ページで確かめてみてください。
