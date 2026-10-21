@@ -115,6 +115,12 @@ picks:
     image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=1209653&item_id=10013341&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Flow-ya%2Fcabinet%2Fitem_cart%2Flighting%2F01%2F2c78w_01.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
     shop: 楽天市場
     note: '家庭向けの商品です。店舗で使う場合は、耐荷重や使い方の条件を商品ページで確認しましょう。'
+  - name: 'Chanté style industriel｜キャビネット（ブラック・天然木＋ガラス＋金属）'
+    url: 'https://af.moshimo.com/af/c/click?a_id=5857428&p_id=6515&pc_id=18440&pl_id=89793&url=https%3A%2F%2Fchante.jp%2Fproducts%2Fstorage-furniture-low-storage-0015'
+    image: 'https://image.moshimo.com/af-img/6318/000000089793.jpg'
+    pixel: 'https://i.moshimo.com/af/i/impression?a_id=5857428&p_id=6515&pc_id=18440&pl_id=89793'
+    shop: Chanté
+    note: '黒いフレームとガラスの、インダストリアルな雰囲気のキャビネット。商品説明では、カフェなどの商業空間にも合うとしています。サイズは4種類あるので、置く場所の寸法を測ってから選びましょう。'
 ---
 
 アイアンの黒と、使い込んだような木を組み合わせた**ブルックリンスタイル**は、服屋やセレクトショップで人気の店づくりです。ただ、雰囲気のある家具を置きすぎると、主役であるはずの商品が目立たなくなってしまいます。写真で見たあの雰囲気を、自分のお店でどう再現するか悩みますよね。

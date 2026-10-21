@@ -1,4 +1,5 @@
-// 実際の商品の例（楽天アフィリエイトなどで発行した画像付きリンク）を小さく表示するカード
+// 実際の商品の例（楽天アフィリエイト・もしもアフィリエイトなどで発行した画像付きリンク）を小さく表示するカード
+// pixel があれば、表示回数の計測用の画像（1×1）も置く
 export default function PickCard({ pick }) {
   return (
     <a href={pick.url} target="_blank" rel="sponsored nofollow noopener" className="pick-card">
@@ -14,6 +15,10 @@ export default function PickCard({ pick }) {
           {pick.shop}で見る
         </span>
       </span>
+      {pick.pixel && (
+        // eslint-disable-next-line @next/next/no-img-element -- アフィリエイトサービスの計測用画像（1×1）
+        <img src={pick.pixel} width="1" height="1" alt="" className="service-pixel" loading="lazy" />
+      )}
     </a>
   );
 }
