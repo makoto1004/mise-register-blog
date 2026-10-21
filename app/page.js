@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import PostThumbnail from '@/components/PostThumbnail';
-import StoreScenes from '@/components/StoreScenes';
 import JsonLd from '@/components/JsonLd';
 import { XFollow } from '@/components/XLinks';
 import XTimeline from '@/components/XTimeline';
@@ -10,7 +9,7 @@ import { getPostsByCategory, getLatestPosts } from '@/lib/posts';
 import { SITE, CATEGORIES, CATEGORY_DESCRIPTIONS } from '@/lib/site';
 
 // トップページ
-// 上部：4 業種の線画を背景にした見出しと、業種へのジャンプ
+// 上部：Canva でデザインした見出しの画像。その下に業種へのジャンプ
 // 各業種：最初の 1 本だけ大きく見せ、残りは文字の一覧（同じ形のカードを並べ続けない）
 export default function Home() {
   const sections = Object.entries(CATEGORIES).map(([slug, name]) => ({
@@ -34,17 +33,21 @@ export default function Home() {
           inLanguage: 'ja',
         }}
       />
+      {/* 見出し部分：Canva でデザインした画像（public/images/hero/）。見出しの文字は画像の中にあるので、h1 は画面に出さずに読み上げ・検索用に置く */}
       <section className="home-hero">
-        <StoreScenes />
-        {/* 見出しのデザインは Gemini の提案（雑誌の特集タイトル風）をもとにしている */}
-        <p className="home-kicker-en">For small shops</p>
-        <h1 className="home-title">
-          <span className="home-title-sub">小さなお店のレジ選びを、</span>
-          <span className="home-title-main">
-            すっきり、<span className="home-title-accent">納得！</span>
-          </span>
-        </h1>
-        <p className="home-lead">{SITE.description}</p>
+        <h1 className="sr-only">小さなお店のレジ選びを、すっきり、納得。mise &amp; register</h1>
+        <picture>
+          <source type="image/webp" srcSet="/images/hero/home-hero-800.webp 800w, /images/hero/home-hero-1600.webp 1600w" sizes="(max-width: 1100px) 100vw, 1100px" />
+          {/* eslint-disable-next-line @next/next/no-img-element -- Static Export のため next/image の最適化は使わない */}
+          <img
+            src="/images/hero/home-hero-1600.jpg"
+            width="1600"
+            height="900"
+            alt="mise & register。小さなお店のレジ選びを、すっきり、納得。業種別のPOSレジ・キャッシュレス決済・周辺機器ガイド。カフェ・美容院・キッチンカー・アパレル。"
+            className="home-hero-image"
+            fetchPriority="high"
+          />
+        </picture>
       </section>
 
       <nav className="jump-links home-jump" aria-label="業種から探す">

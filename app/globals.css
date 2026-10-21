@@ -118,66 +118,21 @@ a:hover { text-decoration: underline; }
 .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
 .breadcrumb a { color: var(--muted); }
 
-/* トップの見出し部分（4 業種の線画を薄く敷く） */
-.home-hero {
-  position: relative;
-  overflow: hidden;
-  text-align: center;
-  padding: 64px 16px 64px;
-  margin: -8px 0 0;
-}
-.store-scenes {
+/* トップの見出し部分：Canva でデザインした画像（public/images/hero/）を枠いっぱいに表示する */
+.home-hero { margin: 8px 0 0; }
+.home-hero-image { display: block; width: 100%; height: auto; }
+
+/* 画面には出さず、読み上げ・検索エンジン向けに残す文字 */
+.sr-only {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  color: var(--muted);
-  opacity: 0.32;
-  pointer-events: none;
-}
-.home-hero > :not(.store-scenes) { position: relative; }
-/* 見出し（雑誌の特集タイトル風）：英字の添え書き → 1 行目は中くらい → 2 行目は大きく、「納得！」だけ差し色と下線 */
-.home-kicker-en {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 12px;
-  font-family: var(--font-serif), "Times New Roman", serif;
-  font-style: italic;
-  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
-  letter-spacing: 0.18em;
-  color: var(--warm);
-}
-.home-kicker-en::before {
-  content: "";
-  display: inline-block;
-  width: 28px;
+  width: 1px;
   height: 1px;
-  background: var(--warm);
-}
-.home-title { margin: 0; line-height: 1.4; }
-.home-title-sub {
-  display: block;
-  margin-bottom: 0.3rem;
-  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
-  font-weight: 500;
-  letter-spacing: 0.06em;
-}
-.home-title-main {
-  display: block;
-  font-size: clamp(2.1rem, 4.4vw, 3rem);
-  font-weight: 800;
-  letter-spacing: 0.04em;
-}
-.home-title-accent {
-  color: var(--warm);
-  padding-bottom: 2px;
-  border-bottom: 2px solid var(--warm);
-}
-.home-lead { max-width: 34em; margin: 14px auto 22px; font-size: 0.9rem; color: var(--muted); }
-@media (max-width: 720px) {
-  .home-hero { padding: 40px 4px 28px; }
-  .store-scenes { opacity: 0.18; }
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* 業種・目的へのジャンプリンク */
