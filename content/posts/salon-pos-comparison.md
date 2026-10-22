@@ -10,7 +10,7 @@ reviewNotes:
   - 各サービスの料金プラン・機能の範囲を公式サイトで確認する
   - 予約サイト（ホットペッパービューティーなど）との連携可否を各サービスで確認する
   - 比較表の各サービスの特徴が最新の内容と合っているか確認する
-services: [airregi, square, smaregi]
+services: [airregi, square, smaregi, postas]
 products:
   - name: Bluetoothのバーコードスキャナー
     keyword: バーコードリーダー Bluetooth 2次元 POS
