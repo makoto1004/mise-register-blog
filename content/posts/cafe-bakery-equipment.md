@@ -1,7 +1,7 @@
 ---
 title: カフェでパンを焼く道具の選び方｜オーブン・ミキサー・発酵
 date: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-22
 category: cafe
 order: 10
 tags: [カフェ, パン, ベーカリー, オーブン, 製菓材料, 開業]
@@ -24,6 +24,28 @@ products:
       - パン以外のメニューにも使える
     cons:
       - 本体が大きく、電気の工事が必要なことがある
+  - name: アイリスオーヤマ コンベクションオーブン（ノンフライヤー）FVC-D15C-H
+    asin: B0H3TMF8K4
+    summary: 熱風で焼くコンベクションオーブン。商品名ではノンフライヤーとしても使えるとしています。家庭向けの製品なので、パンを試作したり、少しずつ焼いたりするのに向いています。一度に焼ける量は商品ページで確かめてください。
+    specs:
+      役割: パンの試作・少量の焼き菓子
+      選び方: 庫内の大きさ・天板の枚数
+      注意点: 家庭向けの製品。お店で毎日たくさん焼くなら業務用を検討
+    pros:
+      - 置き場所を取りにくい
+    cons:
+      - たくさん焼くには向かない
+  - name: シャープ ウォーターオーブン ヘルシオ AX-XJ1-B
+    asin: B08G87L8NB
+    summary: シャープのスチームオーブンレンジ「ヘルシオ」。オーブンと電子レンジの両方に使えます。家庭向けの製品なので、メニューの試作や、少量の調理に使う場合の候補です。
+    specs:
+      役割: 試作・少量の調理・温め
+      選び方: 庫内の大きさ・電源
+      注意点: 家庭向けの製品。お店での使い方は取扱説明書で確認
+    pros:
+      - オーブンと電子レンジを1台にまとめられる
+    cons:
+      - たくさん焼くには向かない
   - name: パン生地用ミキサー（ニーダー）
     keyword: パン ミキサー 業務用 ニーダー
     summary: パン生地をこねるための機械。手ごねに比べて、生地の仕上がりをそろえやすく、仕込みの時間を短くできます。
@@ -57,6 +79,17 @@ products:
       - 費用を抑えてそろえられる
     cons:
       - 数がそろうと収納場所が必要
+  - name: タイガークラウン ドレッジ No.554（ポリプロピレン）
+    asin: B001U1CX9E
+    summary: 製菓・製パンの道具のメーカー、タイガークラウンのドレッジ（生地を切ったり集めたりするカード）。ボウルの生地をきれいに集めたり、分けたりするのに使います。
+    specs:
+      役割: 生地を切る・集める
+      選び方: かたさ・大きさ
+      注意点: 熱いものには使わない
+    pros:
+      - 生地を無駄なく集められる
+    cons:
+      - 刃物ではないので、かたいものは切れない
   - name: 天板・パン型・クーラー（冷却網）
     keyword: 天板 業務用 パン型 ケーキクーラー
     summary: 焼くための天板や型と、焼き上がったパンを冷ますための網。オーブンの大きさに合うサイズを選びます。
@@ -79,6 +112,32 @@ products:
       - まとめ買いで単価を抑えやすい
     cons:
       - 使い切れない量を買うと品質が落ちる
+picks:
+  - name: '【新品】マルゼン コンベクションオーブン MCOE-074B（幅690×奥行450×高さ600mm）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/58b6260d.8836f93f.58b6260e.07884c84/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftenpos2%2Ft0470171200651%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/58b6260d.8836f93f.58b6260e.07884c84/?me_id=1251755&item_id=10307728&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Ftenpos2%2Fcabinet%2Fdm1-2%2Ft0470171200651_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場（業務用厨房のテンポス）
+    note: '新品の業務用コンベクションオーブン。電源の種類（単相・三相、電圧）は、商品ページで確かめてから選びましょう。'
+  - name: '【中古・1年保証】フジマック 電気式コンベクションオーブン FESOA505AL（三相200V）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/58b6260d.8836f93f.58b6260e.07884c84/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftenpos2%2F2500000484834%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/58b6260d.8836f93f.58b6260e.07884c84/?me_id=1251755&item_id=11505651&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Ftenpos2%2Fcabinet%2Fric714%2F2500000484834_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場（業務用厨房のテンポス）
+    note: '中古の電気式。三相200V（動力）の電源が必要です。中古品は1台限りのことが多く、売り切れていることもあります。送料は別に見積もりです。'
+  - name: '【中古・1年保証】リンナイ コンベクションオーブン RCK-S10AS（都市ガス）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/58b6260d.8836f93f.58b6260e.07884c84/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftenpos2%2F2500009210915%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/58b6260d.8836f93f.58b6260e.07884c84/?me_id=1251755&item_id=11522114&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Ftenpos2%2Fcabinet%2Fric756%2F2500009210915_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場（業務用厨房のテンポス）
+    note: '中古のガス式（都市ガス用）。お店のガスが都市ガスかプロパンガスかを先に確かめましょう。送料は別に見積もりです。'
+  - name: '【中古・1年保証】タニコー ガス式スチームコンベクションオーブン TSCO-4GBC（都市ガス）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/58b6260d.8836f93f.58b6260e.07884c84/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftenpos2%2F2500009959913%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/58b6260d.8836f93f.58b6260e.07884c84/?me_id=1251755&item_id=11576751&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Ftenpos2%2Fcabinet%2Fric833%2F2500009959913_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場（業務用厨房のテンポス）
+    note: '中古の、蒸気の機能が付いたスチームコンベクションオーブン（都市ガス用）。パン以外の料理にも使いたいお店向けです。送料は別に見積もりです。'
+  - name: '【新品】タニコー 電気式ベーシックスチームコンベクションオーブン TSCO-101EBR（棚10段）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/58b62e59.266fc58a.58b62e5a.793cfdd9/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fchubo1ban%2Ftsco-101ebr%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/58b62e59.266fc58a.58b62e5a.793cfdd9/?me_id=1236227&item_id=10007054&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fchubo1ban%2Fcabinet%2Ftanico%2Ftsco-101ebr.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '棚が10段ある大型のスチームコンベクションオーブン（幅840×奥行730×高さ1010mm）。たくさん焼くお店向けで、置き場所と電源の確認が欠かせません。'
 ---
 
 焼きたてのパンの香りは、お店の前を通る人の足を止めます。カフェでパンを焼くと、モーニングやランチのメニューの幅も広がります。一方で、道具をそろえる費用や手間が気になる方も多いと思います。
@@ -107,6 +166,21 @@ products:
 | 冷蔵庫・冷凍庫 | 生地を寝かせる・保存する | 前日に仕込んで冷蔵発酵させると、朝の作業が楽になる |
 
 オーブンや冷蔵庫は電気の容量を大きく使います。物件を選ぶ段階で、電気の容量を確認しておきましょう（[カフェの物件選び](/posts/cafe-property-guide)）。
+
+### 業務用のオーブンは、厨房機器の専門店で探す
+
+お店でたくさん焼くなら、業務用のコンベクションオーブンが候補になります。業務用は、タニコー・ニチワ電機・マルゼン・フジマックなどの厨房機器メーカーが作っていて、厨房機器の専門店や、楽天市場に出店している業務用厨房機器のお店で扱われています。
+
+| 確かめること | 理由 |
+| --- | --- |
+| 電気式か、ガス式か | 電気式は三相200V（動力）が必要な機種が多い。ガス式は都市ガス用かプロパンガス用かを合わせる |
+| 大きさと搬入 | 業務用は大きく重い。置き場所の寸法と、お店の入口から運び込めるかを測る |
+| 新品か、中古か | 中古は手ごろな値段で買えることが多い一方、保証の有無と期間、製造年を確かめる |
+| 送料と設置 | 送料が別に見積もりのことが多い。電気やガスの工事が必要かも確かめる |
+
+中古を選ぶときは、点検や保証が付いている厨房機器の専門店のものを選ぶと安心です。
+
+<!-- picks -->
 
 ## 材料の仕入れ
 
