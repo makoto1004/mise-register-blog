@@ -5,7 +5,7 @@
 ## サイトの概要
 
 - サイト名: mise & register（業種別の POS レジ・周辺機器・開業準備のブログ）
-- 公開先: https://mise-register-blog-bice.vercel.app/ （Vercel。GitHub の main にプッシュすると自動で公開される）
+- 公開先: https://www.mise-register.com/ （Vercel。GitHub の main にプッシュすると自動で公開される。旧 URL の https://mise-register-blog-bice.vercel.app/ は `vercel.json` で新しいドメインへ 308 リダイレクト）
 - 技術: Next.js（Static Export）。記事は `content/posts/*.md`（フロントマターで title / date / category / tags / products / services / picks などを管理）
 - 対象業種: カフェ・美容院（サロン）・キッチンカー・アパレル（雑貨店を含む）
 - 収益: Amazon アソシエイト・楽天アフィリエイト・A8.net（リンクは `lib/affiliates.js` と各記事のフロントマター）

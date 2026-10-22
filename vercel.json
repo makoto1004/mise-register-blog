@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "mise-register-blog-bice.vercel.app" }],
+      "destination": "https://www.mise-register.com/:path*",
+      "permanent": true
+    }
+  ]
+}
