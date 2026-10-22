@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Cormorant_Garamond } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Logo from '@/components/Logo';
+import { InstagramHeaderLink } from '@/components/XLinks';
 import XHeaderTimeline from '@/components/XHeaderTimeline';
 import { SITE, CATEGORIES, OG_IMAGE } from '@/lib/site';
 import './globals.css';
@@ -56,7 +57,10 @@ export default function RootLayout({ children }) {
               <Logo />
             </Link>
             <p className="site-catch">{SITE.catchphrase}</p>
-            <XHeaderTimeline account={SITE.xAccount} />
+            <div className="header-social">
+              <InstagramHeaderLink />
+              <XHeaderTimeline account={SITE.xAccount} />
+            </div>
           </div>
           <nav className="menu-bar" aria-label="カテゴリー">
             <ul>
@@ -110,6 +114,16 @@ export default function RootLayout({ children }) {
                   rel="noopener noreferrer me"
                 >
                   X（@{SITE.xAccount}）
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`https://www.instagram.com/${SITE.instagramAccount}/`}
+                  className="underline-link"
+                  target="_blank"
+                  rel="noopener noreferrer me"
+                >
+                  Instagram（@{SITE.instagramAccount}）
                 </a>
               </li>
               <li>

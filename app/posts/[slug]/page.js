@@ -212,7 +212,7 @@ export default async function PostPage({ params }) {
 
       <section className="x-section" aria-label="X でシェア・フォロー">
         <XShare title={post.title} path={`/posts/${post.slug}`} />
-        <XFollow lead="記事の更新は X でもお知らせしています。" />
+        <XFollow lead="記事の更新は X と Instagram でもお知らせしています。" />
       </section>
 
       <QuickSurvey slug={post.slug} />

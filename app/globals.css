@@ -702,7 +702,8 @@ a:hover { text-decoration: underline; }
 
 /* X（旧 Twitter）へのリンク */
 .x-logo { width: 1em; height: 1em; flex: 0 0 auto; }
-.x-header-wrap { position: relative; margin-left: auto; }
+.header-social { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.x-header-wrap { position: relative; }
 .x-header-link {
   display: inline-grid;
   cursor: pointer;

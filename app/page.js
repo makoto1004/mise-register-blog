@@ -137,9 +137,9 @@ export default function Home() {
         );
       })}
 
-      <section className="home-section x-section" aria-label="X のお知らせ">
+      <section className="home-section x-section" aria-label="X・Instagram のお知らせ">
         <div className="section-head">
-          <h2>X でもお知らせしています</h2>
+          <h2>X・Instagram でもお知らせしています</h2>
         </div>
         {/* 選んだ投稿があればそれを埋め込み（最大 3 件）、なければタイムラインを表示する */}
         {SITE.homeXPosts.length > 0 ? <XPostEmbeds urls={SITE.homeXPosts} /> : <XTimeline account={SITE.xAccount} />}
