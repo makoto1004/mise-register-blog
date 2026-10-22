@@ -45,6 +45,13 @@ products:
     cons:
       - 種類が増えると在庫管理が大変
 services: [netsea]
+picks:
+  - name: 'LEO SPECIALTY COFFEE｜スペシャルティコーヒーの定期便・単品'
+    url: 'https://af.moshimo.com/af/c/click?a_id=5857381&p_id=7667&pc_id=22171&pl_id=95926'
+    image: 'https://image.moshimo.com/af-img/7395/000000095926.png'
+    pixel: 'https://i.moshimo.com/af/i/impression?a_id=5857381&p_id=7667&pc_id=22171&pl_id=95926'
+    shop: LEO SPECIALTY COFFEE
+    note: 'スペシャルティコーヒー豆のオンラインショップ。定期便と単品・ギフトがあり、卸売販売の案内ページもあります。お店で使う豆を選ぶ前に、味見用として少量から試すのも1つの方法です。業務用の条件は公式サイトで確認しましょう。'
 ---
 
 カフェの利益は、**仕入れの値段と量**で大きく変わります。仕入れ先を上手に選び、在庫を持ちすぎないことが大切です。開業したばかりの頃は、どれくらい仕入れればいいか手探りになりがちですよね。
@@ -78,6 +85,10 @@ POSレジの売上データの使い方は[カフェ・飲食店向けPOSレジ�
 <!-- products -->
 
 <!-- services -->
+
+コーヒー豆の味を比べたいときは、ネットで買えるスペシャルティコーヒーのお店を試してみるのもおすすめです。
+
+<!-- picks -->
 
 ## よくある質問
 

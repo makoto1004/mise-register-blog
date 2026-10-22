@@ -3,7 +3,7 @@ title: 店舗のネットワーク配線ガイド｜POSレジが止まらないW
 date: 2026-10-17
 category: devices
 order: 7
-services: [virusbuster, dtihikari, niftyhikari]
+services: [virusbuster, biglobehikari, dtihikari, niftyhikari]
 tags: [ネットワーク, Wi-Fi, LANケーブル, ルーター, POSレジ, 周辺機器]
 description: POSレジやキャッシュレス決済を安定して使うための店舗ネットワークの組み方を解説。ルーターの置き場所、プリンターを有線LANでつなぐ理由、お客様用Wi-Fiを分ける方法、配線をきれいにまとめるコツを紹介します。
 reviewNotes:

@@ -4,7 +4,7 @@ date: 2026-10-22
 publishedAt: 2026-10-22T07:08
 category: devices
 order: 20
-services: [dtihikari, niftyhikari]
+services: [biglobehikari, dtihikari, niftyhikari]
 tags: [Wi-Fi, ルーター, ネットワーク, POSレジ, セキュリティ]
 description: POSレジやキャッシュレス決済を使うお店で、Wi-Fiルーターを選ぶときに確かめたいことをまとめました。暗号化の方式（WPA2・WPA3）、ネットワークを分けられる機能、置き場所、買ったあとの設定と更新まで、公的な手引きをもとに解説します。
 reviewNotes:
