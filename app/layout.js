@@ -27,19 +27,23 @@ export const metadata = {
     images: [OG_IMAGE.url],
   },
   alternates: { canonical: '/' },
-  // Google Search Console の所有権確認（HTML タグ方式）
-  ...(googleVerification() ? { verification: { google: googleVerification() } } : {}),
+  // Google Search Console の所有権確認（HTML タグ方式）。確認用の値が複数あれば、タグを複数出す
+  verification: { google: googleVerifications() },
 };
 
 // Google アナリティクスの測定 ID（G-XXXXXXXXXX）。未設定なら読み込まない
 // 測定用のタグをまるごと貼った場合や、前後に空白・引用符がある場合も、G- で始まる部分だけを取り出す
 const GA_ID = ((process.env.NEXT_PUBLIC_GA_ID ?? '').toUpperCase().match(/G-[A-Z0-9]+/) ?? [''])[0];
 
-// 環境変数の確認用の値を取り出す。<meta … content="…"> のタグをまるごと入れた場合も、content の中身だけを使う
-function googleVerification() {
+// 確認用の値の一覧。環境変数の値（以前のプロパティ用）と、下の値を合わせる
+// 環境変数に <meta … content="…"> のタグをまるごと入れた場合も、content の中身だけを使う
+function googleVerifications() {
+  // Search Console の確認用の値（公開してよい値）。https://www.mise-register.com/ の URL プレフィックスのプロパティ用
+  const SEARCH_CONSOLE_VERIFICATIONS = ['ZpSSIAZb_QGa0d7C_FxX60zmsYlSj-JNrSx3PEPOGiE'];
   const raw = (process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ?? process.env.GOOGLE_SITE_VERIFICATION ?? '').trim();
   const match = raw.match(/content\s*=\s*["']([^"']+)["']/i);
-  return match ? match[1].trim() : raw;
+  const fromEnv = match ? match[1].trim() : raw;
+  return [...new Set([fromEnv, ...SEARCH_CONSOLE_VERIFICATIONS].filter(Boolean))];
 }
 
 export default function RootLayout({ children }) {
