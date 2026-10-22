@@ -292,6 +292,22 @@ a:hover { text-decoration: underline; }
 }
 .thumb-text > span, .article-hero > :not(.theme-bg) { position: relative; }
 
+/* 記事の挿絵（Canva）を背景に敷く場合。うすいクリーム色を重ねて文字を読みやすくする */
+.thumb-text > .theme-photo, .article-hero > .theme-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.thumb-text > .photo-veil, .article-hero > .photo-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(251, 241, 228, 0.55), rgba(251, 241, 228, 0.3));
+  pointer-events: none;
+}
+
 /* 記事ページの見出し部分 */
 .article-hero {
   border: 1px solid var(--border);

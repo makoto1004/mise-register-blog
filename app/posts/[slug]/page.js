@@ -161,9 +161,17 @@ export default async function PostPage({ params }) {
           </>
         )}
       </nav>
-      {/* 記事の見出し部分。背景に記事のテーマのイラストを入れる（中央は文字のために空ける） */}
-      <header className={`article-hero thumb-${post.category}`}>
-        <ThemeBackground post={post} width={760} height={260} />
+      {/* 記事の見出し部分。背景に記事の挿絵（なければテーマのアイコン）を入れる */}
+      <header className={`article-hero thumb-${post.category}${post.illustration ? ' has-photo' : ''}`}>
+        {post.illustration ? (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element -- Static Export のため next/image の最適化は使わない */}
+            <img src={post.illustration} alt="" className="theme-photo" />
+            <span className="photo-veil" />
+          </>
+        ) : (
+          <ThemeBackground post={post} width={760} height={260} />
+        )}
         <h1>{post.title}</h1>
         <div className="post-meta">
           <time dateTime={post.date}>公開 {post.date}</time>
