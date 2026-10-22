@@ -772,3 +772,29 @@ a:hover { text-decoration: underline; }
   font-size: 0.85rem;
 }
 .x-embed-section { margin-top: 40px; }
+
+/* 記事の最後の「前の記事・次の記事」 */
+.post-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 32px 0 8px;
+}
+.post-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.post-nav-link:hover { text-decoration: none; transform: translate(-3px, -3px); box-shadow: 3px 3px 0 var(--border); }
+.post-nav-next { text-align: right; }
+.post-nav-label { font-size: 0.75rem; font-weight: 800; color: var(--accent); }
+.post-nav-title { font-size: 0.9rem; font-weight: 700; line-height: 1.6; }
+@media (max-width: 560px) {
+  .post-nav { grid-template-columns: 1fr; }
+  .post-nav-empty { display: none; }
+}

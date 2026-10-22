@@ -10,7 +10,8 @@ import CostSimulator from '@/components/CostSimulator';
 import QuickSurvey from '@/components/QuickSurvey';
 import { XFollow, XShare } from '@/components/XLinks';
 import XPostEmbeds from '@/components/XPostEmbeds';
-import { getPostSlugs, getPostBySlug } from '@/lib/posts';
+import PostNav from '@/components/PostNav';
+import { getPostSlugs, getPostBySlug, getAdjacentPosts } from '@/lib/posts';
 import JsonLd from '@/components/JsonLd';
 import { SITE, CATEGORIES, OG_IMAGE } from '@/lib/site';
 
@@ -143,6 +144,8 @@ export default async function PostPage({ params }) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   const categoryName = CATEGORIES[post.category];
+  // 同じカテゴリーの一覧で前後にある記事（記事の最後に「前の記事・次の記事」として出す）
+  const { prev, next } = getAdjacentPosts(post.slug, post.category);
 
   return (
     <article className="article">
@@ -227,6 +230,7 @@ export default async function PostPage({ params }) {
       <p className="price-note">
         ※ 価格・在庫・仕様は変わることがあります。購入前に各商品ページ・公式サイトで最新情報を確認してください。
       </p>
+      <PostNav prev={prev} next={next} />
       <p className="back-link">
         <Link href="/">← 記事一覧に戻る</Link>
       </p>
