@@ -30,6 +30,8 @@ export const metadata = {
   alternates: { canonical: '/' },
   // Google Search Console の所有権確認（HTML タグ方式）。確認用の値が複数あれば、タグを複数出す
   verification: { google: googleVerifications() },
+  // Google AdSense のサイト確認（メタタグ方式）
+  other: { 'google-adsense-account': SITE.adsenseClient },
 };
 
 // Google アナリティクスの測定 ID（G-XXXXXXXXXX）。未設定なら読み込まない
@@ -50,6 +52,14 @@ function googleVerifications() {
 export default function RootLayout({ children }) {
   return (
     <html lang="ja" className={serif.variable}>
+      <head>
+        {/* Google AdSense の広告コード（審査と広告の表示に使う） */}
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SITE.adsenseClient}`}
+          crossOrigin="anonymous"
+        />
+      </head>
       <body id="top">
         <header className="site-header">
           <div className="header-top">

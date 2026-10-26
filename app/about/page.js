@@ -47,6 +47,32 @@ export default function AboutPage() {
         記事内のリンクの一部はアフィリエイトリンクです。リンク経由で購入・申し込みをされた場合、当サイトに紹介料が支払われることがありますが、購入者・申込者の支払額は変わりません。
       </p>
 
+      <h3>Google AdSense について</h3>
+      <p>
+        当サイトでは、Google LLC が提供する広告配信サービス「Google AdSense」を利用しています。Google などの第三者配信事業者は、Cookie（クッキー）を使って、ユーザーが当サイトやほかのサイトを過去に訪れたときの情報にもとづいて広告を配信します。
+      </p>
+      <p>
+        Google は広告 Cookie を使うことで、ユーザーが当サイトやインターネット上のほかのサイトを訪れたときの情報にもとづいて、Google やそのパートナーが適切な広告を表示できるようにしています。
+      </p>
+      <p>
+        ユーザーは、
+        <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">
+          Google の広告設定
+        </a>
+        で、パーソナライズ広告（閲覧の記録にもとづく広告）を無効にできます。また、
+        <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">
+          www.aboutads.info
+        </a>
+        で、第三者配信事業者の Cookie によるパーソナライズ広告を無効にできます。
+      </p>
+      <p>
+        Google による Cookie の使い方について、くわしくは
+        <a href="https://policies.google.com/technologies/ads?hl=ja" target="_blank" rel="noopener noreferrer">
+          広告 – ポリシーと規約 – Google
+        </a>
+        をご覧ください。
+      </p>
+
       <h2>アクセス解析について</h2>
       <p>
         当サイトでは、Google LLC が提供するアクセス解析ツール「Google アナリティクス」を利用しています。Google
