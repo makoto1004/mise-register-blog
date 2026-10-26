@@ -126,6 +126,14 @@ export default function RootLayout({ children }) {
                   Instagram（@{SITE.instagramAccount}）
                 </a>
               </li>
+              {/* AI 無料相談は、フォームの URL を設定してからリンクを出す */}
+              {SITE.consultFormUrl && (
+                <li>
+                  <Link href="/consult" className="underline-link">
+                    AI相談デスク
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link href="/contact" className="underline-link">
                   お問い合わせ
