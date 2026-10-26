@@ -59,6 +59,28 @@ export default function Home() {
           <Link href="/site-map#purpose">目的から探す →</Link>
       </nav>
 
+      {/* AI相談デスクの案内：フォームの URL が設定されているときだけ表示する */}
+      {SITE.consultFormUrl && (
+        <section className="home-consult" aria-labelledby="consult-heading">
+          <span className="home-consult-mascots" aria-hidden="true">
+            {/* eslint-disable-next-line @next/next/no-img-element -- Static Export のため next/image の最適化は使わない */}
+            <img src="/images/mascots/rejimaru.webp" width="96" height="96" alt="" />
+            {/* eslint-disable-next-line @next/next/no-img-element -- Static Export のため next/image の最適化は使わない */}
+            <img src="/images/mascots/posuta.webp" width="96" height="96" alt="" />
+          </span>
+          <div className="home-consult-body">
+            <p className="home-consult-label">AI相談デスク（無料）</p>
+            <h2 id="consult-heading">レジまわりの困りごと、無料で相談できます</h2>
+            <p>
+              POSレジ・決済端末・プリンター・スキャナー・お店のネットワークのことを、フォームから相談できます。レジまるとポスタが回答の下書きを作り、運営者が確認してからメールでお返しします。
+            </p>
+            <Link href="/consult" className="home-consult-button">
+              相談してみる →
+            </Link>
+          </div>
+        </section>
+      )}
+
       {/* 新着記事：全カテゴリーから新しい順に 3 本を目立たせて表示する */}
       {latest.length > 0 && (
         <section className="home-section latest-section" aria-labelledby="latest-heading">
