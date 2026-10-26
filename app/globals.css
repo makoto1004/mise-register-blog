@@ -719,6 +719,7 @@ a:hover { text-decoration: underline; }
 
 .footer-links { margin-bottom: 24px; }
 .footer-note { margin: 4px 0; font-size: 0.75rem; color: var(--muted); }
+.footer-profile { margin: 0 0 16px; font-size: 0.8rem; }
 
 /* スマホ用：画面下の固定メニュー */
 .bottom-bar {

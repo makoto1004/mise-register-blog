@@ -145,6 +145,13 @@ export default function RootLayout({ children }) {
                 </Link>
               </li>
             </ul>
+            {/* 運営者のひとこと紹介（くわしくは運営者情報のページのプロフィール） */}
+            <p className="footer-profile">
+              運営者：相談デスクの店番（POSレジ・周辺機器・ネットワークの検証／ヘルプデスク）{' '}
+              <Link href="/about#profile" className="underline-link">
+                プロフィール
+              </Link>
+            </p>
             {/* Amazon アソシエイト・プログラムの規約で求められる表示 */}
             <p className="footer-note">Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。</p>
             <p className="footer-note">© {SITE.name}</p>
