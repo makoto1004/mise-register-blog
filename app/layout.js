@@ -53,6 +53,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ja" className={serif.variable}>
       <head>
+        {/* Impact（Shopify のアフィリエイト）のサイト確認用のタグ。Impact は content ではなく value で読むため、そのまま書く */}
+        <meta name="impact-site-verification" value="0a53640a-dc73-49f8-9b75-7d581548b146" />
         {/* Google AdSense の広告コード（審査と広告の表示に使う） */}
         <script
           async
