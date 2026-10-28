@@ -10,7 +10,8 @@
     "draft:daily": "node --env-file-if-exists=.env.local scripts/daily-draft.mjs",
     "og": "node scripts/make-og-image.mjs",
     "publish:scheduled": "node scripts/publish-scheduled.mjs",
-    "research:daily": "node scripts/daily-research.mjs"
+    "research:daily": "node scripts/daily-research.mjs",
+    "sns:daily": "node --env-file-if-exists=.env.local scripts/daily-sns.mjs"
   },
   "dependencies": {
     "@next/third-parties": "^16.4.2",
