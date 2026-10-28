@@ -160,6 +160,12 @@ a:hover { text-decoration: underline; }
   border: 1px solid var(--border);
   background: var(--surface);
 }
+/* Amazon のセールのバナー（画像は加工せず、表示の大きさだけ決める） */
+.sale-banner { margin-top: 32px; padding: 16px; border: 1px solid var(--border); background: var(--surface); text-align: center; }
+.sale-banner-label { margin: 0 0 8px; font-size: 0.7rem; font-weight: 800; color: var(--muted); text-align: left; }
+.sale-banner img { display: block; width: 100%; max-width: 360px; height: auto; margin: 0 auto; }
+.sale-banner-text { margin: 10px 0 0; font-size: 0.85rem; color: var(--muted); }
+
 .home-consult-mascots { display: flex; flex-shrink: 0; }
 .home-consult-mascots img { width: 96px; height: 96px; border-radius: 50%; border: 2px solid var(--bg); background: var(--bg); }
 .home-consult-mascots img + img { margin-left: -18px; }

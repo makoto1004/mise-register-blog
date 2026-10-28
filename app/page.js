@@ -5,6 +5,7 @@ import { XFollow } from '@/components/XLinks';
 import XTimeline from '@/components/XTimeline';
 import XPostEmbeds from '@/components/XPostEmbeds';
 import NewBadge from '@/components/NewBadge';
+import AmazonSaleBanner from '@/components/AmazonSaleBanner';
 import { getPostsByCategory, getLatestPosts } from '@/lib/posts';
 import { SITE, CATEGORIES, CATEGORY_DESCRIPTIONS } from '@/lib/site';
 
@@ -80,6 +81,9 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      {/* Amazon のセールのバナー：セールの期間だけ表示する */}
+      <AmazonSaleBanner />
 
       {/* 新着記事：全カテゴリーから新しい順に 3 本を目立たせて表示する */}
       {latest.length > 0 && (

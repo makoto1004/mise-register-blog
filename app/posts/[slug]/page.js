@@ -11,6 +11,7 @@ import QuickSurvey from '@/components/QuickSurvey';
 import { XFollow, XShare } from '@/components/XLinks';
 import XPostEmbeds from '@/components/XPostEmbeds';
 import PostNav from '@/components/PostNav';
+import AmazonSaleBanner from '@/components/AmazonSaleBanner';
 import { getPostSlugs, getPostBySlug, getAdjacentPosts } from '@/lib/posts';
 import JsonLd from '@/components/JsonLd';
 import { SITE, CATEGORIES, OG_IMAGE } from '@/lib/site';
@@ -209,6 +210,9 @@ export default async function PostPage({ params }) {
           <XPostEmbeds urls={post.xPosts} />
         </section>
       )}
+
+      {/* Amazon のセールのバナー：セールの期間だけ表示する */}
+      <AmazonSaleBanner />
 
       <section className="x-section" aria-label="X でシェア・フォロー">
         <XShare title={post.title} path={`/posts/${post.slug}`} />
