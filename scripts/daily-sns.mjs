@@ -4,6 +4,10 @@
 // 使い方:
 //   npm run sns:daily            # 次の 1 本を作る
 //   npm run sns:daily -- --dry   # 次にどの記事を作るかを表示するだけ
+//   npm run sns:daily -- --count 7  # 7 本まとめて作る
+//
+// - フォルダー名には投稿する予定の日付をつける（すでにある最後の日付の次の日から、1 日 1 本）
+// - 毎朝の実行では、1 週間先（今日から 6 日後）まで用意できていれば何もしない
 //
 // - 古い記事から順に作る。作った記事は logs/daily-sns.json に記録し、2 回作らない
 // - 保存先の SNS投稿 フォルダーに x-<slug>.png か instagram-<slug>/ がある記事は、手で作ったものとみなして飛ばす
@@ -27,6 +31,9 @@ const STATE_FILE = path.join(ROOT, 'logs', 'daily-sns.json');
 const SNS_DIR = path.join(os.homedir(), 'OneDrive', 'デスクトップ', 'SNS投稿');
 const OUT_DIR = process.env.SNS_OUT_DIR || path.join(SNS_DIR, '毎日');
 const DRY_RUN = process.argv.includes('--dry');
+const COUNT_ARG = process.argv.indexOf('--count');
+const COUNT = COUNT_ARG >= 0 ? Math.max(1, Number(process.argv[COUNT_ARG + 1]) || 1) : 0;
+const STOCK_DAYS = 6;
 const X_LIMIT = 280;
 
 // SNS の画像の色（ブログと同じ）
@@ -43,6 +50,20 @@ function log(message) {
 
 const readState = () => (fs.existsSync(STATE_FILE) ? JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')) : { done: [] });
 const today = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
+const addDays = (date, n) => new Date(Date.parse(`${date}T00:00:00Z`) + n * 86400e3).toISOString().slice(0, 10);
+
+// 保存先にある最後の予定日（フォルダー名の先頭の日付）
+function lastPlannedDate() {
+  if (!fs.existsSync(OUT_DIR)) return null;
+  const dates = fs.readdirSync(OUT_DIR).map((n) => n.slice(0, 10)).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d)).sort();
+  return dates.at(-1) ?? null;
+}
+// 次の予定日：今日か、最後の予定日の次の日の、遅いほう
+function nextPlannedDate() {
+  const last = lastPlannedDate();
+  const t = today();
+  return last && last >= t ? addDays(last, 1) : t;
+}
 
 // 公開ずみの記事を古い順に並べる
 function listPosts() {
@@ -210,16 +231,16 @@ ${textLines(lines, 80, 860, size, Math.round(size * 1.4), 'font-weight="800"')}
   await sharp(Buffer.from(svg)).composite(layers).png().toFile(file);
 }
 
-async function main() {
-  const state = readState();
+async function makeOne(state) {
   const next = listPosts().find((p) => !state.done.includes(p.slug) && !madeByHand(p.slug));
   if (!next) {
     log('作っていない記事はありません');
-    return;
+    return false;
   }
+  const date = nextPlannedDate();
   if (DRY_RUN) {
-    console.log(`次に作る記事: ${next.slug}（${next.data.title}）`);
-    return;
+    console.log(`次に作る記事: ${next.slug}（${next.data.title}）／予定日 ${date}`);
+    return false;
   }
 
   let talk;
@@ -231,7 +252,7 @@ async function main() {
   talk ??= templateTalk(next);
 
   const ads = hasAds(next);
-  const dir = path.join(OUT_DIR, `${today()}-${next.slug}`);
+  const dir = path.join(OUT_DIR, `${date}-${next.slug}`);
   fs.mkdirSync(dir, { recursive: true });
   const illusFile = path.join(ROOT, 'public', 'images', 'posts', `${next.slug}-1.webp`);
   const illus = fs.existsSync(illusFile) ? illusFile : null;
@@ -245,6 +266,19 @@ async function main() {
   state.done.push(next.slug);
   fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
   log(`作成: ${next.slug}（X ${xLength(xText)} / ${X_LIMIT} 文字）→ ${dir}`);
+  return true;
+}
+
+async function main() {
+  const state = readState();
+  if (!COUNT && !DRY_RUN) {
+    const last = lastPlannedDate();
+    if (last && last >= addDays(today(), STOCK_DAYS)) {
+      log(`${last} の分まで用意できているため、今日は作りません`);
+      return;
+    }
+  }
+  for (let i = 0; i < (COUNT || 1); i++) if (!(await makeOne(state))) break;
 }
 
 main().catch((err) => {
