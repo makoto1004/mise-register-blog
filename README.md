@@ -83,6 +83,21 @@ npm run draft:daily                          # 手動で 1 件だけ試す
 - 成功した行は `keywords.txt` から消える。失敗したら行が残るので、翌朝もう一度試される
 - 結果は `logs/daily-draft.log` に残る
 - 自動では公開しない。`reviewNotes` を確認してから `content/posts/` に移す
+
+### 毎朝 7 時半に SNS 投稿用のファイルを作る
+
+公開ずみの記事から古い順に 1 本選び、X の画像と文章、Instagram の表紙と投稿文を、デスクトップの `SNS投稿\毎日\日付-slug\` に作る（`scripts/daily-sns.mjs`）。投稿は手で行う。
+
+```bash
+npm run sns:daily                            # 手動で 1 本作る
+npm run sns:daily -- --dry                   # 次に作る記事を表示するだけ
+.\scripts\register-sns-task.ps1              # タスク スケジューラに毎日 07:30 で登録
+.\scripts\register-sns-task.ps1 -Remove      # 登録を解除
+```
+
+- 2 人の会話は Claude Code（`claude -p`）で作る。使えないときは、タイトルを使ったひな形の文章になる
+- 作った記事は `logs/daily-sns.json` に記録し、2 回作らない。`SNS投稿` に `x-<slug>.png` か `instagram-<slug>/` がある記事（手で作ったもの）は飛ばす
+- 結果は `logs/daily-sns.log` に残る
 - PC がログオン中のときだけ動く。8 時に電源が切れていた場合は、次に起動したときに実行される
 
 ## A8.net のリンクを設定する
