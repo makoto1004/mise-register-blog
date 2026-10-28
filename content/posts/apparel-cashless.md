@@ -58,7 +58,7 @@ products:
       - お店のイメージを伝えられる
     cons:
       - 置き場所を取る
-services: [square, storesPayment, airpay]
+services: [square, storesPayment, airpay, shopify]
 ---
 
 アパレルショップは、1回の会計が高額になることが多い業種です。そのため、**クレジットカードで払いたい**というお客様が多く、決済の選び方が売上に関わります。「カードは使えますか？」と聞かれる場面が多いお店ほど、決済の選び方で会計のしやすさが変わってきます。
