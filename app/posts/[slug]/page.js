@@ -15,7 +15,7 @@ import PostNav from '@/components/PostNav';
 import AmazonSaleBanner from '@/components/AmazonSaleBanner';
 import { getPostSlugs, getPostBySlug, getAdjacentPosts } from '@/lib/posts';
 import JsonLd from '@/components/JsonLd';
-import { SITE, CATEGORIES, OG_IMAGE } from '@/lib/site';
+import { SITE, CATEGORIES, OG_IMAGE, SERVICES_OPEN } from '@/lib/site';
 
 // ビルド時に生成するページの一覧（Static Export では必須）
 export function generateStaticParams() {
@@ -221,7 +221,7 @@ export default async function PostPage({ params }) {
       </section>
 
       {/* 運営者の有料の代行サービスの案内：フロントマターの ownServices がある記事だけ。受付を始めるまでは出さない */}
-      {SITE.orderFormUrl && post.ownServices.length > 0 && <OwnServiceBox services={post.ownServices} />}
+      {SERVICES_OPEN && post.ownServices.length > 0 && <OwnServiceBox services={post.ownServices} />}
 
       <QuickSurvey slug={post.slug} />
 

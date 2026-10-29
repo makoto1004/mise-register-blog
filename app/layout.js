@@ -4,7 +4,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import Logo from '@/components/Logo';
 import { InstagramHeaderLink } from '@/components/XLinks';
 import XHeaderTimeline from '@/components/XHeaderTimeline';
-import { SITE, CATEGORIES, OG_IMAGE } from '@/lib/site';
+import { SITE, CATEGORIES, OG_IMAGE, SERVICES_OPEN } from '@/lib/site';
 import './globals.css';
 
 // ロゴの「mise」「&」に使うセリフ体（ビルド時に取り込まれ、サイト内から配信される）
@@ -151,20 +151,21 @@ export default function RootLayout({ children }) {
                   </Link>
                 </li>
               )}
-              {/* 有料の作業代行は、見積もり依頼フォームの URL を設定してからリンクを出す */}
-              {SITE.orderFormUrl && (
-                <>
-                  <li>
-                    <Link href="/services" className="underline-link">
-                      レジまわりの作業代行
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/legal" className="underline-link">
-                      特定商取引法に基づく表記
-                    </Link>
-                  </li>
-                </>
+              {/* 有料の作業代行は、受付先（ココナラか見積もり依頼フォーム）の URL を設定してからリンクを出す */}
+              {SERVICES_OPEN && (
+                <li>
+                  <Link href="/services" className="underline-link">
+                    レジまわりの作業代行
+                  </Link>
+                </li>
+              )}
+              {/* 特定商取引法に基づく表記は、ブログで直接受けるときだけ必要（ココナラ経由はココナラの仕組みで取引する） */}
+              {SITE.orderFormUrl && !SITE.coconalaUrl && (
+                <li>
+                  <Link href="/legal" className="underline-link">
+                    特定商取引法に基づく表記
+                  </Link>
+                </li>
               )}
               <li>
                 <Link href="/contact" className="underline-link">
