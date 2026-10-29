@@ -32,6 +32,13 @@ export default function ServicesPage() {
         <Link href="/">ホーム</Link> › <span>レジまわりの作業代行</span>
       </nav>
       <h1 className="page-title">レジまわりの作業代行</h1>
+      <img
+        className="consult-hero"
+        src="/images/services-desk.webp"
+        width={1200}
+        height={674}
+        alt="チェックリストの紙を持つレシートプリンターのレジまると、棒グラフの紙を持つタブレットのPOSレジのポスタが、表の紙や封筒を置いた作業台に並んでいる手描きのイラスト"
+      />
       <p className="own-service-label">運営者の有料サービス</p>
       <div className="post-body">
         <p>
