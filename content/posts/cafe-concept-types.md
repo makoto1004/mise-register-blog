@@ -1,12 +1,14 @@
 ---
 title: カフェのコンセプト14種類｜開業前に確かめたい許可とレジまわり
 date: 2026-10-29
+updated: 2026-10-29
 publishedAt: 2026-10-29T14:00
 category: cafe
 order: 18
 tags: [カフェ開業, コンセプト, 猫カフェ, 夜カフェ, ベーカリーカフェ, ブックカフェ, 許可]
 description: ブックカフェ・猫カフェ・夜カフェ・ベーカリーカフェなど、カフェのコンセプト14種類を4つのグループに分けて紹介します。コンセプトによって必要になる許可や届出、レジ・機材で気をつけたいことも、公的機関の案内をもとにまとめました。
 reviewNotes:
+  - 「コンセプトに合う食器を選ぶ」の食器は楽天アフィリエイトのリンク。商品ページがあることは2026年10月29日に確認した。説明は商品名と商品ページの表示にもとづき、値段は書いていない
   - 動物の展示時間（犬猫は午前8時〜午後8時、特定成猫は午後10時まで・1日12時間まで）は、環境省の報道発表（2016年5月17日、2016年6月1日施行）にもとづく。その後の改正は確認していない
   - 深夜における酒類提供飲食店営業の定義（午前0時〜午前6時、主食を出すのが常態の店を除く）は、警視庁「風俗営業等業種一覧」にもとづく。届出の期限・届出先は書いていない
   - 喫茶店でケーキを持ち帰り用に売るときの扱いは、厚生労働省「営業許可制度の見直し及び営業届出制度の創設に関するQ＆A」問5（令和3年8月26日最終改正）にもとづく。パンについては同じ考え方で書いたが、自治体の判断を保健所で確かめるよう案内している
@@ -15,6 +17,37 @@ reviewNotes:
   - ペット同伴・ボードゲーム・自家焙煎の豆の販売に関する許可は確認できなかったため、具体的な条件は書かず、保健所などに相談するよう案内している
   - 外食のアレルギー表示については、消費者庁の資料を開けなかったため、制度の説明は書いていない
 services: [airregi, square, smaregi]
+picks:
+  - name: 'イッタラ ティーマ プレート 21cm'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdaily-3%2Fita13%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=213885&item_id=10065814&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fdaily-3%2Fcabinet%2Fita2%2Fita13-2.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '北欧の定番の食器です。シンプルな形なので、北欧風やブックカフェなどの落ち着いたお店に合わせやすいです。'
+  - name: 'アラビア 24h アベック プレート 20cm（ブルー）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fonestep%2Fjj1599%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=201844&item_id=10075326&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fonestep%2Fcabinet%2Flpitem%2Fiittala2%2Fjj1599_1n.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: 'ブルーの北欧の食器です。パンケーキやケーキなど、スイーツの皿に使いやすい大きさです。'
+  - name: '波佐見焼 natural69 角皿（長角皿）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcucina%2Fd3711-3750%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=219264&item_id=10004351&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fcucina%2Fcabinet%2F09222084%2Fd3711-3750-1.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '和の雰囲気の波佐見焼の角皿です。日本茶・和カフェのお茶菓子やワンプレートに向いています。'
+  - name: '波佐見焼 マルヒロ HASAMI SEASON 01 プレート 22cm'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fplywood%2F28251037%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=212236&item_id=10012508&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fplywood%2Fcabinet%2Fkitchen%2F28251037.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '高台（底の台）のある、少し大きめの丸皿です。ベーカリーカフェのパンの皿にも使えます。'
+  - name: '白山陶器 ブルーム プレートSS（リース）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnatural69%2F10000317%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=260874&item_id=10000317&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fnatural69%2Fcabinet%2Fshohin01%2Fthumbnail_wakunashi%2Fbloom_plss_t0_r.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '模様の入った小皿です。ケーキや焼き菓子を少しだけのせるときに使えます。'
+  - name: 'KINTO SLOW COFFEE STYLE マグ 250ml'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flivingut%2F4963264497145%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=222208&item_id=10062436&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Flivingut%2Fcabinet%2Fmaker_kinto7%2F4963264497145.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '飾りのないシンプルなマグです。サードウェーブコーヒーやエスプレッソ・スタンドのテイクアウトしない席用に向いています。'
 ---
 
 「カフェを開きたい」と思ったとき、最初に考えるのが**どんなカフェにするか**ですよね。本が読めるお店、猫と過ごせるお店、夜遅くまで開いているお店。コンセプトによって、お店の作りも、そろえる機材も変わります。
@@ -144,6 +177,12 @@ services: [airregi, square, smaregi]
 
 - **確かめたいこと**：お茶は種類ごとにお湯の温度が違うので、温度を設定できる電気ケトルや給湯器があると、毎回の味がそろいます。和菓子を仕入れて出すなら、仕入れ先と、日持ちや保存の方法を決めておきましょう。
 - **レジまわり**：茶葉も売るなら、店内で飲むお茶とは別のカテゴリーで登録しておくと、売上を分けて見られます。
+
+## コンセプトに合う食器を選ぶ
+
+カップやお皿は、お客様が手に取って、写真にも残すものです。北欧風なら北欧の食器、和の雰囲気なら波佐見焼のように、コンセプトと器の雰囲気をそろえると、お店の印象がまとまります。お店で使う前に、食洗機や電子レンジに対応しているか、同じものを買い足せるかも確かめておきましょう。
+
+<!-- picks -->
 
 ## コンセプトが決まったら、レジを選ぶ
 

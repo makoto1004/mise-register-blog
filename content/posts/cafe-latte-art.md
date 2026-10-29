@@ -1,6 +1,7 @@
 ---
 title: カフェでラテアートを始めるには｜ミルクの泡立てと注ぎ方、そろえる道具
 date: 2026-10-28
+updated: 2026-10-29
 publishedAt: 2026-10-28T07:15
 category: cafe
 order: 15
@@ -45,6 +46,17 @@ products:
       - 模様を描きやすい
     cons:
       - 置き場所を取る
+picks:
+  - name: 'KINTO PEBBLE カップ&ソーサー（180ml・磁器）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcolorfulbox%2F329576%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=309659&item_id=10092608&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fcolorfulbox%2Fcabinet%2Fmaker_kinto9%2F329576cb.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '記事でおすすめしている180ml前後の大きさのカップです。底の形がラテアートに向いているかは、商品ページの写真で確かめましょう。'
+  - name: 'ニッコー FEAST スタッキング碗（200cc）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Futu-wa%2F3100-2120%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=211571&item_id=10007759&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Futu-wa%2Fcabinet%2Fnikko_2%2F3100-2120-1.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '重ねてしまえるカップです。ソーサーは別売りなので、商品ページでおすすめされているソーサーと一緒にそろえましょう。'
 ---
 
 カフェラテの表面にハートや葉っぱの模様があると、それだけでお客様の表情が変わりますよね。写真を撮ってもらえることもあって、お店を知ってもらうきっかけにもなります。
@@ -96,6 +108,8 @@ products:
 ## ラテアートの練習に使える道具
 
 <!-- products -->
+
+<!-- picks -->
 
 ## よくある質問
 
