@@ -5,6 +5,7 @@
 //   npm run sns:daily            # 次の 1 本を作る
 //   npm run sns:daily -- --dry   # 次にどの記事を作るかを表示するだけ
 //   npm run sns:daily -- --count 7  # 7 本まとめて作る
+//   npm run sns:daily -- --slug cafe-cup-warmer,cafe-latte-art  # 記事を指定して、今日の日付で作る
 //
 // - フォルダー名には投稿する予定の日付をつける（すでにある最後の日付の次の日から、1 日 1 本）
 // - 毎朝の実行では、1 週間先（今日から 6 日後）まで用意できていれば何もしない
@@ -33,6 +34,8 @@ const OUT_DIR = process.env.SNS_OUT_DIR || path.join(SNS_DIR, '毎日');
 const DRY_RUN = process.argv.includes('--dry');
 const COUNT_ARG = process.argv.indexOf('--count');
 const COUNT = COUNT_ARG >= 0 ? Math.max(1, Number(process.argv[COUNT_ARG + 1]) || 1) : 0;
+const SLUG_ARG = process.argv.indexOf('--slug');
+const SLUGS = SLUG_ARG >= 0 ? String(process.argv[SLUG_ARG + 1] ?? '').split(',').map((s) => s.trim()).filter(Boolean) : [];
 const STOCK_DAYS = 6;
 const X_LIMIT = 280;
 
@@ -231,13 +234,16 @@ ${textLines(lines, 80, 860, size, Math.round(size * 1.4), 'font-weight="800"')}
   await sharp(Buffer.from(svg)).composite(layers).png().toFile(file);
 }
 
-async function makeOne(state) {
-  const next = listPosts().find((p) => !state.done.includes(p.slug) && !madeByHand(p.slug));
+// slug を指定したときはその記事を今日の日付で作る（公開したばかりの記事をすぐ投稿したいとき）
+async function makeOne(state, slug) {
+  const next = slug
+    ? listPosts().find((p) => p.slug === slug)
+    : listPosts().find((p) => !state.done.includes(p.slug) && !madeByHand(p.slug));
   if (!next) {
-    log('作っていない記事はありません');
+    log(slug ? `記事が見つかりません: ${slug}` : '作っていない記事はありません');
     return false;
   }
-  const date = nextPlannedDate();
+  const date = slug ? today() : nextPlannedDate();
   if (DRY_RUN) {
     console.log(`次に作る記事: ${next.slug}（${next.data.title}）／予定日 ${date}`);
     return false;
@@ -263,7 +269,7 @@ async function makeOne(state) {
   await makeXImage(next, illus, path.join(dir, 'x.png'));
   await makeInstagramCover(next, illus, path.join(dir, 'instagram.png'));
 
-  state.done.push(next.slug);
+  if (!state.done.includes(next.slug)) state.done.push(next.slug);
   fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
   log(`作成: ${next.slug}（X ${xLength(xText)} / ${X_LIMIT} 文字）→ ${dir}`);
   return true;
@@ -271,6 +277,10 @@ async function makeOne(state) {
 
 async function main() {
   const state = readState();
+  if (SLUGS.length) {
+    for (const slug of SLUGS) await makeOne(state, slug);
+    return;
+  }
   if (!COUNT && !DRY_RUN) {
     const last = lastPlannedDate();
     if (last && last >= addDays(today(), STOCK_DAYS)) {
