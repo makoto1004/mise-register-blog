@@ -1,7 +1,7 @@
 ---
 title: 閉店後の現金はどうする？金庫の置き場所と店じまいのルール
 date: 2026-10-23
-updated: 2026-10-29
+updated: 2026-10-30
 publishedAt: 2026-10-23T18:00
 category: devices
 order: 23
@@ -87,7 +87,7 @@ products:
 
 閉店したお店の様子をうかがう人を見かけたら、110番通報するよう警視庁は呼びかけています（参考：警視庁）。
 
-レジ締めの手順は[レジ締めで現金が合わないときの確認手順](/posts/register-cash-mismatch)で、お店の防犯全体は[お店の防犯グッズの選び方](/posts/store-crime-prevention)で紹介しています。
+レジ締めと店じまいの確認を1枚にまとめた[無料のレジ締めチェック表（PDF）](/downloads/register-closing-checklist.pdf)も用意しています。レジ締めの手順は[レジ締めで現金が合わないときの確認手順](/posts/register-cash-mismatch)で、お店の防犯全体は[お店の防犯グッズの選び方](/posts/store-crime-prevention)で紹介しています。
 
 ## あると助かる道具
 
