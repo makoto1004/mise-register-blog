@@ -1,7 +1,7 @@
 ---
 title: アパレル・雑貨店の内装・照明・清掃道具の選び方
 date: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-29
 category: apparel
 order: 9
 tags: [アパレル, 雑貨店, 内装, 照明, 清掃道具, 売り場づくり]
@@ -64,6 +64,12 @@ products:
       - 外からの見え方がよくなる
     cons:
       - 天気の悪い日のあとは特に汚れやすい
+picks:
+  - name: 'ダクトレール用 スポットライト器具（E26）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkyodoled%2F10000749%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=304644&item_id=10000749&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fkyodoled%2Fcabinet%2F03875224%2Fimgrc0091943368.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: 'ダクトレールに付けて、向きを変えられるスポットライトです。電球は別に用意します。'
 ---
 
 アパレル・雑貨店では、**照明で商品の色や素材感の見え方**が変わります。そして、ほこりのない棚やきれいなガラスが、お店の印象を決めます。毎日のことなので、無理なく続けられるお手入れの形も見つけておきたいですね。
@@ -106,6 +112,8 @@ products:
 - **レジまわり**：POSレジやバーコードスキャナーも、専用のクロスで定期的に拭く
 
 <!-- products -->
+
+<!-- picks -->
 
 ## よくある質問
 

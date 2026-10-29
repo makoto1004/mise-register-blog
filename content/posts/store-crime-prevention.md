@@ -1,7 +1,7 @@
 ---
 title: お店の防犯グッズの選び方｜万引き・侵入盗・強盗への備え
 date: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-29
 category: devices
 order: 9
 tags: [防犯, 防犯カメラ, 万引き対策, 侵入盗対策, 強盗対策, 店舗運営]
@@ -114,6 +114,17 @@ products:
       - 1人で店番をしているときの安心につながる
     cons:
       - 使い方をスタッフ全員で決めておく必要がある
+picks:
+  - name: 'TP-Link 屋内用の見守りカメラ（200万画素・首振り）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftplinkdirect%2F6935364053239-new%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=321020&item_id=10001097&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Ftplinkdirect%2Fcabinet%2F06321509%2Ftapo-c200.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: 'スマホで映像を確かめられる屋内用のカメラです。家庭用として売られているので、録画の保存方法と保存期間を確かめてから選びましょう。'
+  - name: 'TP-Link 屋内用の見守りカメラ（最大500万画素・AI検知）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftplinkdirect%2F4897098687666%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=321020&item_id=10001164&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Ftplinkdirect%2Fcabinet%2F06321509%2Ftapo-c210c230.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '上のカメラより画素数が多いタイプです。レジまわりを映すときは、お客様のカードの暗証番号が映らない向きにしましょう。'
 ---
 
 お店を狙った犯罪のニュースが続いています。警察庁によると、2024年の**万引きの認知件数は9万8,292件で、前年より5.5%増加**しました。強盗も前年より増えていて、SNSなどで実行役を集める強盗が関東を中心に相次いだとされています。小さなお店ほど、どこから手をつければいいか迷うと思います。
@@ -150,6 +161,8 @@ products:
 | 強盗 | 営業中・1人で店番をしている時間・閉店間際 | 防犯カメラ・防犯ブザー・据え置き型の金庫（レジの現金を減らす） |
 
 <!-- products -->
+
+<!-- picks -->
 
 ## グッズとあわせて見直したい「お店のルール」
 

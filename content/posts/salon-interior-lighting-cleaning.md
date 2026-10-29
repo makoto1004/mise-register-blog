@@ -1,7 +1,7 @@
 ---
 title: 美容室の内装・照明・清掃道具の選び方｜清潔で仕上がりが映えるサロン
 date: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-29
 category: salon
 order: 10
 tags: [美容院, サロン, 内装, 照明, 清掃道具, 開業]
@@ -66,6 +66,17 @@ products:
       - 衛生管理をお客様に見せられる
     cons:
       - 消毒液の交換の手間がかかる
+picks:
+  - name: 'LEDライト付き 卓上の女優ミラー'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnikokira%2Fnk-led-363339%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=357091&item_id=10005666&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fnikokira%2Fcabinet%2Fnk%2F363339-img200.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '鏡のまわりにライトが付いた卓上ミラーです。メイクやヘアセットの仕上がりを確かめる場所に向いています。'
+  - name: 'マキタ 充電式クリーナー CL107FDSHW（紙パック式）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fyamamura%2Fcl107fdshw01%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=199969&item_id=10007118&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fyamamura%2Fcabinet%2Fpoint3%2Fcl107fdshw-main.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '紙パック式のコードレス掃除機です。切った髪の毛をさっと吸い取るのに使えます。'
 ---
 
 美容室の内装と照明は、お店の雰囲気だけでなく、**カラーの色の見え方**や**仕上がりの印象**を左右します。そして、髪の毛がすぐに片付いている清潔な店内は、お客様の安心感につながります。お客様に「きれいなお店」と感じてもらえるよう、毎日続けやすい形を考えていきましょう。
@@ -112,6 +123,8 @@ products:
 - **POSレジやカルテ用のiPad**：画面を専用のクロスで定期的に拭く
 
 <!-- products -->
+
+<!-- picks -->
 
 ## よくある質問
 

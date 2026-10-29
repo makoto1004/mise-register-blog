@@ -1,7 +1,7 @@
 ---
 title: アパレル・雑貨店の試着室づくり｜Amazonでそろう道具11選
 date: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-29
 category: apparel
 order: 8
 tags: [アパレル, 雑貨店, 試着室, カーテン, トルソー, ハンガー, フェイスカバー]
@@ -135,6 +135,17 @@ products:
       - 商品を汚さずに済む
     cons:
       - 消耗品として続けて費用がかかる
+picks:
+  - name: 'Refsafe 割れないミラー（全身・軽量）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkagu-world%2Fsmk-1740%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=270424&item_id=10054692&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fkagu-world%2Fcabinet%2Fsmk%2Fmirror%2Fsmk-1740-a.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: 'ガラスではないので割れにくく、軽いミラーです。試着室の中に立て掛ける使い方ができます。'
+  - name: '全身鏡 スタンドミラー（飛散防止・壁掛けも可）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbubblee%2Fst16050%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=386647&item_id=10000735&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fbubblee%2Fcabinet%2F12744030%2F13429049%2Fst16050-mt.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '割れたときに破片が飛び散りにくい加工の全身鏡です。置く場所の幅と高さを測ってから選びましょう。'
 ---
 
 アパレルショップでは、**試着してもらえるかどうか**で売上が大きく変わります。試着室が使いにくいと、お客様は「今日はいいか」と試着をやめてしまいます。小さなお店だと、試着室にどこまでスペースを割くか迷うところです。
@@ -185,6 +196,8 @@ products:
 前半の5つは試着室そのものをつくる道具、後半の6つは試着室と売り場に置く小物です。
 
 <!-- products -->
+
+<!-- picks -->
 
 ## よくある質問
 

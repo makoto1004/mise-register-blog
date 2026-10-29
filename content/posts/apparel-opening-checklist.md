@@ -1,7 +1,7 @@
 ---
 title: アパレルショップ開業に必要なもの一覧｜レジ・什器・備品のチェックリスト
 date: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-29
 category: apparel
 order: 3
 tags: [アパレル, セレクトショップ, 開業, 店舗備品, チェックリスト]
@@ -84,6 +84,12 @@ services:
     note: ラック・シェルフ・ミラーなど、売り場づくりに使える家具を探せる通販ブランド。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
   - id: airRhizome
     note: さまざまなテイストの家具・インテリアがそろう通販ショップ。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
+picks:
+  - name: 'パナソニック 衣類スチーマー NI-FS60C（楽天ビック）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbiccamera%2F4550719157336%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=269553&item_id=15332099&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fbiccamera%2Fcabinet%2Fproduct%2F15871%2F00000014815787_a01.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: 'ハンガーに掛けたまま、服のしわを伸ばせるスチーマーです。入荷した服を店頭に出す前に使えます。'
 ---
 
 アパレルショップや古着屋、セレクトショップの開業準備では、**レジ周り・売り場・試着室・バックヤード**のそれぞれで必要なものがあります。この記事では、開業日までにそろえたいものをチェックリストにまとめました。やることが多くて頭がいっぱいになりがちな時期なので、一覧で一つずつ確かめていきましょう。
@@ -142,6 +148,8 @@ POSレジの選び方は[アパレル向けPOSレジ比較](/posts/apparel-pos-c
 3. **ショッパーの在庫**：オープン直後は想定より多く出ることがあります。多めに用意しておくと安心です
 
 <!-- products -->
+
+<!-- picks -->
 
 <!-- services -->
 

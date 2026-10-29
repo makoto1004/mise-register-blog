@@ -1,7 +1,7 @@
 ---
 title: アパレルの仕入れガイド｜展示会・卸サイト・古着仕入れの違い
 date: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-29
 category: apparel
 order: 5
 tags: [アパレル, セレクトショップ, 古着, 仕入れ, 在庫管理]
@@ -44,6 +44,12 @@ products:
     cons:
       - 採寸に時間がかかる
 services: [superdelivery, netsea]
+picks:
+  - name: '折りたたみ ワークテーブル 作業台（幅150cm・耐荷重125kg）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fthe-product-store%2Fworktable-middle%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=428480&item_id=10000011&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fthe-product-store%2Fcabinet%2Fwarktable%2Fworktable-01_middle.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '入荷した服の検品や値札付けに使える、折りたためる作業台です。高さを変えられるかは商品ページで確かめましょう。'
 ---
 
 アパレルショップの品ぞろえは、**仕入れ方法**で大きく変わります。この記事では、主な仕入れ方法の違いと、サイズ・カラーの仕入れ量の決め方を解説します。最初の仕入れは、どれくらい買えばいいのか不安になるものです。
@@ -79,6 +85,8 @@ services: [superdelivery, netsea]
 必要な道具は[アパレルショップ開業に必要なもの一覧](/posts/apparel-opening-checklist)で紹介しています。
 
 <!-- products -->
+
+<!-- picks -->
 
 <!-- services -->
 

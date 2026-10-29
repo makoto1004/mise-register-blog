@@ -1,6 +1,7 @@
 ---
 title: 美容室の受付・会計あるある6選｜手が泡だらけの時に鳴る電話の対策
 date: 2026-10-18
+updated: 2026-10-29
 publishedAt: 2026-10-18T18:00
 category: salon
 order: 11
@@ -66,6 +67,17 @@ products:
       - 電話やiPadを汚しにくい
     cons:
       - ペーパーの補充が必要
+picks:
+  - name: 'パナソニック コードレス電話機（子機1台付き）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcloud-nine%2F2593-000821%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=394448&item_id=10000513&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fcloud-nine%2Fcabinet%2F13721441%2Fimgrc0118557993.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '子機があると、施術中でも近くで電話を取れます。留守番電話の機能があるかは型番で確かめましょう。'
+  - name: 'パナソニック 電話機 VE-GD27DL（親機のみ・ナンバーディスプレイ対応）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsanreishop%2F4549980615317%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=392837&item_id=10001621&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fsanreishop%2Fcabinet%2F07795391%2F07829050%2F08234158%2Fimgrc0079439944.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '親機だけのシンプルな電話機です。ナンバーディスプレイは電話会社との契約も必要です。'
 ---
 
 小さな美容室では、スタイリストが受付と会計も担当することがよくあります。すると、施術と受付の「タイミングのすれ違い」が、毎日のように起こります。
@@ -126,6 +138,8 @@ products:
 ## あるあるを減らす道具
 
 <!-- products -->
+
+<!-- picks -->
 
 予約・顧客管理と一緒にPOSレジを選ぶ場合は[美容院・サロン向けPOSレジおすすめ比較](/posts/salon-pos-comparison)、受付で使う機材は[美容室の周辺機器とカルテ用iPadの選び方](/posts/salon-ipad-peripherals)を参考にしてみてください。
 

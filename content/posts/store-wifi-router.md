@@ -1,6 +1,7 @@
 ---
 title: お店のWi-Fiルーターの選び方｜POSレジを止めないために
 date: 2026-10-22
+updated: 2026-10-29
 publishedAt: 2026-10-22T07:08
 category: devices
 order: 20
@@ -45,6 +46,12 @@ products:
       - 無線より安定しやすい
     cons:
       - 配線の手間がかかる
+picks:
+  - name: 'バッファロー Wi-Fiルーター WSR3600BE4P（Wi-Fi 7対応）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fetre%2F1290719%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=212826&item_id=10052856&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fetre%2Fcabinet%2Fitemimage34%2F1290719.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '家庭用のWi-Fiルーターです。お客様用とレジ用でネットワークを分けたいときは、ゲスト用の機能があるか商品ページで確かめましょう。'
 ---
 
 POSレジやキャッシュレス決済は、ネットにつながらないと止まってしまうことがあります。会計の途中でくるくる回ったまま…という場面は、できれば避けたいですよね。そこで大事になるのが、お店の**Wi-Fiルーター**です。
@@ -101,6 +108,8 @@ POSレジやキャッシュレス決済は、ネットにつながらないと�
 ## あると助かる道具
 
 <!-- products -->
+
+<!-- picks -->
 
 ## よくある質問
 

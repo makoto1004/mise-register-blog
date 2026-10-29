@@ -1,6 +1,7 @@
 ---
 title: 屋外イベント用・持ち運びPOSレジ機材セット｜キッチンカーでそろえるもの
 date: 2026-10-16
+updated: 2026-10-29
 category: kitchen-car
 order: 3
 tags: [キッチンカー, 移動販売, 屋外イベント, 周辺機器, ポータブル電源]
@@ -56,6 +57,17 @@ products:
     cons:
       - 固定できる場所が限られる
 services: [bridgewifi]
+picks:
+  - name: 'Jackery ポータブル電源 1000 New（公式ショップ）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjackery-japan%2Fn-p-10001000-bkor-jk2%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=374756&item_id=10000025&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fjackery-japan%2Fcabinet%2F13934099%2F13934159%2Fimgrc0120314279.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '容量の大きいポータブル電源です。使いたい機器の消費電力（W）の合計が、出力の上限に収まるか先に確かめましょう。'
+  - name: 'EcoFlow ポータブル電源 RIVER 3（230Wh・公式ショップ）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fecoflow%2Friver-2%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=398835&item_id=10000144&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fecoflow%2Fcabinet%2F11639262%2Fr3.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '小さめのポータブル電源です。レジのタブレットやプリンター、照明など、電力の小さい機器向けです。'
 ---
 
 キッチンカーや屋外イベントでは、**限られたスペースと電源**で会計をこなす必要があります。この記事では、持ち運びやすいPOSレジ機材をセットで紹介します。当日に「あれを忘れた」とならないよう、セットで考えておくと安心です。
@@ -84,6 +96,8 @@ POSレジそのものの選び方は[キッチンカー向けPOSレジ比較](/p
 3. **予備を持つ**：ロール紙・充電ケーブル・お釣りなど、なくなると困るものは多めに
 
 <!-- products -->
+
+<!-- picks -->
 
 通信が不安な会場では、予備のWi-Fiを1つ持っておくと安心です。
 

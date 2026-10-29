@@ -1,7 +1,7 @@
 ---
 title: カフェの内装・照明器具・清掃道具の選び方｜居心地と衛生を両立するポイント
 date: 2026-10-17
-updated: 2026-10-17
+updated: 2026-10-29
 category: cafe
 order: 11
 tags: [カフェ, 内装, 照明, 清掃道具, 衛生管理, 開業]
@@ -67,6 +67,27 @@ products:
       - 閉店後の掃除が速くなる
     cons:
       - 乾かす場所が必要
+picks:
+  - name: 'ダクトレール用 ガラスのペンダントライト（LED対応）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnissin-lux%2Fpdl-arm-001%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=363781&item_id=10000057&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fnissin-lux%2Fcabinet%2F06598344%2F13417094%2Fp-t3c-01.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: 'ダクトレール（照明用のレール）に取り付けるタイプです。天井の配線が引掛シーリングの場合は、下のタイプを選びましょう。'
+  - name: 'ガラスシェードのペンダントライト 1灯（引掛シーリング・E26）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmaxshare%2Fa16169%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=201798&item_id=10059914&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fmaxshare%2Fcabinet%2Fmaster%2F1st%2Fa16169.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '天井の引掛シーリングに付けるタイプです。電球は別に用意するので、明るさと色を選んで組み合わせましょう。'
+  - name: 'Ampoule 天然木とスチールのLEDペンダントライト 1灯'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fampoule%2F10004386%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=251992&item_id=10004386&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fampoule%2Fcabinet%2Fkishima%2Fpendantlight%2F06701788%2Fayle1pl_sam.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '木の質感のペンダントライトです。テーブルの真上に吊るすときは、頭が当たらない高さに調整しましょう。'
+  - name: 'マキタ 充電式クリーナー CL108FDSHW（バッテリー・充電器付き）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fyamamura%2Fcl108fdshw-2%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=199969&item_id=10007526&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fyamamura%2Fcabinet%2Fpoint3%2Fcl108fdshw-main.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: 'コードのない掃除機なので、開店前や閉店後にさっと掃除できます。'
 ---
 
 カフェの居心地は、**内装**と**照明**で大きく変わります。そして、お客様が安心して食事を楽しめるかは、**清潔さ**で決まります。毎日の掃除を無理なく続けられる仕組みも、一緒に考えていきましょう。
@@ -120,6 +141,8 @@ products:
 - **POSレジやタブレット**も、画面を拭く専用のクロスで定期的に掃除する
 
 <!-- products -->
+
+<!-- picks -->
 
 ## よくある質問
 
