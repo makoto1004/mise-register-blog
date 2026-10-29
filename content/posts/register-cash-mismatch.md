@@ -113,7 +113,7 @@ Squareでは、「現金の管理」から「入金/出金」を選び、金額�
 | [PDF](/downloads/register-closing-checklist.pdf) | 印刷して手で書く |
 | [Excel](/downloads/register-closing-checklist.xlsx) | 枚数と金額を入れると、合計と差額が自動で出る（Google スプレッドシートでも開けます） |
 
-お店の中で自由にコピーして使えます。再配布・販売はご遠慮ください。
+お店の中で自由にコピーして使えます。再配布・販売はご遠慮ください。書き方や、Excel 版で自動で出る項目は[レジ締めチェック表（無料）の使い方](/posts/register-closing-checklist)で詳しく紹介しています。
 
 キャッシュドロアそのものの選び方は[POSレジ用キャッシュドロアの選び方](/posts/cash-drawer-comparison)、ドロアが開かないときは[キャッシュドロアが開かないときの確認手順](/posts/cash-drawer-not-opening)で紹介しています。
 
