@@ -83,6 +83,11 @@ export default function RootLayout({ children }) {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/search" className="underline-link">
+                  記事を探す
+                </Link>
+              </li>
               <li className="menu-sitemap">
                 <Link href="/site-map" className="underline-link">
                   サイトマップ
@@ -173,6 +178,7 @@ export default function RootLayout({ children }) {
         {/* スマホ用：画面下に固定するメニュー */}
         <nav className="bottom-bar" aria-label="クイックメニュー">
           <Link href="/site-map">サイトマップ</Link>
+          <Link href="/search">記事を探す</Link>
           <Link href="/">トップ</Link>
           <a href="#top" aria-label="ページの先頭へ">↑</a>
         </nav>

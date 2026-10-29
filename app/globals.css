@@ -873,3 +873,64 @@ a:hover { text-decoration: underline; }
   .post-nav { grid-template-columns: 1fr; }
   .post-nav-empty { display: none; }
 }
+
+/* ---- カテゴリーのタブ（カテゴリーのページの上） ---- */
+/* スマホでは横にスクロールできる。カテゴリーごとにサムネイルと同じ色を敷き、今いるカテゴリーは枠を濃くする */
+.category-tabs { position: relative; margin: 4px 0 20px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.category-tabs ul { list-style: none; margin: 0; padding: 2px 0 6px; display: flex; gap: 8px; width: max-content; }
+.category-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.category-tab:hover { text-decoration: none; border-color: var(--border); }
+.category-tabs li:nth-child(1) .category-tab { background: var(--thumb-cafe); }
+.category-tabs li:nth-child(2) .category-tab { background: var(--thumb-salon); }
+.category-tabs li:nth-child(3) .category-tab { background: var(--thumb-kitchen-car); }
+.category-tabs li:nth-child(4) .category-tab { background: var(--thumb-apparel); }
+.category-tabs li:nth-child(5) .category-tab { background: var(--thumb-devices); }
+.category-tab[aria-current='page'] { border: 2px solid var(--border); padding: 7px 13px; box-shadow: 3px 3px 0 var(--border); }
+.category-tab-count { font-size: 0.75rem; font-weight: 600; color: var(--muted); }
+.category-tab-search { background: var(--bg); border-style: dashed; }
+
+/* ---- 記事の検索（カテゴリーのページと /search） ---- */
+.post-search { margin-top: 8px; }
+.search-box { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+.search-label { font-size: 0.85rem; font-weight: 700; }
+.search-input {
+  width: 100%;
+  max-width: 560px;
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  background: #fffdf9;
+  color: var(--text);
+  font: inherit;
+  font-size: 1rem;
+}
+.search-input::placeholder { color: var(--muted); opacity: 0.8; }
+.search-input:focus-visible, .search-chip:focus-visible, .category-tab:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.search-categories { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.search-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.search-chip[aria-pressed='true'] { background: var(--text); color: var(--bg); }
+.search-chip-count { font-size: 0.75rem; font-weight: 600; opacity: 0.75; }
+.search-count { margin: 0 0 16px; font-size: 0.85rem; color: var(--muted); }
+.search-empty { padding: 20px; border: 1px dashed var(--line); background: var(--surface); }

@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import PostCard from '@/components/PostCard';
-import { getPostsByCategory, getLatestPosts } from '@/lib/posts';
+import CategoryTabs from '@/components/CategoryTabs';
+import PostSearch from '@/components/PostSearch';
+import { getAllPosts, getPostsByCategory, getLatestPosts, toSearchItem } from '@/lib/posts';
 import { CATEGORIES, CATEGORY_DESCRIPTIONS } from '@/lib/site';
 
 // カテゴリー別の記事一覧。slug は ASCII にして静的ホスティングでの文字化けを避ける
@@ -22,21 +23,23 @@ export async function generateMetadata({ params }) {
 export default async function CategoryPage({ params }) {
   const { category } = await params;
   const posts = getPostsByCategory(category);
-  const latestSlugs = new Set(getLatestPosts().map((post) => post.slug));
+  const latestSlugs = getLatestPosts().map((post) => post.slug);
+  const counts = {};
+  for (const post of getAllPosts()) counts[post.category] = (counts[post.category] ?? 0) + 1;
 
   return (
     <>
       <nav className="breadcrumb" aria-label="パンくずリスト">
         <Link href="/">ホーム</Link> › <span>{CATEGORIES[category]}</span>
       </nav>
+      <CategoryTabs current={category} counts={counts} />
       <h1 className="page-title">{CATEGORIES[category]}</h1>
       <p className="category-description">{CATEGORY_DESCRIPTIONS[category]}</p>
-      {posts.length === 0 && <p>このカテゴリーの記事はまだありません。</p>}
-      <ul className="card-grid">
-        {posts.map((post) => (
-          <PostCard key={post.slug} post={post} showCategory={false} isLatest={latestSlugs.has(post.slug)} />
-        ))}
-      </ul>
+      {posts.length === 0 ? (
+        <p>このカテゴリーの記事はまだありません。</p>
+      ) : (
+        <PostSearch posts={posts.map(toSearchItem)} categories={CATEGORIES} fixedCategory={category} latestSlugs={latestSlugs} />
+      )}
     </>
   );
 }
