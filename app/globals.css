@@ -441,6 +441,14 @@ a:hover { text-decoration: underline; }
 .post-body table { border-collapse: collapse; display: block; overflow-x: auto; font-size: 0.9rem; }
 .post-body th, .post-body td { border: 1px solid var(--line); padding: 6px 12px; }
 .post-body th { background: var(--surface); }
+/* 出典の長い URL が画面の横にはみ出さないよう、どこでも折り返せるようにする */
+.post-body a { overflow-wrap: anywhere; }
+/* スマホでは表の文字と余白を小さくし、1行に入る文字を増やす（左の列は見出しなので太字にし、細くなりすぎないようにする） */
+@media (max-width: 640px) {
+  .post-body table { font-size: 0.8rem; line-height: 1.55; }
+  .post-body th, .post-body td { padding: 6px 8px; vertical-align: top; }
+  .post-body td:first-child { min-width: 5.5em; font-weight: 700; }
+}
 .post-body img { display: block; max-width: 100%; height: auto; margin: 20px auto; border: 1px solid var(--line); }
 /* マスコット（レジまる・ポスタ）のアイコンは、小さく丸く表示する */
 .post-body img[src^="/images/mascots/"] { width: 180px; border-radius: 50%; }
