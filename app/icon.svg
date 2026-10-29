@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- ファビコン：サイトのロゴと同じ軒先テントのマーク。小さくても見えるよう、線を太くして色の地に白抜きにする -->
+  <rect width="32" height="32" rx="7" fill="#b4532a"/>
+  <g fill="none" stroke="#fbf1e4" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4.5 8.5h23l-2 5.5h-19z"/>
+    <path d="M6.5 14c0 2.2 4.75 2.2 4.75 0 0 2.2 4.75 2.2 4.75 0 0 2.2 4.75 2.2 4.75 0 0 2.2 4.75 2.2 4.75 0"/>
+    <path d="M8 17.5v8h16v-8 M13.5 25.5v-5h5v5"/>
+  </g>
+</svg>
