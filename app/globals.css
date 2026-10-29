@@ -790,6 +790,23 @@ a:hover { text-decoration: underline; }
 .footer-note { margin: 4px 0; font-size: 0.75rem; color: var(--muted); }
 .footer-profile { margin: 0 0 16px; font-size: 0.8rem; }
 
+/* 記事のページの「どこまで読んだか」のバー（SiteMotion が GSAP で横に伸ばす） */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  width: 100%;
+  height: 3px;
+  background: var(--warm);
+  transform: scaleX(0);
+  transform-origin: left center;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reading-progress { display: none; }
+}
+
 /* スマホ用：画面下の固定メニュー */
 .bottom-bar {
   position: fixed;

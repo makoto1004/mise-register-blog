@@ -1,7 +1,12 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import PostCard from '@/components/PostCard';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 // 記事を言葉とカテゴリーでしぼり込む検索（ブラウザの中だけで動く。サーバーは使わない）
 // fixedCategory を渡すとそのカテゴリーの中だけを探し、カテゴリーのボタンは出さない（カテゴリーのページ用）
@@ -57,6 +62,41 @@ export default function PostSearch({ posts, categories, fixedCategory = '', late
     return c;
   }, [indexed]);
 
+  // カードの動き（GSAP）。画面の下のカードはスクロールで見えたときにふわっと出す
+  // 言葉やカテゴリーを変えたときは、見えているカードも順番に出して「結果が変わった」と分かるようにする
+  // 最初に開いたときに見えているカードは動かさない（表示の速さに影響させない）
+  const listRef = useRef(null);
+  const firstRun = useRef(true);
+  const resultKey = results.map((post) => post.slug).join(',');
+  useGSAP(
+    () => {
+      const isFirst = firstRun.current;
+      firstRun.current = false;
+      const mm = gsap.matchMedia();
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        const cards = gsap.utils.toArray(listRef.current?.children ?? []);
+        const targets = isFirst ? cards.filter((el) => el.getBoundingClientRect().top > window.innerHeight) : cards;
+        if (!targets.length) return;
+        gsap.set(targets, { opacity: 0, y: 20 });
+        ScrollTrigger.batch(targets, {
+          start: 'top bottom',
+          once: true,
+          onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', stagger: 0.05, overwrite: true }),
+        });
+        // Tab キーで、まだ出ていないカードに移ったら、すぐに出す
+        const showOnFocus = (e) => {
+          const card = e.target.closest?.('.post-card');
+          if (card) gsap.to(card, { opacity: 1, y: 0, duration: 0.2, overwrite: true });
+        };
+        listRef.current?.addEventListener('focusin', showOnFocus);
+        const list = listRef.current;
+        return () => list?.removeEventListener('focusin', showOnFocus);
+      });
+      return () => mm.revert();
+    },
+    { dependencies: [resultKey], revertOnUpdate: true },
+  );
+
   return (
     <div className="post-search">
       <div className="search-box">
@@ -98,7 +138,7 @@ export default function PostSearch({ posts, categories, fixedCategory = '', late
           {category && !fixedCategory ? 'カテゴリーを「すべて」にして' : 'ちがう言い方で'}探してみてください。
         </p>
       ) : (
-        <ul className="card-grid">
+        <ul className="card-grid" ref={listRef}>
           {results.map((post) => (
             <PostCard key={post.slug} post={post} showCategory={!fixedCategory} isLatest={latest.has(post.slug)} />
           ))}

@@ -4,6 +4,7 @@ import { GoogleAnalytics } from '@next/third-parties/google';
 import Logo from '@/components/Logo';
 import { InstagramHeaderLink } from '@/components/XLinks';
 import XHeaderTimeline from '@/components/XHeaderTimeline';
+import SiteMotion from '@/components/SiteMotion';
 import { SITE, CATEGORIES, OG_IMAGE, SERVICES_OPEN } from '@/lib/site';
 import './globals.css';
 
@@ -98,6 +99,8 @@ export default function RootLayout({ children }) {
         </header>
 
         <main className="container">{children}</main>
+        {/* スクロールでふわっと出す動き・記事の読んだ位置のバー（GSAP） */}
+        <SiteMotion />
 
         <footer id="footer" className="site-footer">
           <div className="footer-inner">
