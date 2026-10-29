@@ -1,6 +1,7 @@
 ---
 title: カフェのカップウォーマー・コーヒーウォーマーの選び方｜温かいまま出すコツ
 date: 2026-10-29
+updated: 2026-10-29
 publishedAt: 2026-10-29T10:36
 category: cafe
 order: 16
@@ -45,6 +46,17 @@ products:
       - カップをまとめて温めておける
     cons:
       - 置き場所が必要
+picks:
+  - name: 'カリタ コーヒーウォーマー CW-90（楽天ビック）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbiccamera%2F4901369521167%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=269553&item_id=10155784&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fbiccamera%2Fcabinet%2Fproduct%2F0845%2F00000001862298_a01.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: 'ガラスのサーバーを温めておくウォーマーです。置けるサーバーの数と、コンセントの位置を先に確かめましょう。'
+  - name: 'カリタ シングルウォーマー DX-1（コジマ）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fr-kojima%2F4901369521198%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=270903&item_id=11129465&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fr-kojima%2Fcabinet%2Fn0000000132%2F4901369521198_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: 'サーバーを1つ置くシングルタイプのウォーマーです。カウンターが狭いお店向けです。'
 ---
 
 淹れたてのコーヒーを出したのに、お客様が口をつけたときにはもうぬるい。冷たいカップに注ぐと、カップに熱を取られて、思ったより早く冷めてしまいますよね。
@@ -97,6 +109,8 @@ products:
 ## お店で使いやすいウォーマー
 
 <!-- products -->
+
+<!-- picks -->
 
 ## よくある質問
 

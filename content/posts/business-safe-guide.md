@@ -1,6 +1,7 @@
 ---
 title: 業務用金庫の選び方｜耐火金庫と防盗金庫のちがい
 date: 2026-10-23
+updated: 2026-10-29
 publishedAt: 2026-10-23T18:00
 category: devices
 order: 22
@@ -44,6 +45,22 @@ products:
       - 持ち去りを防ぎやすい
     cons:
       - 床に穴を開ける工事が必要なことがある
+picks:
+  - name: 'ダイヤセーフ テンキー式耐火金庫 MEK30-4'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkotobukikinko%2Fmek30-4%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=295505&item_id=10000059&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fkotobukikinko%2Fcabinet%2F03351314%2F03351316%2Ftenkey%2Fmek30-4-d1.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '家庭用・小型として売られている耐火金庫です。お店で使うなら、入れたいものが入る大きさか確かめましょう。'
+  - name: 'ダイヤセーフ テンキー式耐火金庫 DE70（業務用）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkotobukikinko%2Fde70%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=295505&item_id=10000094&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fkotobukikinko%2Fcabinet%2F03351314%2F03351316%2Fgilyoumu-tenkey%2Fde70-c2.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '業務用として売られている耐火金庫です。重さと、置く床の強さを先に確かめましょう。'
+  - name: 'ダイヤセーフ 業務用耐火金庫 ETS90（TS-15試験合格）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fyamagata-kinko%2Fets90%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=283475&item_id=10000182&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fyamagata-kinko%2Fcabinet%2Fdaiya%2Fets90.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '商品ページでは、耐工具15分（TS-15）の試験と2時間耐火の試験に合格と書かれています。内容量は105リットルです。'
 ---
 
 お店の売上金や、契約書・通帳などの大事な書類。しまっておく場所を考えると、「金庫を買えば安心」と思いますよね。ただ、金庫には**「火災に強い耐火金庫」と「盗難に強い防盗金庫」**があり、できることがちがいます。
@@ -86,6 +103,8 @@ ALSOKは、業務用金庫を選ぶポイントとして、次のようなこと
 ## あると助かる道具
 
 <!-- products -->
+
+<!-- picks -->
 
 ## よくある質問
 

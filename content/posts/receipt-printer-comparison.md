@@ -1,7 +1,7 @@
 ---
 title: POSレジ用レシートプリンター比較｜Airレジ・Square・スマレジ対応
 date: 2026-10-16
-updated: 2026-10-22
+updated: 2026-10-29
 category: devices
 order: 2
 tags: [レシートプリンター, Airレジ, Square, スマレジ]
@@ -67,6 +67,17 @@ products:
       - 80mm幅のレシートを印刷できる
     cons:
       - POSアプリの対応機種一覧に入っていないことがある
+picks:
+  - name: 'EPSON レシートプリンター TM-m30III-H'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsmaregi%2Fc001-07501%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=298833&item_id=10000331&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fsmaregi%2Fcabinet%2Fprinter_bluetooth%2Ftm-m30lll%2Ftm-m30lll-h%2Ftmm30lll-h.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '使っているPOSレジに対応しているかは、レジの会社の対応機種の一覧で確かめてから選びましょう。'
+  - name: 'スター精密 レシートプリンター mC-Print3（Bluetooth対応）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsmaregi%2Fm000-00000%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=298833&item_id=10000561&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fsmaregi%2Fcabinet%2Fmc_print%2Fmc-print3%2Fimgrc0119892061.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: 'ロール紙が付いたセットです。つなぎ方（Bluetooth・USB・LAN）は、使うレジに合わせて選びましょう。'
 ---
 
 タブレットで使うPOSレジ（Airレジ・Square・スマレジなど）を導入するとき、最初に悩むのがレシートプリンター選びです。この記事では、Amazonで購入できる代表的なモデルを比較し、選び方のポイントをまとめます。
@@ -97,6 +108,8 @@ products:
 プリンターとキャッシュドロアをケーブルでつなぐと、会計時に自動でドロアが開きます。連動させる場合は、プリンターにドロア接続端子があるか確認しましょう。
 
 <!-- products -->
+
+<!-- picks -->
 
 ## まとめ
 

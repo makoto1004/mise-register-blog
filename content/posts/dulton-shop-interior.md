@@ -1,6 +1,7 @@
 ---
 title: DULTON（ダルトン）の雑貨でお店をつくる｜什器・サイン・時計の選び方
 date: 2026-10-29
+updated: 2026-10-29
 publishedAt: 2026-10-29T14:00
 category: apparel
 order: 12
@@ -12,7 +13,8 @@ reviewNotes:
   - 送料・発送の目安・支払い方法・領収書・返品の条件は、DULTON ONLINE SHOP「ご利用ガイド」にもとづく。価格は書いていない
   - 直営店の一覧は、公式「店舗一覧」にもとづく
   - 国内のお店向けの卸・法人取引の窓口は、公式サイトで確認できなかったため、問い合わせフォームで確かめるよう案内している（海外向けの卸の問い合わせ窓口はある）
-  - DULTONとのアフィリエイト提携はない。商品の画像は使っていない（挿絵は、DULTONの商品をまねしない一般的な店内の絵）
+  - DULTONとのアフィリエイト提携はない。挿絵は、DULTONの商品をまねしない一般的な店内の絵
+  - 「実際の商品の例」は楽天アフィリエイトのリンクで、画像は楽天の商品ページの画像（2026年10月29日に商品ページがあることを確認）。DULTONの公式の販売ではない
   - Amazonの検索リンクは、DULTONの公式の販売とは限らないため、出品者を確かめるよう書いている
 products:
   - name: DULTONのOPEN・CLOSEDサイン
@@ -48,6 +50,22 @@ products:
       - レイアウトを変えやすい
     cons:
       - 動かすぶん、通路の幅に余裕が必要
+picks:
+  - name: 'DULTON リバーシブルサイン OPEN-CLOSED（S455-174OC）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fe-prism%2Fdltn2032%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=250022&item_id=10158030&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fe-prism%2Fcabinet%2Fitem_dltn_4%2Fdltn2032.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: 'ドアや壁に下げて、裏返すと表示が変わる両面のサインです。'
+  - name: 'DULTON スピナー サイン スタンド（オープン・クローズド）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjism%2F4997337924511-25-46418-n%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=206032&item_id=13838980&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fjism%2Fcabinet%2F1939%2F4997337924511.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '床に置くスタンドタイプのサインです。置く場所の広さを測ってから選びましょう。'
+  - name: 'DULTON ストアワゴン（MT-0531）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fatease-br%2Fdl-mt-0531%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=214046&item_id=10005893&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fatease-br%2Fcabinet%2F00639267%2F05231563%2Fmt-0531-img01.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: 'キャスター付きの陳列棚です。大きな商品なので、送料と搬入の方法を商品ページで確かめましょう。'
 ---
 
 雑貨店やカフェの内装を考えていると、「お店の雰囲気に合う棚や看板が、なかなか見つからない」と迷うことがありますよね。業務用の什器（商品を並べる棚や台）は丈夫ですが、見た目がそっけないものも多いです。
@@ -126,6 +144,8 @@ DULTON ONLINE SHOPの「ご利用ガイド」から、お店の準備で買う�
 なお、お店向けの卸や法人での取引について、国内向けの窓口は公式サイトで見つけられませんでした。まとめて買いたい場合は、公式サイトのお問い合わせフォームで聞いてみてください。
 
 <!-- products -->
+
+<!-- picks -->
 
 ※ Amazonなどの通販サイトでは、DULTONの商品をほかのお店が売っていることもあります。購入するときは、出品者と商品名を確かめてください。
 

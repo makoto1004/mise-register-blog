@@ -1,6 +1,7 @@
 ---
 title: キッチンカーの看板・メニューボードの選び方｜遠くから目立って注文が増えるコツ
 date: 2026-10-17
+updated: 2026-10-29
 category: kitchen-car
 order: 4
 tags: [キッチンカー, 移動販売, 看板, メニューボード, 集客]
@@ -68,6 +69,17 @@ products:
       - 車体の塗装を傷めずに看板にできる
     cons:
       - 走行中にはがれないよう注意が必要
+picks:
+  - name: 'A型看板（A1・A2／片面・両面／アルミフレーム）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdaysfashions%2Fjc-a1-s%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=359605&item_id=10003328&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fdaysfashions%2Fcabinet%2Faaaaa%2Fjc-a1-s_0.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: 'ポスターを入れ替えて使うA型看板です。屋外では、風で倒れないように重りも用意しましょう。'
+  - name: 'A型 両面ブラックボード（木製）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsouplesse%2Fsouplesse-01462%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=395554&item_id=10001758&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fsouplesse%2Fcabinet%2F10811013%2F140819_main1.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: 'チョークやマーカーでメニューを書ける両面の黒板です。雨の日は濡れない場所に置きましょう。'
 ---
 
 キッチンカーの売上は、**お客様に見つけてもらえるか**と、**メニューをすぐに選んでもらえるか**で大きく変わります。イベント会場ではたくさんのお店が並ぶため、看板とメニューボードの工夫が欠かせません。手書きの看板もすてきですが、遠くから見えるかどうかは一度確かめておきたいところです。
@@ -103,6 +115,8 @@ products:
 - **通路をふさがない**：お客様や歩く人のじゃまにならない場所に置きましょう
 
 <!-- products -->
+
+<!-- picks -->
 
 ## よくある質問
 

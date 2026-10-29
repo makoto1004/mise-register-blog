@@ -1,6 +1,7 @@
 ---
 title: 美容室のスタイリングチェアと鏡の選び方｜セット面をつくるときのチェックポイント
 date: 2026-10-17
+updated: 2026-10-29
 category: salon
 order: 9
 tags: [美容院, サロン, スタイリングチェア, 鏡, セット面, 開業]
@@ -65,6 +66,12 @@ products:
       - 施術中に道具を取りやすい
     cons:
       - セット面の周りが狭くなることがある
+picks:
+  - name: 'スタイリングチェア Standard NAPOLI（2年保証）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2F7esthe-pro%2F30074-set%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=228016&item_id=10029696&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2F7esthe-pro%2Fcabinet%2Festhe%2Fgoods_equipment_3%2F30074-set.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: 'セット面で使うカットチェアです。座面の高さの範囲と、床の固定のしかたを商品ページで確かめましょう。'
 ---
 
 スタイリングチェアと鏡は、お客様が来店中に一番長く過ごす**セット面**をつくる道具です。座り心地や鏡の見え方は、お客様の満足度に直結します。また、毎日使うスタッフの体の負担にも関わります。大きな買い物なので、カタログだけで決めるのは少し不安ですよね。
@@ -106,6 +113,8 @@ products:
 間取りの考え方は[美容室の物件選び](/posts/salon-property-guide)でも解説しています。
 
 <!-- products -->
+
+<!-- picks -->
 
 ## よくある質問
 
