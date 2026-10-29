@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>レジ締めチェック表</title>
+<!--
+  無料配布のレジ締めチェック表（印刷用）の元のファイル。Chrome で A4 の PDF に印刷して public/downloads/ に置く
+  （node scripts/downloads/make-pdf.cjs）。Excel 版は make-xlsx.js で作る。項目を変えたら両方と、記事の表もそろえる
+  確認項目の出典：Airレジ FAQ「Airレジにおけるレジ締め業務のポイント」（締める前の伝票・未送信データの確認、預入金）、
+  スマレジ・ヘルプ「現金過不足が発生した場合」（金種・準備金の入力ミス、支払方法の間違い、会計忘れ・二重会計、お釣りの渡し間違い）、
+  グローリー「レジ締めを標準化するには？」（金庫に移した現金の計上、金券の混入、値引き・クーポンの反映漏れ、準備金を一定にする）
+-->
+<style>
+  @page { size: A4; margin: 10mm 11mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: "Yu Gothic", "YuGothic", "Meiryo", sans-serif; color: #1a1a1a; font-size: 9.5pt; line-height: 1.4; }
+  h1 { font-size: 16pt; margin: 0; letter-spacing: .04em; }
+  .head { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #1a1a1a; padding-bottom: 4px; }
+  .head small { font-size: 8.5pt; color: #555; }
+  .meta { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 6px; margin: 6px 0 4px; }
+  .meta div { border-bottom: 1px solid #888; padding: 2px 0; font-size: 9pt; color: #444; height: 21px; }
+  h2 { font-size: 10.5pt; margin: 9px 0 4px; padding-left: 6px; border-left: 4px solid #1a1a1a; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border: 1px solid #777; padding: 2px 6px; height: 25px; }
+  th { background: #eee; font-weight: 700; font-size: 8.5pt; }
+  .num { text-align: right; }
+  .unit { color: #555; font-size: 8pt; }
+  .cols { display: grid; grid-template-columns: 1fr 1.15fr; gap: 12px; }
+  .denom td:first-child { width: 34%; }
+  .denom td:nth-child(2) { width: 28%; }
+  .sub td { font-size: 8.5pt; background: #fafafa; }
+  .total td { font-weight: 700; background: #f2f2f2; }
+  .calc td:first-child { width: 9%; text-align: center; font-weight: 700; }
+  .calc td:nth-child(2) { width: 55%; }
+  .calc .result td { background: #f2f2f2; font-weight: 700; }
+  .cash th:nth-child(1) { width: 34%; } .cash th:nth-child(2) { width: 22%; } .cash th:nth-child(3) { width: 26%; }
+  .cash td:first-child { white-space: nowrap; font-size: 8.5pt; }
+  .note { font-size: 8pt; color: #444; margin: 2px 0 0; }
+  .checks { list-style: none; margin: 0; padding: 0; }
+  .checks li { display: flex; gap: 8px; align-items: flex-start; padding: 3.5px 0; border-bottom: 1px dotted #aaa; }
+  .checks.two { display: grid; grid-template-columns: 1fr 1fr; column-gap: 14px; }
+  .box { flex: none; width: 12px; height: 12px; border: 1.4px solid #1a1a1a; margin-top: 2px; }
+  .checks b { font-weight: 700; }
+  .checks span.hint { color: #555; font-size: 8pt; }
+  .memo { border: 1px solid #777; height: 60px; padding: 2px 6px; font-size: 8pt; color: #555; margin-top: 4px; }
+  .foot { margin-top: 8px; border-top: 1px solid #aaa; padding-top: 4px; font-size: 7.5pt; color: #555; line-height: 1.5; }
+</style>
+</head>
+<body>
+  <div class="head">
+    <h1>レジ締めチェック表</h1>
+    <small>毎日同じ用紙に記録して、精算レシートといっしょに保管しましょう</small>
+  </div>
+  <div class="meta">
+    <div>日付：　　　年　　月　　日（　）</div>
+    <div>レジ：</div>
+    <div>締めた人：</div>
+    <div>確かめた人：</div>
+  </div>
+
+  <h2>0. 締める前に（POSレジの画面で）</h2>
+  <ul class="checks two">
+    <li><span class="box"></span><span><b>取り消し・返品・訂正の伝票に問題がない</b></span></li>
+    <li><span class="box"></span><span><b>送られていない会計データがない</b>　<span class="hint">通知が出ていないか</span></span></li>
+  </ul>
+
+  <div class="cols">
+    <section>
+      <h2>1. 現金を数える（金種表）</h2>
+      <table class="denom">
+        <tr><th>お札・硬貨</th><th>枚数</th><th>金額</th></tr>
+        <tr><td>10,000円</td><td class="num"><span class="unit">枚</span></td><td class="num"><span class="unit">円</span></td></tr>
+        <tr><td>5,000円</td><td class="num"><span class="unit">枚</span></td><td class="num"><span class="unit">円</span></td></tr>
+        <tr><td>2,000円</td><td class="num"><span class="unit">枚</span></td><td class="num"><span class="unit">円</span></td></tr>
+        <tr><td>1,000円</td><td class="num"><span class="unit">枚</span></td><td class="num"><span class="unit">円</span></td></tr>
+        <tr><td>500円</td><td class="num"><span class="unit">枚</span></td><td class="num"><span class="unit">円</span></td></tr>
+        <tr><td>100円</td><td class="num"><span class="unit">枚</span></td><td class="num"><span class="unit">円</span></td></tr>
+        <tr><td>50円</td><td class="num"><span class="unit">枚</span></td><td class="num"><span class="unit">円</span></td></tr>
+        <tr><td>10円</td><td class="num"><span class="unit">枚</span></td><td class="num"><span class="unit">円</span></td></tr>
+        <tr><td>5円</td><td class="num"><span class="unit">枚</span></td><td class="num"><span class="unit">円</span></td></tr>
+        <tr><td>1円</td><td class="num"><span class="unit">枚</span></td><td class="num"><span class="unit">円</span></td></tr>
+        <tr class="sub"><td colspan="2">営業中に金庫などへ移した現金</td><td class="num"><span class="unit">円</span></td></tr>
+        <tr class="total"><td colspan="2">数えた現金の合計（A）</td><td class="num"><span class="unit">円</span></td></tr>
+      </table>
+      <p class="note">商品券・クーポン券は現金とまぜずに分けて数えます。</p>
+    </section>
+
+    <section>
+      <h2>2. あるはずの現金を計算する</h2>
+      <table class="calc">
+        <tr><td>B</td><td>開店時の釣り銭（準備金）</td><td class="num"><span class="unit">円</span></td></tr>
+        <tr><td>C</td><td>現金の売上（POSレジの記録）</td><td class="num"><span class="unit">円</span></td></tr>
+        <tr><td>D</td><td>営業中の入金（両替など）</td><td class="num"><span class="unit">円</span></td></tr>
+        <tr><td>E</td><td>営業中の出金（買い出しなど）</td><td class="num"><span class="unit">円</span></td></tr>
+        <tr class="result"><td>F</td><td>あるはずの現金<br><span class="unit">B＋C＋D－E</span></td><td class="num"><span class="unit">円</span></td></tr>
+        <tr class="result"><td>差</td><td>差額（A－F）　多い・少ない</td><td class="num"><span class="unit">円</span></td></tr>
+      </table>
+      <p class="note">差額は0でも毎日書くと、いつから合わなくなったかが分かります。</p>
+
+      <h2>3. キャッシュレスを見比べる</h2>
+      <table class="cash">
+        <tr><th>支払い方法</th><th>POSレジ</th><th>決済の管理画面</th><th>差</th></tr>
+        <tr><td>クレジットカード</td><td class="num"><span class="unit">円</span></td><td class="num"><span class="unit">円</span></td><td class="num"><span class="unit">円</span></td></tr>
+        <tr><td>QRコード決済</td><td class="num"><span class="unit">円</span></td><td class="num"><span class="unit">円</span></td><td class="num"><span class="unit">円</span></td></tr>
+        <tr><td>電子マネー</td><td class="num"><span class="unit">円</span></td><td class="num"><span class="unit">円</span></td><td class="num"><span class="unit">円</span></td></tr>
+        <tr><td>その他（商品券など）</td><td class="num"><span class="unit">円</span></td><td class="num"><span class="unit">円</span></td><td class="num"><span class="unit">円</span></td></tr>
+      </table>
+    </section>
+  </div>
+
+  <h2>4. 差額が出たら、上から順に確かめる</h2>
+  <ul class="checks">
+    <li><span class="box"></span><span><b>金種ごとに数え直した</b>　<span class="hint">お札の重なり、硬貨の積み方、商品券がまざっていないか</span></span></li>
+    <li><span class="box"></span><span><b>金庫などへ移した現金も数えた</b>　<span class="hint">交代のときに移した分の伝え忘れはないか</span></span></li>
+    <li><span class="box"></span><span><b>開店時の釣り銭（B）が、いつもの金額と同じ</b>　<span class="hint">入れ忘れ・記録とちがう金額ではないか</span></span></li>
+    <li><span class="box"></span><span><b>営業中の入金・出金（D・E）を、すべて記録した</b>　<span class="hint">両替や、現金での小さな支払い</span></span></li>
+    <li><span class="box"></span><span><b>キャッシュレスの会計を「現金」で登録していない</b>　<span class="hint">3の表の「差」が0か</span></span></li>
+    <li><span class="box"></span><span><b>会計忘れ・二重の会計・取り消し忘れがない</b>　<span class="hint">取引の一覧で。返品のときに現金を戻したかも</span></span></li>
+    <li><span class="box"></span><span><b>値引き・クーポンがレジに入っている</b>　<span class="hint">口頭で値引きして、レジに入れ忘れていないか</span></span></li>
+    <li><span class="box"></span><span><b>差額が、どれかの会計のお釣りと同じ金額ではない</b>　<span class="hint">お釣りの渡し間違い・渡し忘れの手がかり</span></span></li>
+  </ul>
+  <div class="memo">差額の理由・気づいたこと：</div>
+
+  <h2>5. 店じまい</h2>
+  <ul class="checks">
+    <li><span class="box"></span><span><b>翌日の釣り銭を残した</b>　（　　　　　　円）　<span class="hint">毎日同じ金額に決めておくと迷いません</span></span></li>
+    <li><span class="box"></span><span><b>売上金を取り出した</b>　（　　　　　　円）　<span class="hint">A－翌日の釣り銭。夜間金庫・持ち帰りなど、お店で決めた方法で</span></span></li>
+    <li><span class="box"></span><span><b>表・裏の出入口と、小さな窓の鍵を閉めた</b>　<span class="hint">合鍵を郵便受けなどに置いていない</span></span></li>
+  </ul>
+
+  <div class="foot">
+    mise &amp; register（https://www.mise-register.com/）｜レジ締めの手順の解説は、記事「レジ締めで現金が合わないときの確認手順」へ<br>
+    お店の中で自由にコピーして使えます。再配布・販売はご遠慮ください。
+  </div>
+</body>
+</html>
