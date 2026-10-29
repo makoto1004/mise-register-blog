@@ -230,6 +230,7 @@ a:hover { text-decoration: underline; }
 .latest-label { background: var(--warm); color: var(--bg); padding: 1px 8px; font-weight: 800; letter-spacing: 0.1em; }
 .latest-title { font-size: 0.95rem; font-weight: 800; line-height: 1.6; }
 .latest-card-top .latest-title { font-size: 1.05rem; }
+.latest-title .title-sub { font-size: 0.82rem; }
 .latest-date { margin-top: auto; font-size: 0.75rem; color: var(--muted); }
 
 /* 公開から 7 日以内の記事の「NEW」（components/NewBadge.js） */
@@ -291,6 +292,14 @@ a:hover { text-decoration: underline; }
 @media (min-width: 1660px) { .card-grid { grid-template-columns: repeat(4, 1fr); } }
 
 .post-card { min-width: 0; }
+/* スマホの記事一覧は、左に小さな挿絵、右にタイトルと日付を並べて、一覧を見渡しやすくする */
+@media (max-width: 767px) {
+  .card-grid { gap: 18px; }
+  .post-card { display: grid; grid-template-columns: 112px 1fr; column-gap: 14px; align-items: start; }
+  .post-card .thumb-link { grid-row: span 2; }
+  .post-card .thumb { aspect-ratio: 1 / 1; }
+  .post-card .card-title { margin-top: 0; }
+}
 .thumb-link { display: block; }
 .thumb-link:hover { text-decoration: none; }
 
@@ -321,7 +330,7 @@ a:hover { text-decoration: underline; }
 .thumb-apparel { background: var(--thumb-apparel); }
 .thumb-devices { background: var(--thumb-devices); }
 .thumb-label { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.2em; }
-.thumb-headline { font-size: 1.15rem; font-weight: 800; line-height: 1.5; }
+.thumb-headline { font-size: 1.15rem; font-weight: 800; line-height: 1.5; font-feature-settings: "palt"; word-break: auto-phrase; text-wrap: balance; }
 .thumb-category { font-size: 0.75rem; font-weight: 700; color: var(--muted); }
 
 /* 記事のテーマのイラスト背景（ThemeBackground）。文字の後ろに敷く */
@@ -351,6 +360,13 @@ a:hover { text-decoration: underline; }
   background: linear-gradient(rgba(251, 241, 228, 0.55), rgba(251, 241, 228, 0.3));
   pointer-events: none;
 }
+/* 挿絵のあるサムネイルは絵だけを見せる（タイトルはカードの下に出ているので、絵の上には重ねない） */
+.thumb-text.has-photo > .photo-veil,
+.thumb-text.has-photo > .thumb-label,
+.thumb-text.has-photo > .thumb-headline,
+.thumb-text.has-photo > .thumb-category { display: none; }
+/* 記事ページの見出しは、同じ挿絵が本文の最初にも出るので、絵はうすく敷くだけにして文字を読みやすくする */
+.article-hero.has-photo > .photo-veil { background: rgba(251, 241, 228, 0.86); }
 
 /* 記事ページの見出し部分 */
 .article-hero {
@@ -358,7 +374,7 @@ a:hover { text-decoration: underline; }
   padding: 56px 28px 52px;
   margin: 4px 0 8px;
 }
-.article .article-hero h1 { margin: 0 0 12px; }
+.article .article-hero h1 { margin: 0 0 12px; font-feature-settings: "palt"; word-break: auto-phrase; text-wrap: balance; }
 @media (max-width: 480px) {
   .article-hero { padding: 48px 18px 44px; }
 }
@@ -372,6 +388,11 @@ a:hover { text-decoration: underline; }
   line-height: 1.6;
 }
 .card-title:hover { text-decoration: underline; }
+/* 記事一覧のタイトル：文字を少し詰め、言葉の切れ目で折り返し、行の長さをそろえる */
+.latest-title, .card-title { font-feature-settings: "palt"; letter-spacing: 0.02em; word-break: auto-phrase; text-wrap: pretty; }
+/* タイトルの「｜」の後ろは、次の行に小さく出す */
+.title-main { display: block; line-height: 1.5; }
+.title-sub { display: block; margin-top: 4px; font-size: 0.78rem; font-weight: 600; color: var(--muted); line-height: 1.5; letter-spacing: 0.03em; }
 .card-meta { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 4px; font-size: 0.75rem; color: var(--muted); }
 .card-meta .underline-link { color: var(--muted); }
 
@@ -435,6 +456,12 @@ a:hover { text-decoration: underline; }
 }
 .comparison-table thead th { background: var(--surface); white-space: nowrap; }
 .comparison-table tbody th { min-width: 160px; }
+/* スマホでは横にスクロールしても商品名が見えるよう、商品名の列を左に固定し、ほかの列は細くなりすぎないようにする */
+@media (max-width: 640px) {
+  .comparison-table tbody th, .comparison-table thead th:first-child { position: sticky; left: 0; z-index: 1; min-width: 8.5em; max-width: 8.5em; background: var(--bg); box-shadow: 1px 0 0 var(--line); }
+  .comparison-table thead th:first-child { background: var(--surface); }
+  .comparison-table td { min-width: 9em; }
+}
 
 .badge {
   display: inline-block;

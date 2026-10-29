@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import PostThumbnail from '@/components/PostThumbnail';
 import NewBadge from '@/components/NewBadge';
+import PostTitle from '@/components/PostTitle';
 import { CATEGORIES } from '@/lib/site';
 
 // 記事一覧に並べる 1 記事分のカード（サムネイル・タイトル・日付）
@@ -12,7 +13,7 @@ export default function PostCard({ post, showCategory = true, isLatest = false }
         <PostThumbnail post={post} />
       </Link>
       <Link href={`/posts/${post.slug}`} className="card-title">
-        {post.title}
+        <PostTitle title={post.title} />
       </Link>
       <div className="card-meta">
         {isLatest && <NewBadge date={post.date} />}

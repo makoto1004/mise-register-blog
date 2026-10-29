@@ -5,6 +5,7 @@ import { XFollow } from '@/components/XLinks';
 import XTimeline from '@/components/XTimeline';
 import XPostEmbeds from '@/components/XPostEmbeds';
 import NewBadge from '@/components/NewBadge';
+import PostTitle from '@/components/PostTitle';
 import AmazonSaleBanner from '@/components/AmazonSaleBanner';
 import { getPostsByCategory, getLatestPosts } from '@/lib/posts';
 import { SITE, CATEGORIES, CATEGORY_DESCRIPTIONS } from '@/lib/site';
@@ -103,7 +104,9 @@ export default function Home() {
                     <NewBadge date={post.date} />
                     {CATEGORIES[post.category] && <span className="latest-category">{CATEGORIES[post.category]}</span>}
                   </span>
-                  <span className="latest-title">{post.title}</span>
+                  <span className="latest-title">
+                    <PostTitle title={post.title} />
+                  </span>
                   <time dateTime={post.date} className="latest-date">
                     {post.date.replaceAll('-', '/')}
                   </time>
