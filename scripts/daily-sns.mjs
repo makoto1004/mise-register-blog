@@ -1,4 +1,4 @@
-// 毎日 1 本、公開ずみの記事から SNS 投稿用のファイル（X の画像と文章、Instagram の表紙と投稿文）を作る
+// 毎日 1 本、公開ずみの記事から SNS 投稿用のファイル（X の画像と文章、Instagram の表紙・リール動画と投稿文）を作る
 // 投稿は自動ではしない。運営者が中身を確かめてから、X・Instagram の画面から手で投稿する
 //
 // 使い方:
@@ -234,6 +234,83 @@ ${textLines(lines, 80, 860, size, Math.round(size * 1.4), 'font-weight="800"')}
   await sharp(Buffer.from(svg)).composite(layers).png().toFile(file);
 }
 
+// ---- Instagram のリール動画（縦長 1080×1920・4 場面・BGM 付き・16 秒） ----
+// ffmpeg の場所は FFMPEG_PATH（.env.local）。なければ PATH の ffmpeg を使う。見つからないときは動画を作らずに飛ばす
+const FFMPEG = process.env.FFMPEG_PATH || 'ffmpeg';
+const REEL_BGM = path.join(ROOT, 'scripts', 'assets', 'reel-bgm.m4a');
+const RW = 1080, RH = 1920;
+
+// 日本語を全角 n 文字分の幅で折り返す（半角は 0.55 文字分）。読点のあとで切れるならそこで切り、
+// 英数字の途中では切らず、句読点は行の頭に来ないようにする
+function wrapJa(str, n) {
+  const w = (ch) => (/[\x20-\x7e]/.test(ch) ? 0.55 : 1);
+  const word = /[A-Za-z0-9]/;
+  const out = [];
+  let rest = String(str);
+  while ([...rest].reduce((s, ch) => s + w(ch), 0) > n) {
+    let k = 0, width = 0;
+    while (k < rest.length && width + w(rest[k]) <= n) width += w(rest[k++]);
+    const comma = rest.lastIndexOf('、', k - 1);
+    if (comma >= Math.floor(k / 2)) k = comma + 1;
+    else while (k > 1 && word.test(rest[k]) && word.test(rest[k - 1])) k--;
+    while (k < rest.length && '。、」？！）'.includes(rest[k])) k++;
+    out.push(rest.slice(0, k));
+    rest = rest.slice(k);
+  }
+  if (rest) out.push(rest);
+  return out;
+}
+
+async function makeReelFrames(post, talk, illus, ads, dir) {
+  const t = (x, y, s, size, color, weight = 700, anchor = 'start') =>
+    `<text x="${x}" y="${y}" font-family="${FONT}" font-size="${size}" font-weight="${weight}" fill="${color}" text-anchor="${anchor}">${esc(s)}</text>`;
+  const brand = t(RW / 2, 1820, 'mise & register', 40, C.muted, 700, 'middle');
+  const pr = ads ? `<rect x="900" y="120" width="100" height="52" rx="8" fill="none" stroke="${C.muted}" stroke-width="2"/>${t(950, 157, 'PR', 30, C.muted, 700, 'middle')}` : '';
+  const frame = (body) => Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${RW}" height="${RH}"><rect width="${RW}" height="${RH}" fill="${C.bg}"/>${body}</svg>`);
+  const files = [1, 2, 3, 4].map((i) => path.join(dir, `reel-${i}.png`));
+  const box = '#fffaf3', line = '#e3d3bf';
+
+  // 1. タイトルと挿絵
+  const { lines, size } = fitTitle(post.data.title, 920, 84, 60, 4);
+  const lh = Math.round(size * 1.35);
+  const layers1 = illus ? [await put(illus, 1000, 562, 40, 260 + lines.length * lh + 60)] : [];
+  await sharp(frame(t(80, 200, '新しい記事', 44, C.accent) + pr + textLines(lines, 80, 260 + size, size, lh, `font-family="${FONT}" font-weight="800" fill="${C.ink}"`) + brand))
+    .composite(layers1).png().toFile(files[0]);
+
+  // 2. 2 人の会話
+  const bubble = (y, n) => `<rect x="300" y="${y}" width="720" height="${140 + n * 62}" rx="28" fill="${box}" stroke="${line}" stroke-width="3"/>`;
+  const r = wrapJa(talk.rejimaru, 13), p = wrapJa(talk.posuta, 13);
+  await sharp(frame(bubble(330, r.length) + t(340, 400, 'レジまる', 38, C.accent) + r.map((s, i) => t(340, 470 + i * 62, s, 46, C.ink, 600)).join('') +
+    bubble(1000, p.length) + t(340, 1070, 'ポスタ', 38, C.accent) + p.map((s, i) => t(340, 1140 + i * 62, s, 44, C.ink, 600)).join('') + brand))
+    .composite([await put(mascot('rejimaru'), 220, 220, 50, 360), await put(mascot('posuta'), 220, 220, 50, 1030)]).png().toFile(files[1]);
+
+  // 3. この記事で分かること
+  // 2 行目からは「・」のぶん字下げする
+  const points = talk.caption_points.slice(0, 4).flatMap((s) => wrapJa(s, 16).map((x, i) => (i ? [176, x] : [130, `・${x}`])));
+  await sharp(frame(t(RW / 2, 400, 'この記事で分かること', 76, C.ink, 700, 'middle') +
+    `<rect x="80" y="520" width="920" height="${120 + points.length * 92}" rx="32" fill="${box}" stroke="${line}" stroke-width="3"/>` +
+    points.map(([x, s], i) => t(x, 620 + i * 92, s, 46, C.ink, 600)).join('') + brand)).png().toFile(files[2]);
+
+  // 4. 締め
+  await sharp(frame(t(RW / 2, 380, 'くわしくは記事で', 92, C.ink, 700, 'middle') +
+    t(RW / 2, 520, 'ブログ「mise & register」に', 48, C.muted, 600, 'middle') + t(RW / 2, 596, 'まとめています', 48, C.muted, 600, 'middle') +
+    `<rect x="190" y="720" width="700" height="120" rx="60" fill="${C.accent}"/>` + t(RW / 2, 798, 'プロフィールのリンクから', 46, '#ffffff', 700, 'middle') +
+    (ads ? t(RW / 2, 1600, 'この投稿には広告（PR）を含む記事の紹介があります', 30, C.muted, 500, 'middle') : '') + brand))
+    .composite([await put(mascot('rejimaru'), 300, 300, 200, 1050), await put(mascot('posuta'), 300, 300, 580, 1050)]).png().toFile(files[3]);
+  return files;
+}
+
+async function makeInstagramReel(post, talk, illus, ads, dir) {
+  const files = await makeReelFrames(post, talk, illus, ads, dir);
+  const inputs = [[files[0], 4], [files[1], 5], [files[2], 4.5], [files[3], 4]].flatMap(([f, d]) => ['-loop', '1', '-t', String(d), '-i', f]);
+  const filter = '[0:v]format=yuv420p,fps=30[a];[1:v]format=yuv420p,fps=30[b];[2:v]format=yuv420p,fps=30[c];[3:v]format=yuv420p,fps=30[d];' +
+    '[a][b]xfade=transition=fade:duration=0.5:offset=3.5[ab];[ab][c]xfade=transition=fade:duration=0.5:offset=8[abc];[abc][d]xfade=transition=fade:duration=0.5:offset=12[v]';
+  const res = spawnSync(FFMPEG, ['-y', '-loglevel', 'error', ...inputs, '-i', REEL_BGM, '-filter_complex', filter, '-map', '[v]', '-map', '4:a',
+    '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '20', '-c:a', 'aac', '-b:a', '128k', '-shortest', '-movflags', '+faststart', path.join(dir, 'reel.mp4')], { encoding: 'utf8' });
+  for (const f of files) fs.rmSync(f, { force: true });
+  if (res.error || res.status !== 0) throw new Error(res.error?.message || res.stderr?.trim() || 'ffmpeg が失敗しました');
+}
+
 // slug を指定したときはその記事を今日の日付で作る（公開したばかりの記事をすぐ投稿したいとき）
 async function makeOne(state, slug) {
   const next = slug
@@ -268,6 +345,11 @@ async function makeOne(state, slug) {
   fs.writeFileSync(path.join(dir, 'instagram-caption.txt'), buildCaption(next, talk, ads), 'utf8');
   await makeXImage(next, illus, path.join(dir, 'x.png'));
   await makeInstagramCover(next, illus, path.join(dir, 'instagram.png'));
+  try {
+    await makeInstagramReel(next, talk, illus, ads, dir);
+  } catch (err) {
+    log(`リール動画を作れませんでした（画像と文章はできています）: ${err.message}`);
+  }
 
   if (!state.done.includes(next.slug)) state.done.push(next.slug);
   fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
