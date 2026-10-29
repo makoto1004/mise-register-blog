@@ -1,7 +1,7 @@
 ---
 title: 個人カフェのテーブル・チェアの選び方｜Amazonで揃う業務用10選
 date: 2026-10-16
-updated: 2026-10-22
+updated: 2026-10-29
 category: cafe
 order: 4
 tags: [カフェ, 開業, 業務用家具, カフェテーブル, カフェチェア, 店舗レイアウト]
@@ -157,6 +157,10 @@ services:
     note: おしゃれなテーブル・チェアを探せる家具の通販ブランド。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
   - id: airRhizome
     note: 北欧・ナチュラルなど、カフェの雰囲気づくりに使えるテイストの家具がそろう通販ショップ。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
+  - id: kuhon
+    note: デザイナーズ家具を中心にしたセレクトショップ。お店への納品事例も公開されています。リプロダクト家具（デザインの権利が切れた家具を、別のメーカーが作ったもの）も扱っているので、品質や素材は商品ページで確かめましょう。
+  - id: mutuki
+    note: テーブルやソファなどを扱う家具の通販ショップ。北欧風・和風・モダンなどのデザインから選べます。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
 picks:
   - name: 'LOWYA スチール脚のダイニングチェア（2脚・4脚セット／インダストリアル・ヴィンテージ調）'
     url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flow-ya%2Ff105-g1005-100%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
