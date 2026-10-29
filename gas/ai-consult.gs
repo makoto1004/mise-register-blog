@@ -50,8 +50,9 @@ const CONFIG = {
   errorCodeMaxSearches: 4,
   // エラーの表示が書かれる質問のタイトル（detailFields の中のもの）
   errorField: '画面やランプの表示',
-  // 回答の最後に入れる個別面談の URL（決まったら入れる。空のあいだは面談の文言を入れない）
-  meetingUrl: '',
+  // 回答の最後に入れる、有料の作業代行のページの URL（顔出し・電話をしない方針のため、個別面談の代わりに案内する）
+  // 作業代行の受付を始めたら 'https://www.mise-register.com/services' を入れる。空のあいだは案内の文言を入れない
+  servicesUrl: '',
   // 下書きの差出人名
   senderName: 'mise & register AI相談デスク',
   // 回答を作る AI の名前（署名に「回答作成：…（AI）」として出す。人の名前に見える名前にしない）
@@ -268,7 +269,7 @@ function onFormSubmit(e) {
     [
       '新しい相談が届き、Gmail に回答の下書きを作りました。',
       '内容を確かめて、直してから送信してください。',
-      CONFIG.meetingUrl ? '' : '※ 個別面談の URL が未設定のため、面談の案内は入っていません。',
+      CONFIG.servicesUrl ? '' : '※ 作業代行のページの URL が未設定のため、作業代行の案内は入っていません。',
       '',
       `判定：${result.inScope ? '対象' : '対象外'}　手順書：${result.manual ? 'あり（Agent 2）' : 'なし'}　エラーコードの調査：${lookUpError ? 'あり（出典を確かめてください）' : 'なし'}　担当：${character.name}`,
       `お店の種類：${shopType}`,
@@ -411,7 +412,7 @@ function callClaude(system, userText, extra) {
   throw new Error('AI の処理が終わりませんでした（ネット検索の続きが多すぎます）');
 }
 
-// 下書きの本文（あいさつ・面談の案内・注意書きを付ける）
+// 下書きの本文（あいさつ・作業代行の案内・注意書きを付ける）
 // 「相談の種類」から、担当のキャラクターを決める
 function pickCharacter(topic) {
   const found = CONFIG.characters.find((c) => c.topics.some((t) => String(topic || '').includes(t)));
@@ -426,7 +427,9 @@ function buildDraftBody(answer, inScope, character) {
     '',
     answer,
     '',
-    inScope && CONFIG.meetingUrl ? `より詳細なご相談は個別面談（ ${CONFIG.meetingUrl} ）へどうぞ。\n` : null,
+    inScope && CONFIG.servicesUrl
+      ? `POSレジの初期設定セット・商品登録用のデータづくり・売上集計のシート・スタッフ向けの操作マニュアルなど、作業ごとお任せいただける有料の代行サービスもあります（ ${CONFIG.servicesUrl} ）。\n`
+      : null,
     inScope ? 'お店のレジまわりが、早く元気になりますように！\n' : 'またレジまわりで困ったときは、いつでもご相談くださいね。\n',
     '――――――――――',
     `※ この回答は、AI（${character.name}）が作成した下書きを運営者が確認してお送りしています。`,

@@ -74,9 +74,9 @@
 2. Vercel の Settings → Environment Variables に `NEXT_PUBLIC_CONSULT_FORM_URL` として追加し、再デプロイする
 3. `/consult` にフォームが表示されることを確かめる
 
-## 個別面談の URL
+## 作業代行の案内
 
-Agent 3 の回答の最後には「より詳細なご相談は個別面談（URL）へどうぞ」を入れる決まり。URL が決まったら、`ai-consult.gs` の `CONFIG.meetingUrl` に入れる。空のあいだは、この文言を入れない（通知メールにその旨が出る）。
+顔出し・電話をしない方針のため、個別面談はしない。代わりに、対象の相談の回答の最後に、有料の作業代行（`/services`）の案内を入れる。作業代行の受付を始めたら、`ai-consult.gs` の `CONFIG.servicesUrl` に `https://www.mise-register.com/services` を入れる。空のあいだは、この文言を入れない（通知メールにその旨が出る）。
 
 ## ふだんの運用
 
