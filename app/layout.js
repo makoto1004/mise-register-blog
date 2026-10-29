@@ -151,6 +151,21 @@ export default function RootLayout({ children }) {
                   </Link>
                 </li>
               )}
+              {/* 有料の作業代行は、見積もり依頼フォームの URL を設定してからリンクを出す */}
+              {SITE.orderFormUrl && (
+                <>
+                  <li>
+                    <Link href="/services" className="underline-link">
+                      レジまわりの作業代行
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/legal" className="underline-link">
+                      特定商取引法に基づく表記
+                    </Link>
+                  </li>
+                </>
+              )}
               <li>
                 <Link href="/contact" className="underline-link">
                   お問い合わせ

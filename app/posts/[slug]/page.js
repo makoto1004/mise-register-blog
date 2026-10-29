@@ -3,6 +3,7 @@ import TagList from '@/components/TagList';
 import ComparisonTable from '@/components/ComparisonTable';
 import ProductCard from '@/components/ProductCard';
 import ServiceCard from '@/components/ServiceCard';
+import OwnServiceBox from '@/components/OwnServiceBox';
 import PickCard from '@/components/PickCard';
 import VideoCard from '@/components/VideoCard';
 import ThemeBackground from '@/components/ThemeBackground';
@@ -218,6 +219,9 @@ export default async function PostPage({ params }) {
         <XShare title={post.title} path={`/posts/${post.slug}`} />
         <XFollow lead="記事の更新は X と Instagram でもお知らせしています。" />
       </section>
+
+      {/* 運営者の有料の代行サービスの案内：フロントマターの ownServices がある記事だけ。受付を始めるまでは出さない */}
+      {SITE.orderFormUrl && post.ownServices.length > 0 && <OwnServiceBox services={post.ownServices} />}
 
       <QuickSurvey slug={post.slug} />
 

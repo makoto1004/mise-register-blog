@@ -526,6 +526,42 @@ a:hover { text-decoration: underline; }
 .affiliate-buttons-title { margin: 0; font-weight: 800; }
 .post-body .affiliate-buttons a.amazon-button { color: var(--amazon-text); }
 
+/* 運営者の有料の代行サービス（/services と記事の最後の案内）。広告のカードと区別するため、破線の枠にする */
+.own-service-label {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 2px 8px;
+  border: 1px solid var(--text);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.own-service-box { margin: 32px 0 0; padding: 16px 18px 18px; border: 1px dashed var(--text); background: var(--surface); }
+.own-service-lead { margin: 0 0 10px; font-size: 0.85rem; }
+.own-service-list { margin: 0 0 14px; padding: 0; list-style: none; font-size: 0.85rem; }
+.own-service-list li { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--border); }
+.own-service-name { font-weight: 700; }
+.own-service-price { white-space: nowrap; color: var(--muted); }
+.own-service-button {
+  display: block;
+  text-align: center;
+  background: var(--bg);
+  color: var(--text);
+  font-weight: 800;
+  border: 1px solid var(--text);
+  padding: 9px 16px;
+}
+.own-service-button:hover { text-decoration: none; background: var(--surface); }
+.own-service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 16px 0; }
+.own-service-card { border: 1px dashed var(--text); background: var(--bg); padding: 16px 18px 18px; font-size: 0.85rem; }
+.own-service-card .own-service-card-name { margin: 0 0 8px; font-size: 1.05rem; font-weight: 800; border: none; padding: 0; }
+.own-service-card ul { padding-left: 1.2em; }
+.own-service-card table { width: 100%; border-collapse: collapse; }
+.own-service-card th,
+.own-service-card td { padding: 6px 4px; border-top: 1px solid var(--border); text-align: left; vertical-align: top; }
+.own-service-card th { width: 7em; font-weight: 700; white-space: nowrap; }
+.own-service-card small { color: var(--muted); }
+
 /* サービス紹介のカード（A8.net など） */
 .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 16px 0; }
 .service-card {

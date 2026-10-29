@@ -5,6 +5,7 @@ updated: 2026-10-17
 category: devices
 order: 8
 tags: [POSレジ, 初期設定, 開業, 商品登録, インボイス]
+ownServices: [setup, master, manual]
 description: POSレジを導入してから開店するまでにやる初期設定を、アカウント作成・店舗情報・税率・商品登録・周辺機器の接続・レシートの設定・テスト会計の順番で解説します。Airレジ・Square・スマレジなど、どのPOSアプリにも共通する流れです。
 reviewNotes:
   - インボイス制度（適格請求書・適格簡易請求書）でレシートに必要な記載事項を、国税庁の最新情報で確認する

@@ -12,5 +12,7 @@ export default function sitemap() {
   const categories = Object.keys(CATEGORIES).map((slug) => ({
     url: `${SITE.url}/category/${slug}`,
   }));
-  return [{ url: `${SITE.url}/` }, { url: `${SITE.url}/site-map` }, { url: `${SITE.url}/search` }, ...categories, ...posts];
+  // 有料の作業代行のページは、受付を始めてから載せる
+  const services = SITE.orderFormUrl ? [{ url: `${SITE.url}/services` }] : [];
+  return [{ url: `${SITE.url}/` }, { url: `${SITE.url}/site-map` }, { url: `${SITE.url}/search` }, ...services, ...categories, ...posts];
 }

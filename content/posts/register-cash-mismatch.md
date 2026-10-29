@@ -5,6 +5,7 @@ publishedAt: 2026-10-21T07:57
 category: devices
 order: 15
 tags: [レジ締め, 現金管理, トラブル対応, キャッシュドロア, POSレジ]
+ownServices: [manual, sales]
 description: 閉店後のレジ締めで、現金がPOSレジの金額と合わない。そんなときに上から順に確かめたいことと、次から合わなくなりにくくする工夫をまとめました。開店時の釣り銭の記録や、入金・出金の記録のしかたも解説します。
 reviewNotes:
   - Square の「ドロワーのセッション」の手順は、Square ヘルプセンターの記事にもとづく。画面の名前が変わっていないか定期的に確認する
