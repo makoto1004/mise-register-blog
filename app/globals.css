@@ -616,6 +616,11 @@ a:hover { text-decoration: underline; }
 .product-body.has-image { display: flex; gap: 14px; align-items: flex-start; margin: 10px 0 4px; }
 .product-body.has-image .product-summary { margin: 0; }
 .product-thumb-link { flex: 0 0 auto; }
+/* Creators API の価格（規約で、時刻と注意書きを価格のすぐ近くに出す） */
+.amazon-price { margin: 10px 0 0; }
+.amazon-price p { margin: 0; }
+.amazon-price-time { font-size: 0.8rem; color: var(--muted); margin-left: 4px; }
+.amazon-price-note { font-size: 0.72rem; line-height: 1.5; color: var(--muted); margin-top: 4px !important; }
 .product-thumb {
   display: block;
   width: 96px;

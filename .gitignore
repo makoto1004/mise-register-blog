@@ -5,5 +5,8 @@ out/
 !.env.example
 logs/
 
+# Creators API で取った Amazon の商品情報（規約で保存は 24 時間まで。ビルドのたびに取り直す）
+.amazon-cache/
+
 # 予約公開の前の記事（scripts/publish-scheduled.mjs が時刻どおりに content/posts/ へ移す）
 scheduled/

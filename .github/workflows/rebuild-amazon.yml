@@ -1,0 +1,29 @@
+# Amazon の価格・画像を新しくするため、1 日 2 回 Vercel にサイトを作り直してもらう
+# （規約で、Creators API で取った価格などは 24 時間までしか使えない。作り直すたびに scripts/fetch-amazon-items.mjs が取り直す）
+#
+# 準備（運営者が行う）：
+# 1. Vercel のプロジェクト → Settings → Git → Deploy Hooks で、ブランチ main のフックを作り、URL をコピーする
+# 2. GitHub のリポジトリ → Settings → Secrets and variables → Actions で、VERCEL_DEPLOY_HOOK_URL という名前で URL を登録する
+# URL が登録されていないあいだは、何もしないで終わる
+name: Amazon の商品情報を新しくする
+
+on:
+  schedule:
+    - cron: '0 21 * * *' # 日本時間 6:00
+    - cron: '0 9 * * *'  # 日本時間 18:00
+  workflow_dispatch: # GitHub の画面から手で動かすこともできる
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Vercel に作り直しを頼む
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "VERCEL_DEPLOY_HOOK_URL が登録されていないため、何もしません"
+            exit 0
+          fi
+          curl -fsS -X POST "$HOOK" > /dev/null
+          echo "作り直しを頼みました"

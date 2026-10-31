@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/fetch-amazon-items.mjs",
     "build": "next build",
     "start": "npx serve out",
     "draft": "node --env-file-if-exists=.env.local scripts/generate-draft.mjs",

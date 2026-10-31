@@ -1,11 +1,15 @@
 import AmazonButton from '@/components/AmazonButton';
+import AmazonLiveInfo from '@/components/AmazonLiveInfo';
 import { buildAmazonUrl } from '@/lib/site';
+import { getAmazonItem } from '@/lib/amazonItems';
 
 // 1 製品分の紹介カード（画像・概要・良い点・気になる点・Amazon ボタン）
 // headingLevel は見出しの階層（記事の構成に合わせて h3 / h4 を切り替える）
-// 画像はフロントマターの image（SiteStripe の画像・自分で撮った写真など、使用が認められたものだけ）
+// 画像はフロントマターの image（SiteStripe の画像・自分で撮った写真など、使用が認められたものだけ）。
+// ないときは、ASIN があれば Creators API の画像を出す。価格も ASIN があれば出す（components/AmazonLiveInfo）
 export default function ProductCard({ product, rank, headingLevel = 'h3' }) {
   const Heading = headingLevel;
+  const live = getAmazonItem(product.asin);
   return (
     <section className="product-card" id={`product-${rank}`}>
       <div className="product-head">
@@ -13,7 +17,8 @@ export default function ProductCard({ product, rank, headingLevel = 'h3' }) {
         <Heading className="product-name">{product.name}</Heading>
         {product.badge && <span className="badge">{product.badge}</span>}
       </div>
-      <div className={product.image ? 'product-body has-image' : 'product-body'}>
+      <div className={product.image || live?.image ? 'product-body has-image' : 'product-body'}>
+        {!product.image && live && <AmazonLiveInfo item={live} alt={product.name} part="image" />}
         {product.image && (
           <a href={buildAmazonUrl(product)} target="_blank" rel="sponsored nofollow noopener" className="product-thumb-link">
             {/* eslint-disable-next-line @next/next/no-img-element -- 外部の広告画像をそのまま表示する */}
@@ -48,6 +53,7 @@ export default function ProductCard({ product, rank, headingLevel = 'h3' }) {
           </div>
         )}
       </div>
+      {live && <AmazonLiveInfo item={live} part="price" />}
       <AmazonButton product={product} />
     </section>
   );
