@@ -1,11 +1,14 @@
 // サービス紹介のカード（クラウドPOS・決済・会計ソフトなど）
 // A8.net のリンクがあれば広告リンク（rel="sponsored"）と計測用の画像、なければ公式サイトへの通常のリンク
+// 広告リンクの referrerPolicy は、もしもアフィリエイトの発行コードと同じ指定（成果の計測に使われる）
+const AD_REFERRER = 'no-referrer-when-downgrade';
+
 export default function ServiceCard({ service, headingLevel = 'h3' }) {
   const Heading = headingLevel;
   return (
     <section className="service-card">
       {service.banner && (
-        <a href={service.banner.href} target="_blank" rel="sponsored nofollow noopener" className="service-banner-link">
+        <a href={service.banner.href} target="_blank" rel="sponsored nofollow noopener" referrerPolicy={AD_REFERRER} className="service-banner-link">
           {/* 広告のバナーであることが分かるように PR を表示する */}
           <span className="ad-tag service-banner-tag">PR</span>
           {/* eslint-disable-next-line @next/next/no-img-element -- A8.net のバナー画像 */}
@@ -24,6 +27,7 @@ export default function ServiceCard({ service, headingLevel = 'h3' }) {
         className="service-button"
         target="_blank"
         rel={service.isAffiliate ? 'sponsored nofollow noopener' : 'noopener'}
+        referrerPolicy={service.isAffiliate ? AD_REFERRER : undefined}
       >
         {/* A8.net の広告リンクのときだけ PR を表示する */}
         {service.isAffiliate && <span className="ad-tag">PR</span>}

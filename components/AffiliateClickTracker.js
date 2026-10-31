@@ -13,6 +13,8 @@ function networkOf(url) {
   if (/amazon\.co\.jp$|amzn\.to$/.test(host)) return 'amazon';
   if (/rakuten\.co\.jp$/.test(host)) return 'rakuten';
   if (/a8\.net$/.test(host)) return 'a8';
+  if (/moshimo\.com$/.test(host)) return 'moshimo';
+  if (/valuecommerce\.com$/.test(host)) return 'valuecommerce';
   return host;
 }
 
