@@ -6,6 +6,7 @@
 //   npm run sns:daily -- --dry   # 次にどの記事を作るかを表示するだけ
 //   npm run sns:daily -- --count 7  # 7 本まとめて作る
 //   npm run sns:daily -- --slug cafe-cup-warmer,cafe-latte-art  # 記事を指定して、今日の日付で作る
+//   npm run sns:daily -- --rebuild-reels  # 今日から先の日付のフォルダーのリール動画だけを、今の作り方で作り直す（文章は変えない）
 //
 // - フォルダー名には投稿する予定の日付をつける（すでにある最後の日付の次の日から、1 日 1 本）
 // - 毎朝の実行では、1 週間先（今日から 6 日後）まで用意できていれば何もしない
@@ -205,8 +206,7 @@ function fitTitle(title, width, maxSize, minSize, maxLines) {
   const parts = String(title).split('｜');
   const size = Math.max(minSize, Math.min(maxSize, Math.floor(width / Math.max(...parts.map((p) => p.length)))));
   const perLine = Math.floor(width / size);
-  const lines = [];
-  for (const part of parts) for (let i = 0; i < part.length; i += perLine) lines.push(part.slice(i, i + perLine));
+  const lines = parts.flatMap((part) => wrapJa(part, perLine));
   return { lines: lines.slice(0, maxLines), size };
 }
 const textLines = (lines, x, y, size, lh, opt = '') =>
@@ -240,63 +240,97 @@ const FFMPEG = process.env.FFMPEG_PATH || 'ffmpeg';
 const REEL_BGM = path.join(ROOT, 'scripts', 'assets', 'reel-bgm.m4a');
 const RW = 1080, RH = 1920;
 
-// 日本語を全角 n 文字分の幅で折り返す（半角は 0.55 文字分）。読点のあとで切れるならそこで切り、
-// 英数字の途中では切らず、句読点は行の頭に来ないようにする
+// 日本語を全角 n 文字分の幅で折り返す（半角は 0.55 文字分）。「ばら|ばら」「比べ|方」のように単語の途中で切らない
+// 切ってよいのは、助詞や読点（「て」「が」「を」「、」など）で終わる単語のあと。次のどちらかの順に探す
+// 1. そのあとに漢字・カタカナ・英数字が来るところ（「順番が|人によって」）。ここを文節の切れ目とみなす
+// 2. 文節が 1 行に入らないときは、助詞で終わる単語のあと（「なって|いませんか」）。それでも入らなければ単語の切れ目、最後は文字
+// 句読点・小さい字・1 文字の助詞は前の単語に、「お」「ご」は後ろの単語にくっつけて、行の頭や終わりに残らないようにする
+const JA_SEGMENTER = new Intl.Segmenter('ja', { granularity: 'word' });
+const jaWidth = (s) => [...s].reduce((sum, ch) => sum + (/[ -~]/.test(ch) ? 0.55 : 1), 0);
+const JA_BREAK_AFTER = /[てでにをはがのともへやかねよ、。」』）？！]$/;
 function wrapJa(str, n) {
-  const w = (ch) => (/[\x20-\x7e]/.test(ch) ? 0.55 : 1);
-  const word = /[A-Za-z0-9]/;
-  const out = [];
-  let rest = String(str);
-  while ([...rest].reduce((s, ch) => s + w(ch), 0) > n) {
-    let k = 0, width = 0;
-    while (k < rest.length && width + w(rest[k]) <= n) width += w(rest[k++]);
-    const comma = rest.lastIndexOf('、', k - 1);
-    if (comma >= Math.floor(k / 2)) k = comma + 1;
-    else while (k > 1 && word.test(rest[k]) && word.test(rest[k - 1])) k--;
-    while (k < rest.length && '。、」？！）'.includes(rest[k])) k++;
-    out.push(rest.slice(0, k));
-    rest = rest.slice(k);
+  const words = [];
+  for (const { segment } of JA_SEGMENTER.segment(String(str))) {
+    const prev = words.at(-1);
+    const tail = /^[。、，．」』）？！ー…ぁぃぅぇぉっゃゅょァィゥェォッャュョ]/.test(segment) || (/^[ぁ-ゖ][。、？！]*$/.test(segment) && !/^[おご]$/.test(segment) && !/[。、？！」』）]$/.test(prev ?? ''));
+    const kana = /[ァ-ヶー]$/.test(prev ?? '') && /^[ァ-ヶ]/.test(segment); // 「スマ|レジ」のようなカタカナの続きはつなげる
+    if (prev && (tail || kana || /^[おご]$/.test(prev))) words[words.length - 1] += segment;
+    else words.push(segment);
   }
-  if (rest) out.push(rest);
+  // 文節 → 切れ目の候補（piece）→ 単語、の 3 段に分ける
+  const chunks = [];
+  for (const wd of words) {
+    const prev = chunks.at(-1);
+    const prevWord = prev?.pieces.at(-1).at(-1);
+    if (!prev || (JA_BREAK_AFTER.test(prevWord) && (!/^[ぁ-ゖ]/.test(wd) || /^[おご][一-龠]/.test(wd)))) chunks.push({ pieces: [[wd]] });
+    else if (JA_BREAK_AFTER.test(prevWord)) prev.pieces.push([wd]);
+    else prev.pieces.at(-1).push(wd);
+  }
+  const out = [];
+  let line = '';
+  // items を、行に入るだけ詰める。1 つで 1 行に入らないものは、1 段細かくして詰める（文節 → 候補 → 単語 → 文字）
+  const fill = (items) => {
+    for (const item of items) {
+      const text = Array.isArray(item) ? item.flat(Infinity).join('') : item;
+      if (jaWidth(line + text) <= n) line += text;
+      else if (jaWidth(text) <= n) { out.push(line); line = text; }
+      else fill(Array.isArray(item) ? item : [...item]);
+    }
+  };
+  fill(chunks.map((c) => c.pieces));
+  if (line) out.push(line);
   return out;
 }
 
+// リールは、上（アカウント名）・下（説明文）・右（いいね などのボタン）が Instagram の表示に重なり、
+// プロフィールの一覧やフィードでは上下が切り取られる。文字と絵は、この範囲の中だけに置く
+const REEL_SAFE = { top: 300, bottom: 1500, left: 80, right: 940 };
+
 async function makeReelFrames(post, talk, illus, ads, dir) {
+  const S = REEL_SAFE;
   const t = (x, y, s, size, color, weight = 700, anchor = 'start') =>
     `<text x="${x}" y="${y}" font-family="${FONT}" font-size="${size}" font-weight="${weight}" fill="${color}" text-anchor="${anchor}">${esc(s)}</text>`;
-  const brand = t(RW / 2, 1820, 'mise & register', 40, C.muted, 700, 'middle');
-  const pr = ads ? `<rect x="900" y="120" width="100" height="52" rx="8" fill="none" stroke="${C.muted}" stroke-width="2"/>${t(950, 157, 'PR', 30, C.muted, 700, 'middle')}` : '';
+  const cx = (S.left + S.right) / 2;
+  const brand = t(cx, S.bottom - 10, 'mise & register', 36, C.muted, 700, 'middle');
+  const pr = ads ? `<rect x="${S.right - 100}" y="${S.top}" width="100" height="52" rx="8" fill="none" stroke="${C.muted}" stroke-width="2"/>${t(S.right - 50, S.top + 37, 'PR', 30, C.muted, 700, 'middle')}` : '';
   const frame = (body) => Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${RW}" height="${RH}"><rect width="${RW}" height="${RH}" fill="${C.bg}"/>${body}</svg>`);
   const files = [1, 2, 3, 4].map((i) => path.join(dir, `reel-${i}.png`));
   const box = '#fffaf3', line = '#e3d3bf';
 
-  // 1. タイトルと挿絵
-  const { lines, size } = fitTitle(post.data.title, 920, 84, 60, 4);
+  // 1. タイトルと挿絵（挿絵は、タイトルの下からロゴの上までの残りの高さに収める）
+  const width = S.right - S.left;
+  const { lines, size } = fitTitle(post.data.title, width, 76, 54, 4);
   const lh = Math.round(size * 1.35);
-  const layers1 = illus ? [await put(illus, 1000, 562, 40, 260 + lines.length * lh + 60)] : [];
-  await sharp(frame(t(80, 200, '新しい記事', 44, C.accent) + pr + textLines(lines, 80, 260 + size, size, lh, `font-family="${FONT}" font-weight="800" fill="${C.ink}"`) + brand))
+  const titleBottom = S.top + 110 + lines.length * lh;
+  const illusH = Math.min(Math.round(width * 9 / 16), S.bottom - 80 - (titleBottom + 30));
+  const illusW = Math.round(illusH * 16 / 9);
+  const layers1 = illus && illusH > 200 ? [await put(illus, illusW, illusH, Math.round(cx - illusW / 2), titleBottom + 30)] : [];
+  await sharp(frame(t(S.left, S.top + 37, '新しい記事', 42, C.accent) + pr + textLines(lines, S.left, S.top + 90 + size, size, lh, `font-family="${FONT}" font-weight="800" fill="${C.ink}"`) + brand))
     .composite(layers1).png().toFile(files[0]);
 
-  // 2. 2 人の会話
-  const bubble = (y, n) => `<rect x="300" y="${y}" width="720" height="${140 + n * 62}" rx="28" fill="${box}" stroke="${line}" stroke-width="3"/>`;
-  const r = wrapJa(talk.rejimaru, 13), p = wrapJa(talk.posuta, 13);
-  await sharp(frame(bubble(330, r.length) + t(340, 400, 'レジまる', 38, C.accent) + r.map((s, i) => t(340, 470 + i * 62, s, 46, C.ink, 600)).join('') +
-    bubble(1000, p.length) + t(340, 1070, 'ポスタ', 38, C.accent) + p.map((s, i) => t(340, 1140 + i * 62, s, 44, C.ink, 600)).join('') + brand))
-    .composite([await put(mascot('rejimaru'), 220, 220, 50, 360), await put(mascot('posuta'), 220, 220, 50, 1030)]).png().toFile(files[1]);
+  // 2. 2 人の会話（キャラクターは左、吹き出しは右のボタンにかからない幅にする）
+  const bx = 270, bw = S.right - bx, perLine = Math.floor((bw - 70) / 44);
+  const bubble = (y, n) => `<rect x="${bx}" y="${y}" width="${bw}" height="${120 + n * 60}" rx="28" fill="${box}" stroke="${line}" stroke-width="3"/>`;
+  const r = wrapJa(talk.rejimaru, perLine), p = wrapJa(talk.posuta, perLine);
+  const y1 = S.top + 20, y2 = y1 + 120 + r.length * 60 + 70;
+  const say = (y, name, rows) => t(bx + 35, y + 65, name, 36, C.accent) + rows.map((s, i) => t(bx + 35, y + 130 + i * 60, s, 44, C.ink, 600)).join('');
+  await sharp(frame(bubble(y1, r.length) + say(y1, 'レジまる', r) + bubble(y2, p.length) + say(y2, 'ポスタ', p) + brand))
+    .composite([await put(mascot('rejimaru'), 190, 190, S.left - 30, y1 + 20), await put(mascot('posuta'), 190, 190, S.left - 30, y2 + 20)]).png().toFile(files[1]);
 
   // 3. この記事で分かること
   // 2 行目からは「・」のぶん字下げする
-  const points = talk.caption_points.slice(0, 4).flatMap((s) => wrapJa(s, 16).map((x, i) => (i ? [176, x] : [130, `・${x}`])));
-  await sharp(frame(t(RW / 2, 400, 'この記事で分かること', 76, C.ink, 700, 'middle') +
-    `<rect x="80" y="520" width="920" height="${120 + points.length * 92}" rx="32" fill="${box}" stroke="${line}" stroke-width="3"/>` +
-    points.map(([x, s], i) => t(x, 620 + i * 92, s, 46, C.ink, 600)).join('') + brand)).png().toFile(files[2]);
+  const points = talk.caption_points.slice(0, 4).flatMap((s) => wrapJa(s, 15).map((x, i) => (i ? [S.left + 92, x] : [S.left + 46, `・${x}`])));
+  const rowH = Math.min(84, Math.floor((S.bottom - 80 - (S.top + 150) - 100) / Math.max(points.length, 1)));
+  await sharp(frame(t(cx, S.top + 70, 'この記事で分かること', 66, C.ink, 700, 'middle') +
+    `<rect x="${S.left}" y="${S.top + 150}" width="${width}" height="${100 + points.length * rowH}" rx="32" fill="${box}" stroke="${line}" stroke-width="3"/>` +
+    points.map(([x, s], i) => t(x, S.top + 240 + i * rowH, s, 44, C.ink, 600)).join('') + brand)).png().toFile(files[2]);
 
   // 4. 締め
-  await sharp(frame(t(RW / 2, 380, 'くわしくは記事で', 92, C.ink, 700, 'middle') +
-    t(RW / 2, 520, 'ブログ「mise & register」に', 48, C.muted, 600, 'middle') + t(RW / 2, 596, 'まとめています', 48, C.muted, 600, 'middle') +
-    `<rect x="190" y="720" width="700" height="120" rx="60" fill="${C.accent}"/>` + t(RW / 2, 798, 'プロフィールのリンクから', 46, '#ffffff', 700, 'middle') +
-    (ads ? t(RW / 2, 1600, 'この投稿には広告（PR）を含む記事の紹介があります', 30, C.muted, 500, 'middle') : '') + brand))
-    .composite([await put(mascot('rejimaru'), 300, 300, 200, 1050), await put(mascot('posuta'), 300, 300, 580, 1050)]).png().toFile(files[3]);
+  await sharp(frame(t(cx, S.top + 80, 'くわしくは記事で', 84, C.ink, 700, 'middle') +
+    t(cx, S.top + 210, 'ブログ「mise & register」に', 46, C.muted, 600, 'middle') + t(cx, S.top + 280, 'まとめています', 46, C.muted, 600, 'middle') +
+    `<rect x="${cx - 330}" y="${S.top + 360}" width="660" height="116" rx="58" fill="${C.accent}"/>` + t(cx, S.top + 435, 'プロフィールのリンクから', 44, '#ffffff', 700, 'middle') +
+    (ads ? t(cx, S.bottom - 80, 'この投稿には広告（PR）を含む記事の紹介があります', 28, C.muted, 500, 'middle') : '') + brand))
+    .composite([await put(mascot('rejimaru'), 260, 260, cx - 290, S.top + 560), await put(mascot('posuta'), 260, 260, cx + 30, S.top + 560)]).png().toFile(files[3]);
   return files;
 }
 
@@ -357,8 +391,33 @@ async function makeOne(state, slug) {
   return true;
 }
 
+// 作ってあるフォルダーの x.txt と instagram-caption.txt から会話と要点を読み直し、リール動画だけを作り直す
+async function rebuildReels() {
+  const dirs = fs.existsSync(OUT_DIR) ? fs.readdirSync(OUT_DIR).filter((d) => /^\d{4}-\d{2}-\d{2}-/.test(d) && d.slice(0, 10) >= today()) : [];
+  const posts = listPosts();
+  for (const d of dirs) {
+    const dir = path.join(OUT_DIR, d);
+    const post = posts.find((p) => p.slug === d.slice(11));
+    const xFile = path.join(dir, 'x.txt'), capFile = path.join(dir, 'instagram-caption.txt');
+    if (!post || !fs.existsSync(xFile) || !fs.existsSync(capFile)) {
+      log(`リールの作り直しを飛ばしました: ${d}（記事か文章のファイルが見つかりません）`);
+      continue;
+    }
+    const x = fs.readFileSync(xFile, 'utf8'), cap = fs.readFileSync(capFile, 'utf8');
+    const talk = {
+      rejimaru: x.match(/^レジまる「(.*)」$/m)?.[1] ?? '',
+      posuta: cap.match(/^ポスタ「(.*)」$/m)?.[1] ?? '',
+      caption_points: [...cap.matchAll(/^・(.+)$/gm)].map((m) => m[1]),
+    };
+    const illusFile = path.join(ROOT, 'public', 'images', 'posts', `${post.slug}-1.webp`);
+    await makeInstagramReel(post, talk, fs.existsSync(illusFile) ? illusFile : null, /#PR\b/.test(x), dir);
+    log(`リールを作り直しました: ${d}`);
+  }
+}
+
 async function main() {
   const state = readState();
+  if (process.argv.includes('--rebuild-reels')) return rebuildReels();
   if (SLUGS.length) {
     for (const slug of SLUGS) await makeOne(state, slug);
     return;
