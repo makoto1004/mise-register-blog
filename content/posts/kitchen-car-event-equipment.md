@@ -1,7 +1,7 @@
 ---
 title: 屋外イベント用・持ち運びPOSレジ機材セット｜キッチンカーでそろえるもの
 date: 2026-10-16
-updated: 2026-10-29
+updated: 2026-10-31
 category: kitchen-car
 order: 3
 tags: [キッチンカー, 移動販売, 屋外イベント, 周辺機器, ポータブル電源]
@@ -56,7 +56,10 @@ products:
       - 会計中に端末が動かない
     cons:
       - 固定できる場所が限られる
-services: [bridgewifi]
+services:
+  - bridgewifi
+  - id: renogy
+    note: ポータブル電源では足りないほど電気を使うキッチンカーは、車にバッテリーやソーラーパネルを積んで電源をつくる方法もあります。使う機器の消費電力（W）を合計してから、取り付けは販売店や専門の業者に相談しましょう。
 picks:
   - name: 'Jackery ポータブル電源 1000 New（公式ショップ）'
     url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjackery-japan%2Fn-p-10001000-bkor-jk2%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
@@ -99,7 +102,7 @@ POSレジそのものの選び方は[キッチンカー向けPOSレジ比較](/p
 
 <!-- picks -->
 
-通信が不安な会場では、予備のWi-Fiを1つ持っておくと安心です。
+通信が不安な会場では、予備のWi-Fiを1つ持っておくと安心です。電気をたくさん使う場合は、車に電源の設備を積む方法もあります。
 
 <!-- services -->
 
