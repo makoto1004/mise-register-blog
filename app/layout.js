@@ -5,6 +5,7 @@ import Logo from '@/components/Logo';
 import { InstagramHeaderLink } from '@/components/XLinks';
 import XHeaderTimeline from '@/components/XHeaderTimeline';
 import SiteMotion from '@/components/SiteMotion';
+import AffiliateClickTracker from '@/components/AffiliateClickTracker';
 import { SITE, CATEGORIES, OG_IMAGE, SERVICES_OPEN } from '@/lib/site';
 import './globals.css';
 
@@ -101,6 +102,8 @@ export default function RootLayout({ children }) {
         <main className="container">{children}</main>
         {/* スクロールでふわっと出す動き・記事の読んだ位置のバー（GSAP） */}
         <SiteMotion />
+        {/* 広告リンクが押された回数を、記事・広告ごとに Google アナリティクスで数える */}
+        <AffiliateClickTracker />
 
         <footer id="footer" className="site-footer">
           <div className="footer-inner">
