@@ -8,7 +8,7 @@ import NewBadge from '@/components/NewBadge';
 import PostTitle from '@/components/PostTitle';
 import AmazonSaleBanner from '@/components/AmazonSaleBanner';
 import { getPostsByCategory, getLatestPosts } from '@/lib/posts';
-import { SITE, CATEGORIES, CATEGORY_DESCRIPTIONS } from '@/lib/site';
+import { SITE, CATEGORIES, CATEGORY_DESCRIPTIONS, SERVICES_OPEN } from '@/lib/site';
 
 // トップページ
 // 上部：Canva でデザインした見出しの画像。その下に業種へのジャンプ
@@ -60,6 +60,32 @@ export default function Home() {
           ))}
           <Link href="/site-map#purpose">目的から探す →</Link>
       </nav>
+
+      {/* 作業代行と運営者の案内：絵つきのカードを 2 枚並べる（作業代行は受付先があるときだけ） */}
+      <section className="home-guide" aria-label="運営者と作業代行のご案内">
+        {SERVICES_OPEN && (
+          <Link href="/services" className="home-guide-card home-guide-services">
+            {/* eslint-disable-next-line @next/next/no-img-element -- Static Export のため next/image の最適化は使わない */}
+            <img src="/images/home-services.webp" width="800" height="574" alt="" loading="lazy" />
+            <span className="home-guide-body">
+              <span className="home-guide-label">運営者の有料サービス</span>
+              <span className="home-guide-title">レジまわりの作業代行</span>
+              <span className="home-guide-text">商品登録のCSV・スタッフ向けの操作マニュアル・レジの困りごとの整理を、文字のやりとりだけで代わりに作ります。</span>
+              <span className="home-guide-button">内容と料金を見る →</span>
+            </span>
+          </Link>
+        )}
+        <Link href="/about#profile" className="home-guide-card">
+          {/* eslint-disable-next-line @next/next/no-img-element -- Static Export のため next/image の最適化は使わない */}
+          <img src="/images/home-about.webp" width="800" height="574" alt="" loading="lazy" />
+          <span className="home-guide-body">
+            <span className="home-guide-label">運営者について</span>
+            <span className="home-guide-title">相談デスクの店番です</span>
+            <span className="home-guide-text">POSレジ・周辺機器のヘルプデスクの仕事をしている運営者が、お店の目線でレジ選びをまとめています。</span>
+            <span className="home-guide-button">プロフィールを見る →</span>
+          </span>
+        </Link>
+      </section>
 
       {/* AI相談デスクの案内：フォームの URL が設定されているときだけ表示する */}
       {SITE.consultFormUrl && (

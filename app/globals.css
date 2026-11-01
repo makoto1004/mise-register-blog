@@ -151,6 +151,39 @@ a:hover { text-decoration: underline; }
 }
 .jump-links a:hover { text-decoration: none; background: var(--text); color: var(--bg); }
 
+/* トップの作業代行・運営者の案内：絵つきのカードを 2 枚並べる（スマホでは縦に積む） */
+.home-guide { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 32px; }
+.home-guide-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.home-guide-card:hover { text-decoration: none; }
+@media (hover: hover) {
+  .home-guide-card:hover { transform: translate(-3px, -3px); box-shadow: 3px 3px 0 var(--muted); }
+}
+.home-guide-card img { display: block; width: 100%; height: auto; aspect-ratio: 800 / 574; object-fit: cover; border-bottom: 1px solid var(--border); }
+.home-guide-body { display: flex; flex-direction: column; flex: 1; gap: 4px; padding: 16px 20px 20px; }
+.home-guide-label { font-size: 0.75rem; font-weight: 800; color: var(--accent); }
+.home-guide-title { font-size: 1.15rem; font-weight: 800; }
+.home-guide-text { font-size: 0.85rem; color: var(--muted); margin-bottom: 10px; }
+.home-guide-button {
+  margin-top: auto;
+  align-self: flex-start;
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 800;
+  padding: 8px 20px;
+}
+/* 作業代行のカードは差し色の枠で、運営者のカードより目立たせる */
+.home-guide-services { border: 2px solid var(--accent); }
+.home-guide-services .home-guide-button { background: var(--accent); }
+/* 上のメニューの「作業代行」は差し色にする */
+.menu-bar .menu-services { color: var(--accent); }
+
 /* トップの AI相談デスクの案内（マスコット 2 人と相談ページへのボタン） */
 .home-consult {
   display: flex;

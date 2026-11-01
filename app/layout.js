@@ -78,6 +78,14 @@ export default function RootLayout({ children }) {
           </div>
           <nav className="menu-bar" aria-label="カテゴリー">
             <ul>
+              {/* 作業代行は、スマホで横にスクロールしなくても見えるよう先頭に置く */}
+              {SERVICES_OPEN && (
+                <li>
+                  <Link href="/services" className="underline-link menu-services">
+                    作業代行
+                  </Link>
+                </li>
+              )}
               {Object.entries(CATEGORIES).map(([slug, name]) => (
                 <li key={slug}>
                   <Link href={`/category/${slug}`} className="underline-link">
