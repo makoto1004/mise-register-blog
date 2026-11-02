@@ -201,6 +201,8 @@ a:hover { text-decoration: underline; }
 .sale-banner-text { margin: 10px 0 0; font-size: 0.85rem; color: var(--muted); }
 
 .home-consult-mascots { display: flex; flex-shrink: 0; }
+/* 運営者の帯の絵（カードと同じ絵を小さく出す） */
+.home-consult-photo { flex-shrink: 0; width: 200px; height: auto; border: 1px solid var(--border); }
 .home-consult-mascots img { width: 96px; height: 96px; border-radius: 50%; border: 2px solid var(--bg); background: var(--bg); }
 .home-consult-mascots img + img { margin-left: -18px; }
 .home-consult-body { flex: 1; min-width: 0; }
@@ -223,6 +225,7 @@ a:hover { text-decoration: underline; }
 @media (max-width: 600px) {
   .home-consult { flex-direction: column; align-items: flex-start; gap: 12px; padding: 18px 16px; }
   .home-consult-mascots img { width: 72px; height: 72px; }
+  .home-consult-photo { width: 100%; }
   .home-consult-button { display: block; text-align: center; }
 }
 
