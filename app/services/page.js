@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
-import { OWN_SERVICES } from '@/lib/ownServices';
+import { OWN_SERVICES, COCONALA_CONSULT_URL } from '@/lib/ownServices';
 
 export const metadata = {
   title: 'レジまわりの作業代行（初期設定・商品登録データ・売上集計・操作マニュアル・メニュー表・ホームページ）',
@@ -86,6 +86,11 @@ export default function ServicesPage() {
                 </tr>
               </tbody>
             </table>
+            {coconala && service.coconalaUrl && (
+              <a href={service.coconalaUrl} className="own-service-button own-service-card-button" target="_blank" rel="noopener">
+                ココナラの出品ページを見る
+              </a>
+            )}
           </section>
         ))}
       </div>
@@ -100,7 +105,9 @@ export default function ServicesPage() {
       {coconala ? (
         <div className="post-body">
           <ol>
-            <li>下のボタンからココナラの出品ページを開き、見積もりのご相談をしてください（無料。ココナラの会員登録が必要です）。</li>
+            <li>
+              下のボタンからココナラの出品ページを開き、見積もりのご相談をしてください（無料。ココナラの会員登録が必要です）。①と③はそれぞれの出品ページ、そのほかのサービスや、どれを頼めばよいか迷うときは「レジの困りごとの文字相談」の出品ページからメッセージでご相談ください。
+            </li>
             <li>ココナラのメッセージで、料金・納期・作業内容をお伝えします。</li>
             <li>内容でよければ、ココナラでご購入ください。代金はココナラがいったん預かり、取引が終わるまで運営者には支払われません。</li>
             <li>作業をして、確認用の見本をお送りします。内容の修正は2回まで無料です。</li>
@@ -188,11 +195,18 @@ export default function ServicesPage() {
 
       <h2 className="products-heading">{coconala ? 'ご依頼・ご相談' : '見積もりの依頼'}</h2>
       {coconala ? (
-        <p className="own-service-cta">
-          <a href={coconala} className="own-service-button" target="_blank" rel="noopener">
-            ココナラの出品ページで相談する
+        <div className="own-service-cta own-service-cta-list">
+          {services
+            .filter((service) => service.coconalaUrl)
+            .map((service) => (
+              <a key={service.id} href={service.coconalaUrl} className="own-service-button" target="_blank" rel="noopener">
+                {service.number} {service.name}（ココナラ）
+              </a>
+            ))}
+          <a href={COCONALA_CONSULT_URL} className="own-service-button" target="_blank" rel="noopener">
+            レジの困りごとの文字相談・そのほかのご相談（ココナラ）
           </a>
-        </p>
+        </div>
       ) : src ? (
         <iframe className="contact-frame" src={src} title="作業代行の見積もり依頼フォーム" loading="lazy">
           読み込んでいます…
