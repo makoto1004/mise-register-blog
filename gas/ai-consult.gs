@@ -42,6 +42,25 @@ const CONFIG = {
   dailyLimit: 20,
   // 同じメールアドレスから受け付ける相談の上限（1か月あたり。AI に回した相談だけを数える）
   monthlyLimitPerEmail: 3,
+  // 1か月の API 料金の上限（米ドル）。使った額は API の返す usage から計算してスクリプト プロパティに記録する
+  monthlyBudgetUsd: 5,
+  // 相談 1 件で使う額の見込み（米ドル）。「使った額 + 見込み」が上限を超える相談は AI に回さない
+  //   （ふだんは 1 件 0.10〜0.20 ドルほど。手順書とネット検索が重なったときの分を見て多めにする）
+  consultCostEstimateUsd: 0.3,
+  // 週次リサーチ 1 回で使う額の見込み（米ドル）
+  researchCostEstimateUsd: 0.4,
+  // モデルごとの料金（米ドル／100万トークン。2026年11月2日に公式の料金ページで確認）
+  //   cacheRead：キャッシュの読み取り、cacheWrite：5 分のキャッシュの書き込み
+  prices: {
+    'claude-opus-5-5': { input: 4, output: 20, cacheRead: 0.2, cacheWrite: 5 },
+    'claude-opus-5': { input: 5, output: 25, cacheRead: 0.5, cacheWrite: 6.25 },
+    'claude-sonnet-5-5': { input: 2, output: 10, cacheRead: 0.1, cacheWrite: 2.5 },
+    'claude-haiku-5-5': { input: 0.1, output: 0.5, cacheRead: 0.01, cacheWrite: 0.125 },
+  },
+  // 表にないモデル（断られたときに作り直す別のモデルなど）は、高めの料金で数えて上限を超えないようにする
+  unknownModelPrice: { input: 10, output: 50, cacheRead: 1, cacheWrite: 12.5 },
+  // ネット検索 1 回の料金（米ドル。1,000 回で 10 ドル）
+  webSearchUsd: 0.01,
   // 相談内容の文字数の上限（これより長い分は AI に渡さない）
   maxBodyLength: 2000,
   // 週次リサーチで使うネット検索の回数の上限
@@ -235,6 +254,16 @@ function onFormSubmit(e) {
     return;
   }
 
+  const spent = spentThisMonth();
+  if (spent + CONFIG.consultCostEstimateUsd > CONFIG.monthlyBudgetUsd) {
+    writeStatus(sheet, row, `保留（今月の API 料金の上限 ${CONFIG.monthlyBudgetUsd}ドル に近いため AI 未使用）`);
+    notifyOperator(
+      '[AI相談] 今月の API 料金の上限に近づきました',
+      `今月の API 料金は約 ${spent.toFixed(2)} ドルです（上限 ${CONFIG.monthlyBudgetUsd} ドル）。この相談は AI に回していません。\n\nシートの ${row} 行目を見て、手で返信してください。来月の1日から、また AI に回します。`
+    );
+    return;
+  }
+
   if (!takeDailyQuota()) {
     writeStatus(sheet, row, '保留（1日の上限に達したため AI 未使用）');
     notifyOperator('[AI相談] 1日の上限に達しました', `今日の上限（${CONFIG.dailyLimit}件）に達したため、この相談は AI に回していません。\n\nシートの ${row} 行目を見て、手で返信してください。`);
@@ -272,6 +301,7 @@ function onFormSubmit(e) {
       CONFIG.servicesUrl ? '' : '※ 作業代行のページの URL が未設定のため、作業代行の案内は入っていません。',
       '',
       `判定：${result.inScope ? '対象' : '対象外'}　手順書：${result.manual ? 'あり（Agent 2）' : 'なし'}　エラーコードの調査：${lookUpError ? 'あり（出典を確かめてください）' : 'なし'}　担当：${character.name}`,
+      `今月の API 料金：約 ${spentThisMonth().toFixed(2)} ドル（上限 ${CONFIG.monthlyBudgetUsd} ドル）`,
       `お店の種類：${shopType}`,
       `相談の種類：${topic}`,
       '',
@@ -336,6 +366,12 @@ function splitJudgement(text) {
 // ===== 週次リサーチ（Agent 1。月曜 7:00 のトリガーで動く） =====
 function weeklyResearch() {
   const today = Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy年M月d日');
+  // 相談の分を残すため、上限に近いときは週次リサーチを休む
+  const spent = spentThisMonth();
+  if (spent + CONFIG.researchCostEstimateUsd + CONFIG.consultCostEstimateUsd > CONFIG.monthlyBudgetUsd) {
+    notifyOperator('[AI相談] 週次リサーチを休みました', `今月の API 料金が約 ${spent.toFixed(2)} ドル（上限 ${CONFIG.monthlyBudgetUsd} ドル）のため、相談の分を残して今週のリサーチを休みました。`);
+    return;
+  }
   let result;
   try {
     result = callClaude(RESEARCH_PROMPT, `今日は${today}です。直近 1〜2 週間の新しい情報を調べてまとめてください。`, {
@@ -391,6 +427,8 @@ function callClaude(system, userText, extra) {
 
     const status = response.getResponseCode();
     const data = JSON.parse(response.getContentText());
+    // 断られた・途中で止まった応答も料金がかかるので、200 のときは先に記録する
+    if (status === 200) addSpend(data.usage, data.model);
     if (status !== 200) {
       throw new Error(`Claude API ${status}: ${(data.error && data.error.message) || ''}`);
     }
@@ -480,6 +518,38 @@ function takeDailyQuota() {
     if (count >= CONFIG.dailyLimit) return false;
     props.setProperties({ quotaDate: today, quotaCount: String(count + 1) });
     return true;
+  } finally {
+    lock.releaseLock();
+  }
+}
+
+// ===== API 料金の記録（月ごと。スクリプト プロパティ spendMonth / spendUsd） =====
+// 今月これまでに使った額（米ドル）
+function spentThisMonth() {
+  const props = PropertiesService.getScriptProperties();
+  const month = Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy-MM');
+  return props.getProperty('spendMonth') === month ? Number(props.getProperty('spendUsd') || 0) : 0;
+}
+
+// API の応答 1 回分の料金を usage から計算して、今月の額に足す
+//   出力トークンには考える過程（thinking）の分も入っている。ネット検索は回数で数える
+function addSpend(usage, model) {
+  if (!usage) return;
+  const p = CONFIG.prices[model] || CONFIG.unknownModelPrice;
+  const usd =
+    ((usage.input_tokens || 0) * p.input
+      + (usage.output_tokens || 0) * p.output
+      + (usage.cache_read_input_tokens || 0) * p.cacheRead
+      + (usage.cache_creation_input_tokens || 0) * p.cacheWrite) / 1e6
+    + ((usage.server_tool_use && usage.server_tool_use.web_search_requests) || 0) * CONFIG.webSearchUsd;
+
+  const lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    const props = PropertiesService.getScriptProperties();
+    const month = Utilities.formatDate(new Date(), 'Asia/Tokyo', 'yyyy-MM');
+    const before = props.getProperty('spendMonth') === month ? Number(props.getProperty('spendUsd') || 0) : 0;
+    props.setProperties({ spendMonth: month, spendUsd: String(before + usd) });
   } finally {
     lock.releaseLock();
   }
