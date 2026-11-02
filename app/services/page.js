@@ -86,6 +86,18 @@ export default function ServicesPage() {
                 </tr>
               </tbody>
             </table>
+            {service.samples && (
+              <div className="own-service-samples">
+                <p className="own-service-samples-title">できあがりの見本（架空のお店）</p>
+                <div className="own-service-samples-list">
+                  {service.samples.map((sample) => (
+                    <a key={sample.src} href={sample.src} target="_blank" rel="noopener">
+                      <img src={sample.src} alt={sample.alt} width="1200" height="1220" loading="lazy" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
             {coconala && service.coconalaUrl && (
               <a href={service.coconalaUrl} className="own-service-button own-service-card-button" target="_blank" rel="noopener">
                 ココナラの出品ページを見る

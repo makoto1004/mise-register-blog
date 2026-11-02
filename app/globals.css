@@ -611,6 +611,11 @@ a:hover { text-decoration: underline; }
 .own-service-card td { padding: 6px 4px; border-top: 1px solid var(--border); text-align: left; vertical-align: top; }
 .own-service-card th { width: 7em; font-weight: 700; white-space: nowrap; }
 .own-service-card small { color: var(--muted); }
+.own-service-samples { margin-top: 12px; }
+.own-service-samples-title { margin: 0 0 6px; font-weight: 700; }
+.own-service-samples-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.own-service-samples-list a { display: block; border: 1px solid var(--border); }
+.own-service-samples-list img { display: block; width: 100%; height: auto; }
 
 /* サービス紹介のカード（A8.net など） */
 .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 16px 0; }
