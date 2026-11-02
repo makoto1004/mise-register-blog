@@ -109,6 +109,8 @@ services:
     note: 北欧・ナチュラルなど、さまざまなテイストの家具・インテリアがそろう通販ショップ。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
   - id: lowya
     note: ラック・シェルフ・ミラーなど、売り場づくりに使える家具を探せる通販ブランド。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
+  - id: vidaxl
+    note: 家具・ガーデン用品・DIY用品などを扱う通販ショップ。送料と返品は無料と案内されています。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
 picks:
   - name: 'LOWYA 6灯スポットライト型シーリングライト（LED対応・リモコン付き・スチール）'
     url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flow-ya%2F2c78w%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'

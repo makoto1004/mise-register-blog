@@ -161,6 +161,8 @@ services:
     note: デザイナーズ家具を中心にしたセレクトショップ。お店への納品事例も公開されています。リプロダクト家具（デザインの権利が切れた家具を、別のメーカーが作ったもの）も扱っているので、品質や素材は商品ページで確かめましょう。
   - id: mutuki
     note: テーブルやソファなどを扱う家具の通販ショップ。北欧風・和風・モダンなどのデザインから選べます。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
+  - id: vidaxl
+    note: 家具・ガーデン用品・DIY用品などを扱う通販ショップ。送料と返品は無料と案内されています。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
 picks:
   - name: 'LOWYA スチール脚のダイニングチェア（2脚・4脚セット／インダストリアル・ヴィンテージ調）'
     url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flow-ya%2Ff105-g1005-100%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'

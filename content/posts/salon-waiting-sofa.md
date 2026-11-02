@@ -123,6 +123,8 @@ services:
     note: ソファやソファベッドを多く扱う家具の通販ショップ。「あんしん五年間保証」が付きます。店舗で使う場合は、業務用として使えるかや保証の条件を確認しましょう。
   - id: kuhon
     note: デザイナーズ家具を中心にしたセレクトショップ。待合スペースの雰囲気づくりに使えるチェアやソファを探せます。インテリアの相談も受け付けています。
+  - id: vidaxl
+    note: 家具・ガーデン用品・DIY用品などを扱う通販ショップ。送料と返品は無料と案内されています。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
 picks:
   - name: 'INNERPEACE キャビネット（クリーム色・幅100〜200cm）'
     url: 'https://af.moshimo.com/af/c/click?a_id=5857431&p_id=6471&pc_id=18285&pl_id=86305&url=https%3A%2F%2Finnerpeace.jp%2Fcollections%2Fcabinet%2Fproducts%2Fcabinet-0017'
