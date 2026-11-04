@@ -115,8 +115,6 @@ products:
     cons:
       - 雑誌の入れ替えの手間がかかる
 services:
-  - id: lowya
-    note: ソファやサイドテーブルなど、待合スペースに置けるデザイン家具を探せる通販ブランド。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
   - id: airRhizome
     note: 北欧・ナチュラルなど、サロンの雰囲気に合わせやすいソファや小物がそろう通販ショップ。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
   - id: mutuki
@@ -132,6 +130,11 @@ picks:
     pixel: 'https://i.moshimo.com/af/i/impression?a_id=5857431&p_id=6471&pc_id=18285&pl_id=86305'
     shop: INNERPEACE
     note: '待合の雑誌や店販の商品を置ける、やわらかいクリーム色の収納棚。家庭向けの商品なので、店舗で使う場合は耐荷重や素材を商品ページで確認しましょう。'
+  - name: 'LOWYA カウチソファ（L字・3〜4人掛け・ファブリック）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flow-ya%2F15935%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=1209653&item_id=10013391&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Flow-ya%2Fcabinet%2Fitem_cart%2Fsofa%2F02%2F15935_01_.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '家庭向けの商品です。待合スペースに置ける大きさか、店舗で使うときの条件を商品ページで確認しましょう。'
 ---
 
 美容室の待合スペースは、お客様が最初に座り、サロンの印象が決まる場所です。この記事では、**待ち時間の心地よさ**・**カルテを書くときの机の高さ**・**セット椅子のじゃまにならないデザイン**の3つの視点から、待合に置きたいソファとミニテーブルを紹介します。

@@ -153,8 +153,6 @@ products:
     cons:
       - 屋内用より選べるデザインが少なめ
 services:
-  - id: lowya
-    note: おしゃれなテーブル・チェアを探せる家具の通販ブランド。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
   - id: airRhizome
     note: 北欧・ナチュラルなど、カフェの雰囲気づくりに使えるテイストの家具がそろう通販ショップ。店舗で使う場合は、耐荷重や業務用として使えるかを商品ページで確認しましょう。
   - id: kuhon
@@ -174,6 +172,16 @@ picks:
     image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=1209653&item_id=10012124&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Flow-ya%2Fcabinet%2Fitem_cart%2Fdining%2F02%2Fs-s300055_01_.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
     shop: 楽天市場
     note: '家庭向けの商品です。店舗で使う場合は、耐荷重や使い方の条件を商品ページで確認しましょう。'
+  - name: 'LOWYA 1本脚の丸ダイニングテーブル（天然木・単品）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flow-ya%2Fy58cc%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=1209653&item_id=10013422&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Flow-ya%2Fcabinet%2Fitem_cart%2Fdining%2F02%2Fy58cc_01___.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '家庭向けの商品です。店舗で使う場合は、耐荷重や使い方の条件を商品ページで確認しましょう。'
+  - name: 'LOWYA 天然木のダイニングセット（ヴィンテージ調・幅120〜160cm）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flow-ya%2Ff402-g1029-100%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=1209653&item_id=10010615&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Flow-ya%2Fcabinet%2Fitem_cart%2Ftable%2F02%2Ff402-g1029-100_01__.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '家庭向けの商品です。幅や点数の選び方、店舗で使うときの条件は商品ページで確認しましょう。'
 ---
 
 個人カフェの開業準備で、意外と悩むのが**テーブルとチェア選び**です。おしゃれさだけで選ぶと、「毎日の拭き掃除で天板がすぐ傷んだ」「席の組み方を変えられない」といった失敗につながります。

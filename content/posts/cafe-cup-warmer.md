@@ -57,6 +57,11 @@ picks:
     image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=270903&item_id=11129465&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fr-kojima%2Fcabinet%2Fn0000000132%2F4901369521198_1.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
     shop: 楽天市場
     note: 'サーバーを1つ置くシングルタイプのウォーマーです。カウンターが狭いお店向けです。'
+  - name: 'LOWYA キッチン収納・レンジ台（幅60cm・90cm）'
+    url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Flow-ya%2Fs-s200316%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
+    image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=1209653&item_id=10012496&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Flow-ya%2Fcabinet%2Fitem_cart%2Fkitchen%2F02%2Fs-s200316_01__.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
+    shop: 楽天市場
+    note: '家庭向けの商品です。カップや小型の機器を置く場合は、耐荷重と置き場所の広さを商品ページで確認しましょう。'
 ---
 
 淹れたてのコーヒーを出したのに、お客様が口をつけたときにはもうぬるい。冷たいカップに注ぐと、カップに熱を取られて、思ったより早く冷めてしまいますよね。
