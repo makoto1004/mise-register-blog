@@ -107,8 +107,10 @@ export default function Home() {
       </section>
 
       {/* Amazon のセールのバナー：セールの期間だけ表示する */}
-      <AmazonSaleBanner />
-      <RakutenSaleBanner />
+      <div className="sale-banners">
+        <AmazonSaleBanner />
+        <RakutenSaleBanner />
+      </div>
 
       {/* 新着記事：全カテゴリーから新しい順に 3 本を目立たせて表示する */}
       {latest.length > 0 && (

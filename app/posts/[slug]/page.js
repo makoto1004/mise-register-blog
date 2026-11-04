@@ -217,8 +217,10 @@ export default async function PostPage({ params }) {
       )}
 
       {/* Amazon・楽天のセールのバナー：セールの期間だけ表示する */}
-      <AmazonSaleBanner />
-      <RakutenSaleBanner />
+      <div className="sale-banners">
+        <AmazonSaleBanner />
+        <RakutenSaleBanner />
+      </div>
 
       <section className="x-section" aria-label="X でシェア・フォロー">
         <XShare title={post.title} path={`/posts/${post.slug}`} />
