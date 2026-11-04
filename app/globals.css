@@ -766,6 +766,10 @@ a:hover { text-decoration: underline; }
 .sim-result dd { margin: 0; font-weight: 800; white-space: nowrap; }
 .sim-total { border-top: 2px solid var(--border); padding-top: 8px; font-size: 1rem !important; }
 .sim-total dd { font-size: 1.2rem; }
+.sim-next { margin: 18px 0 0; padding-top: 2px; }
+.sim-next ul { margin: 0; padding-left: 1.2em; font-size: 0.88rem; }
+.sim-next li { margin: 4px 0; }
+.sim-next a { text-decoration: underline; }
 .sim-note { margin: 10px 0 0; font-size: 0.72rem; color: var(--muted); }
 .sim-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 8px; }
 .sim-actions button {

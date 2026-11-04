@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
 // 初期費用シミュレーター（ブラウザで動く計算機）
@@ -133,6 +134,30 @@ const SOURCES = {
   ],
 };
 
+// 合計を見たあとに読むとよい記事（業種ごとの記事 + 全業種共通の記事）
+const NEXT_STEPS = {
+  cafe: [
+    { slug: 'cafe-opening-equipment', label: 'カフェ開業に必要な機材を確かめる' },
+    { slug: 'cafe-pos-comparison', label: 'カフェ向けのPOSレジを比べる' },
+  ],
+  salon: [
+    { slug: 'salon-styling-chair-mirror', label: 'スタイリングチェアと鏡の選び方を見る' },
+    { slug: 'salon-pos-comparison', label: '美容院・サロン向けのPOSレジを比べる' },
+  ],
+  'kitchen-car': [
+    { slug: 'kitchen-car-build-franchise', label: 'キッチンカーの始め方を確かめる' },
+    { slug: 'kitchen-car-pos-comparison', label: 'キッチンカー向けのPOSレジを比べる' },
+  ],
+  apparel: [
+    { slug: 'apparel-opening-checklist', label: 'アパレルショップ開業に必要なものを確かめる' },
+    { slug: 'apparel-pos-comparison', label: 'アパレル向けのPOSレジを比べる' },
+  ],
+};
+const COMMON_NEXT_STEPS = [
+  { slug: 'pos-low-cost-start', label: 'POSレジの初期費用を抑える方法を見る' },
+  { slug: 'pos-peripherals-guide', label: 'タブレットPOSレジに必要な周辺機器を確かめる' },
+];
+
 const QTY_OPTIONS = Array.from({ length: 10 }, (_, i) => i + 1);
 
 const yen = (n) => `${Math.round(n).toLocaleString('ja-JP')}円`;
@@ -189,7 +214,7 @@ const initialState = (items) => ({
   unchecked: Object.fromEntries(items.filter((item) => item.off).map((item) => [item.id, true])),
 });
 
-export default function CostSimulator({ category }) {
+export default function CostSimulator({ category, slug, servicesOpen }) {
   const initialItems = useMemo(
     () => [...(CATEGORY_INITIAL[category] ?? STORE_INITIAL), ...COMMON_INITIAL],
     [category],
@@ -199,6 +224,8 @@ export default function CostSimulator({ category }) {
     [category],
   );
   const sources = [...(SOURCES[category] ?? []), ...SOURCES.common];
+  // 今読んでいる記事へのリンクは出さない
+  const nextSteps = [...(NEXT_STEPS[category] ?? []), ...COMMON_NEXT_STEPS].filter((step) => step.slug !== slug);
 
   // 初期費用と毎月の費用で同じ id（例: kitchen）があっても混ざらないよう、別々に持つ
   const [init, setInit] = useState(() => initialState(initialItems));
@@ -324,6 +351,21 @@ export default function CostSimulator({ category }) {
           <dd>{yen(firstYear)}</dd>
         </div>
       </dl>
+      <div className="sim-next">
+        <h3 className="sim-heading">合計を見たら、次はこちら</h3>
+        <ul>
+          {nextSteps.map((step) => (
+            <li key={step.slug}>
+              <Link href={`/posts/${step.slug}`}>{step.label}</Link>
+            </li>
+          ))}
+          {servicesOpen && (
+            <li>
+              <Link href="/services">レジの初期設定や商品登録の準備を、作業代行に頼む（有料）</Link>
+            </li>
+          )}
+        </ul>
+      </div>
       <p className="sim-note">
         ※ 目安は公開情報の金額レンジから選んだ参考値で、地域・物件・機種によって大きく変わります。実際の費用は、各サービス・販売店・工事業者の見積もりで確認してください。
       </p>

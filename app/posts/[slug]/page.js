@@ -202,7 +202,10 @@ export default async function PostPage({ params }) {
         return <div key={index} className="post-body" dangerouslySetInnerHTML={{ __html: section.html }} />;
       })}
 
-      <CostSimulator category={post.category} />
+      {/* 開業に関する記事だけに出す（lib/posts.js の costSimulator） */}
+      {post.costSimulator && (
+        <CostSimulator category={post.category} slug={post.slug} servicesOpen={SERVICES_OPEN} />
+      )}
 
       {/* フロントマターの xPosts で選んだ投稿だけを埋め込む（最大 3 件） */}
       {post.xPosts.length > 0 && (

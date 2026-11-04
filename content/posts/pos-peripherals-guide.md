@@ -5,6 +5,7 @@ updated: 2026-10-17
 category: devices
 order: 1
 tags: [導入ガイド, Airレジ, Square, スマレジ]
+costSimulator: true
 description: タブレットPOSレジを始めるときに必要な周辺機器を、必ず必要なものと、あると便利なものに分けて解説します。そろえる順番や、買う前に確認したい対応機種のポイントもまとめています。
 ---
 
