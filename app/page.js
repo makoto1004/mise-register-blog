@@ -7,6 +7,7 @@ import XPostEmbeds from '@/components/XPostEmbeds';
 import NewBadge from '@/components/NewBadge';
 import PostTitle from '@/components/PostTitle';
 import AmazonSaleBanner from '@/components/AmazonSaleBanner';
+import RakutenSaleBanner from '@/components/RakutenSaleBanner';
 import { getPostsByCategory, getLatestPosts } from '@/lib/posts';
 import { SITE, CATEGORIES, CATEGORY_DESCRIPTIONS, SERVICES_OPEN } from '@/lib/site';
 
@@ -107,6 +108,7 @@ export default function Home() {
 
       {/* Amazon のセールのバナー：セールの期間だけ表示する */}
       <AmazonSaleBanner />
+      <RakutenSaleBanner />
 
       {/* 新着記事：全カテゴリーから新しい順に 3 本を目立たせて表示する */}
       {latest.length > 0 && (
