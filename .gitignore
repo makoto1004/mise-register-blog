@@ -10,3 +10,6 @@ logs/
 
 # 予約公開の前の記事（scripts/publish-scheduled.mjs が時刻どおりに content/posts/ へ移す）
 scheduled/
+
+# 楽天 API の結果（規約で公開の場所に置けない）
+.rakuten-cache/
