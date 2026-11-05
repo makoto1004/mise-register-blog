@@ -104,8 +104,17 @@ a:hover { text-decoration: underline; }
 .footer-logo .logo-amp { font-size: 2.4rem; }
 .footer-logo .logo-register { font-size: 1.2rem; }
 
-.menu-bar { margin-top: 18px; border-bottom: 1px solid var(--line); overflow-x: auto; }
-.menu-bar ul { display: flex; gap: 0 28px; list-style: none; margin: 0; padding: 0 0 12px; white-space: nowrap; }
+/* スマホは指で横にすべらせる（バーは出さない）。パソコンは折り返して全部見せる */
+.menu-bar { margin-top: 18px; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+.menu-bar::-webkit-scrollbar { display: none; }
+.menu-bar ul { display: flex; gap: 0 24px; list-style: none; margin: 0; padding: 0 0 12px; white-space: nowrap; }
+@media (min-width: 768px) {
+  .menu-bar { overflow: visible; }
+  .menu-bar ul { flex-wrap: wrap; gap: 4px 20px; }
+  .menu-bar ul a { font-size: 0.8rem; }
+  /* サイトマップはフッターにあるので、パソコンの上のメニューからは外す */
+  .menu-sitemap { display: none; }
+}
 .menu-bar a { font-size: 0.85rem; font-weight: 800; }
 
 /* メイン */
@@ -121,9 +130,57 @@ a:hover { text-decoration: underline; }
 .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
 .breadcrumb a { color: var(--muted); }
 
-/* トップの見出し部分：Canva でデザインした画像（public/images/hero/）を枠いっぱいに表示する */
-.home-hero { margin: 8px 0 0; }
-.home-hero-image { display: block; width: 100%; height: auto; }
+/* トップの見出し：左に文字、右に押せる 4 業種の絵。絵の白地は背景になじませる */
+.home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 16px 40px;
+  align-items: center;
+  padding: 8px 0 24px;
+  border-bottom: 1px solid var(--line);
+}
+.home-hero h1 {
+  margin: 0;
+  font-family: var(--font-mincho), "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: clamp(2.1rem, 3.9vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+}
+.home-hero-copy p { margin: 20px 0 0; max-width: 24em; color: var(--muted); font-size: 0.95rem; }
+.home-shops { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.home-shop { display: block; padding: 4px 4px 10px; color: var(--text); text-align: center; }
+.home-shop:hover { text-decoration: none; }
+.home-shop img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; transition: transform 0.2s ease-out; }
+.home-shop-name { display: block; margin-top: 4px; font-size: 0.9rem; font-weight: 800; line-height: 1.5; }
+.home-shop:hover .home-shop-name { color: var(--accent); text-decoration: underline; }
+.home-shop-count { display: block; font-size: 0.75rem; color: var(--muted); }
+.home-hero-more { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0; font-size: 0.85rem; color: var(--muted); }
+.home-hero-more a { font-weight: 700; }
+@media (hover: hover) {
+  .home-shop:hover img { transform: translateY(-4px); }
+}
+/* 開いたときに一度だけ、4 つの絵を順に出す（文字は最初から出しておく） */
+@media (prefers-reduced-motion: no-preference) {
+  /* リンクではなく絵を動かす（リンクを動かすと multiply が背景に届かず、絵の四角が見えてしまう） */
+  .home-shop img { animation: shop-in 0.45s ease-out backwards; }
+  .home-shop:nth-child(2) img { animation-delay: 0.08s; }
+  .home-shop:nth-child(3) img { animation-delay: 0.16s; }
+  .home-shop:nth-child(4) img { animation-delay: 0.24s; }
+}
+@keyframes shop-in { from { opacity: 0; transform: translateY(10px); } }
+@media (max-width: 900px) {
+  .home-hero { grid-template-columns: 1fr; }
+  .home-hero h1 { font-size: clamp(1.9rem, 8vw, 2.8rem); }
+  .home-hero-copy p { margin-top: 12px; }
+}
+@media (max-width: 560px) {
+  .home-shops { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .home-shop img { max-width: 150px; margin: 0 auto; }
+}
+
+/* キーボードで移動したときの枠（サイト全体） */
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 
 /* 画面には出さず、読み上げ・検索エンジン向けに残す文字 */
 .sr-only {
@@ -140,7 +197,6 @@ a:hover { text-decoration: underline; }
 
 /* 業種・目的へのジャンプリンク */
 .jump-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 0 0 8px; }
-.home-jump { padding: 16px 0 24px; margin: 0; border-bottom: 1px solid var(--line); }
 .jump-links a {
   border: 1px solid var(--border);
   padding: 4px 14px;
@@ -179,6 +235,13 @@ a:hover { text-decoration: underline; }
   padding: 8px 20px;
 }
 /* 作業代行のカードは差し色の枠で、運営者のカードより目立たせる */
+/* 広い画面では絵を左に小さく置き、案内が画面を占めすぎないようにする */
+@media (min-width: 1100px) {
+  .home-guide-card { flex-direction: row; }
+  /* 絵を切らずに小さく見せる。絵の地色に近いページの色を左の欄に敷く */
+  .home-guide-card img { flex: 0 0 42%; width: 42%; aspect-ratio: auto; object-fit: contain; background: var(--bg); border-bottom: 0; border-right: 1px solid var(--line); }
+  .home-guide-body { min-width: 0; }
+}
 .home-guide-services { border: 2px solid var(--accent); }
 .home-guide-services .home-guide-button { background: var(--accent); }
 /* 上のメニューの「作業代行」は差し色にする */
@@ -242,6 +305,23 @@ a:hover { text-decoration: underline; }
 
 /* トップの業種別セクション：1 本を大きく、残りは文字の一覧 */
 .home-section { margin-top: 56px; scroll-margin-top: 16px; }
+/* 業種の欄：広い画面では見出しを左に固定し、右の記事だけが流れる */
+.home-category { padding-top: 16px; border-top: 1px solid var(--border); }
+.home-category h2 {
+  margin: 0;
+  font-family: var(--font-mincho), "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.home-category .category-description { margin: 8px 0 12px; }
+.home-category-all { font-size: 0.9rem; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }
+.home-category-body { margin-top: 16px; }
+@media (min-width: 1024px) {
+  .home-category { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 40px; align-items: start; }
+  .home-category-head { position: sticky; top: 24px; }
+  .home-category-body { margin-top: 0; }
+}
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
 .section-head h2 { margin: 0; font-size: 1.3rem; font-weight: 800; }
 .more-link { font-size: 0.85rem; font-weight: 700; white-space: nowrap; }
@@ -249,7 +329,7 @@ a:hover { text-decoration: underline; }
 
 .featured-post {
   display: grid;
-  grid-template-columns: minmax(0, 320px) 1fr;
+  grid-template-columns: minmax(0, 260px) 1fr;
   gap: 24px;
   align-items: center;
   color: var(--text);
@@ -622,6 +702,20 @@ a:hover { text-decoration: underline; }
 .own-service-card td { padding: 6px 4px; border-top: 1px solid var(--border); text-align: left; vertical-align: top; }
 .own-service-card th { width: 7em; font-weight: 700; white-space: nowrap; }
 .own-service-card small { color: var(--muted); }
+/* /services：サービスの一覧と、1 列に並べたカード。広い画面では一覧を左に固定する */
+.services-index { margin: 16px 0; }
+.services-index ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.services-index a { display: block; padding: 8px 2px; border-bottom: 1px solid var(--line); color: var(--text); font-size: 0.85rem; font-weight: 700; line-height: 1.5; }
+.services-index a:hover { background: var(--surface); text-decoration: none; }
+.services-index-price { display: block; font-size: 0.75rem; font-weight: 400; color: var(--muted); }
+.services-list { grid-template-columns: minmax(0, 1fr); }
+.services-list .own-service-card { scroll-margin-top: 16px; }
+@media (min-width: 1100px) {
+  .services-page { max-width: 1040px; }
+  .services-page > .post-body, .services-page > .consult-hero, .services-page > .products-heading, .services-page > .own-service-cta { max-width: 760px; }
+  .services-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 32px; align-items: start; }
+  .services-index { position: sticky; top: 16px; }
+}
 .own-service-samples { margin-top: 12px; }
 .own-service-samples-title { margin: 0 0 6px; font-weight: 700; }
 .own-service-samples-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }

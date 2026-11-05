@@ -30,7 +30,7 @@ export default function ServicesPage() {
   const services = Object.values(OWN_SERVICES);
 
   return (
-    <article className="article">
+    <article className="article services-page">
       <nav className="breadcrumb" aria-label="パンくずリスト">
         <Link href="/">ホーム</Link> › <span>レジまわりの作業代行</span>
       </nav>
@@ -54,9 +54,25 @@ export default function ServicesPage() {
         <h2>サービスの内容と料金の目安</h2>
       </div>
 
-      <div className="own-service-grid">
+      {/* 広い画面では、左にサービスの一覧を固定し、右で各サービスを同じ形で読めるようにする */}
+      <div className="services-layout">
+      <nav className="services-index" aria-label="サービスの一覧">
+        <ul>
+          {services.map((service) => (
+            <li key={service.id}>
+              <a href={`#service-${service.id}`}>
+                <span>
+                  {service.number} {service.name}
+                </span>
+                <span className="services-index-price">{service.price}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <div className="own-service-grid services-list">
         {services.map((service) => (
-          <section key={service.id} className="own-service-card">
+          <section key={service.id} id={`service-${service.id}`} className="own-service-card">
             <h3 className="own-service-card-name">
               {service.number} {service.name}
             </h3>
@@ -105,6 +121,7 @@ export default function ServicesPage() {
             )}
           </section>
         ))}
+      </div>
       </div>
 
       <div className="post-body">
@@ -171,6 +188,11 @@ export default function ServicesPage() {
         </ul>
 
         <h2>よくある質問</h2>
+        <h3>何を頼むか決まっていなくても、相談できますか？</h3>
+        <p>
+          はい。見積もりの相談までは無料です。どのサービスが合うか分からないときは、困っていることをそのまま書いてください。
+          {coconala && '「レジの困りごとの文字相談」の出品ページから、メッセージでご相談いただけます。'}
+        </p>
         <h3>まだお店を開いていなくても頼めますか？</h3>
         <p>
           はい、開店前の準備としてご依頼いただけます。メニューや商品の一覧がExcelや紙にまとまっていれば、商品登録用のデータを作れます。

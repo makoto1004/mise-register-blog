@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Cormorant_Garamond } from 'next/font/google';
+import { Cormorant_Garamond, Noto_Serif_JP } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Logo from '@/components/Logo';
 import { InstagramHeaderLink } from '@/components/XLinks';
@@ -16,6 +16,15 @@ const serif = Cormorant_Garamond({
   style: ['normal', 'italic'],
   variable: '--font-serif',
   display: 'swap',
+});
+
+// トップの大きな見出しと、業種の見出しに使う明朝体
+const mincho = Noto_Serif_JP({
+  subsets: ['latin'],
+  weight: ['600'],
+  variable: '--font-mincho',
+  display: 'swap',
+  preload: false,
 });
 
 export const metadata = {
@@ -53,7 +62,7 @@ function googleVerifications() {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ja" className={serif.variable}>
+    <html lang="ja" className={`${serif.variable} ${mincho.variable}`}>
       <head>
         {/* Impact（Shopify のアフィリエイト）のサイト確認用のタグ。Impact は content ではなく value で読むため、そのまま書く */}
         <meta name="impact-site-verification" value="0a53640a-dc73-49f8-9b75-7d581548b146" />
