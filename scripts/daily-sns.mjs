@@ -105,13 +105,29 @@ const SYSTEM_PROMPT = `あなたは、小さなお店向けのブログ「mise &
 - レジまる：レシートプリンターから生まれたキャラクター。プリンター・キャッシュドロア・バーコードリーダーの担当
 - ポスタ：タブレットの POS レジのキャラクター。POS レジ・キャッシュレス決済・お店の Wi-Fi の担当
 決まり:
-- やさしい「です・ます」で書く。くだけた話し方、語尾の「〜まる」、絵文字は使わない
+- やさしい「です・ます」で書く。くだけた話し方、語尾の「〜まる」は使わない
+- rejimaru・posuta・caption_points の本文には絵文字・顔文字を入れない（画像にも使うため）
+- rejimaru_deco・posuta_deco：セリフの最後に付ける絵文字か顔文字を、1 人 1 個まで。話の内容に合う、面白いものを選ぶ。合うものがなければ空文字にする。法律・資格・料金の注意が中心の記事は、どちらも空文字にする
+- おじさん構文にしない：絵文字や記号を重ねない、語尾をカタカナにしない（「〜ネ」「〜カナ」）、馴れ馴れしくしない。😅😘❣️、ハート、！の連続は使わない。顔文字に @ # \\ は使わない
 - 記事に書かれていることだけを書く。記事にない数字・効果・体験談を足さない
 - 「必ず」「絶対」「いちばん安い」のような言い切りはしない
 - rejimaru：記事が役に立つ場面や、読む人の困りごとを 1〜2 文で（45 文字以内）
 - posuta：記事で分かることを 1〜2 文で（55 文字以内）
 - caption_points：Instagram の投稿文に入れる、記事の要点を 3〜4 個（1 個 30 文字以内）
 - hashtags：記事に合うハッシュタグを 2 個（# をつける。#PR は入れない）`;
+
+// セリフの最後に付ける絵文字・顔文字を確かめる。決まりに合わないものは付けない
+// 😅😘❣ は Z 世代に古い印象とされる（Simeji 調査 2026 年 6 月）。🫪 は iOS 26.4 の新しい絵文字で、古い端末では表示できないおそれがある
+const DECO_BLOCKED = /[😅😘❣🫪🤮🖕❗❕‼💕💖💗💞💓❤♥]/u;
+function cleanDeco(value) {
+  const deco = String(value ?? '').trim();
+  if (!deco || [...deco].length > 12) return '';
+  if (DECO_BLOCKED.test(deco) || /[@＠#＃\\<>「」\s]/.test(deco)) return '';
+  // 言葉を混ぜない（「〜ネ」のような語尾を防ぐ）。絵文字は 1 個まで
+  if (/[\p{sc=Han}\p{sc=Hiragana}]|[ァ-ヶ]{2,}/u.test(deco)) return '';
+  if ((deco.match(/\p{Extended_Pictographic}/gu) ?? []).length > 1) return '';
+  return deco;
+}
 
 // 記事の見出し（## の行）を集める。会話を作るときの材料にする
 const headings = (content) => [...content.matchAll(/^##\s+(.+)$/gm)].map((m) => m[1]).slice(0, 12);
@@ -121,7 +137,7 @@ function writeTalk(post) {
   const prompt = `${SYSTEM_PROMPT}
 
 次の記事を紹介する文章を、JSON だけで返してください（前後に説明やコードブロックの記号をつけない）。
-形: {"rejimaru": "...", "posuta": "...", "caption_points": ["..."], "hashtags": ["#...", "#..."]}
+形: {"rejimaru": "...", "rejimaru_deco": "...", "posuta": "...", "posuta_deco": "...", "caption_points": ["..."], "hashtags": ["#...", "#..."]}
 
 記事のタイトル: ${post.data.title}
 記事の説明: ${post.data.description ?? ''}
@@ -134,8 +150,10 @@ ${headings(post.content).map((h) => `- ${h}`).join('\n')}`;
   if (!json) throw new Error('返ってきた文章が JSON ではありません');
   const talk = JSON.parse(json[0]);
   if (!talk.rejimaru || !talk.posuta || !Array.isArray(talk.caption_points) || !Array.isArray(talk.hashtags)) throw new Error('返ってきた JSON の形が違います');
-  // 絵文字の入った文章は使わない
-  if (/\p{Extended_Pictographic}/u.test(talk.rejimaru + talk.posuta)) throw new Error('絵文字の入った文章が返ってきました');
+  // セリフの本文は画像にも使うので、絵文字を入れない。絵文字と顔文字は投稿文だけに付ける
+  if (/\p{Extended_Pictographic}/u.test(talk.rejimaru + talk.posuta)) throw new Error('セリフの本文に絵文字が入っています');
+  talk.rejimaru_deco = cleanDeco(talk.rejimaru_deco);
+  talk.posuta_deco = cleanDeco(talk.posuta_deco);
   // ハッシュタグは「#」をつけ、#PR は広告のある記事だけにあとでつける
   talk.hashtags = talk.hashtags.map((t) => `#${String(t).replace(/^#/, '').trim()}`).filter((t) => t !== '#' && t !== '#PR');
   return talk;
@@ -158,17 +176,18 @@ function buildXText(post, talk, ads) {
   const base = SITE.url.includes('example.com') ? 'https://www.mise-register.com' : SITE.url.replace(/\/$/, '');
   const url = `${base}/posts/${post.slug}`;
   const tags = [...talk.hashtags.slice(0, 2), ...(ads ? ['#PR'] : [])].join(' ');
-  const full = `レジまる「${talk.rejimaru}」\nポスタ「${talk.posuta}」\n${url}\n${tags}`;
+  const rejimaru = `レジまる「${talk.rejimaru}」${talk.rejimaru_deco ?? ''}`;
+  const full = `${rejimaru}\nポスタ「${talk.posuta}」${talk.posuta_deco ?? ''}\n${url}\n${tags}`;
   if (xLength(full) <= X_LIMIT) return full;
   // 長すぎるときは、ポスタのひとことを短くする
-  return `レジまる「${talk.rejimaru}」\nポスタ「くわしくは、ブログの記事で紹介しています」\n${url}\n${tags}`;
+  return `${rejimaru}\nポスタ「くわしくは、ブログの記事で紹介しています」\n${url}\n${tags}`;
 }
 
 function buildCaption(post, talk, ads) {
   const tags = [...talk.hashtags, '#小さなお店', '#お店づくり', '#開業準備', ...(ads ? ['#PR'] : [])];
-  return `レジまる「${talk.rejimaru}」
+  return `レジまる「${talk.rejimaru}」${talk.rejimaru_deco ?? ''}
 
-ポスタ「${talk.posuta}」
+ポスタ「${talk.posuta}」${talk.posuta_deco ?? ''}
 
 ▼この記事で分かること
 ${talk.caption_points.map((p) => `・${p}`).join('\n')}
