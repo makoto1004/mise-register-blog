@@ -130,7 +130,7 @@ a:hover { text-decoration: underline; }
 .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
 .breadcrumb a { color: var(--muted); }
 
-/* トップの見出し：左に文字、右に押せる 4 業種の絵。絵の白地は背景になじませる */
+/* トップの見出し：左に文字、右に POS レジの絵、下に押せる 4 業種の絵。絵の白地は背景になじませる */
 .home-hero {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -148,7 +148,12 @@ a:hover { text-decoration: underline; }
   letter-spacing: 0.04em;
 }
 .home-hero-copy p { margin: 20px 0 0; max-width: 24em; color: var(--muted); font-size: 0.95rem; }
-.home-shops { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.home-pos { display: block; width: 100%; max-width: 400px; justify-self: center; color: var(--text); text-align: center; }
+.home-pos:hover { text-decoration: none; }
+.home-pos img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; transition: transform 0.2s ease-out; }
+.home-pos-name { display: block; margin-top: -6px; font-size: 0.95rem; font-weight: 800; line-height: 1.5; }
+.home-pos:hover .home-pos-name { color: var(--accent); text-decoration: underline; }
+.home-shops { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; max-width: 880px; width: 100%; justify-self: center; }
 .home-shop { display: block; padding: 4px 4px 10px; color: var(--text); text-align: center; }
 .home-shop:hover { text-decoration: none; }
 .home-shop img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; transition: transform 0.2s ease-out; }
@@ -158,12 +163,12 @@ a:hover { text-decoration: underline; }
 .home-hero-more { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0; font-size: 0.85rem; color: var(--muted); }
 .home-hero-more a { font-weight: 700; }
 @media (hover: hover) {
-  .home-shop:hover img { transform: translateY(-4px); }
+  .home-shop:hover img, .home-pos:hover img { transform: translateY(-4px); }
 }
 /* 開いたときに一度だけ、4 つの絵を順に出す（文字は最初から出しておく） */
 @media (prefers-reduced-motion: no-preference) {
   /* リンクではなく絵を動かす（リンクを動かすと multiply が背景に届かず、絵の四角が見えてしまう） */
-  .home-shop img { animation: shop-in 0.45s ease-out backwards; }
+  .home-pos img, .home-shop img { animation: shop-in 0.45s ease-out backwards; }
   .home-shop:nth-child(2) img { animation-delay: 0.08s; }
   .home-shop:nth-child(3) img { animation-delay: 0.16s; }
   .home-shop:nth-child(4) img { animation-delay: 0.24s; }
@@ -173,6 +178,7 @@ a:hover { text-decoration: underline; }
   .home-hero { grid-template-columns: 1fr; }
   .home-hero h1 { font-size: clamp(1.9rem, 8vw, 2.8rem); }
   .home-hero-copy p { margin-top: 12px; }
+  .home-pos { max-width: 300px; }
 }
 @media (max-width: 560px) {
   .home-shops { grid-template-columns: repeat(2, minmax(0, 1fr)); }

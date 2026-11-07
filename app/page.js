@@ -23,7 +23,7 @@ const HERO_SHOPS = [
 const HOME_ROW_COUNT = 5;
 
 // トップページ
-// 上部：見出しの文字と、押せる 4 業種の絵
+// 上部：見出しの文字、POS レジの絵、押せる 4 業種の絵
 // 各業種：見出しを左に固定し、右に最初の 1 本を大きく、続く数本を文字の一覧で並べる
 export default function Home() {
   const sections = Object.entries(CATEGORIES).map(([slug, name]) => ({
@@ -61,6 +61,17 @@ export default function Home() {
           </h1>
           <p>業種別のPOSレジ・キャッシュレス決済・周辺機器のガイドです。</p>
         </div>
+        <Link href="/category/devices" className="home-pos">
+          {/* eslint-disable-next-line @next/next/no-img-element -- Static Export のため next/image の最適化は使わない */}
+          <img
+            src="/images/hero/pos-register.webp"
+            width="800"
+            height="800"
+            alt="タブレットのPOSレジとキャッシュドロア、レシートプリンター、バーコードリーダーのイラスト"
+            fetchPriority="high"
+          />
+          <span className="home-pos-name">POSレジ・周辺機器の選び方</span>
+        </Link>
         <nav className="home-shops" aria-label="業種から探す">
           {HERO_SHOPS.map((shop) => (
             <Link key={shop.slug} href={`/category/${shop.slug}`} className="home-shop">
