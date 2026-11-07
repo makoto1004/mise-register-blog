@@ -96,6 +96,9 @@ export default function Home() {
           <Link href="/search" className="underline-link">
             キーワードで探す
           </Link>
+          <Link href="/opening-checklist" className="underline-link">
+            開業準備チェックリスト
+          </Link>
         </p>
       </section>
 

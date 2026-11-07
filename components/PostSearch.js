@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import Link from 'next/link';
 import PostCard from '@/components/PostCard';
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -19,6 +20,9 @@ function normalize(text) {
     .toLowerCase()
     .replace(/[ァ-ヶ]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0x60));
 }
+
+// 検索結果が 0 件のときに候補として出す言葉
+const SUGGESTED_WORDS = ['レシートプリンター', 'キャッシュレス', '会計ソフト', '初期費用', '商品登録', 'Wi-Fi', '物件'];
 
 // ボタン用の短いカテゴリー名（「カフェ・飲食店向け」→「カフェ・飲食店」）
 const shortName = (name) => name.replace(/向け$/, '').replace(/（共通）$/, '');
@@ -55,6 +59,11 @@ export default function PostSearch({ posts, categories, fixedCategory = '', late
   const terms = normalize(query).split(/\s+/).filter(Boolean);
   const inCategory = indexed.filter(({ post }) => !category || post.category === category);
   const results = inCategory.filter(({ text }) => terms.every((t) => text.includes(t))).map(({ post }) => post);
+  // 0 件のときに出す言葉の候補（今のカテゴリーで 1 件以上見つかるものだけ）
+  const suggestions = SUGGESTED_WORDS.filter((word) => {
+    const t = normalize(word);
+    return inCategory.some(({ text }) => text.includes(t));
+  }).slice(0, 5);
 
   const counts = useMemo(() => {
     const c = {};
@@ -133,10 +142,38 @@ export default function PostSearch({ posts, categories, fixedCategory = '', late
       </p>
 
       {results.length === 0 ? (
-        <p className="search-empty">
-          「{query}」に合う記事は見つかりませんでした。言葉を短くするか、
-          {category && !fixedCategory ? 'カテゴリーを「すべて」にして' : 'ちがう言い方で'}探してみてください。
-        </p>
+        // 0 件のときは、次にできること（言葉の候補・条件を外す・チェックリスト）を出す
+        <div className="search-empty">
+          <p className="search-empty-title">
+            {query ? `「${query}」に合う記事は見つかりませんでした` : 'このカテゴリーの記事はまだありません'}
+          </p>
+          <p className="search-empty-hint">言葉を短くするか、ちがう言い方で探してみてください。</p>
+          {suggestions.length > 0 && (
+            <div className="search-suggest">
+              <span className="search-suggest-label">この言葉なら見つかります：</span>
+              {suggestions.map((word) => (
+                <button key={word} type="button" className="search-chip" onClick={() => setQuery(word)}>
+                  {word}
+                </button>
+              ))}
+            </div>
+          )}
+          <div className="search-empty-actions">
+            {category && !fixedCategory && (
+              <button type="button" className="search-clear" onClick={() => setCategory('')}>
+                カテゴリーを「すべて」にする
+              </button>
+            )}
+            {query && (
+              <button type="button" className="search-clear" onClick={() => setQuery('')}>
+                言葉を消す
+              </button>
+            )}
+            <Link href="/opening-checklist" className="underline-link">
+              開業準備チェックリストから探す
+            </Link>
+          </div>
+        </div>
       ) : (
         <ul className="card-grid" ref={listRef}>
           {results.map((post) => (

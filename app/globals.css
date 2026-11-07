@@ -1163,3 +1163,111 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .search-chip-count { font-size: 0.75rem; font-weight: 600; opacity: 0.75; }
 .search-count { margin: 0 0 16px; font-size: 0.85rem; color: var(--muted); }
 .search-empty { padding: 20px; border: 1px dashed var(--line); background: var(--surface); }
+.search-empty p { margin: 0; }
+.search-empty-title { font-weight: 800; }
+.search-empty-hint { margin-top: 4px !important; font-size: 0.85rem; color: var(--muted); }
+.search-suggest { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 14px; }
+.search-suggest-label { font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+.search-empty-actions { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 14px; font-size: 0.85rem; }
+.search-clear { padding: 0; font: inherit; color: var(--accent); background: none; border: 0; text-decoration: underline; cursor: pointer; }
+
+/* ===== AI相談デスクのフォーム：読み込み中の表示と、開けないときの案内 ===== */
+.consult-frame-wrap { position: relative; }
+.consult-frame-wrap .contact-frame { display: block; }
+.consult-frame-loading {
+  position: absolute;
+  inset: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 200px;
+  font-size: 0.9rem;
+  color: var(--muted);
+  background: #fff;
+  border: 1px solid var(--line);
+}
+.consult-frame-loading::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: consult-spin 0.8s linear infinite;
+}
+@keyframes consult-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .consult-frame-loading::before { animation: none; } }
+.consult-frame-fallback { margin: 10px 0 0; font-size: 0.85rem; color: var(--muted); }
+
+/* ===== 開業準備チェックリスト（/opening-checklist） ===== */
+.checklist { margin-top: 8px; }
+.checklist-summary { border: 1px solid var(--border); background: var(--bg); padding: 16px 18px; }
+.checklist-progress-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
+.checklist-progress-count { margin: 0; font-size: 0.9rem; }
+.checklist-progress-count strong { font-size: 1.6rem; font-weight: 800; }
+.checklist-countdown { margin: 0; font-weight: 800; color: var(--accent); }
+.checklist-progress { height: 10px; margin: 8px 0 14px; background: var(--surface); border: 1px solid var(--line); overflow: hidden; }
+.checklist-progress span { display: block; height: 100%; background: var(--accent); transition: width 0.3s ease-out; }
+.checklist-date { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 0.85rem; font-weight: 700; }
+.checklist-date input { min-height: 40px; padding: 4px 10px; font: inherit; font-weight: 400; color: var(--text); background: #fff; border: 1px solid var(--border); }
+.checklist-welcome { margin: 12px 0 0; padding: 8px 12px; font-size: 0.85rem; background: var(--surface); }
+
+/* 次にやること：1 つだけ大きく出す */
+.checklist-next { margin: 20px 0 32px; padding: 20px 22px; border: 2px solid var(--accent); background: #fff; }
+.checklist-next-label { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 4px; font-size: 0.8rem; font-weight: 800; color: var(--accent); }
+.checklist-next-stage { padding: 0 8px; font-weight: 700; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; }
+.checklist-next-title { margin: 0 0 6px; font-size: 1.25rem; font-weight: 800; line-height: 1.5; }
+.checklist-next-text { margin: 0 0 14px; font-size: 0.9rem; }
+.checklist-next-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.checklist-link,
+.checklist-done-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+.checklist-link { color: var(--text); background: var(--bg); }
+.checklist-link:hover { text-decoration: none; background: var(--surface); }
+.checklist-done-button { color: #fff; background: var(--accent); border-color: var(--accent); }
+.checklist-done-button:hover { filter: brightness(0.92); }
+.checklist-complete { border-style: dashed; }
+
+/* 段階ごとの一覧（段階は順番に進めるので番号を付ける） */
+.checklist-stages { list-style: none; margin: 0; padding: 0; counter-reset: stage; }
+.checklist-stage { margin: 0 0 28px; counter-increment: stage; }
+.checklist-stage h2 { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; padding-bottom: 6px; font-size: 1.1rem; font-weight: 800; border-bottom: 1px solid var(--border); }
+.checklist-stage h2::before { content: counter(stage); display: inline-grid; place-items: center; flex-shrink: 0; width: 26px; height: 26px; font-size: 0.85rem; color: var(--bg); background: var(--text); border-radius: 50%; }
+.checklist-stage.is-complete h2::before { background: var(--accent); }
+.checklist-stage-count { margin-left: auto; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
+.checklist-stage.is-complete .checklist-stage-count { color: var(--accent); }
+.checklist-stage ul { list-style: none; margin: 0; padding: 0; }
+.checklist-item { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.checklist-item label { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; }
+.checklist-item input { flex-shrink: 0; width: 20px; height: 20px; margin: 4px 0 0; accent-color: var(--accent); cursor: pointer; }
+.checklist-item-title { font-weight: 700; }
+.checklist-item.is-done .checklist-item-title { color: var(--muted); text-decoration: line-through; }
+.checklist-item-text { margin: 2px 0 0 30px; font-size: 0.85rem; color: var(--muted); }
+.checklist-item-links { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 4px 0 0 30px; font-size: 0.8rem; color: var(--muted); }
+
+.checklist-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin-top: 8px; font-size: 0.8rem; color: var(--muted); }
+.checklist-footer p { margin: 0; }
+.checklist-reset { min-height: 40px; padding: 0 14px; font: inherit; font-size: 0.8rem; color: var(--muted); background: transparent; border: 1px solid var(--line); cursor: pointer; }
+.checklist-reset:hover { color: var(--text); border-color: var(--border); }
+
+/* 画面下のお知らせ（スマホは下部固定メニューの上に出す） */
+.checklist-toast-region { position: fixed; right: 16px; bottom: 72px; left: 16px; z-index: 60; display: flex; justify-content: center; pointer-events: none; }
+@media (min-width: 768px) { .checklist-toast-region { bottom: 20px; } }
+.checklist-toast { display: flex; align-items: center; gap: 14px; max-width: 560px; padding: 12px 12px 12px 18px; font-size: 0.9rem; color: var(--bg); background: var(--text); pointer-events: auto; animation: checklist-toast-in 0.2s ease-out; }
+.checklist-toast button { flex-shrink: 0; min-height: 36px; padding: 0 12px; font: inherit; font-size: 0.85rem; font-weight: 700; color: var(--bg); background: transparent; border: 1px solid currentColor; cursor: pointer; }
+@keyframes checklist-toast-in { from { transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) {
+  .checklist-progress span { transition: none; }
+  .checklist-toast { animation: none; }
+}
+.checklist :focus-visible, .checklist-toast button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }

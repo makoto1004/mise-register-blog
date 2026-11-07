@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { SITE } from '@/lib/site';
+import ConsultFormFrame from '@/components/ConsultFormFrame';
 
 export const metadata = {
   title: 'AI相談デスク（無料）｜POSレジ・スキャナー・プリンター・ネットワーク',
@@ -119,9 +120,7 @@ export default function ConsultPage() {
       </div>
 
       {src ? (
-        <iframe className="contact-frame" src={src} title="AI相談デスクのフォーム" loading="lazy">
-          読み込んでいます…
-        </iframe>
+        <ConsultFormFrame src={src} openUrl={SITE.consultFormUrl} />
       ) : (
         <p className="feedback-box">AI相談デスクは準備中です。</p>
       )}

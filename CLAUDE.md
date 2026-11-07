@@ -8,6 +8,8 @@
 - 公開先: https://www.mise-register.com/ （Vercel。GitHub の main にプッシュすると自動で公開される。旧 URL の https://mise-register-blog-bice.vercel.app/ は `vercel.json` で新しいドメインへ 308 リダイレクト）
 - 技術: Next.js（Static Export）。記事は `content/posts/*.md`（フロントマターで title / date / category / tags / products / services / picks などを管理）
 - 初期費用シミュレーターは、タグに「開業」を含む記事にだけ記事の下に出る。それ以外に出す・消すときはフロントマターに `costSimulator: true / false` を書く
+- 開業準備チェックリスト（`/opening-checklist`、2026年11月8日に追加）：4段階15項目。項目は `lib/openingChecklist.js`（id はブラウザの保存と結びつくので変えない。links は公開済みの記事だけが自動でリンクになる）。チェックと開業予定日はブラウザの localStorage（キー `mise-opening-checklist-v1`）だけに保存し、ログインはなし。プライバシーポリシーにも記載済み
+- 記事の検索（`components/PostSearch.js`）は、0件のときに見つかる言葉の候補（`SUGGESTED_WORDS`）・条件を外すボタン・チェックリストへのリンクを出す。AI相談デスクのフォームは、読み込み中の表示と「新しいタブで開く」リンク付き（`components/ConsultFormFrame.js`）
 - 対象業種: カフェ・美容院（サロン）・キッチンカー・アパレル（雑貨店を含む）
 - 収益: Amazon アソシエイト・楽天アフィリエイト・A8.net（リンクは `lib/affiliates.js` と各記事のフロントマター）
 
