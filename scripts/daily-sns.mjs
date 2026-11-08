@@ -8,7 +8,7 @@
 //   npm run sns:daily -- --slug cafe-cup-warmer,cafe-latte-art  # 記事を指定して、今日の日付で作る
 //   npm run sns:daily -- --rebuild-reels  # 今日から先の日付のフォルダーのリール動画だけを、今の作り方で作り直す（文章は変えない）
 //
-// - フォルダー名には投稿する予定の日付をつける（すでにある最後の日付の次の日から、1 日 1 本）
+// - フォルダー名には投稿する予定の日付をつける（すでにある最後の日付から順に、1 日 1 本。日曜だけ 2 本）
 // - 毎朝の実行では、1 週間先（今日から 6 日後）まで用意できていれば何もしない
 //
 // - 古い記事から順に作る。作った記事は logs/daily-sns.json に記録し、2 回作らない
@@ -56,17 +56,25 @@ const readState = () => (fs.existsSync(STATE_FILE) ? JSON.parse(fs.readFileSync(
 const today = () => new Date(Date.now() + 9 * 3600e3).toISOString().slice(0, 10);
 const addDays = (date, n) => new Date(Date.parse(`${date}T00:00:00Z`) + n * 86400e3).toISOString().slice(0, 10);
 
-// 保存先にある最後の予定日（フォルダー名の先頭の日付）
-function lastPlannedDate() {
-  if (!fs.existsSync(OUT_DIR)) return null;
-  const dates = fs.readdirSync(OUT_DIR).map((n) => n.slice(0, 10)).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d)).sort();
-  return dates.at(-1) ?? null;
+// 1 日に作る本数（日曜は 2 本、ほかの日は 1 本）
+const postsPerDay = (date) => (new Date(`${date}T00:00:00Z`).getUTCDay() === 0 ? 2 : 1);
+
+// 保存先にある予定日（フォルダー名の先頭の日付）の一覧
+function plannedDates() {
+  if (!fs.existsSync(OUT_DIR)) return [];
+  return fs.readdirSync(OUT_DIR).map((n) => n.slice(0, 10)).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d)).sort();
 }
-// 次の予定日：今日か、最後の予定日の次の日の、遅いほう
+// 保存先にある最後の予定日
+function lastPlannedDate() {
+  return plannedDates().at(-1) ?? null;
+}
+// 次の予定日：今日から順に見て、その日の本数がまだ足りない最初の日
+// （あとから日曜を 2 本にしたときも、すでに 1 本だけの日曜を先に埋める）
 function nextPlannedDate() {
-  const last = lastPlannedDate();
-  const t = today();
-  return last && last >= t ? addDays(last, 1) : t;
+  const dates = plannedDates();
+  let d = today();
+  while (dates.filter((x) => x === d).length >= postsPerDay(d)) d = addDays(d, 1);
+  return d;
 }
 
 // 公開ずみの記事を古い順に並べる
@@ -442,11 +450,15 @@ async function main() {
     return;
   }
   if (!COUNT && !DRY_RUN) {
-    const last = lastPlannedDate();
-    if (last && last >= addDays(today(), STOCK_DAYS)) {
-      log(`${last} の分まで用意できているため、今日は作りません`);
-      return;
+    // 毎朝の実行：1 週間先までの分がそろうまで作る（日曜が 2 本なので、1 回に 2 本まで）
+    for (let i = 0; i < 2; i++) {
+      if (nextPlannedDate() > addDays(today(), STOCK_DAYS)) {
+        if (i === 0) log(`${lastPlannedDate()} の分まで用意できているため、今日は作りません`);
+        return;
+      }
+      if (!(await makeOne(state))) return;
     }
+    return;
   }
   for (let i = 0; i < (COUNT || 1); i++) if (!(await makeOne(state))) break;
 }
