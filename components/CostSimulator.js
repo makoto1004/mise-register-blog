@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 // 初期費用シミュレーター（ブラウザで動く計算機）
 // 初期値は「10坪前後の小さなお店」を想定した目安（出典を確認できた金額のレンジの中ほど）。
@@ -214,24 +214,56 @@ const initialState = (items) => ({
   unchecked: Object.fromEntries(items.filter((item) => item.off).map((item) => [item.id, true])),
 });
 
-export default function CostSimulator({ category, slug, servicesOpen }) {
-  const initialItems = useMemo(
-    () => [...(CATEGORY_INITIAL[category] ?? STORE_INITIAL), ...COMMON_INITIAL],
-    [category],
+// 業種ごとの項目の一覧
+const itemsFor = (category) => ({
+  initialItems: [...(CATEGORY_INITIAL[category] ?? STORE_INITIAL), ...COMMON_INITIAL],
+  monthlyItems: [...(CATEGORY_MONTHLY[category] ?? STORE_MONTHLY), ...MONTHLY],
+});
+
+// チェックの入った項目の「金額 × 数量」の合計
+const sumItems = (items, state) =>
+  items.reduce(
+    (total, item) => total + (state.unchecked[item.id] ? 0 : toNumber(state.values[item.id]) * (state.qty[item.id] ?? 1)),
+    0,
   );
-  const monthlyItems = useMemo(
-    () => [...(CATEGORY_MONTHLY[category] ?? STORE_MONTHLY), ...MONTHLY],
-    [category],
-  );
+
+// キャッシュレス決済の手数料（月の売上 × 手数料率）
+const calcFee = (sales, rate) => {
+  const fee = (toNumber(sales) * Number(String(rate).replace(/[%％\s]/g, '') || 0)) / 100;
+  return Number.isFinite(fee) ? fee : 0;
+};
+
+// 保存した入力から合計を出す（開業準備チェックリストの診断と相談文で使う）
+export function calcCostTotals(category, data) {
+  const { initialItems, monthlyItems } = itemsFor(category);
+  const init = data?.init ?? initialState(initialItems);
+  const monthly = data?.monthly ?? initialState(monthlyItems);
+  const initialTotal = sumItems(initialItems, init);
+  const monthlyTotal = sumItems(monthlyItems, monthly) + calcFee(data?.sales, data?.rate);
+  return { initialTotal, monthlyTotal };
+}
+
+// savedData / onDataChange：開業準備チェックリストの中で使うときに、入れた金額を保存・復元するためのもの（記事の中では使わない）
+// embedded：チェックリストの中に置くとき。見出しを 1 段下げ、「次はこちら」の記事の案内を出さない
+export default function CostSimulator({ category, slug, servicesOpen, savedData, onDataChange, embedded = false }) {
+  const { initialItems, monthlyItems } = useMemo(() => itemsFor(category), [category]);
   const sources = [...(SOURCES[category] ?? []), ...SOURCES.common];
   // 今読んでいる記事へのリンクは出さない
   const nextSteps = [...(NEXT_STEPS[category] ?? []), ...COMMON_NEXT_STEPS].filter((step) => step.slug !== slug);
 
   // 初期費用と毎月の費用で同じ id（例: kitchen）があっても混ざらないよう、別々に持つ
-  const [init, setInit] = useState(() => initialState(initialItems));
-  const [monthly, setMonthly] = useState(() => initialState(monthlyItems));
-  const [sales, setSales] = useState('');
-  const [rate, setRate] = useState('');
+  const [init, setInit] = useState(() => savedData?.init ?? initialState(initialItems));
+  const [monthly, setMonthly] = useState(() => savedData?.monthly ?? initialState(monthlyItems));
+  const [sales, setSales] = useState(savedData?.sales ?? '');
+  const [rate, setRate] = useState(savedData?.rate ?? '');
+
+  // 入れた内容が変わるたびに親へ知らせる（親が保存する）
+  useEffect(() => {
+    onDataChange?.({ init, monthly, sales, rate });
+  }, [onDataChange, init, monthly, sales, rate]);
+
+  const Title = embedded ? 'h3' : 'h2';
+  const Sub = embedded ? 'h4' : 'h3';
 
   const handlers = (setter) => ({
     setValue: (id) => (v) => setter((s) => ({ ...s, values: { ...s.values, [id]: v } })),
@@ -241,16 +273,8 @@ export default function CostSimulator({ category, slug, servicesOpen }) {
   const initH = handlers(setInit);
   const monthlyH = handlers(setMonthly);
 
-  const sum = (items, state) =>
-    items.reduce(
-      (total, item) =>
-        total + (state.unchecked[item.id] ? 0 : toNumber(state.values[item.id]) * (state.qty[item.id] ?? 1)),
-      0,
-    );
-
-  const initialTotal = sum(initialItems, init);
-  const fee = (toNumber(sales) * Number(String(rate).replace(/[%％\s]/g, '') || 0)) / 100;
-  const monthlyTotal = sum(monthlyItems, monthly) + (Number.isFinite(fee) ? fee : 0);
+  const initialTotal = sumItems(initialItems, init);
+  const monthlyTotal = sumItems(monthlyItems, monthly) + calcFee(sales, rate);
   const firstYear = initialTotal + monthlyTotal * 12;
 
   const reset = () => {
@@ -282,7 +306,7 @@ export default function CostSimulator({ category, slug, servicesOpen }) {
 
   return (
     <section className="cost-sim" aria-labelledby="cost-sim-title">
-      <h2 id="cost-sim-title">初期費用シミュレーター</h2>
+      <Title id="cost-sim-title">初期費用シミュレーター</Title>
       <p className="sim-lead">
         はじめから入っている金額は、<strong>10坪前後の小さなお店</strong>を想定した目安です（下の出典の金額レンジの中ほど）。
         必要なものにチェックを入れ、見積もりの金額や数量に書き換えると、初期費用と毎月の費用の合計を計算できます。空欄の項目は、お店に合わせて入力してください。
@@ -296,10 +320,10 @@ export default function CostSimulator({ category, slug, servicesOpen }) {
         </button>
       </div>
 
-      <h3 className="sim-heading">初期費用</h3>
+      <Sub className="sim-heading">初期費用</Sub>
       <ul className="sim-list">{renderRows(initialItems, init, initH)}</ul>
 
-      <h3 className="sim-heading">毎月の費用</h3>
+      <Sub className="sim-heading">毎月の費用</Sub>
       <ul className="sim-list">
         {renderRows(monthlyItems, monthly, monthlyH)}
         <li className="sim-row sim-fee">
@@ -351,6 +375,7 @@ export default function CostSimulator({ category, slug, servicesOpen }) {
           <dd>{yen(firstYear)}</dd>
         </div>
       </dl>
+      {!embedded && (
       <div className="sim-next">
         <h3 className="sim-heading">合計を見たら、次はこちら</h3>
         <ul>
@@ -366,6 +391,7 @@ export default function CostSimulator({ category, slug, servicesOpen }) {
           )}
         </ul>
       </div>
+      )}
       <p className="sim-note">
         ※ 目安は公開情報の金額レンジから選んだ参考値で、地域・物件・機種によって大きく変わります。実際の費用は、各サービス・販売店・工事業者の見積もりで確認してください。
       </p>

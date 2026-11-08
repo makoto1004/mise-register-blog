@@ -185,6 +185,20 @@ a:hover { text-decoration: underline; }
   .home-shop img { max-width: 150px; margin: 0 auto; }
 }
 
+/* トップの開業準備チェックリストの案内：差し色の枠の帯。広い画面では「説明・4 段階・ボタン」を横に並べる */
+.home-checklist { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 28px; padding: 20px 22px; background: #fff; border: 2px solid var(--accent); }
+.home-checklist-copy h2 { margin: 0; font-size: 1.35rem; font-weight: 800; line-height: 1.4; }
+.home-checklist-copy p { margin: 4px 0 0; font-size: 0.875rem; color: var(--muted); }
+.home-checklist-stages { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; counter-reset: home-stage; }
+.home-checklist-stages li { counter-increment: home-stage; display: flex; align-items: center; gap: 6px; padding: 4px 10px 4px 4px; font-size: 0.8rem; font-weight: 700; background: var(--surface); }
+.home-checklist-stages li::before { content: counter(home-stage); display: inline-grid; place-items: center; width: 22px; height: 22px; font-size: 0.75rem; color: var(--bg); background: var(--accent); border-radius: 50%; }
+.home-checklist-button { justify-self: start; padding: 10px 22px; font-weight: 800; color: #fff; background: var(--accent); }
+.home-checklist-button:hover { text-decoration: none; filter: brightness(0.92); }
+@media (min-width: 1000px) {
+  .home-checklist { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr) auto; align-items: center; gap: 20px 28px; }
+  .home-checklist-button { justify-self: end; }
+}
+
 /* キーボードで移動したときの枠（サイト全体） */
 a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 
@@ -1202,6 +1216,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 
 /* ===== 開業準備チェックリスト（/opening-checklist） ===== */
 .checklist { margin-top: 8px; }
+/* ページのタイトル：ほかの一覧ページより大きくし、下にアクセント色の線を引く */
+.checklist-title { margin: 4px 0 12px; padding-bottom: 10px; font-size: 1.75rem; line-height: 1.35; border-bottom: 3px solid var(--accent); }
+@media (min-width: 768px) { .checklist-title { font-size: 2.1rem; } }
 .checklist-summary { border: 1px solid var(--border); background: var(--bg); padding: 16px 18px; }
 .checklist-progress-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
 .checklist-progress-count { margin: 0; font-size: 0.9rem; }
@@ -1241,8 +1258,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 /* 段階ごとの一覧（段階は順番に進めるので番号を付ける） */
 .checklist-stages { list-style: none; margin: 0; padding: 0; counter-reset: stage; }
 .checklist-stage { margin: 0 0 28px; counter-increment: stage; }
-.checklist-stage h2 { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; padding-bottom: 6px; font-size: 1.1rem; font-weight: 800; border-bottom: 1px solid var(--border); }
-.checklist-stage h2::before { content: counter(stage); display: inline-grid; place-items: center; flex-shrink: 0; width: 26px; height: 26px; font-size: 0.85rem; color: var(--bg); background: var(--text); border-radius: 50%; }
+.checklist-stage h2 { display: flex; align-items: center; gap: 12px; margin: 0 0 10px; padding: 12px 14px; font-size: 1.3rem; font-weight: 800; line-height: 1.4; background: var(--surface); border-left: 6px solid var(--accent); }
+.checklist-stage h2::before { content: counter(stage); display: inline-grid; place-items: center; flex-shrink: 0; width: 34px; height: 34px; font-size: 1rem; color: var(--bg); background: var(--text); border-radius: 50%; }
 .checklist-stage.is-complete h2::before { background: var(--accent); }
 .checklist-stage-count { margin-left: auto; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
 .checklist-stage.is-complete .checklist-stage-count { color: var(--accent); }
@@ -1254,6 +1271,44 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .checklist-item.is-done .checklist-item-title { color: var(--muted); text-decoration: line-through; }
 .checklist-item-text { margin: 2px 0 0 30px; font-size: 0.85rem; color: var(--muted); }
 .checklist-item-links { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 4px 0 0 30px; font-size: 0.8rem; color: var(--muted); }
+
+/* 「初期費用の目安を出す」の中のシミュレーター */
+.checklist-sim-toggle { min-height: 40px; margin: 10px 0 0 30px; padding: 0 14px; font: inherit; font-size: 0.85rem; font-weight: 700; color: var(--accent); background: #fff; border: 1px solid var(--accent); cursor: pointer; }
+.checklist-sim-toggle:hover { background: var(--surface); }
+.checklist-sim { margin: 12px 0 4px; scroll-margin-top: 16px; }
+.checklist-sim-category { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 10px; font-size: 0.85rem; font-weight: 700; }
+.checklist-sim-category select { min-height: 40px; padding: 4px 10px; font: inherit; font-weight: 400; color: var(--text); background: #fff; border: 1px solid var(--border); }
+.checklist-sim .cost-sim { margin: 0; }
+.checklist-sim .cost-sim h3#cost-sim-title { margin: 0 0 6px; font-size: 1.1rem; font-weight: 800; }
+@media (max-width: 560px) { .checklist-sim-toggle { margin-left: 0; } }
+
+/* かんたん診断：急ぎは差し色、順調・目安は落ち着いた色の印を付ける */
+.checklist-diagnosis { margin: 16px 0 0; padding: 14px 18px; background: #fff; border: 1px solid var(--border); }
+.checklist-diagnosis h2 { margin: 0 0 8px; font-size: 1.05rem; font-weight: 800; }
+.checklist-diagnosis ul { list-style: none; margin: 0; padding: 0; }
+.checklist-diagnosis li { display: flex; align-items: baseline; gap: 10px; padding: 6px 0; font-size: 0.9rem; border-top: 1px dashed var(--line); }
+.checklist-diagnosis li:first-child { border-top: 0; }
+.checklist-diagnosis-mark { flex-shrink: 0; padding: 0 8px; font-size: 0.75rem; font-weight: 800; border: 1px solid currentColor; }
+.checklist-diagnosis-warn .checklist-diagnosis-mark { color: #fff; background: var(--accent); border-color: var(--accent); }
+.checklist-diagnosis-good .checklist-diagnosis-mark, .checklist-diagnosis-info .checklist-diagnosis-mark { color: var(--muted); }
+.checklist-diagnosis-note { margin: 8px 0 0; font-size: 0.75rem; color: var(--muted); }
+
+/* AI相談デスクに相談する */
+.checklist-consult { border-color: var(--border); background: #fff; }
+.checklist-consult-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 6px; }
+.checklist-consult-actions .checklist-share-button { margin-top: 0; }
+.checklist-consult .checklist-link { color: var(--text); background: var(--bg); }
+.checklist-share-fallback textarea { display: block; width: 100%; margin-top: 4px; padding: 6px 8px; font: inherit; font-size: 0.8rem; background: #fff; border: 1px solid var(--border); resize: vertical; }
+
+/* ほかの端末で続ける（引き継ぎ用のURL） */
+.checklist-share { margin: 8px 0 16px; padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); }
+.checklist-share h2 { margin: 0 0 6px; font-size: 1.05rem; font-weight: 800; }
+.checklist-share p { margin: 0 0 6px; font-size: 0.85rem; }
+.checklist-share-note { color: var(--muted); }
+.checklist-share-button { min-height: 44px; margin-top: 6px; padding: 0 18px; font: inherit; font-size: 0.85rem; font-weight: 700; color: var(--bg); background: var(--text); border: 1px solid var(--text); cursor: pointer; }
+.checklist-share-button:hover { filter: brightness(1.2); }
+.checklist-share-fallback { display: block; margin-top: 10px; font-size: 0.8rem; }
+.checklist-share-fallback input { display: block; width: 100%; min-height: 40px; margin-top: 4px; padding: 4px 8px; font: inherit; background: #fff; border: 1px solid var(--border); }
 
 .checklist-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin-top: 8px; font-size: 0.8rem; color: var(--muted); }
 .checklist-footer p { margin: 0; }

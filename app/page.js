@@ -10,6 +10,10 @@ import AmazonSaleBanner from '@/components/AmazonSaleBanner';
 import RakutenSaleBanner from '@/components/RakutenSaleBanner';
 import { getPostsByCategory, getLatestPosts } from '@/lib/posts';
 import { SITE, CATEGORIES, CATEGORY_DESCRIPTIONS, SERVICES_OPEN } from '@/lib/site';
+import { OPENING_STAGES } from '@/lib/openingChecklist';
+
+// 開業準備チェックリストの項目の数（トップの案内の文に出す）
+const totalItems = OPENING_STAGES.reduce((sum, stage) => sum + stage.items.length, 0);
 
 // トップの見出しに並べる 4 業種の絵（public/images/hero/shop-*.webp）
 const HERO_SHOPS = [
@@ -96,10 +100,25 @@ export default function Home() {
           <Link href="/search" className="underline-link">
             キーワードで探す
           </Link>
-          <Link href="/opening-checklist" className="underline-link">
-            開業準備チェックリスト
-          </Link>
         </p>
+      </section>
+
+      {/* 開業準備チェックリストの案内：見出しのすぐ下に帯で置き、4 つの段階を順に見せる */}
+      <section className="home-checklist" aria-labelledby="home-checklist-heading">
+        <div className="home-checklist-copy">
+          <h2 id="home-checklist-heading">開業準備チェックリスト</h2>
+          <p>
+            開業の準備を4つの段階・{totalItems}項目に分けました。チェックを入れると、次にやることが1つずつ分かります。
+          </p>
+        </div>
+        <ol className="home-checklist-stages">
+          {OPENING_STAGES.map((stage) => (
+            <li key={stage.id}>{stage.name}</li>
+          ))}
+        </ol>
+        <Link href="/opening-checklist" className="home-checklist-button">
+          チェックリストを開く
+        </Link>
       </section>
 
       {/* 新着記事：全カテゴリーから新しい順に 3 本を目立たせて表示する */}
