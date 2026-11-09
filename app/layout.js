@@ -174,6 +174,12 @@ export default function RootLayout({ children }) {
                   </Link>
                 </li>
               )}
+              {/* 運営者が BOOTH で販売しているテンプレートの紹介ページ */}
+              <li>
+                <Link href="/templates" className="underline-link">
+                  お店の Excel テンプレート
+                </Link>
+              </li>
               {/* 有料の作業代行は、受付先（ココナラか見積もり依頼フォーム）の URL を設定してからリンクを出す */}
               {SERVICES_OPEN && (
                 <li>

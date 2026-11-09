@@ -14,5 +14,5 @@ export default function sitemap() {
   }));
   // 有料の作業代行のページは、受付を始めてから載せる
   const services = SERVICES_OPEN ? [{ url: `${SITE.url}/services` }] : [];
-  return [{ url: `${SITE.url}/` }, { url: `${SITE.url}/site-map` }, { url: `${SITE.url}/search` }, { url: `${SITE.url}/opening-checklist` }, ...services, ...categories, ...posts];
+  return [{ url: `${SITE.url}/` }, { url: `${SITE.url}/site-map` }, { url: `${SITE.url}/search` }, { url: `${SITE.url}/opening-checklist` }, { url: `${SITE.url}/templates` }, ...services, ...categories, ...posts];
 }

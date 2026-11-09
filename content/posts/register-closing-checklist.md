@@ -6,6 +6,7 @@ category: devices
 order: 28
 tags: [レジ締め, 現金管理, チェック表, 無料ダウンロード, POSレジ]
 ownServices: [manual]
+ownTemplates: [sales]
 description: 閉店後のレジ締めを、毎日同じ順番で迷わず進めるための無料のチェック表です。金種表、あるはずの現金の計算、キャッシュレスの見比べ、差額が出たときの確認、店じまいまでを1枚にまとめました。印刷用PDFとExcel版の使い方を表で紹介します。
 reviewNotes:
   - チェック表の中身は public/downloads の PDF・Excel と同じ。表やファイルを直したら、この記事の表も直す

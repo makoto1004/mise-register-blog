@@ -4,6 +4,7 @@ import ComparisonTable from '@/components/ComparisonTable';
 import ProductCard from '@/components/ProductCard';
 import ServiceCard from '@/components/ServiceCard';
 import OwnServiceBox from '@/components/OwnServiceBox';
+import OwnTemplateBox from '@/components/OwnTemplateBox';
 import PickCard from '@/components/PickCard';
 import VideoCard from '@/components/VideoCard';
 import ThemeBackground from '@/components/ThemeBackground';
@@ -229,6 +230,9 @@ export default async function PostPage({ params }) {
 
       {/* 運営者の有料の代行サービスの案内：フロントマターの ownServices がある記事だけ。受付を始めるまでは出さない */}
       {SERVICES_OPEN && post.ownServices.length > 0 && <OwnServiceBox services={post.ownServices} />}
+
+      {/* 運営者が BOOTH で販売しているテンプレートの案内：フロントマターの ownTemplates がある記事だけ */}
+      {post.ownTemplates.length > 0 && <OwnTemplateBox templates={post.ownTemplates} />}
 
       <QuickSurvey slug={post.slug} />
 

@@ -5,6 +5,7 @@ publishedAt: 2026-10-20T08:00
 category: devices
 order: 11
 tags: [バーコードリーダー, トラブル対応, 値札, ラベル, POSレジ]
+ownTemplates: [ledger]
 description: バーコードリーダーが反応しない・読み取れない・文字が全角になるときに、どこから確かめればよいかをまとめました。リーダー本体の設定、入力モード、バーコードの印刷や汚れまで、原因の切り分け方を解説します。
 reviewNotes:
   - 入力モード（IME）と Caps Lock の記述は、パソコン（Windows）で使う場合の RECORE の案内にもとづく。iPad の場合は POS アプリの公式の案内を確認する
