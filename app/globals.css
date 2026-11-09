@@ -26,6 +26,7 @@
   --thumb-apparel: #e6e1ef;
   --thumb-industries: #ece6d0;
   --thumb-devices: #dfe5ee;
+  --thumb-management: #dcebe6;
 }
 
 /* ダークモードの端末でも、いつも明るい色で表示する（ブランドの画像・OGP 画像と色をそろえる） */
@@ -478,6 +479,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .thumb-apparel { background: var(--thumb-apparel); }
 .thumb-industries { background: var(--thumb-industries); }
 .thumb-devices { background: var(--thumb-devices); }
+.thumb-management { background: var(--thumb-management); }
 .thumb-label { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.2em; }
 .thumb-headline { font-size: 1.15rem; font-weight: 800; line-height: 1.5; font-feature-settings: "palt"; word-break: auto-phrase; text-wrap: balance; }
 .thumb-category { font-size: 0.75rem; font-weight: 700; color: var(--muted); }
@@ -1139,6 +1141,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .category-tabs li:nth-child(4) .category-tab { background: var(--thumb-apparel); }
 .category-tabs li:nth-child(5) .category-tab { background: var(--thumb-industries); }
 .category-tabs li:nth-child(6) .category-tab { background: var(--thumb-devices); }
+.category-tabs li:nth-child(7) .category-tab { background: var(--thumb-management); }
 .category-tab[aria-current='page'] { border: 2px solid var(--border); padding: 7px 13px; box-shadow: 3px 3px 0 var(--border); }
 .category-tab-count { font-size: 0.75rem; font-weight: 600; color: var(--muted); }
 .category-tab-search { background: var(--bg); border-style: dashed; }

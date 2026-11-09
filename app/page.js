@@ -152,9 +152,9 @@ export default function Home() {
         </section>
       )}
 
-      {/* 作業代行と AI相談デスクの案内：絵つきのカードを 2 枚並べる（それぞれ受付先があるときだけ） */}
-      {(SERVICES_OPEN || SITE.consultFormUrl) && (
-        <section className="home-guide" aria-label="作業代行と無料相談のご案内">
+      {/* 作業代行・Excel テンプレート・AI相談デスクの案内：絵つきのカードを並べる（作業代行と相談は受付先があるときだけ） */}
+      {(
+        <section className="home-guide" aria-label="作業代行・Excel テンプレート・無料相談のご案内">
           {SERVICES_OPEN && (
             <Link href="/services" className="home-guide-card home-guide-services">
               {/* eslint-disable-next-line @next/next/no-img-element -- Static Export のため next/image の最適化は使わない */}
@@ -167,6 +167,16 @@ export default function Home() {
               </span>
             </Link>
           )}
+          <Link href="/templates" className="home-guide-card">
+            {/* eslint-disable-next-line @next/next/no-img-element -- Static Export のため next/image の最適化は使わない */}
+            <img src="/images/home-templates.webp" width="800" height="574" alt="" loading="lazy" />
+            <span className="home-guide-body">
+              <span className="home-guide-label">運営者の Excel テンプレート（BOOTH で販売）</span>
+              <span className="home-guide-title">お店の IT 管理台帳・売上集計シート</span>
+              <span className="home-guide-text">機器と保証期限・障害記録・点検表をまとめる台帳と、POSレジの売上明細を貼るだけで集計するシート。マクロなしの数式だけで動きます。</span>
+              <span className="home-guide-button">中身と使い方を見る →</span>
+            </span>
+          </Link>
           {SITE.consultFormUrl && (
             <Link href="/consult" className="home-guide-card">
               {/* eslint-disable-next-line @next/next/no-img-element -- Static Export のため next/image の最適化は使わない */}

@@ -53,6 +53,7 @@ const CATEGORY_ICONS = {
   'kitchen-car': ['foodtruck', 'hotdog', 'pizza', 'burger', 'truck', 'sign'],
   apparel: ['shirt', 'bag', 'pouch', 'hanger', 'store'],
   devices: ['receipt', 'tablet'],
+  management: ['receipt', 'coin', 'tablet'],
 };
 
 // 記事のテーマ（slug・タグに含まれる言葉）→ 追加するモチーフ

@@ -2,8 +2,8 @@
 title: レジ締めチェック表（無料）｜印刷用PDFとExcel版の使い方
 date: 2026-10-30
 publishedAt: 2026-10-30T07:40
-category: devices
-order: 28
+category: management
+order: 2
 tags: [レジ締め, 現金管理, チェック表, 無料ダウンロード, POSレジ]
 ownServices: [manual]
 ownTemplates: [sales]

@@ -3,8 +3,8 @@ title: レジ締めで現金が合わないときの確認手順｜原因と防�
 date: 2026-10-21
 publishedAt: 2026-10-21T07:57
 updated: 2026-10-30
-category: devices
-order: 15
+category: management
+order: 3
 tags: [レジ締め, 現金管理, トラブル対応, キャッシュドロア, POSレジ]
 ownServices: [manual, sales]
 ownTemplates: [sales]

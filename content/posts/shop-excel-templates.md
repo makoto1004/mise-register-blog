@@ -2,8 +2,8 @@
 title: お店の IT 管理台帳と売上集計シート｜運営者が作った Excel テンプレートの紹介
 date: 2026-11-09
 publishedAt: 2026-11-09T23:55
-category: devices
-order: 50
+category: management
+order: 1
 tags: [Excelテンプレート, IT管理台帳, 売上集計, レジ締め, 点検表, ABC分析]
 ownTemplates: [ledger, sales]
 description: 運営者が BOOTH で販売している Excel テンプレート「お店の IT 管理台帳」と「売上集計シート」の中身と使い方、動作環境、合わないかもしれない人をまとめました。どちらもマクロなしの数式だけで動きます。
