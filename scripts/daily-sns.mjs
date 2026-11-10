@@ -1,4 +1,5 @@
-// 毎日 1 本、公開ずみの記事から SNS 投稿用のファイル（X の画像と文章、Instagram の表紙・リール動画と投稿文）を作る
+// 毎日 1 本、公開ずみの記事から SNS 投稿用のファイル（X の画像と文章、Instagram の表紙・カルーセル 5 枚・リール動画と投稿文）を作る
+// Instagram のほうがフォロワーが多い（2026-11-10）。Instagram はカルーセル（carousel-1〜5.png ＋ instagram-caption.txt）を主にし、リール（reel.mp4 ＋ instagram-reel-caption.txt）も出す
 // 投稿は自動ではしない。運営者が中身を確かめてから、X・Instagram の画面から手で投稿する
 //
 // 使い方:
@@ -191,9 +192,16 @@ function buildXText(post, talk, ads) {
   return `${rejimaru}\nポスタ「くわしくは、ブログの記事で紹介しています」\n${url}\n${tags}`;
 }
 
+// Instagram の投稿文の 1 行目（一覧では最初の 1〜2 行しか見えないので、何の記事かを先に書く）
+const captionHook = (post) => `【${String(post.data.title).split('｜')[0]}】`;
+
+// Instagram はフォロワーが多いので、カルーセル（めくる画像）を主にする。投稿文は 1 行目で何の記事か分かるようにする
 function buildCaption(post, talk, ads) {
   const tags = [...talk.hashtags, '#小さなお店', '#お店づくり', '#開業準備', ...(ads ? ['#PR'] : [])];
-  return `レジまる「${talk.rejimaru}」${talk.rejimaru_deco ?? ''}
+  return `${captionHook(post)}
+画像を横にめくると、要点と目次が見られます。
+
+レジまる「${talk.rejimaru}」${talk.rejimaru_deco ?? ''}
 
 ポスタ「${talk.posuta}」${talk.posuta_deco ?? ''}
 
@@ -202,6 +210,19 @@ ${talk.caption_points.map((p) => `・${p}`).join('\n')}
 
 あとで見返せるように、保存しておいてください。
 記事は、プロフィールのリンク（mise & register）から見られます。
+
+${[...new Set(tags)].join(' ')}
+`;
+}
+
+// リールの投稿文：動画で中身を見せるので短くする
+function buildReelCaption(post, talk, ads) {
+  const tags = [...talk.hashtags, '#小さなお店', '#開業準備', ...(ads ? ['#PR'] : [])];
+  return `${captionHook(post)}
+${talk.posuta}${talk.posuta_deco ?? ''}
+
+くわしくは、プロフィールのリンク（mise & register）から。
+保存しておくと、あとで見返せます。
 
 ${[...new Set(tags)].join(' ')}
 `;
@@ -372,6 +393,48 @@ async function makeInstagramReel(post, talk, illus, ads, dir) {
   if (res.error || res.status !== 0) throw new Error(res.error?.message || res.stderr?.trim() || 'ffmpeg が失敗しました');
 }
 
+// ---- Instagram のカルーセル（縦長 1080×1350・5 枚） ----
+// 1 枚目は表紙（instagram.png と同じ）、2 枚目は会話、3 枚目は要点、4 枚目は記事の目次、5 枚目は保存とプロフィールへの案内
+async function makeInstagramCarousel(post, talk, illus, ads, dir) {
+  const W = 1080, H = 1350, L = 80, R = 1000, cx = W / 2;
+  const t = (x, y, s, size, color, weight = 700, anchor = 'start') =>
+    `<text x="${x}" y="${y}" font-family="${FONT}" font-size="${size}" font-weight="${weight}" fill="${color}" text-anchor="${anchor}">${esc(s)}</text>`;
+  const box = '#fffaf3', line = '#e3d3bf';
+  const frame = (body, n) => Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}"><rect width="${W}" height="${H}" fill="${C.bg}"/>${body}` +
+    t(L, H - 60, 'mise & register', 30, C.muted) + t(R, H - 60, `${n} / 5`, 30, C.muted, 700, 'end') +
+    (ads ? `<rect x="${R - 90}" y="50" width="90" height="48" rx="8" fill="none" stroke="${C.muted}" stroke-width="2"/>${t(R - 45, 84, 'PR', 28, C.muted, 700, 'middle')}` : '') + '</svg>');
+  const files = [1, 2, 3, 4, 5].map((i) => path.join(dir, `carousel-${i}.png`));
+
+  // 1. 表紙
+  await makeInstagramCover(post, illus, files[0]);
+
+  // 2. 会話
+  const bx = 250, bw = R - bx, perLine = Math.floor((bw - 70) / 42);
+  const r = wrapJa(talk.rejimaru, perLine), p = wrapJa(talk.posuta, perLine);
+  const y1 = 150, y2 = y1 + 120 + r.length * 58 + 80;
+  const bubble = (y, n) => `<rect x="${bx}" y="${y}" width="${bw}" height="${120 + n * 58}" rx="28" fill="${box}" stroke="${line}" stroke-width="3"/>`;
+  const say = (y, name, rows) => t(bx + 35, y + 62, name, 34, C.accent) + rows.map((s, i) => t(bx + 35, y + 124 + i * 58, s, 42, C.ink, 600)).join('');
+  await sharp(frame(bubble(y1, r.length) + say(y1, 'レジまる', r) + bubble(y2, p.length) + say(y2, 'ポスタ', p), 2))
+    .composite([await put(mascot('rejimaru'), 170, 170, L - 20, y1 + 10), await put(mascot('posuta'), 170, 170, L - 20, y2 + 10)]).png().toFile(files[1]);
+
+  // 3・4. 要点と目次（どちらも「・」の箇条書き。2 行目からは字下げ）
+  const listSlide = async (title, items, n, file) => {
+    const rows = items.flatMap((s) => wrapJa(s, 17).map((x, i) => (i ? [L + 96, x] : [L + 50, `・${x}`])));
+    const rowH = Math.min(80, Math.floor((H - 330 - 120) / Math.max(rows.length, 1)));
+    await sharp(frame(t(cx, 170, title, 62, C.ink, 800, 'middle') +
+      `<rect x="${L}" y="230" width="${R - L}" height="${80 + rows.length * rowH}" rx="32" fill="${box}" stroke="${line}" stroke-width="3"/>` +
+      rows.map(([x, s], i) => t(x, 300 + i * rowH, s, 42, C.ink, 600)).join(''), n)).png().toFile(file);
+  };
+  await listSlide('この記事で分かること', talk.caption_points.slice(0, 4), 3, files[2]);
+  const toc = headings(post.content).filter((h) => !/よくある質問|まとめ|参考/.test(h)).slice(0, 7);
+  await listSlide('記事の目次', toc.length ? toc : talk.caption_points.slice(0, 4), 4, files[3]);
+
+  // 5. 保存とプロフィールへの案内
+  await sharp(frame(t(cx, 260, 'あとで見返すなら', 70, C.ink, 800, 'middle') + t(cx, 360, '右下の保存ボタンを', 50, C.muted, 600, 'middle') +
+    `<rect x="${cx - 400}" y="470" width="800" height="116" rx="58" fill="${C.accent}"/>` + t(cx, 543, 'くわしくはプロフィールのリンクから', 36, '#ffffff', 700, 'middle'), 5))
+    .composite([await put(mascot('rejimaru'), 240, 240, cx - 270, 700), await put(mascot('posuta'), 240, 240, cx + 30, 700)]).png().toFile(files[4]);
+}
+
 // slug を指定したときはその記事を今日の日付で作る（公開したばかりの記事をすぐ投稿したいとき）
 async function makeOne(state, slug) {
   const next = slug
@@ -406,6 +469,12 @@ async function makeOne(state, slug) {
   fs.writeFileSync(path.join(dir, 'instagram-caption.txt'), buildCaption(next, talk, ads), 'utf8');
   await makeXImage(next, illus, path.join(dir, 'x.png'));
   await makeInstagramCover(next, illus, path.join(dir, 'instagram.png'));
+  fs.writeFileSync(path.join(dir, 'instagram-reel-caption.txt'), buildReelCaption(next, talk, ads), 'utf8');
+  try {
+    await makeInstagramCarousel(next, talk, illus, ads, dir);
+  } catch (err) {
+    log(`カルーセルの画像を作れませんでした（ほかはできています）: ${err.message}`);
+  }
   try {
     await makeInstagramReel(next, talk, illus, ads, dir);
   } catch (err) {
