@@ -930,16 +930,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .sim-sources { margin: 4px 0 0; padding-left: 1.2em; font-size: 0.72rem; }
 .sim-sources a { color: var(--muted); }
 
-/* 参考になる動画（YouTube） */
-.video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 16px 0; }
-.video-card { margin: 0; }
-.video-frame { position: relative; aspect-ratio: 16 / 9; border: 1px solid var(--line); background: var(--surface); }
-.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-.video-card figcaption { display: flex; flex-direction: column; gap: 2px; margin-top: 8px; }
-.video-title { font-size: 0.85rem; font-weight: 700; line-height: 1.6; }
-.video-channel { font-size: 0.72rem; color: var(--muted); }
-.video-note { font-size: 0.78rem; color: var(--muted); }
-
 /* 簡易アンケート */
 .quick-survey { border: 1px solid var(--border); padding: 18px 20px; margin: 48px 0 0; }
 .quick-survey h2 { margin: 0 0 4px; font-size: 1.05rem; font-weight: 800; border: 0; padding: 0; }

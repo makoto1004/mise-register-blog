@@ -6,7 +6,6 @@ import ServiceCard from '@/components/ServiceCard';
 import OwnServiceBox from '@/components/OwnServiceBox';
 import OwnTemplateBox from '@/components/OwnTemplateBox';
 import PickCard from '@/components/PickCard';
-import VideoCard from '@/components/VideoCard';
 import ThemeBackground from '@/components/ThemeBackground';
 import CostSimulator from '@/components/CostSimulator';
 import QuickSurvey from '@/components/QuickSurvey';
@@ -126,23 +125,6 @@ function PicksBlock({ picks, nested }) {
   );
 }
 
-function VideosBlock({ videos, nested }) {
-  const Heading = nested ? 'h3' : 'h2';
-  return (
-    <>
-      <Heading className="products-heading">参考になる動画</Heading>
-      <div className="video-grid">
-        {videos.map((video) => (
-          <VideoCard key={video.id} video={video} />
-        ))}
-      </div>
-      <p className="service-note">
-        ※ 動画の内容は各チャンネルの発信です。許可・基準などの制度については、保健所などの公式情報で確認してください。
-      </p>
-    </>
-  );
-}
-
 // 記事詳細ページ
 export default async function PostPage({ params }) {
   const { slug } = await params;
@@ -197,9 +179,6 @@ export default async function PostPage({ params }) {
         }
         if (section.type === 'picks') {
           return <PicksBlock key={index} picks={post.picks} nested={nested} />;
-        }
-        if (section.type === 'videos') {
-          return <VideosBlock key={index} videos={post.videos} nested={nested} />;
         }
         return <div key={index} className="post-body" dangerouslySetInnerHTML={{ __html: section.html }} />;
       })}
