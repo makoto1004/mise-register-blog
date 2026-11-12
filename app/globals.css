@@ -131,7 +131,7 @@ a:hover { text-decoration: underline; }
 .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
 .breadcrumb a { color: var(--muted); }
 
-/* トップの見出し：左に文字、右に POS レジの絵、下に押せる 4 業種の絵。絵の白地は背景になじませる */
+/* トップの見出し：左に文字、右に POS レジの飾りの絵。絵の白地は背景になじませる */
 .home-hero {
   display: grid;
   grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
@@ -150,29 +150,11 @@ a:hover { text-decoration: underline; }
 }
 .home-hero-copy p { margin: 20px 0 0; max-width: 24em; color: var(--muted); font-size: 0.95rem; }
 .home-pos { display: block; width: 100%; max-width: 400px; justify-self: center; color: var(--text); text-align: center; }
-.home-pos:hover { text-decoration: none; }
 .home-pos img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; transition: transform 0.2s ease-out; }
-.home-pos-name { display: block; margin-top: -6px; font-size: 0.95rem; font-weight: 800; line-height: 1.5; }
-.home-pos:hover .home-pos-name { color: var(--accent); text-decoration: underline; }
-.home-shops { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; max-width: 880px; width: 100%; justify-self: center; }
-.home-shop { display: block; padding: 4px 4px 10px; color: var(--text); text-align: center; }
-.home-shop:hover { text-decoration: none; }
-.home-shop img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; transition: transform 0.2s ease-out; }
-.home-shop-name { display: block; margin-top: 4px; font-size: 0.9rem; font-weight: 800; line-height: 1.5; }
-.home-shop:hover .home-shop-name { color: var(--accent); text-decoration: underline; }
-.home-shop-count { display: block; font-size: 0.75rem; color: var(--muted); }
-.home-hero-more { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 4px 20px; margin: 0; font-size: 0.85rem; color: var(--muted); }
-.home-hero-more a { font-weight: 700; }
-@media (hover: hover) {
-  .home-shop:hover img, .home-pos:hover img { transform: translateY(-4px); }
-}
 /* 開いたときに一度だけ、4 つの絵を順に出す（文字は最初から出しておく） */
 @media (prefers-reduced-motion: no-preference) {
   /* リンクではなく絵を動かす（リンクを動かすと multiply が背景に届かず、絵の四角が見えてしまう） */
-  .home-pos img, .home-shop img { animation: shop-in 0.45s ease-out backwards; }
-  .home-shop:nth-child(2) img { animation-delay: 0.08s; }
-  .home-shop:nth-child(3) img { animation-delay: 0.16s; }
-  .home-shop:nth-child(4) img { animation-delay: 0.24s; }
+  .home-pos img { animation: shop-in 0.45s ease-out backwards; }
 }
 @keyframes shop-in { from { opacity: 0; transform: translateY(10px); } }
 @media (max-width: 900px) {
@@ -180,10 +162,6 @@ a:hover { text-decoration: underline; }
   .home-hero h1 { font-size: clamp(1.9rem, 8vw, 2.8rem); }
   .home-hero-copy p { margin-top: 12px; }
   .home-pos { max-width: 300px; }
-}
-@media (max-width: 560px) {
-  .home-shops { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .home-shop img { max-width: 150px; margin: 0 auto; }
 }
 
 /* トップの開業準備チェックリストの案内：差し色の枠の帯。広い画面では「説明・4 段階・ボタン」を横に並べる */
@@ -263,8 +241,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   .home-guide-card img { flex: 0 0 42%; width: 42%; aspect-ratio: auto; object-fit: contain; background: var(--bg); border-bottom: 0; border-right: 1px solid var(--line); }
   .home-guide-body { min-width: 0; }
 }
-.home-guide-services { border: 2px solid var(--accent); }
-.home-guide-services .home-guide-button { background: var(--accent); }
 /* 上のメニューの「作業代行」は差し色にする */
 .menu-bar .menu-services { color: var(--accent); }
 
@@ -326,45 +302,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 
 /* トップの業種別セクション：1 本を大きく、残りは文字の一覧 */
 .home-section { margin-top: 56px; scroll-margin-top: 16px; }
-/* 業種の欄：広い画面では見出しを左に固定し、右の記事だけが流れる */
-.home-category { padding-top: 16px; border-top: 1px solid var(--border); }
-.home-category h2 {
-  margin: 0;
-  font-family: var(--font-mincho), "Yu Mincho", "Hiragino Mincho ProN", serif;
-  font-size: 1.45rem;
-  font-weight: 600;
-  line-height: 1.5;
-}
-.home-category .category-description { margin: 8px 0 12px; }
-.home-category-all { font-size: 0.9rem; font-weight: 800; text-decoration: underline; text-underline-offset: 4px; }
-.home-category-body { margin-top: 16px; }
-@media (min-width: 1024px) {
-  .home-category { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 40px; align-items: start; }
-  .home-category-head { position: sticky; top: 24px; }
-  .home-category-body { margin-top: 0; }
-}
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
 .section-head h2 { margin: 0; font-size: 1.3rem; font-weight: 800; }
 .more-link { font-size: 0.85rem; font-weight: 700; white-space: nowrap; }
 .category-description { margin: 8px 0 20px; color: var(--muted); font-size: 0.85rem; }
-
-.featured-post {
-  display: grid;
-  grid-template-columns: minmax(0, 260px) 1fr;
-  gap: 24px;
-  align-items: center;
-  color: var(--text);
-}
-.featured-post:hover { text-decoration: none; }
-.featured-post:hover .featured-title { text-decoration: underline; }
-.featured-thumb .thumb { border-color: var(--line); }
-.featured-body { display: flex; flex-direction: column; gap: 8px; }
-.featured-label { font-size: 0.75rem; font-weight: 800; color: var(--warm); letter-spacing: 0.1em; }
-.featured-title { font-size: 1.15rem; font-weight: 800; line-height: 1.6; }
-.featured-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.8; }
-@media (max-width: 720px) {
-  .featured-post { grid-template-columns: 1fr; gap: 12px; }
-}
 
 /* 新着記事（トップページ）。いちばん新しい記事は枠と影で目立たせる */
 .latest-grid { list-style: none; margin: 20px 0 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 20px; }
@@ -397,23 +338,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   vertical-align: 0.1em;
 }
 .latest-meta .new-badge, .card-meta .new-badge { margin-right: 0; }
-.featured-label .new-badge { margin: 0 0 0 8px; }
-
-.post-rows { list-style: none; margin: 20px 0 0; padding: 0; border-top: 1px solid var(--line); }
-.post-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 16px;
-  padding: 12px 2px;
-  border-bottom: 1px solid var(--line);
-  color: var(--text);
-  font-size: 0.9rem;
-  font-weight: 700;
-  line-height: 1.6;
-}
-.post-row:hover { text-decoration: none; background: var(--surface); }
-.post-row-date { flex: 0 0 auto; font-size: 0.75rem; font-weight: 400; color: var(--muted); }
 
 /* サイトマップ */
 .site-map .jump-links { justify-content: flex-start; margin: 16px 0 8px; }
@@ -1053,8 +977,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .x-header-panel-foot span { color: var(--muted); font-weight: 400; font-size: 0.75rem; }
 .x-header-panel-foot .x-button { padding: 5px 12px; font-size: 0.75rem; }
 .x-header-close { font: inherit; font-size: 1.1rem; line-height: 1; background: none; border: 0; color: var(--text); cursor: pointer; padding: 2px 6px; }
-.x-section { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 40px; }
-.home-section.x-section { display: block; }
 .x-follow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
 .x-follow p { margin: 0; font-size: 0.85rem; color: var(--muted); }
 .x-button {
