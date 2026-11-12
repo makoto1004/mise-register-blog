@@ -34,7 +34,7 @@ export default function Home() {
         </h1>
       </section>
 
-      <JourneySteps />
+      <JourneySteps large />
 
       {/* AI無料POSレジ診断の小さな案内（受付先が未設定のときは「準備中」と出す） */}
       <section className="help-box help-free home-help" aria-labelledby="home-help-heading">

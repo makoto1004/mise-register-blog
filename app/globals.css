@@ -1171,6 +1171,19 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .journey-step-lead { font-size: 0.8rem; color: var(--muted); overflow-wrap: anywhere; }
 @media (min-width: 768px) { .journey-steps { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1260px) { .journey-steps { grid-template-columns: repeat(4, 1fr); } }
+/* トップの道のり（大きい表示）：サイトのいちばんの入口。番号・名前を大きくし、濃い枠のカードにする */
+.journey-steps-large { gap: 14px; margin: 8px 0 32px; }
+.journey-steps-large .journey-step { border: 2px solid var(--border); border-left-width: 10px; border-left-color: var(--accent); box-shadow: 4px 4px 0 var(--line); transition: transform 0.15s, box-shadow 0.15s; }
+.journey-steps-large .journey-step:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--accent); }
+.journey-steps-large .journey-step-link { align-items: center; gap: 18px; min-height: 112px; padding: 20px 22px; }
+.journey-steps-large .journey-step-link:hover { background: #fff; }
+.journey-steps-large .journey-step-number { font-size: 3.2rem; }
+.journey-steps-large .journey-step-body { gap: 6px; }
+.journey-steps-large .journey-step-name { font-family: var(--font-mincho), "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 1.35rem; line-height: 1.35; }
+.journey-steps-large .journey-step-lead { font-size: 0.95rem; }
+.journey-steps-large .journey-step-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+@media (min-width: 1260px) { .journey-steps-large .journey-step-link { flex-direction: column; align-items: flex-start; min-height: 180px; } }
+@media (prefers-reduced-motion: reduce) { .journey-steps-large .journey-step { transition: none; } .journey-steps-large .journey-step:hover { transform: none; } }
 .journey-post-list { margin-top: 24px; }
 .home-checklist + .journey-post-list { margin-top: 28px; }
 .journey-post-list ul { list-style: none; margin: 0; padding: 0; }
