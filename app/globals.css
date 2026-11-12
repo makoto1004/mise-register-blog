@@ -839,7 +839,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .x-logo { width: 1em; height: 1em; flex: 0 0 auto; }
 .header-social { display: flex; align-items: center; gap: 8px; margin-left: auto; }
 .x-header-wrap { position: relative; }
-.x-header-link.header-search-link { width: auto; gap: 6px; padding: 0 10px; font-size: 15px; white-space: nowrap; }
+/* 虫めがねと「記事を探す」を横に並べる（.x-header-link の grid のままだと、文字が虫めがねの下に落ちて枠からはみ出す） */
+.x-header-link.header-search-link { display: inline-flex; align-items: center; justify-content: center; width: auto; gap: 6px; padding: 0 10px; font-size: 15px; white-space: nowrap; }
 .header-search-label { font-size: 0.8rem; font-weight: 700; }
 @media (max-width: 399px) { .x-header-link.header-search-link { width: 34px; padding: 0; } .header-search-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
 .x-header-link {
