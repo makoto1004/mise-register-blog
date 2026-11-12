@@ -72,7 +72,6 @@ a:hover { text-decoration: underline; }
 /* ヘッダー */
 .site-header { margin: 0 6%; padding: 28px 0 0; }
 .header-top { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px; }
-.site-catch { margin: 0; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
 
 /* タイトルロゴ「mise & register」 */
 .logo-link, .footer-logo { color: var(--text); display: inline-block; }
@@ -130,15 +129,8 @@ a:hover { text-decoration: underline; }
 .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
 .breadcrumb a { color: var(--muted); }
 
-/* トップの見出し：左に文字、右に POS レジの飾りの絵。絵の白地は背景になじませる */
-.home-hero {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: 16px 40px;
-  align-items: center;
-  padding: 8px 0 24px;
-  border-bottom: 1px solid var(--line);
-}
+/* トップの見出し */
+.home-hero { padding: 8px 0 24px; }
 .home-hero h1 {
   margin: 0;
   font-family: var(--font-mincho), "Yu Mincho", "Hiragino Mincho ProN", serif;
@@ -147,20 +139,8 @@ a:hover { text-decoration: underline; }
   line-height: 1.4;
   letter-spacing: 0.04em;
 }
-.home-hero-copy p { margin: 20px 0 0; max-width: 24em; color: var(--muted); font-size: 0.95rem; }
-.home-pos { display: block; width: 100%; max-width: 400px; justify-self: center; color: var(--text); text-align: center; }
-.home-pos img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; transition: transform 0.2s ease-out; }
-/* 開いたときに一度だけ、4 つの絵を順に出す（文字は最初から出しておく） */
-@media (prefers-reduced-motion: no-preference) {
-  /* リンクではなく絵を動かす（リンクを動かすと multiply が背景に届かず、絵の四角が見えてしまう） */
-  .home-pos img { animation: shop-in 0.45s ease-out backwards; }
-}
-@keyframes shop-in { from { opacity: 0; transform: translateY(10px); } }
 @media (max-width: 900px) {
-  .home-hero { grid-template-columns: 1fr; }
   .home-hero h1 { font-size: clamp(1.9rem, 8vw, 2.8rem); }
-  .home-hero-copy p { margin-top: 12px; }
-  .home-pos { max-width: 300px; }
 }
 
 /* トップの開業準備チェックリストの案内：差し色の枠の帯。広い画面では「説明・4 段階・ボタン」を横に並べる */
@@ -205,54 +185,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 }
 .jump-links a:hover { text-decoration: none; background: var(--text); color: var(--bg); }
 
-/* トップの作業代行・運営者の案内：絵つきのカードを 2 枚並べる（スマホでは縦に積む） */
-.home-guide { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 32px; }
-.home-guide-card {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
-  transition: transform 0.1s, box-shadow 0.1s;
-}
-.home-guide-card:hover { text-decoration: none; }
-@media (hover: hover) {
-  .home-guide-card:hover { transform: translate(-3px, -3px); box-shadow: 3px 3px 0 var(--muted); }
-}
-.home-guide-card img { display: block; width: 100%; height: auto; aspect-ratio: 800 / 574; object-fit: cover; border-bottom: 1px solid var(--border); }
-.home-guide-body { display: flex; flex-direction: column; flex: 1; gap: 4px; padding: 16px 20px 20px; }
-.home-guide-label { font-size: 0.75rem; font-weight: 800; color: var(--accent); }
-.home-guide-title { font-size: 1.15rem; font-weight: 800; }
-.home-guide-text { font-size: 0.85rem; color: var(--muted); margin-bottom: 10px; }
-.home-guide-button {
-  margin-top: auto;
-  align-self: flex-start;
-  background: var(--text);
-  color: var(--bg);
-  font-weight: 800;
-  padding: 8px 20px;
-}
-/* 作業代行のカードは差し色の枠で、運営者のカードより目立たせる */
-/* 広い画面では絵を左に小さく置き、案内が画面を占めすぎないようにする */
-@media (min-width: 1100px) {
-  .home-guide-card { flex-direction: row; }
-  /* 絵を切らずに小さく見せる。絵の地色に近いページの色を左の欄に敷く */
-  .home-guide-card img { flex: 0 0 42%; width: 42%; aspect-ratio: auto; object-fit: contain; background: var(--bg); border-bottom: 0; border-right: 1px solid var(--line); }
-  .home-guide-body { min-width: 0; }
-}
 /* 上のメニューの「作業代行」は差し色にする */
 .menu-bar .menu-services { color: var(--accent); }
 
-/* トップの AI相談デスクの案内（マスコット 2 人と相談ページへのボタン） */
-.home-consult {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  margin-top: 32px;
-  padding: 20px 24px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-}
 /* Amazon のセールのバナー（画像は加工せず、表示の大きさだけ決める） */
 .sale-banner { margin-top: 32px; padding: 16px; border: 1px solid var(--border); background: var(--surface); text-align: center; }
 .sale-banner-label { margin: 0 0 8px; font-size: 0.7rem; font-weight: 800; color: var(--muted); text-align: left; }
@@ -270,34 +205,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 }
 .sale-banner-text { margin: 10px 0 0; font-size: 0.85rem; color: var(--muted); }
 
-.home-consult-mascots { display: flex; flex-shrink: 0; }
-/* 運営者の帯の絵（カードと同じ絵を小さく出す） */
-.home-consult-photo { flex-shrink: 0; width: 200px; height: auto; border: 1px solid var(--border); }
-.home-consult-mascots img { width: 96px; height: 96px; border-radius: 50%; border: 2px solid var(--bg); background: var(--bg); }
-.home-consult-mascots img + img { margin-left: -18px; }
-.home-consult-body { flex: 1; min-width: 0; }
-.home-consult-label { margin: 0; font-size: 0.75rem; font-weight: 800; color: var(--accent); }
-.home-consult h2 { margin: 2px 0 6px; font-size: 1.15rem; font-weight: 800; }
-.home-consult-body p:not(.home-consult-label) { margin: 0 0 12px; font-size: 0.85rem; color: var(--muted); }
-.home-consult-button {
-  display: inline-block;
-  background: var(--text);
-  color: var(--bg);
-  font-weight: 800;
-  border: 1px solid var(--text);
-  padding: 8px 20px;
-  transition: transform 0.1s, box-shadow 0.1s;
-}
-.home-consult-button:hover { text-decoration: none; }
-@media (hover: hover) {
-  .home-consult-button:hover { transform: translate(-3px, -3px); box-shadow: 3px 3px 0 var(--muted); }
-}
-@media (max-width: 600px) {
-  .home-consult { flex-direction: column; align-items: flex-start; gap: 12px; padding: 18px 16px; }
-  .home-consult-mascots img { width: 72px; height: 72px; }
-  .home-consult-photo { width: 100%; }
-  .home-consult-button { display: block; text-align: center; }
-}
 
 /* トップの業種別セクション：1 本を大きく、残りは文字の一覧 */
 .home-section { margin-top: 56px; scroll-margin-top: 16px; }
@@ -899,13 +806,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .site-footer { border-top: 1px solid var(--border); margin-top: 80px; padding: 40px 6% 64px; font-size: 0.85rem; }
 .footer-inner { max-width: 620px; margin: 0 auto; }
 .footer-heading { margin: 0 0 8px; font-weight: 800; }
-.footer-categories ul, .footer-links { display: flex; flex-wrap: wrap; gap: 6px 20px; list-style: none; margin: 0; padding: 0; }
-.footer-categories { margin-bottom: 40px; }
-.footer-catch { margin: 0; font-weight: 800; font-size: 0.8rem; }
+.footer-group ul { display: flex; flex-wrap: wrap; gap: 6px 20px; list-style: none; margin: 0; padding: 0; }
+.footer-groups { display: grid; gap: 24px; margin-bottom: 28px; }
 
-.footer-links { margin-bottom: 24px; }
 .footer-note { margin: 4px 0; font-size: 0.75rem; color: var(--muted); }
-.footer-profile { margin: 0 0 16px; font-size: 0.8rem; }
 
 /* 記事のページの「どこまで読んだか」のバー（SiteMotion が GSAP で横に伸ばす） */
 .reading-progress {
@@ -1269,6 +1173,13 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 @media (min-width: 1260px) { .journey-steps { grid-template-columns: repeat(4, 1fr); } }
 .journey-post-list { margin-top: 24px; }
 .home-checklist + .journey-post-list { margin-top: 28px; }
+.journey-post-list ul { list-style: none; margin: 0; padding: 0; }
+.journey-post-list li { border-bottom: 1px solid var(--line); }
+.journey-post-list li a { display: block; padding: 10px 2px; font-weight: 700; }
+.journey-more summary { padding: 10px 2px; font-weight: 800; color: var(--accent); cursor: pointer; }
+.home-help { margin-top: 28px; }
+.home-help .help-heading { margin-top: 0; }
+.home-help .help-note { margin-top: 6px; }
 
 /* 無料・有料の 2 つの枠 */
 .help-choices { margin-top: 36px; }

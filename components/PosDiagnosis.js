@@ -44,11 +44,11 @@ export default function PosDiagnosis({ posts }) {
 
   return (
     <section className="pos-diagnosis" aria-labelledby="pos-diagnosis-heading">
-      <h2 id="pos-diagnosis-heading" className="pos-diagnosis-title">3つの質問で、合う記事を探す</h2>
-      <p className="pos-diagnosis-note">答えはこの画面の中だけで使い、どこにも送りません。</p>
+      <h2 id="pos-diagnosis-heading" className="pos-diagnosis-title">3つの質問で記事を探す</h2>
+      <p className="pos-diagnosis-note">答えはどこにも送りません。</p>
       {/* form は使わない（読み込み前に送信されて、答えが URL やアクセス記録に残るのを防ぐため） */}
       <noscript>
-        <p className="pos-diagnosis-note">診断は JavaScript を使います。下の「業種から探す」からも記事を探せます。</p>
+        <p className="pos-diagnosis-note">診断には JavaScript が必要です。下の「業種から探す」をお使いください。</p>
       </noscript>
       <div>
         {DIAGNOSIS_QUESTIONS.map((question) => (
@@ -69,7 +69,7 @@ export default function PosDiagnosis({ posts }) {
           </fieldset>
         ))}
         <button type="button" className="pos-diagnosis-button" onClick={handleSubmit} disabled={!mounted}>
-          合う記事を探す
+          探す
         </button>
       </div>
 
@@ -93,7 +93,7 @@ export default function PosDiagnosis({ posts }) {
             )}
             {result.fallbackToConsult && (
               <p className="pos-diagnosis-consult">
-                合う記事がまだありません。<Link href="/consult">AI に相談する</Link>と、お店に合う選び方を一緒に考えます。
+                合う記事がまだありません。<Link href="/consult">AI に相談する</Link>
               </p>
             )}
           </>

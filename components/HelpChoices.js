@@ -8,13 +8,13 @@ export default function HelpChoices() {
   return (
     <section className="help-choices" aria-labelledby="help-choices-heading">
       <h2 id="help-choices-heading" className="help-choices-title">
-        困ったときの相談先
+        困ったら
       </h2>
       <div className="help-choices-grid">
         <div className="help-box help-free">
           <p className="help-label">無料</p>
           <h3 className="help-heading">AI に相談する</h3>
-          <p>POS レジの選び方・使い方・機器のエラーや障害</p>
+          <p>選び方・使い方・エラー</p>
           <p className="help-note">{CONSULT_FREE_NOTE}</p>
           {consultOpen ? (
             <Link href="/consult" className="help-button">
@@ -27,9 +27,9 @@ export default function HelpChoices() {
         <div className="help-box help-paid">
           <p className="help-label">有料</p>
           <h3 className="help-heading">資料づくりを頼む</h3>
-          <p>商品データの CSV・マニュアル・売上の集計表など</p>
+          <p>CSV・マニュアル・集計表など</p>
           <Link href="/services" className="help-link">
-            できること・できないことを見る
+            できること・できないこと
           </Link>
           {!SERVICES_OPEN && <p className="help-pending">受付の準備中です</p>}
         </div>

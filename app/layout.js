@@ -29,6 +29,16 @@ const mincho = Noto_Serif_JP({
 });
 
 // ヘッダーのメニューに出す短い名前（道のりの 4 ステップ。パスは JOURNEY_STEPS から取る）
+// ヘッダーの虫めがね（記事を探す）のアイコン。文字は aria-label で伝える
+function SearchIcon() {
+  return (
+    <svg className="x-logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" strokeWidth="2.2" />
+      <path d="M15.5 15.5 21 21" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 const MENU_LABELS = { find: 'レジを探す', devices: '周辺機器', setup: '導入ガイド', after: '開業したあと' };
 
 export const metadata = {
@@ -83,8 +93,10 @@ export default function RootLayout({ children }) {
             <Link href="/" className="logo-link" aria-label={`${SITE.name} トップページ`}>
               <Logo />
             </Link>
-            <p className="site-catch">{SITE.catchphrase}</p>
             <div className="header-social">
+              <Link href="/search" className="x-header-link" aria-label="記事を探す">
+                <SearchIcon />
+              </Link>
               <InstagramHeaderLink />
               <XHeaderTimeline account={SITE.xAccount} />
             </div>
@@ -103,11 +115,6 @@ export default function RootLayout({ children }) {
                   相談
                 </Link>
               </li>
-              <li>
-                <Link href="/search" className="underline-link">
-                  記事を探す
-                </Link>
-              </li>
             </ul>
           </nav>
         </header>
@@ -120,93 +127,101 @@ export default function RootLayout({ children }) {
 
         <footer id="footer" className="site-footer">
           <div className="footer-inner">
-            <section id="footer-categories" className="footer-categories">
-              <p className="footer-heading">カテゴリから探す</p>
-              <ul>
-                {Object.entries(CATEGORIES).map(([slug, name]) => (
-                  <li key={slug}>
-                    <Link href={`/category/${slug}`} className="underline-link">
-                      {name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </section>
-            <p className="footer-catch">{SITE.catchphrase}</p>
             <Link href="/" className="footer-logo" aria-label={`${SITE.name} トップページ`}>
               <Logo />
             </Link>
-            <ul className="footer-links">
-              <li>
-                <Link href="/site-map" className="underline-link">
-                  サイトマップ
-                </Link>
-              </li>
-              <li>
-                <a
-                  href={`https://x.com/${SITE.xAccount}`}
-                  className="underline-link"
-                  target="_blank"
-                  rel="noopener noreferrer me"
-                >
-                  X（@{SITE.xAccount}）
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`https://www.instagram.com/${SITE.instagramAccount}/`}
-                  className="underline-link"
-                  target="_blank"
-                  rel="noopener noreferrer me"
-                >
-                  Instagram（@{SITE.instagramAccount}）
-                </a>
-              </li>
-              {/* AI 無料相談（フォームの URL が未設定のあいだは、ページに「準備中」と出る） */}
-              <li>
-                <Link href="/consult" className="underline-link">
-                  AI相談デスク
-                </Link>
-              </li>
-              {/* 運営者が BOOTH で販売しているテンプレートの紹介ページ */}
-              <li>
-                <Link href="/templates" className="underline-link">
-                  お店の Excel テンプレート
-                </Link>
-              </li>
-              {/* 作業代行は、受付の前も「できること・できないこと」として見られる（申し込みのボタンは受付後に出る） */}
-              <li>
-                <Link href="/services" className="underline-link">
-                  作業代行（できること・できないこと）
-                </Link>
-              </li>
-              {/* 特定商取引法に基づく表記は、ブログで直接受けるときだけ必要（ココナラ経由はココナラの仕組みで取引する） */}
-              {SITE.orderFormUrl && !SITE.coconalaUrl && (
-                <li>
-                  <Link href="/legal" className="underline-link">
-                    特定商取引法に基づく表記
-                  </Link>
-                </li>
-              )}
-              <li>
-                <Link href="/contact" className="underline-link">
-                  お問い合わせ
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="underline-link">
-                  運営者情報・プライバシーポリシー
-                </Link>
-              </li>
-            </ul>
-            {/* 運営者のひとこと紹介（くわしくは運営者情報のページのプロフィール） */}
-            <p className="footer-profile">
-              運営者：相談デスクの店番（POSレジ・周辺機器・ネットワークの検証／ヘルプデスク）{' '}
-              <Link href="/about#profile" className="underline-link">
-                プロフィール
-              </Link>
-            </p>
-            {/* Amazon アソシエイト・プログラムの規約で求められる表示 */}
+            <div className="footer-groups">
+              <section className="footer-group" aria-labelledby="footer-journey-heading">
+                <p id="footer-journey-heading" className="footer-heading">道のり</p>
+                <ul>
+                  {JOURNEY_STEPS.map((step) => (
+                    <li key={step.id}>
+                      <Link href={step.path} className="underline-link">
+                        {step.number}. {step.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+              <section id="footer-categories" className="footer-group footer-categories" aria-labelledby="footer-categories-heading">
+                <p id="footer-categories-heading" className="footer-heading">カテゴリ</p>
+                <ul>
+                  {Object.entries(CATEGORIES).map(([slug, name]) => (
+                    <li key={slug}>
+                      <Link href={`/category/${slug}`} className="underline-link">
+                        {name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+              <section className="footer-group" aria-labelledby="footer-about-heading">
+                <p id="footer-about-heading" className="footer-heading">運営者・規約</p>
+                <ul>
+                  <li>
+                    <Link href="/about" className="underline-link">
+                      運営者情報・プライバシーポリシー
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/contact" className="underline-link">
+                      お問い合わせ
+                    </Link>
+                  </li>
+                  {/* AI 無料相談（フォームの URL が未設定のあいだは、ページに「準備中」と出る） */}
+                  <li>
+                    <Link href="/consult" className="underline-link">
+                      AI相談デスク
+                    </Link>
+                  </li>
+                  {/* 作業代行は、受付の前も「できること・できないこと」として見られる */}
+                  <li>
+                    <Link href="/services" className="underline-link">
+                      作業代行（できること・できないこと）
+                    </Link>
+                  </li>
+                  {/* 運営者が BOOTH で販売しているテンプレートの紹介ページ */}
+                  <li>
+                    <Link href="/templates" className="underline-link">
+                      お店の Excel テンプレート
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/site-map" className="underline-link">
+                      サイトマップ
+                    </Link>
+                  </li>
+                  {/* 特定商取引法に基づく表記は、ブログで直接受けるときだけ必要（ココナラ経由はココナラの仕組みで取引する） */}
+                  {SITE.orderFormUrl && !SITE.coconalaUrl && (
+                    <li>
+                      <Link href="/legal" className="underline-link">
+                        特定商取引法に基づく表記
+                      </Link>
+                    </li>
+                  )}
+                  <li>
+                    <a
+                      href={`https://x.com/${SITE.xAccount}`}
+                      className="underline-link"
+                      target="_blank"
+                      rel="noopener noreferrer me"
+                    >
+                      X（@{SITE.xAccount}）
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={`https://www.instagram.com/${SITE.instagramAccount}/`}
+                      className="underline-link"
+                      target="_blank"
+                      rel="noopener noreferrer me"
+                    >
+                      Instagram（@{SITE.instagramAccount}）
+                    </a>
+                  </li>
+                </ul>
+              </section>
+            </div>            {/* Amazon アソシエイト・プログラムの規約で求められる表示 */}
             <p className="footer-note">Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。</p>
             <p className="footer-note">© {SITE.name}</p>
           </div>

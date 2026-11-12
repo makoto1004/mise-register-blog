@@ -29,7 +29,7 @@ export default function Page() {
         <div className="home-checklist-copy">
           <h2 id="home-checklist-heading">開業準備チェックリスト</h2>
           <p>
-            開業の準備を4つの段階・{totalItems}項目に分けました。チェックを入れると、次にやることが1つずつ分かります。
+            4段階・{totalItems}項目で、次にやることが分かります。
           </p>
         </div>
         <ol className="home-checklist-stages">

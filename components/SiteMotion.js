@@ -18,7 +18,6 @@ const REVEAL_SELECTOR = [
 // サイト全体の動き（GSAP）
 // ・画面の下にある部品を、スクロールで見えたときにふわっと出す（最初から画面に見えている部品は動かさない＝表示の速さに影響させない）
 // ・記事のページでは、画面のいちばん上に「どこまで読んだか」の細いバーを出す
-// ・トップページの AI相談デスクのマスコットを、小さくゆらす
 // 端末で「視差効果を減らす」を選んでいる人には、どれも動かさない
 export default function SiteMotion() {
   const pathname = usePathname();
@@ -46,10 +45,7 @@ export default function SiteMotion() {
             { scaleX: 0 },
             { scaleX: 1, ease: 'none', scrollTrigger: { trigger: document.documentElement, start: 'top top', end: 'bottom bottom', scrub: 0.3 } },
           );
-        }
-
-        gsap.to('.home-consult-mascots img', { y: -5, duration: 1.4, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: 0.7 });
-      });
+        }      });
 
       // Tab キーで、まだ出ていない部品に移ったら、すぐに出す
       const showOnFocus = (e) => {
