@@ -1366,3 +1366,23 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .help-button:hover { text-decoration: none; filter: brightness(0.92); }
 .help-link { display: inline-block; margin-top: 14px; font-weight: 700; text-decoration: underline; }
 .help-pending { font-weight: 700; color: var(--muted); }
+/* 「POS レジを探す」ページの診断 */
+.pos-diagnosis { margin: 8px 0 28px; padding: 20px 22px; background: #fff; border: 2px solid var(--accent); }
+.pos-diagnosis-title, .find-industries-title { margin: 0 0 6px; font-family: var(--font-mincho), "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 1.1rem; font-weight: 800; }
+.pos-diagnosis-note { margin: 0 0 14px; font-size: 0.8rem; color: var(--muted); }
+.pos-diagnosis-group { min-width: 0; margin: 0 0 14px; padding: 0; border: 0; }
+.pos-diagnosis-group legend { padding: 0; margin-bottom: 6px; font-weight: 800; }
+.pos-diagnosis-option { display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px; margin-bottom: 4px; background: var(--surface); cursor: pointer; overflow-wrap: anywhere; }
+.pos-diagnosis-option input { flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--accent); }
+.pos-diagnosis-button { padding: 10px 22px; font: inherit; font-weight: 800; color: #fff; background: var(--accent); border: 0; cursor: pointer; }
+.pos-diagnosis-button:hover { filter: brightness(0.92); }
+.pos-diagnosis-result:not(:empty) { margin-top: 18px; }
+.pos-diagnosis-error { margin: 0; font-weight: 800; color: var(--cons); }
+.pos-diagnosis-result-group h3 { margin: 14px 0 6px; padding-left: 10px; font-size: 1rem; border-left: 6px solid var(--accent); }
+.pos-diagnosis-result-group ul { margin: 0; padding-left: 1.4em; }
+.pos-diagnosis-result-group li { margin-bottom: 4px; overflow-wrap: anywhere; }
+.pos-diagnosis-consult { margin: 14px 0 0; overflow-wrap: anywhere; }
+.find-industries { margin: 0 0 8px; }
+.find-industries ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 0; padding: 0; list-style: none; }
+.find-industries a { display: inline-block; padding: 8px 14px; color: var(--text); background: var(--surface); }
+.find-industries a:hover { text-decoration: none; background: var(--text); color: var(--bg); }
