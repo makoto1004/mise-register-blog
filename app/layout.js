@@ -103,6 +103,11 @@ export default function RootLayout({ children }) {
                   相談
                 </Link>
               </li>
+              <li>
+                <Link href="/search" className="underline-link">
+                  記事を探す
+                </Link>
+              </li>
             </ul>
           </nav>
         </header>
@@ -163,14 +168,12 @@ export default function RootLayout({ children }) {
                   お店の数字と管理
                 </Link>
               </li>
-              {/* AI 無料相談は、フォームの URL を設定してからリンクを出す */}
-              {SITE.consultFormUrl && (
-                <li>
-                  <Link href="/consult" className="underline-link">
-                    AI相談デスク
-                  </Link>
-                </li>
-              )}
+              {/* AI 無料相談（フォームの URL が未設定のあいだは、ページに「準備中」と出る） */}
+              <li>
+                <Link href="/consult" className="underline-link">
+                  AI相談デスク
+                </Link>
+              </li>
               {/* 運営者が BOOTH で販売しているテンプレートの紹介ページ */}
               <li>
                 <Link href="/templates" className="underline-link">

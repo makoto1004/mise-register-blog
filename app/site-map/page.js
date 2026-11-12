@@ -5,7 +5,7 @@ import { JOURNEY_STEPS } from '@/lib/journey';
 
 export const metadata = {
   title: 'サイトマップ',
-  description: 'すべての記事を、業種別・目的別に一覧できるページです。',
+  description: 'すべての記事を、開業準備の道のり・業種別・目的別に一覧できるページです。',
   alternates: { canonical: '/site-map' },
 };
 
@@ -21,7 +21,7 @@ export default function SiteMapPage() {
       </nav>
       <h1 className="page-title">サイトマップ</h1>
       <p className="category-description">
-        全{all.length}本の記事を、「業種から探す」と「目的から探す」の2つの方法で一覧にしています。
+        全{all.length}本の記事を、「開業準備の道のりから探す」「業種から探す」「目的から探す」の3つの方法で一覧にしています。
       </p>
 
       <nav className="jump-links" aria-label="ページ内の移動">
