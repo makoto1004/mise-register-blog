@@ -13,3 +13,6 @@ scheduled/
 
 # 楽天 API の結果（規約で公開の場所に置けない）
 .rakuten-cache/
+
+# ブレインストーミングの見比べ用の画面（ローカルだけ）
+.superpowers/
