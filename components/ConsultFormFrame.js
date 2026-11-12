@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-// AI相談デスクの Google フォームの埋め込み
+// AI無料POSレジ診断の Google フォームの埋め込み
 // 読み込みが終わるまでは「読み込み中」を重ねて出し、フォームが表示されないときのために新しいタブで開くリンクも出す
 export default function ConsultFormFrame({ src, openUrl }) {
   const [loaded, setLoaded] = useState(false);
@@ -12,7 +12,7 @@ export default function ConsultFormFrame({ src, openUrl }) {
       <iframe
         className="contact-frame"
         src={src}
-        title="AI相談デスクのフォーム"
+        title="AI無料POSレジ診断のフォーム"
         loading="lazy"
         onLoad={() => setLoaded(true)}
       >

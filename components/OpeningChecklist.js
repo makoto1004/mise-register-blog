@@ -11,7 +11,7 @@ import { buildConsultText, diagnose } from '@/lib/openingDiagnosis';
 // - 段階がすべて終わったら、画面の下で短くお祝いする
 // - 「最初からやり直す」は確認ダイアログを出さず、数秒「元に戻す」を出す
 // - 「かんたん診断」は AI を使わず、開業予定日までの日数と残りの項目から注意を出す（lib/openingDiagnosis.js）
-// - 「AI相談デスクに相談する」は、今の状況を相談文にしてコピーする（フォームに貼ってもらう。自動では送らない）
+// - 「AI無料POSレジ診断に出す」は、今の状況を相談文にしてコピーする（フォームに貼ってもらう。自動では送らない）
 // - ほかの端末で続けるときは、状態を入れた「引き継ぎ用のURL」を使う。状態は URL の # の後ろに入れるので、サーバーには送られない
 
 const STORAGE_KEY = 'mise-opening-checklist-v1';
@@ -132,7 +132,7 @@ function countdownText(days) {
   return `開業予定日から${-days}日たちました`;
 }
 
-// consultAvailable：AI相談デスクのフォームがあるとき true
+// consultAvailable：AI無料POSレジ診断のフォームがあるとき true
 export default function OpeningChecklist({ stages, consultAvailable = false }) {
   const [done, setDone] = useState([]);
   const [openDate, setOpenDate] = useState('');
@@ -295,7 +295,7 @@ export default function OpeningChecklist({ stages, consultAvailable = false }) {
     try {
       await navigator.clipboard.writeText(text);
       setConsultFallback('');
-      showToast({ message: '相談文をコピーしました。AI相談デスクのフォームの相談内容に貼り付けてください' });
+      showToast({ message: '相談文をコピーしました。AI無料POSレジ診断のフォームの相談内容に貼り付けてください' });
     } catch {
       setConsultFallback(text);
     }
@@ -394,7 +394,7 @@ export default function OpeningChecklist({ stages, consultAvailable = false }) {
         ready && (
           <section className="checklist-next checklist-complete">
             <p className="checklist-next-title">すべての準備が終わりました</p>
-            <p className="checklist-next-text">おつかれさまでした。開店してから困ったときは、記事やAI相談デスクも使ってください。</p>
+            <p className="checklist-next-text">おつかれさまでした。開店してから困ったときは、記事やAI無料POSレジ診断も使ってください。</p>
           </section>
         )
       )}
@@ -455,9 +455,9 @@ export default function OpeningChecklist({ stages, consultAvailable = false }) {
 
       {consultAvailable && (
         <section className="checklist-share checklist-consult" aria-labelledby="checklist-consult-heading">
-          <h2 id="checklist-consult-heading">AI相談デスクに相談する（無料）</h2>
+          <h2 id="checklist-consult-heading">AI無料POSレジ診断（無料）</h2>
           <p>
-            今の進み具合・まだの項目・シミュレーターの合計を、相談文にしてコピーします。AI相談デスクのフォームの相談内容に貼り付けて、相談したいことを書き足してください。AIが作った回答を運営者が確かめてから、メールでお返しします。
+            今の進み具合・まだの項目・シミュレーターの合計を、相談文にしてコピーします。AI無料POSレジ診断のフォームの相談内容に貼り付けて、相談したいことを書き足してください。AIが作った回答を運営者が確かめてから、メールでお返しします。
           </p>
           <p className="checklist-share-note">相談文に、名前・住所・電話番号などは入れないでください。</p>
           <div className="checklist-consult-actions">
@@ -465,7 +465,7 @@ export default function OpeningChecklist({ stages, consultAvailable = false }) {
               相談文をコピー
             </button>
             <Link href="/consult" className="checklist-link">
-              AI相談デスクを開く
+              AI無料POSレジ診断を開く
             </Link>
           </div>
           {consultFallback && (

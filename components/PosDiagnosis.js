@@ -93,7 +93,7 @@ export default function PosDiagnosis({ posts }) {
             )}
             {result.fallbackToConsult && (
               <p className="pos-diagnosis-consult">
-                合う記事がまだありません。<Link href="/consult">AI に相談する</Link>
+                合う記事がまだありません。<Link href="/consult">AI無料POSレジ診断</Link>
               </p>
             )}
           </>

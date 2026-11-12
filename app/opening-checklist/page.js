@@ -2,7 +2,7 @@ import Link from 'next/link';
 import OpeningChecklist from '@/components/OpeningChecklist';
 import { getAllPosts } from '@/lib/posts';
 import { OPENING_STAGES } from '@/lib/openingChecklist';
-import { SITE } from '@/lib/site';
+import { CONSULT_AVAILABLE } from '@/lib/site';
 
 // 開業準備チェックリストのページ。チェックの状態と開業予定日は、ブラウザの中（localStorage）だけに保存する
 export const metadata = {
@@ -32,7 +32,7 @@ export default function OpeningChecklistPage() {
       <p className="category-description">
         開業の準備を4つの段階に分けました。終わったものにチェックを入れると、次にやることが1つだけ大きく出ます。関連する記事もそこから読めます。
       </p>
-      <OpeningChecklist stages={stages} consultAvailable={Boolean(SITE.consultFormUrl)} />
+      <OpeningChecklist stages={stages} consultAvailable={CONSULT_AVAILABLE} />
     </article>
   );
 }

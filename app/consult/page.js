@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import { SITE, CONSULT_FREE_NOTE } from '@/lib/site';
+import { SITE, CONSULT_FREE_NOTE, CONSULT_NAME, CONSULT_AVAILABLE } from '@/lib/site';
 import ConsultFormFrame from '@/components/ConsultFormFrame';
 
 export const metadata = {
-  title: 'AI相談デスク（無料）｜POSレジ・スキャナー・プリンター・ネットワーク',
+  title: `${CONSULT_NAME}｜POSレジの選び方・使い方・エラーや障害`,
   description:
-    'POSレジ・ハンディターミナル・バーコードリーダー・プリンター・業務用Android端末・お店のネットワーク機器の困りごとを、フォームから無料で相談できます。AI が作った回答を運営者が確認して、メールでお返しします。',
+    'POSレジの選び方・使い方・エラーや障害を、フォームから無料で診断できます。AI が下書きした答えを運営者が確かめて、メールでお返しします。',
   alternates: { canonical: '/consult' },
 };
 
@@ -21,16 +21,16 @@ function embedUrl(url) {
   }
 }
 
-// AI 相談デスク（無料）のページ（フォーム入力 → AI の下書きを運営者が確認 → メールで回答）
+// AI無料POSレジ診断のページ（フォーム入力 → AI の下書きを運営者が確認 → メールで回答）
 export default function ConsultPage() {
-  const src = SITE.consultFormUrl ? embedUrl(SITE.consultFormUrl) : '';
+  const src = CONSULT_AVAILABLE ? embedUrl(SITE.consultFormUrl) : '';
 
   return (
     <article className="article">
       <nav className="breadcrumb" aria-label="パンくずリスト">
-        <Link href="/">ホーム</Link> › <span>AI相談デスク</span>
+        <Link href="/">ホーム</Link> › <span>{CONSULT_NAME}</span>
       </nav>
-      <h1 className="page-title">AI相談デスク</h1>
+      <h1 className="page-title">{CONSULT_NAME}</h1>
       <div className="post-body">
         <p className="consult-free-box">
           <strong>{CONSULT_FREE_NOTE}</strong>
@@ -49,12 +49,12 @@ export default function ConsultPage() {
       {src ? (
         <ConsultFormFrame src={src} openUrl={SITE.consultFormUrl} />
       ) : (
-        <p className="feedback-box">AI相談デスクは準備中です。</p>
+        <p className="feedback-box">{CONSULT_NAME}は準備中です。</p>
       )}
 
       <div className="post-body">
 
-        <h2>相談できること</h2>
+        <h2>診断できること</h2>
         <ul>
           <li>選び方：POSレジ・周辺機器・ネットワーク機器</li>
           <li>使い方：設定、機器のつなぎ方</li>

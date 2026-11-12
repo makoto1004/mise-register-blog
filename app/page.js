@@ -5,7 +5,7 @@ import NewBadge from '@/components/NewBadge';
 import PostTitle from '@/components/PostTitle';
 import JourneySteps from '@/components/JourneySteps';
 import { getLatestPosts } from '@/lib/posts';
-import { SITE, CATEGORIES, CONSULT_FREE_NOTE } from '@/lib/site';
+import { SITE, CATEGORIES, CONSULT_FREE_NOTE, CONSULT_NAME, CONSULT_AVAILABLE } from '@/lib/site';
 
 // トップページ
 // 上から：見出しと道のり（1→4）、無料相談の案内、新着記事
@@ -36,18 +36,18 @@ export default function Home() {
 
       <JourneySteps />
 
-      {/* 無料相談の小さな案内（受付先が未設定のときは「準備中」と出す） */}
+      {/* AI無料POSレジ診断の小さな案内（受付先が未設定のときは「準備中」と出す） */}
       <section className="help-box help-free home-help" aria-labelledby="home-help-heading">
         <h2 id="home-help-heading" className="help-heading">
-          困ったら無料で相談
+          {CONSULT_NAME}
         </h2>
         <p className="help-note">{CONSULT_FREE_NOTE}</p>
-        {SITE.consultFormUrl ? (
+        {CONSULT_AVAILABLE ? (
           <Link href="/consult" className="help-button">
-            相談してみる
+            診断してみる
           </Link>
         ) : (
-          <p className="help-pending">受付の準備中です</p>
+          <p className="help-pending">準備中です</p>
         )}
       </section>
       {/* 新着記事：全カテゴリーから新しい順に 3 本を目立たせて表示する */}

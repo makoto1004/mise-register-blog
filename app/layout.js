@@ -112,7 +112,7 @@ export default function RootLayout({ children }) {
               ))}
               <li>
                 <Link href="/consult" className="underline-link menu-services">
-                  相談
+                  AIレジ診断
                 </Link>
               </li>
             </ul>
@@ -168,10 +168,10 @@ export default function RootLayout({ children }) {
                       お問い合わせ
                     </Link>
                   </li>
-                  {/* AI 無料相談（フォームの URL が未設定のあいだは、ページに「準備中」と出る） */}
+                  {/* AI無料POSレジ診断（準備中のあいだは、ページに「準備中」と出る） */}
                   <li>
                     <Link href="/consult" className="underline-link">
-                      AI相談デスク
+                      AI無料POSレジ診断
                     </Link>
                   </li>
                   {/* 作業代行は、受付の前も「できること・できないこと」として見られる */}
