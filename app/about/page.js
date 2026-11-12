@@ -26,8 +26,17 @@ export default function AboutPage() {
       </p>
       <ul>
         <li>経験：POSレジ・周辺機器（プリンター・スキャナーなど）・ネットワークの検証、ヘルプデスク</li>
-        <li>資格：AWS 認定ソリューションアーキテクト – アソシエイト（AWS SAA）、LPIC-1</li>
+        <li>資格：AWS 認定クラウドプラクティショナー、AWS 認定ソリューションアーキテクト – アソシエイト（AWS SAA）、LPIC-1</li>
       </ul>
+      {/* 資格のデジタルバッジ（画像だけ。名前や認定番号が出ないよう、証明書のページへのリンクはつけない） */}
+      <div className="badge-list">
+        {/* eslint-disable-next-line @next/next/no-img-element -- Static Export のため next/image の最適化は使わない */}
+        <img src="/images/badges/aws-cloud-practitioner.png" width="96" height="96" alt="AWS Certified Cloud Practitioner のバッジ" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/badges/aws-solutions-architect-associate.png" width="96" height="96" alt="AWS Certified Solutions Architect – Associate のバッジ" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/images/badges/lpic-1.png" width="100" height="96" alt="LPIC-1 Linux Administrator のバッジ" />
+      </div>
       <p>
         仕事で身につけた、機器のつなぎ方やトラブルの原因の切り分け方をもとに、小さなお店のレジ選びと、困ったときの対処をわかりやすくまとめています。製品の仕様や料金は、メーカー・サービスの公式情報を確かめてから書いています。
       </p>
