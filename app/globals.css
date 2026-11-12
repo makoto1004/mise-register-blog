@@ -977,6 +977,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .x-header-panel-foot span { color: var(--muted); font-weight: 400; font-size: 0.75rem; }
 .x-header-panel-foot .x-button { padding: 5px 12px; font-size: 0.75rem; }
 .x-header-close { font: inherit; font-size: 1.1rem; line-height: 1; background: none; border: 0; color: var(--text); cursor: pointer; padding: 2px 6px; }
+.x-section { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 40px; }
 .x-follow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
 .x-follow p { margin: 0; font-size: 0.85rem; color: var(--muted); }
 .x-button {

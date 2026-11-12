@@ -11,7 +11,6 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 // スクロールすると下からふわっと出てくる部品（記事一覧のカードは PostSearch が自分で動かす）
 const REVEAL_SELECTOR = [
   '.latest-card',
-  '.featured-post',
   '.pick-card',
   '.product-card',
 ].join(',');
