@@ -40,8 +40,6 @@ const CONFIG = {
   model: 'claude-opus-5-5',
   // 1 日に受け付ける相談の上限（いたずらで API 料金がかさむのを防ぐ）
   dailyLimit: 20,
-  // 同じメールアドレスから受け付ける相談の上限（1か月あたり。AI に回した相談だけを数える）
-  monthlyLimitPerEmail: 3,
   // 1か月の API 料金の上限（米ドル）。使った額は API の返す usage から計算してスクリプト プロパティに記録する
   monthlyBudgetUsd: 5,
   // 相談 1 件で使う額の見込み（米ドル）。「使った額 + 見込み」が上限を超える相談は AI に回さない
@@ -303,15 +301,7 @@ function onFormSubmit(e) {
     return;
   }
 
-  const usedThisMonth = countThisMonth(sheet, row, email);
-  if (usedThisMonth >= CONFIG.monthlyLimitPerEmail) {
-    writeStatus(sheet, row, `保留（同じメールアドレスの今月の上限 ${CONFIG.monthlyLimitPerEmail}回 に達したため AI 未使用）`);
-    notifyOperator(
-      '[AI相談] 同じメールアドレスの月の上限に達しました',
-      `同じメールアドレスから、今月 ${usedThisMonth + 1} 件目の相談が届きました（上限は月 ${CONFIG.monthlyLimitPerEmail} 回）。この相談は AI に回していません。\n\nシートの ${row} 行目を見て、返信するかどうかを決めてください。`
-    );
-    return;
-  }
+  // 同じメールアドレスの回数の上限は、2026-11-12 に運営者の指示で外した（1日の件数と月の API 料金の上限は残す）
 
   const spent = spentThisMonth();
   if (spent + CONFIG.consultCostEstimateUsd > CONFIG.monthlyBudgetUsd) {
