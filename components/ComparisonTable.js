@@ -5,7 +5,9 @@ export default function ComparisonTable({ products }) {
   const specKeys = [...new Set(products.flatMap((p) => Object.keys(p.specs)))];
 
   return (
-    <div className="table-scroll">
+    <>
+      <p className="scroll-hint" aria-hidden="true">← 横にスクロールできます →</p>
+      <div className="table-scroll" role="region" aria-label="製品の比較表（横にスクロールできます）" tabIndex={0}>
       <table className="comparison-table">
         <thead>
           <tr>
@@ -37,6 +39,7 @@ export default function ComparisonTable({ products }) {
           ))}
         </tbody>
       </table>
-    </div>
+      </div>
+    </>
   );
 }
