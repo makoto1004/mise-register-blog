@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { SITE, SERVICES_OPEN } from '@/lib/site';
+import { SITE, SERVICES_OPEN, CONSULT_FREE_NOTE } from '@/lib/site';
 
 // 無料（AI 相談）と有料（資料づくりの代行）の 2 つの枠。受付先が未設定のときは枠を消さず「準備中」と出す
 export default function HelpChoices() {
@@ -15,7 +15,7 @@ export default function HelpChoices() {
           <p className="help-label">無料</p>
           <h3 className="help-heading">AI に相談する</h3>
           <p>POS レジの選び方・使い方・機器のエラーや障害</p>
-          <p className="help-note">相談は最後まで無料です（1か月に3回まで）。相談のあとに料金を請求することはありません。</p>
+          <p className="help-note">{CONSULT_FREE_NOTE}</p>
           {consultOpen ? (
             <Link href="/consult" className="help-button">
               相談してみる

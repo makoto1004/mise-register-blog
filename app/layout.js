@@ -6,7 +6,8 @@ import { InstagramHeaderLink } from '@/components/XLinks';
 import XHeaderTimeline from '@/components/XHeaderTimeline';
 import SiteMotion from '@/components/SiteMotion';
 import AffiliateClickTracker from '@/components/AffiliateClickTracker';
-import { SITE, CATEGORIES, OG_IMAGE, SERVICES_OPEN } from '@/lib/site';
+import { SITE, CATEGORIES, OG_IMAGE } from '@/lib/site';
+import { JOURNEY_STEPS } from '@/lib/journey';
 import './globals.css';
 
 // ロゴの「mise」「&」に使うセリフ体（ビルド時に取り込まれ、サイト内から配信される）
@@ -26,6 +27,9 @@ const mincho = Noto_Serif_JP({
   display: 'swap',
   preload: false,
 });
+
+// ヘッダーのメニューに出す短い名前（道のりの 4 ステップ。パスは JOURNEY_STEPS から取る）
+const MENU_LABELS = { find: '探す', devices: '周辺機器', setup: '導入ガイド', after: '開業したあと' };
 
 export const metadata = {
   metadataBase: new URL(SITE.url),
@@ -85,31 +89,18 @@ export default function RootLayout({ children }) {
               <XHeaderTimeline account={SITE.xAccount} />
             </div>
           </div>
-          <nav className="menu-bar" aria-label="カテゴリー">
+          <nav className="menu-bar" aria-label="開業準備の道のり">
             <ul>
-              {/* 作業代行は、スマホで横にスクロールしなくても見えるよう先頭に置く */}
-              {SERVICES_OPEN && (
-                <li>
-                  <Link href="/services" className="underline-link menu-services">
-                    作業代行
-                  </Link>
-                </li>
-              )}
-              {Object.entries(CATEGORIES).map(([slug, name]) => (
-                <li key={slug}>
-                  <Link href={`/category/${slug}`} className="underline-link">
-                    {name}
+              {JOURNEY_STEPS.map((step) => (
+                <li key={step.id}>
+                  <Link href={step.path} className="underline-link">
+                    {MENU_LABELS[step.id]}
                   </Link>
                 </li>
               ))}
               <li>
-                <Link href="/search" className="underline-link">
-                  記事を探す
-                </Link>
-              </li>
-              <li className="menu-sitemap">
-                <Link href="/site-map" className="underline-link">
-                  サイトマップ
+                <Link href="/consult" className="underline-link menu-services">
+                  相談
                 </Link>
               </li>
             </ul>
@@ -166,6 +157,12 @@ export default function RootLayout({ children }) {
                   Instagram（@{SITE.instagramAccount}）
                 </a>
               </li>
+              {/* お店の数字と管理（売上・在庫などの記事） */}
+              <li>
+                <Link href="/category/management" className="underline-link">
+                  お店の数字と管理
+                </Link>
+              </li>
               {/* AI 無料相談は、フォームの URL を設定してからリンクを出す */}
               {SITE.consultFormUrl && (
                 <li>
@@ -180,14 +177,12 @@ export default function RootLayout({ children }) {
                   お店の Excel テンプレート
                 </Link>
               </li>
-              {/* 有料の作業代行は、受付先（ココナラか見積もり依頼フォーム）の URL を設定してからリンクを出す */}
-              {SERVICES_OPEN && (
-                <li>
-                  <Link href="/services" className="underline-link">
-                    レジまわりの作業代行
-                  </Link>
-                </li>
-              )}
+              {/* 作業代行は、受付の前も「できること・できないこと」として見られる（申し込みのボタンは受付後に出る） */}
+              <li>
+                <Link href="/services" className="underline-link">
+                  作業代行（できること・できないこと）
+                </Link>
+              </li>
               {/* 特定商取引法に基づく表記は、ブログで直接受けるときだけ必要（ココナラ経由はココナラの仕組みで取引する） */}
               {SITE.orderFormUrl && !SITE.coconalaUrl && (
                 <li>

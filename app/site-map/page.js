@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getAllPosts, getPostsByCategory } from '@/lib/posts';
 import { CATEGORIES, PURPOSES } from '@/lib/site';
+import { JOURNEY_STEPS } from '@/lib/journey';
 
 export const metadata = {
   title: 'サイトマップ',
@@ -24,10 +25,25 @@ export default function SiteMapPage() {
       </p>
 
       <nav className="jump-links" aria-label="ページ内の移動">
+        <a href="#journey">開業準備の道のりから探す</a>
         <a href="#industry">業種から探す</a>
         <a href="#purpose">目的から探す</a>
         <Link href="/about">運営者情報</Link>
       </nav>
+
+      <section id="journey" className="map-section">
+        <h2>開業準備の道のりから探す</h2>
+        <ol className="map-journey">
+          {JOURNEY_STEPS.map((step) => (
+            <li key={step.id}>
+              <Link href={step.path} className="underline-link">
+                {step.number}. {step.name}
+              </Link>
+              <span className="map-category">{step.lead}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
 
       <section id="industry" className="map-section">
         <h2>業種から探す</h2>

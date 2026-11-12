@@ -1309,3 +1309,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .find-industries ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 0; padding: 0; list-style: none; }
 .find-industries a { display: inline-block; padding: 8px 14px; color: var(--text); background: var(--surface); }
 .find-industries a:hover { text-decoration: none; background: var(--text); color: var(--bg); }
+
+/* /consult：相談は無料であることを目立たせる枠 */
+.consult-free-box { margin: 20px 0; padding: 16px 20px; background: var(--surface); border: 2px solid var(--accent); border-radius: 8px; font-size: 1.05rem; line-height: 1.7; }
+/* /site-map：開業準備の道のり */
+.map-journey { margin: 0; padding-left: 1.4em; display: grid; gap: 8px; }
+.map-journey li { overflow-wrap: anywhere; }
+.map-journey .map-category { margin-left: 8px; }

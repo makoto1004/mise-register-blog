@@ -1,5 +1,6 @@
 import { getAllPosts } from '@/lib/posts';
 import { SITE, CATEGORIES, SERVICES_OPEN } from '@/lib/site';
+import { JOURNEY_STEPS } from '@/lib/journey';
 
 // Static Export でも sitemap.xml を出力するために静的生成を指定する
 export const dynamic = 'force-static';
@@ -14,5 +15,7 @@ export default function sitemap() {
   }));
   // 有料の作業代行のページは、受付を始めてから載せる
   const services = SERVICES_OPEN ? [{ url: `${SITE.url}/services` }] : [];
-  return [{ url: `${SITE.url}/` }, { url: `${SITE.url}/site-map` }, { url: `${SITE.url}/search` }, { url: `${SITE.url}/opening-checklist` }, { url: `${SITE.url}/templates` }, ...services, ...categories, ...posts];
+  // 開業準備の道のりの 4 ページ
+  const journey = JOURNEY_STEPS.map((step) => ({ url: `${SITE.url}${step.path}` }));
+  return [{ url: `${SITE.url}/` }, { url: `${SITE.url}/site-map` }, { url: `${SITE.url}/search` }, { url: `${SITE.url}/opening-checklist` }, { url: `${SITE.url}/templates` }, ...journey, ...services, ...categories, ...posts];
 }
