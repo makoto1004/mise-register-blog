@@ -29,7 +29,7 @@ const mincho = Noto_Serif_JP({
 });
 
 // ヘッダーのメニューに出す短い名前（道のりの 4 ステップ。パスは JOURNEY_STEPS から取る）
-const MENU_LABELS = { find: '探す', devices: '周辺機器', setup: '導入ガイド', after: '開業したあと' };
+const MENU_LABELS = { find: 'レジを探す', devices: '周辺機器', setup: '導入ガイド', after: '開業したあと' };
 
 export const metadata = {
   metadataBase: new URL(SITE.url),
@@ -89,7 +89,7 @@ export default function RootLayout({ children }) {
               <XHeaderTimeline account={SITE.xAccount} />
             </div>
           </div>
-          <nav className="menu-bar" aria-label="開業準備の道のり">
+          <nav className="menu-bar" aria-label="メインメニュー">
             <ul>
               {JOURNEY_STEPS.map((step) => (
                 <li key={step.id}>
@@ -161,12 +161,6 @@ export default function RootLayout({ children }) {
                 >
                   Instagram（@{SITE.instagramAccount}）
                 </a>
-              </li>
-              {/* お店の数字と管理（売上・在庫などの記事） */}
-              <li>
-                <Link href="/category/management" className="underline-link">
-                  お店の数字と管理
-                </Link>
               </li>
               {/* AI 無料相談（フォームの URL が未設定のあいだは、ページに「準備中」と出る） */}
               <li>

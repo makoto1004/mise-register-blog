@@ -105,13 +105,12 @@ a:hover { text-decoration: underline; }
 .footer-logo .logo-amp { font-size: 2.4rem; }
 .footer-logo .logo-register { font-size: 1.2rem; }
 
-/* スマホは指で横にすべらせる（バーは出さない）。パソコンは折り返して全部見せる */
-.menu-bar { margin-top: 18px; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
-.menu-bar::-webkit-scrollbar { display: none; }
-.menu-bar ul { display: flex; gap: 0 24px; list-style: none; margin: 0; padding: 0 0 12px; white-space: nowrap; }
+/* スマホもパソコンも折り返して、メニューを全部見せる（スマホは 2 行になる） */
+.menu-bar { margin-top: 18px; border-bottom: 1px solid var(--line); }
+.menu-bar ul { display: flex; flex-wrap: wrap; gap: 6px 18px; list-style: none; margin: 0; padding: 0 0 12px; }
+.menu-bar li { white-space: nowrap; }
 @media (min-width: 768px) {
-  .menu-bar { overflow: visible; }
-  .menu-bar ul { flex-wrap: wrap; gap: 4px 20px; }
+  .menu-bar ul { gap: 4px 20px; }
   .menu-bar ul a { font-size: 0.8rem; }
   /* サイトマップはフッターにあるので、パソコンの上のメニューからは外す */
   .menu-sitemap { display: none; }
@@ -1259,7 +1258,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 /* 開業準備の道のり（1→4）：左にテラコッタの太線、明朝の番号、白い面 */
 .journey-steps { list-style: none; margin: 0 0 20px; padding: 0; display: grid; grid-template-columns: 1fr; gap: 10px; }
 .journey-step { min-width: 0; background: #fff; border-left: 6px solid var(--accent); }
-.journey-step[aria-current="step"] { background: var(--surface); }
+.journey-step:has([aria-current="page"]) { background: var(--surface); }
 .journey-step-link { display: flex; align-items: center; gap: 14px; padding: 12px 16px; color: var(--text); }
 .journey-step-link:hover { text-decoration: none; background: var(--surface); }
 .journey-step-number { flex: none; font-family: var(--font-mincho), "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 1.9rem; font-weight: 800; line-height: 1; color: var(--accent); }
@@ -1299,6 +1298,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .pos-diagnosis-option input { flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--accent); }
 .pos-diagnosis-button { padding: 10px 22px; font: inherit; font-weight: 800; color: #fff; background: var(--accent); border: 0; cursor: pointer; }
 .pos-diagnosis-button:hover { filter: brightness(0.92); }
+.pos-diagnosis-button:disabled { opacity: 0.5; cursor: not-allowed; filter: none; }
 .pos-diagnosis-result:not(:empty) { margin-top: 18px; }
 .pos-diagnosis-error { margin: 0; font-weight: 800; color: var(--cons); }
 .pos-diagnosis-result-group h3 { margin: 14px 0 6px; padding-left: 10px; font-size: 1rem; border-left: 6px solid var(--accent); }

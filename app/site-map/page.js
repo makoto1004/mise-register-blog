@@ -96,6 +96,22 @@ export default function SiteMapPage() {
           })}
         </div>
       </section>
+
+      <section id="others" className="map-section">
+        <h2>そのほかのページ</h2>
+        <ul>
+          <li>
+            <Link href="/templates" className="underline-link">
+              Excel テンプレート
+            </Link>
+          </li>
+          <li>
+            <Link href="/services" className="underline-link">
+              作業代行のできること・できないこと
+            </Link>
+          </li>
+        </ul>
+      </section>
     </article>
   );
 }

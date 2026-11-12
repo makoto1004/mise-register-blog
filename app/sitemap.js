@@ -13,7 +13,7 @@ export default function sitemap() {
   const categories = Object.keys(CATEGORIES).map((slug) => ({
     url: `${SITE.url}/category/${slug}`,
   }));
-  // 有料の作業代行のページは、受付を始めてから載せる
+  // 作業代行（できること・できないこと）のページ。受付の前も常に載せる
   const services = [{ url: `${SITE.url}/services` }];
   // 開業準備の道のりの 4 ページ
   const journey = JOURNEY_STEPS.map((step) => ({ url: `${SITE.url}${step.path}` }));

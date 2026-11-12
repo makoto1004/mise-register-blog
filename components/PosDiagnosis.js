@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { DIAGNOSIS_QUESTIONS, diagnosePos } from '@/lib/posDiagnosis';
 
@@ -20,12 +20,18 @@ export default function PosDiagnosis({ posts }) {
 
   const titleBySlug = new Map(posts.map((post) => [post.slug, post.title]));
 
+  // 読み込みが終わる（JavaScript が動く）まではボタンを押せないようにする
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   function selectAnswer(id, value) {
     setAnswers((prev) => ({ ...prev, [id]: value }));
+    // 答えを変えたら、前の結果とメッセージは消す
+    setStatus(null);
+    setResult(null);
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  function handleSubmit() {
     const found = diagnosePos(answers, new Set(posts.map((post) => post.slug)));
     if (!found) {
       setResult(null);
@@ -40,7 +46,11 @@ export default function PosDiagnosis({ posts }) {
     <section className="pos-diagnosis" aria-labelledby="pos-diagnosis-heading">
       <h2 id="pos-diagnosis-heading" className="pos-diagnosis-title">3つの質問で、合う記事を探す</h2>
       <p className="pos-diagnosis-note">答えはこの画面の中だけで使い、どこにも送りません。</p>
-      <form onSubmit={handleSubmit}>
+      {/* form は使わない（読み込み前に送信されて、答えが URL やアクセス記録に残るのを防ぐため） */}
+      <noscript>
+        <p className="pos-diagnosis-note">診断は JavaScript を使います。下の「業種から探す」からも記事を探せます。</p>
+      </noscript>
+      <div>
         {DIAGNOSIS_QUESTIONS.map((question) => (
           <fieldset key={question.id} className="pos-diagnosis-group">
             <legend>{question.label}</legend>
@@ -58,8 +68,10 @@ export default function PosDiagnosis({ posts }) {
             ))}
           </fieldset>
         ))}
-        <button type="submit" className="pos-diagnosis-button">合う記事を探す</button>
-      </form>
+        <button type="button" className="pos-diagnosis-button" onClick={handleSubmit} disabled={!mounted}>
+          合う記事を探す
+        </button>
+      </div>
 
       <div className="pos-diagnosis-result" aria-live="polite">
         {status === 'missing' && <p className="pos-diagnosis-error">3つとも選んでください</p>}
