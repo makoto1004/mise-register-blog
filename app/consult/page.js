@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { SITE } from '@/lib/site';
+import { SITE, CONSULT_FREE_NOTE } from '@/lib/site';
 import ConsultFormFrame from '@/components/ConsultFormFrame';
 
 export const metadata = {
@@ -43,16 +43,30 @@ export default function ConsultPage() {
           「mise &amp; register AI相談デスク」では、お店のレジまわりの困りごとを、下のフォームから無料で相談できます。AI アシスタントの「レジまる」（プリンター・スキャナーなどの担当）と「ポスタ」（POSレジ・決済端末・ネットワークなどの担当）が回答の下書きを作り、運営者が内容を確認してから、メールでお返しします。
         </p>
 
+        <p className="consult-free-box">
+          <strong>{CONSULT_FREE_NOTE}</strong>
+        </p>
+
         <h2>相談できること</h2>
+        <h3>選び方</h3>
         <ul>
-          <li>POSレジ・決済端末（選び方・使い方・設定・トラブル）</li>
-          <li>ハンディターミナル・バーコードリーダー・モバイルスキャナー</li>
-          <li>レシートプリンター・ラベルプリンター・キャッシュドロア</li>
-          <li>業務用のAndroid端末（Android Enterprise を含む）</li>
-          <li>ネットワーク機器（Wi-Fiアクセスポイント・ルーター・スイッチ・LAN配線）</li>
+          <li>POSレジ・決済端末の選び方</li>
+          <li>ハンディターミナル・バーコードリーダー・モバイルスキャナー、レシートプリンター・ラベルプリンター・キャッシュドロアの選び方</li>
+          <li>業務用のAndroid端末（Android Enterprise を含む）やネットワーク機器（Wi-Fiアクセスポイント・ルーター・スイッチ・LAN配線）の選び方</li>
+        </ul>
+        <h3>使い方</h3>
+        <ul>
+          <li>POSレジ・決済端末の使い方と設定</li>
+          <li>プリンター・キャッシュドロア・スキャナーをレジにつなぐ設定</li>
+          <li>業務用のAndroid端末の設定、お店のネットワークのつなぎ方</li>
+        </ul>
+        <h3>エラーや障害</h3>
+        <ul>
+          <li>POSレジ・決済端末のトラブル</li>
+          <li>ハンディターミナル・バーコードリーダー・プリンター・キャッシュドロアのエラーや動かないとき</li>
+          <li>業務用のAndroid端末やネットワーク機器（Wi-Fi・ルーター・スイッチ・LAN）の不具合</li>
         </ul>
         <p>これ以外のご相談（集客・メニュー・経営全般、Windowsパソコン・Microsoft 365 の相談など）にはお答えできません。</p>
-
         <h2>記入例</h2>
         <p>
           「いつから」「画面やランプの表示」「機種名」などが分かると、原因をしぼりこみやすくなります。分からないところは空欄で大丈夫です。
@@ -106,7 +120,7 @@ export default function ConsultPage() {
         <h2>ご利用の前に</h2>
         <ul>
           <li>運営者が確認してからお送りするため、回答まで数日かかることがあります。</li>
-          <li>ご相談は、同じメールアドレスから1か月に3回までとさせていただきます。</li>
+          <li>無料のご相談は、同じメールアドレスから1か月に3回までです（相談のあとに料金を請求することはありません）。</li>
           <li>回答は一般的な情報です。製品の仕様・料金・設定は変わることがあるため、最終的には各メーカー・サービスの公式情報やサポート窓口でご確認ください。</li>
           <li>税金・法律・許可などの個別の判断にはお答えできません。</li>
           <li>
@@ -116,6 +130,7 @@ export default function ConsultPage() {
             相談内容は、回答を作るために AI サービス（Anthropic の Claude）に送ります。詳しくは<Link href="/about">プライバシーポリシー</Link>をご覧ください。
           </li>
           <li>内容によっては、お答えできない場合があります。</li>
+          <li>資料づくりなど有料の作業は、無料の相談とは別です。<Link href="/services">作業代行のページ</Link>で、できること・できないことと、ココナラでの見積もり相談を案内しています。</li>
         </ul>
       </div>
 
