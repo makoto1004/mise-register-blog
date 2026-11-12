@@ -1332,3 +1332,37 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   .checklist-toast { animation: none; }
 }
 .checklist :focus-visible, .checklist-toast button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* 開業準備の道のり（1→4）：左にテラコッタの太線、明朝の番号、白い面 */
+.journey-steps { list-style: none; margin: 0 0 20px; padding: 0; display: grid; grid-template-columns: 1fr; gap: 10px; }
+.journey-step { min-width: 0; background: #fff; border-left: 6px solid var(--accent); }
+.journey-step[aria-current="step"] { background: var(--surface); }
+.journey-step-link { display: flex; align-items: center; gap: 14px; padding: 12px 16px; color: var(--text); }
+.journey-step-link:hover { text-decoration: none; background: var(--surface); }
+.journey-step-number { flex: none; font-family: var(--font-mincho), "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 1.9rem; font-weight: 800; line-height: 1; color: var(--accent); }
+.journey-step-body { display: grid; min-width: 0; gap: 2px; }
+.journey-step-name { font-weight: 800; }
+.journey-step-lead { font-size: 0.8rem; color: var(--muted); overflow-wrap: anywhere; }
+@media (min-width: 768px) { .journey-steps { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1260px) { .journey-steps { grid-template-columns: repeat(4, 1fr); } }
+.journey-post-list { margin-top: 24px; }
+.home-checklist + .journey-post-list { margin-top: 28px; }
+
+/* 無料・有料の 2 つの枠 */
+.help-choices { margin-top: 36px; }
+.help-choices-title { margin: 0 0 12px; font-size: 1.25rem; font-weight: 800; }
+.help-choices-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 768px) { .help-choices-grid { grid-template-columns: repeat(2, 1fr); } }
+.help-box { min-width: 0; padding: 18px 20px; overflow-wrap: anywhere; }
+.help-box p { margin: 8px 0 0; }
+.help-free { border: 2px solid var(--pros); background: #fff; }
+.help-paid { border: 2px solid var(--border); background: var(--surface); }
+.help-label { display: inline-block; margin: 0; padding: 2px 10px; font-size: 0.8rem; font-weight: 800; color: #fff; }
+.help-free .help-label { background: var(--pros); }
+.help-paid .help-label { background: var(--text); }
+.help-heading { margin: 8px 0 0; font-size: 1.15rem; font-weight: 800; }
+.help-note { font-size: 0.875rem; color: var(--muted); }
+.help-button { display: inline-block; margin-top: 14px; padding: 10px 22px; font-weight: 800; color: #fff; background: var(--pros); }
+.help-button:hover { text-decoration: none; filter: brightness(0.92); }
+.help-link { display: inline-block; margin-top: 14px; font-weight: 700; text-decoration: underline; }
+.help-pending { font-weight: 700; color: var(--muted); }
