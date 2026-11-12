@@ -17,7 +17,7 @@ function normalize(text) {
 }
 
 // 言葉の例（押すと入力欄に入り、そのまま探す）
-const QUICK_WORDS = ['レシートプリンター', 'キャッシュレス決済', 'Wi-Fi・ネットワーク', 'キャッシュドロア', 'エラー・つながらない', '開業の費用'];
+const QUICK_WORDS = ['レシートプリンター', 'キャッシュレス決済', 'Wi-Fi・ネットワーク', 'キャッシュドロア', 'エラー・つながらない', '初期費用'];
 
 export default function PostSearch({ posts, categories, fixedCategory = '' }) {
   const [query, setQuery] = useState('');
