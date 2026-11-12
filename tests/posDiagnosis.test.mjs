@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import {
   DIAGNOSIS_QUESTIONS,
   DIAGNOSIS_RULES,
@@ -8,6 +9,8 @@ import {
 } from '../lib/posDiagnosis.js'
 import { JOURNEY_STEPS } from '../lib/journey.js'
 
+// プロジェクトのルート（テストを実行する場所に左右されないようにする）
+const ROOT = fileURLToPath(new URL('../', import.meta.url))
 const GROUPS = ['choose', 'devices', 'setup']
 const journeySlugs = JOURNEY_STEPS.flatMap((s) => s.slugs)
 // 対応表（DIAGNOSIS_RULES）の中の slug をすべて集める
@@ -42,7 +45,37 @@ test('filters unpublished slugs', () => {
   const rest = new Set(everySlug)
   rest.delete(target)
   const r = diagnosePos(a, rest)
-  for (const g of GROUPS) assert.ok(!r[g].includes(target))
+  for (const g of GROUPS) {
+    assert.ok(!r[g].includes(target))
+    assert.ok(r[g].length > 0)
+  }
+})
+
+test('keeps shop, flow, budget order and removes duplicates', () => {
+  const a = { shop: 'food', flow: 'prepay', budget: 'full' }
+  // 飲食→先払い→本格 の順に連結し、重複（receipt-printer-comparison など）を除いた先頭2本
+  assert.deepEqual(diagnosePos(a, everySlug).devices, ['pos-peripherals-guide', 'receipt-printer-comparison'])
+  // 先頭2本が未公開なら、次の2本（連結順どおり）が繰り上がる
+  const rest = new Set(everySlug)
+  rest.delete('pos-peripherals-guide')
+  rest.delete('receipt-printer-comparison')
+  assert.deepEqual(diagnosePos(a, rest).devices, ['cash-drawer-comparison', 'scanner-phone-screen-code'])
+})
+
+test('fills only the empty group from the matching journey step', () => {
+  const a = { shop: 'food', flow: 'prepay', budget: 'full' }
+  const before = diagnosePos(a, everySlug)
+  const rest = new Set(everySlug)
+  for (const byValue of [DIAGNOSIS_RULES.shop.food, DIAGNOSIS_RULES.flow.prepay, DIAGNOSIS_RULES.budget.full]) {
+    for (const s of byValue.devices) rest.delete(s)
+  }
+  const r = diagnosePos(a, rest)
+  const step = JOURNEY_STEPS.find((s) => s.id === 'devices')
+  assert.equal(r.fallbackToConsult, false)
+  assert.ok(r.devices.length > 0)
+  for (const s of r.devices) assert.ok(step.slugs.includes(s))
+  assert.deepEqual(r.choose, before.choose)
+  assert.deepEqual(r.setup, before.setup)
 })
 
 test('falls back when a group is empty', () => {
@@ -57,7 +90,8 @@ test('falls back when a group is empty', () => {
 
 test('every rule slug exists', () => {
   for (const slug of everySlug) {
-    const ok = fs.existsSync(`content/posts/${slug}.md`) || fs.existsSync(`scheduled/${slug}.md`)
+    // scheduled/ は git に入れない予約記事の置き場（運営者のパソコンにだけある）も見る
+    const ok = fs.existsSync(`${ROOT}content/posts/${slug}.md`) || fs.existsSync(`${ROOT}scheduled/${slug}.md`)
     assert.ok(ok, `${slug} が content/posts にも scheduled にもありません`)
   }
 })
