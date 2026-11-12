@@ -1,13 +1,8 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import PostCard from '@/components/PostCard';
-
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+import { CATEGORIES } from '@/lib/site';
 
 // 記事を言葉とカテゴリーでしぼり込む検索（ブラウザの中だけで動く。サーバーは使わない）
 // fixedCategory を渡すとそのカテゴリーの中だけを探し、カテゴリーのボタンは出さない（カテゴリーのページ用）
@@ -21,18 +16,14 @@ function normalize(text) {
     .replace(/[ァ-ヶ]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0x60));
 }
 
-// 検索結果が 0 件のときに候補として出す言葉
-const SUGGESTED_WORDS = ['レシートプリンター', 'キャッシュレス', '会計ソフト', '初期費用', '商品登録', 'Wi-Fi', '物件'];
+// 言葉の例（押すと入力欄に入り、そのまま探す）
+const QUICK_WORDS = ['レシートプリンター', 'キャッシュレス決済', 'Wi-Fi・ネットワーク', 'キャッシュドロア', 'エラー・つながらない', '開業の費用'];
 
-// ボタン用の短いカテゴリー名（「カフェ・飲食店向け」→「カフェ・飲食店」）
-const shortName = (name) => name.replace(/向け$/, '').replace(/（共通）$/, '');
-
-export default function PostSearch({ posts, categories, fixedCategory = '', latestSlugs = [] }) {
+export default function PostSearch({ posts, categories, fixedCategory = '' }) {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState(fixedCategory);
   // URL の条件を読み込むまでは、URL を書きかえない（読む前に消してしまわないように）
   const [ready, setReady] = useState(false);
-  const latest = useMemo(() => new Set(latestSlugs), [latestSlugs]);
 
   // URL に検索の条件があれば、最初に読み込む
   useEffect(() => {
@@ -56,59 +47,15 @@ export default function PostSearch({ posts, categories, fixedCategory = '', late
     () => posts.map((post) => ({ post, text: normalize([post.title, post.description, ...post.tags, categories[post.category] ?? ''].join(' ')) })),
     [posts, categories],
   );
-  const terms = normalize(query).split(/\s+/).filter(Boolean);
-  const inCategory = indexed.filter(({ post }) => !category || post.category === category);
-  const results = inCategory.filter(({ text }) => terms.every((t) => text.includes(t))).map(({ post }) => post);
-  // 0 件のときに出す言葉の候補（今のカテゴリーで 1 件以上見つかるものだけ）
-  const suggestions = SUGGESTED_WORDS.filter((word) => {
-    const t = normalize(word);
-    return inCategory.some(({ text }) => text.includes(t));
-  }).slice(0, 5);
-
-  const counts = useMemo(() => {
-    const c = {};
-    for (const { post } of indexed) c[post.category] = (c[post.category] ?? 0) + 1;
-    return c;
-  }, [indexed]);
-
-  // カードの動き（GSAP）。画面の下のカードはスクロールで見えたときにふわっと出す
-  // 言葉やカテゴリーを変えたときは、見えているカードも順番に出して「結果が変わった」と分かるようにする
-  // 最初に開いたときに見えているカードは動かさない（表示の速さに影響させない）
-  const listRef = useRef(null);
-  const firstRun = useRef(true);
-  const resultKey = results.map((post) => post.slug).join(',');
-  useGSAP(
-    () => {
-      const isFirst = firstRun.current;
-      firstRun.current = false;
-      const mm = gsap.matchMedia();
-      mm.add('(prefers-reduced-motion: no-preference)', () => {
-        const cards = gsap.utils.toArray(listRef.current?.children ?? []);
-        const targets = isFirst ? cards.filter((el) => el.getBoundingClientRect().top > window.innerHeight) : cards;
-        if (!targets.length) return;
-        gsap.set(targets, { opacity: 0, y: 20 });
-        ScrollTrigger.batch(targets, {
-          start: 'top bottom',
-          once: true,
-          onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out', stagger: 0.05, overwrite: true }),
-        });
-        // Tab キーで、まだ出ていないカードに移ったら、すぐに出す
-        const showOnFocus = (e) => {
-          const card = e.target.closest?.('.post-card');
-          if (card) gsap.to(card, { opacity: 1, y: 0, duration: 0.2, overwrite: true });
-        };
-        listRef.current?.addEventListener('focusin', showOnFocus);
-        const list = listRef.current;
-        return () => list?.removeEventListener('focusin', showOnFocus);
-      });
-      return () => mm.revert();
-    },
-    { dependencies: [resultKey], revertOnUpdate: true },
-  );
+  // 空白で区切った言葉は「すべて含む」、「・」で区切った言葉は「どれかを含む」で探す（例：Wi-Fi・ネットワーク）
+  const terms = normalize(query).split(/\s+/).filter(Boolean).map((t) => t.split('・').filter(Boolean));
+  const results = indexed
+    .filter(({ post, text }) => (!category || post.category === category) && terms.every((alts) => alts.some((t) => text.includes(t))))
+    .map(({ post }) => post);
 
   return (
     <div className="post-search">
-      <div className="search-box">
+      <form className="search-box" role="search" onSubmit={(e) => e.preventDefault()}>
         <label htmlFor="post-search-input" className="search-label">
           {fixedCategory ? 'このカテゴリーの記事を探す' : '言葉で探す'}
         </label>
@@ -118,69 +65,67 @@ export default function PostSearch({ posts, categories, fixedCategory = '', late
           className="search-input"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="例：レシートプリンター　キャッシュレス"
+          placeholder="例：レシートプリンター"
           autoComplete="off"
+          enterKeyHint="search"
         />
-      </div>
+      </form>
 
       {!fixedCategory && (
-        <div className="search-categories" role="group" aria-label="カテゴリーでしぼる">
-          <button type="button" className="search-chip" aria-pressed={!category} onClick={() => setCategory('')}>
-            すべて<span className="search-chip-count">{posts.length}</span>
-          </button>
-          {Object.entries(categories).map(([slug, name]) => (
-            <button key={slug} type="button" className="search-chip" aria-pressed={category === slug} onClick={() => setCategory(slug)}>
-              {shortName(name)}
-              <span className="search-chip-count">{counts[slug] ?? 0}</span>
-            </button>
-          ))}
-        </div>
+        <>
+          <div className="search-words" role="group" aria-label="よく探される言葉">
+            {QUICK_WORDS.map((word) => (
+              <button key={word} type="button" className="search-chip" aria-pressed={query === word} onClick={() => setQuery(word)}>
+                {word}
+              </button>
+            ))}
+          </div>
+          <div className="search-select-row">
+            <label htmlFor="post-search-category" className="search-label">
+              お店の種類
+            </label>
+            <select id="post-search-category" className="search-select" value={category} onChange={(e) => setCategory(e.target.value)}>
+              <option value="">すべて</option>
+              {Object.entries(categories).map(([slug, name]) => (
+                <option key={slug} value={slug}>
+                  {name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </>
       )}
 
       <p className="search-count" aria-live="polite">
-        {terms.length || (category && !fixedCategory) ? `${results.length}件の記事が見つかりました` : `${results.length}件の記事`}
+        {results.length}件
       </p>
 
       {results.length === 0 ? (
-        // 0 件のときは、次にできること（言葉の候補・条件を外す・チェックリスト）を出す
         <div className="search-empty">
-          <p className="search-empty-title">
-            {query ? `「${query}」に合う記事は見つかりませんでした` : 'このカテゴリーの記事はまだありません'}
-          </p>
-          <p className="search-empty-hint">言葉を短くするか、ちがう言い方で探してみてください。</p>
-          {suggestions.length > 0 && (
-            <div className="search-suggest">
-              <span className="search-suggest-label">この言葉なら見つかります：</span>
-              {suggestions.map((word) => (
-                <button key={word} type="button" className="search-chip" onClick={() => setQuery(word)}>
-                  {word}
-                </button>
-              ))}
-            </div>
-          )}
-          <div className="search-empty-actions">
-            {category && !fixedCategory && (
-              <button type="button" className="search-clear" onClick={() => setCategory('')}>
-                カテゴリーを「すべて」にする
-              </button>
-            )}
-            {query && (
-              <button type="button" className="search-clear" onClick={() => setQuery('')}>
-                言葉を消す
-              </button>
-            )}
-            <Link href="/opening-checklist" className="underline-link">
-              開業準備チェックリストから探す
+          <p className="search-empty-title">見つかりませんでした。別の言葉で探してください（例：プリンター、Wi-Fi）</p>
+          <p className="search-empty-actions">
+            <Link href="/find" className="underline-link">
+              POS レジを探す（3つの質問）
             </Link>
-          </div>
+          </p>
         </div>
       ) : (
-        <ul className="card-grid" ref={listRef}>
+        <ul className="search-results">
           {results.map((post) => (
-            <PostCard key={post.slug} post={post} showCategory={!fixedCategory} isLatest={latest.has(post.slug)} />
+            <li key={post.slug} className="search-result">
+              <Link href={`/posts/${post.slug}`} className="search-result-title">
+                {post.title}
+              </Link>
+              {post.description && <p className="search-result-desc">{post.description}</p>}
+              <p className="search-result-meta">
+                <time dateTime={post.date}>{post.date.replaceAll('-', '/')}</time>
+                {!fixedCategory && CATEGORIES[post.category] && <span>{CATEGORIES[post.category]}</span>}
+              </p>
+            </li>
           ))}
         </ul>
       )}
     </div>
   );
 }
+

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import CategoryTabs from '@/components/CategoryTabs';
 import PostSearch from '@/components/PostSearch';
-import { getAllPosts, getPostsByCategory, getLatestPosts, toSearchItem } from '@/lib/posts';
+import { getAllPosts, getPostsByCategory, toSearchItem } from '@/lib/posts';
 import { CATEGORIES, CATEGORY_DESCRIPTIONS } from '@/lib/site';
 
 // カテゴリー別の記事一覧。slug は ASCII にして静的ホスティングでの文字化けを避ける
@@ -23,7 +23,6 @@ export async function generateMetadata({ params }) {
 export default async function CategoryPage({ params }) {
   const { category } = await params;
   const posts = getPostsByCategory(category);
-  const latestSlugs = getLatestPosts().map((post) => post.slug);
   const counts = {};
   for (const post of getAllPosts()) counts[post.category] = (counts[post.category] ?? 0) + 1;
 
@@ -38,7 +37,7 @@ export default async function CategoryPage({ params }) {
       {posts.length === 0 ? (
         <p>このカテゴリーの記事はまだありません。</p>
       ) : (
-        <PostSearch posts={posts.map(toSearchItem)} categories={CATEGORIES} fixedCategory={category} latestSlugs={latestSlugs} />
+        <PostSearch posts={posts.map(toSearchItem)} categories={CATEGORIES} fixedCategory={category} />
       )}
     </>
   );

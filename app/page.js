@@ -36,6 +36,19 @@ export default function Home() {
 
       <JourneySteps large />
 
+      {/* 記事を探す入力欄（JavaScript がなくても /search に言葉を渡せる、ふつうのフォーム） */}
+      <form className="home-search" action="/search" method="get" role="search">
+        <label htmlFor="home-search-input" className="home-search-label">
+          記事を探す
+        </label>
+        <div className="home-search-row">
+          <input id="home-search-input" type="search" name="q" className="search-input" placeholder="例：レシートプリンター" autoComplete="off" enterKeyHint="search" />
+          <button type="submit" className="home-search-button">
+            探す
+          </button>
+        </div>
+      </form>
+
       {/* AI無料POSレジ診断の小さな案内（受付先が未設定のときは「準備中」と出す） */}
       <section className="help-box help-free home-help" aria-labelledby="home-help-heading">
         <h2 id="home-help-heading" className="help-heading">

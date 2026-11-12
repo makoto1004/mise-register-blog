@@ -94,8 +94,9 @@ export default function RootLayout({ children }) {
               <Logo />
             </Link>
             <div className="header-social">
-              <Link href="/search" className="x-header-link" aria-label="記事を探す">
+              <Link href="/search" className="x-header-link header-search-link">
                 <SearchIcon />
+                <span className="header-search-label">記事を探す</span>
               </Link>
               <InstagramHeaderLink />
               <XHeaderTimeline account={SITE.xAccount} />
