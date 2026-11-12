@@ -74,13 +74,21 @@ const entries = fs
   .filter((f) => f.endsWith('.md'))
   .map((file) => {
     const raw = fs.readFileSync(path.join(SCHEDULED_DIR, file), 'utf8');
-    const { data } = matter(raw);
+    // フロントマターの書き方がこわれている記事が 1 本あっても、ほかの記事の公開は止めない（その記事だけ飛ばして記録に残す）
+    let data;
+    try {
+      ({ data } = matter(raw));
+    } catch (error) {
+      const line = error.mark ? `${error.mark.line + 1} 行目あたり、` : '';
+      return { file, error: `${line}${error.reason ?? error.message.split('\n')[0]}`, publishAt: null };
+    }
     return { file, raw, title: data.title, publishAt: parsePublishAt(data.publishAt), reviewed: data.reviewed !== false };
   })
   .sort((a, b) => (a.publishAt?.text ?? '').localeCompare(b.publishAt?.text ?? ''));
 
 for (const e of entries) {
-  if (!e.publishAt) log(`スキップ: ${e.file}（publishAt が「2026-10-18T12:00」の形ではありません）`);
+  if (e.error) log(`スキップ: ${e.file}（フロントマターを読めません：${e.error}。「: 」や行頭の「**」などを直してください）`);
+  else if (!e.publishAt) log(`スキップ: ${e.file}（publishAt が「2026-10-18T12:00」の形ではありません）`);
 }
 
 const timeReached = entries.filter((e) => e.publishAt && e.publishAt.date <= now);
