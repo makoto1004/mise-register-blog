@@ -458,11 +458,16 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 }
 .comparison-table thead th { background: var(--surface); white-space: nowrap; }
 .comparison-table tbody th { min-width: 160px; }
+/* 横スクロールの手がかり（スマホ）: 右端の影と「横にスクロールできます」の案内。デスクトップでは表示しない */
+.scroll-hint { display: none; }
+.table-scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 /* スマホでは横にスクロールしても商品名が見えるよう、商品名の列を左に固定し、ほかの列は細くなりすぎないようにする */
 @media (max-width: 640px) {
   .comparison-table tbody th, .comparison-table thead th:first-child { position: sticky; left: 0; z-index: 1; min-width: 8.5em; max-width: 8.5em; background: var(--bg); box-shadow: 1px 0 0 var(--line); }
   .comparison-table thead th:first-child { background: var(--surface); }
   .comparison-table td { min-width: 9em; }
+  .scroll-hint { display: block; margin: 12px 0 -10px; font-size: 0.75rem; color: var(--muted); text-align: right; }
+  .table-scroll { background: linear-gradient(to left, rgba(47, 39, 37, 0.18), rgba(47, 39, 37, 0) 14px) right center / 14px 100% no-repeat scroll; }
 }
 
 .badge {
@@ -729,7 +734,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .sim-input input:disabled { opacity: 0.4; }
 .sim-input .sim-rate { width: 4.5em; }
 .sim-fee { align-items: flex-start; }
-.sim-fee-inputs { display: flex; flex-wrap: wrap; gap: 6px 12px; }
+.sim-fee-inputs { display: flex; flex-wrap: wrap; gap: 6px 12px; max-width: 100%; min-width: 0; }
+/* 狭い画面では、ラベルと入力欄を折り返して、ページが横にはみ出さないようにする */
+@media (max-width: 640px) {
+  .sim-fee-inputs .sim-input { flex-wrap: wrap; white-space: normal; max-width: 100%; }
+}
 .sim-result { margin: 16px 0 0; display: grid; gap: 6px; }
 .sim-result div { display: flex; justify-content: space-between; gap: 12px; font-size: 0.9rem; }
 .sim-result dt { font-weight: 700; }
