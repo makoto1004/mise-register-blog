@@ -28,7 +28,9 @@ export default function Home() {
       <section className="home-hero">
         <h1>
           <span className="sr-only">mise &amp; register </span>
-          開業前に、POS レジと周辺機器を「つながる組み合わせ」で選ぶ
+          開業前に、POS レジと周辺機器を
+          <br />
+          「つながる組み合わせ」で選ぶ
         </h1>
       </section>
 

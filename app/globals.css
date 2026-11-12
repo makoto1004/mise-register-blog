@@ -1205,8 +1205,19 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .pos-diagnosis-note { margin: 0 0 14px; font-size: 0.8rem; color: var(--muted); }
 .pos-diagnosis-group { min-width: 0; margin: 0 0 14px; padding: 0; border: 0; }
 .pos-diagnosis-group legend { padding: 0; margin-bottom: 6px; font-weight: 800; }
-.pos-diagnosis-option { display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px; margin-bottom: 4px; background: var(--surface); cursor: pointer; overflow-wrap: anywhere; }
-.pos-diagnosis-option input { flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--accent); }
+/* 選択肢：枠のある行。選んだ行は差し色の太い枠と薄い色の背景で、ひと目で分かるようにする */
+.pos-diagnosis-option { display: flex; align-items: center; gap: 12px; padding: 10px 12px; margin-bottom: 6px; background: #fff; border: 2px solid var(--line); cursor: pointer; overflow-wrap: anywhere; transition: border-color 0.15s, background-color 0.15s; }
+.pos-diagnosis-option:hover { border-color: var(--muted); }
+.pos-diagnosis-option:has(input:checked) { border-color: var(--accent); background: var(--badge-bg); font-weight: 800; }
+/* ラジオボタン：標準の細い丸をやめ、濃い色の太い丸にする。選ぶと中に差し色の点が入る */
+.pos-diagnosis-option input { flex: none; appearance: none; -webkit-appearance: none; width: 22px; height: 22px; margin: 0; border: 2px solid var(--text); border-radius: 50%; background: #fff; display: grid; place-content: center; cursor: pointer; }
+.pos-diagnosis-option input::before { content: ''; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); transform: scale(0); transition: transform 0.12s; }
+.pos-diagnosis-option input:checked { border-color: var(--accent); }
+.pos-diagnosis-option input:checked::before { transform: scale(1); }
+.pos-diagnosis-option input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  .pos-diagnosis-option, .pos-diagnosis-option input::before { transition: none; }
+}
 .pos-diagnosis-button { padding: 10px 22px; font: inherit; font-weight: 800; color: #fff; background: var(--accent); border: 0; cursor: pointer; }
 .pos-diagnosis-button:hover { filter: brightness(0.92); }
 .pos-diagnosis-button:disabled { opacity: 0.5; cursor: not-allowed; filter: none; }
