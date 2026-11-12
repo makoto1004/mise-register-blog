@@ -1,8 +1,41 @@
 import AmazonButton from '@/components/AmazonButton';
 
-// 商品の specs を列にした比較表。列は全商品の specs のキーを登場順に集めたもの
+// 表の中で、値が入っているマスの割合がこれより少ないときは、表をやめて「商品ごとの一覧」で見せる
+// （iPad・プリンター・ロール紙のように種類のちがう商品を並べると、「—」ばかりの列が増えて読みにくくなるため）
+const MIN_FILL_RATIO = 0.6;
+
+// 商品の比較。specs のキーがそろっている商品どうしは表、そろっていないときは商品ごとの一覧にする
 export default function ComparisonTable({ products }) {
   const specKeys = [...new Set(products.flatMap((p) => Object.keys(p.specs)))];
+  const filled = products.reduce((sum, p) => sum + specKeys.filter((key) => p.specs[key] != null && p.specs[key] !== '').length, 0);
+  const total = products.length * specKeys.length;
+  const useList = total > 0 && filled / total < MIN_FILL_RATIO;
+
+  if (useList) {
+    return (
+      <ul className="spec-list">
+        {products.map((product, index) => (
+          <li key={product.name} className="spec-list-item">
+            <p className="spec-list-name">
+              <a href={`#product-${index + 1}`}>{product.name}</a>
+              {product.badge && <span className="badge">{product.badge}</span>}
+            </p>
+            {Object.keys(product.specs).length > 0 && (
+              <dl className="spec-list-specs">
+                {Object.entries(product.specs).map(([key, value]) => (
+                  <div key={key} className="spec-list-row">
+                    <dt>{key}</dt>
+                    <dd>{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+            <AmazonButton product={product} small />
+          </li>
+        ))}
+      </ul>
+    );
+  }
 
   return (
     <>

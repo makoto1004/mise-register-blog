@@ -436,6 +436,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 }
 .comparison-table thead th { background: var(--surface); white-space: nowrap; }
 .comparison-table tbody th { min-width: 160px; }
+/* 列が細くなりすぎて1〜2文字ずつ折り返さないよう、マスの最小幅を決める */
+.comparison-table td { min-width: 8em; }
+/* 種類のちがう商品をくらべるとき（表にすると空欄だらけになるとき）の、商品ごとの一覧 */
+.spec-list { list-style: none; margin: 16px 0 24px; padding: 0; display: grid; gap: 12px; }
+.spec-list-item { padding: 14px 16px; background: #fff; border: 1px solid var(--line); border-left: 5px solid var(--accent); }
+.spec-list-name { margin: 0 0 8px; font-weight: 800; overflow-wrap: anywhere; }
+.spec-list-name .badge { margin-left: 8px; }
+.spec-list-specs { margin: 0 0 10px; display: grid; gap: 4px; font-size: 0.9rem; }
+.spec-list-row { display: grid; grid-template-columns: 8em 1fr; gap: 10px; }
+.spec-list-row dt { color: var(--muted); font-weight: 700; }
+.spec-list-row dd { margin: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) { .spec-list-row { grid-template-columns: 1fr; gap: 0; } .spec-list-row dd { margin-bottom: 4px; } }
 /* 横スクロールの手がかり（スマホ）: 右端の影と「横にスクロールできます」の案内。デスクトップでは表示しない */
 .scroll-hint { display: none; }
 .table-scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
