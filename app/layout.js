@@ -29,6 +29,8 @@ const mincho = Noto_Serif_JP({
 });
 
 // ヘッダーのメニューに出す短い名前（道のりの 4 ステップ。パスは JOURNEY_STEPS から取る）
+const MENU_LABELS = { find: 'レジを探す', devices: '周辺機器', setup: '導入ガイド', after: '開業したあと' };
+
 // ヘッダーの虫めがね（記事を探す）のアイコン。文字は aria-label で伝える
 function SearchIcon() {
   return (
@@ -38,8 +40,6 @@ function SearchIcon() {
     </svg>
   );
 }
-
-const MENU_LABELS = { find: 'レジを探す', devices: '周辺機器', setup: '導入ガイド', after: '開業したあと' };
 
 export const metadata = {
   metadataBase: new URL(SITE.url),
@@ -221,7 +221,8 @@ export default function RootLayout({ children }) {
                   </li>
                 </ul>
               </section>
-            </div>            {/* Amazon アソシエイト・プログラムの規約で求められる表示 */}
+            </div>
+            {/* Amazon アソシエイト・プログラムの規約で求められる表示 */}
             <p className="footer-note">Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。</p>
             <p className="footer-note">© {SITE.name}</p>
           </div>

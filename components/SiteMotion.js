@@ -45,7 +45,8 @@ export default function SiteMotion() {
             { scaleX: 0 },
             { scaleX: 1, ease: 'none', scrollTrigger: { trigger: document.documentElement, start: 'top top', end: 'bottom bottom', scrub: 0.3 } },
           );
-        }      });
+        }
+      });
 
       // Tab キーで、まだ出ていない部品に移ったら、すぐに出す
       const showOnFocus = (e) => {
