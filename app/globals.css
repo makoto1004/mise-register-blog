@@ -1183,7 +1183,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .journey-step-name { font-weight: 800; }
 .journey-step-lead { font-size: 0.8rem; color: var(--muted); overflow-wrap: anywhere; }
 @media (min-width: 768px) { .journey-steps { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1260px) { .journey-steps { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1260px) { .journey-steps { grid-template-columns: repeat(5, 1fr); } }
+/* 道のりの 5（ジャンル別の記事）：業種・家具・豆知識の見出しで区切る */
+.genre-section { margin: 28px 0 0; }
+.genre-section h2 { font-size: 1.2rem; margin: 0 0 10px; padding-left: 10px; border-left: 4px solid var(--accent); }
 /* トップの道のり（大きい表示）：サイトのいちばんの入口。番号・名前を大きくし、濃い枠のカードにする */
 .journey-steps-large { gap: 14px; margin: 8px 0 32px; }
 .journey-steps-large .journey-step { border: 2px solid var(--border); border-left-width: 10px; border-left-color: var(--accent); box-shadow: 4px 4px 0 var(--line); transition: transform 0.15s, box-shadow 0.15s; }
@@ -1195,6 +1198,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .journey-steps-large .journey-step-name { font-family: var(--font-mincho), "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 1.35rem; line-height: 1.35; }
 .journey-steps-large .journey-step-lead { font-size: 0.95rem; }
 .journey-steps-large .journey-step-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+/* 5 つ並ぶと幅が細くなるので、大きい表示の名前を少し小さくして途中で折り返さないようにする */
+@media (min-width: 1260px) { .journey-steps-large .journey-step-link { padding: 18px 16px; gap: 12px; } .journey-steps-large .journey-step-name { font-size: 1.12rem; } .journey-steps-large .journey-step-lead { font-size: 0.85rem; } }
 @media (min-width: 1260px) { .journey-steps-large .journey-step-link { flex-direction: column; align-items: flex-start; min-height: 180px; } }
 @media (prefers-reduced-motion: reduce) { .journey-steps-large .journey-step { transition: none; } .journey-steps-large .journey-step:hover { transform: none; } }
 .journey-post-list { margin-top: 24px; }

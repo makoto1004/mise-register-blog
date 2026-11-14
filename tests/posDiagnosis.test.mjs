@@ -97,8 +97,22 @@ test('every rule slug exists', () => {
 })
 
 test('journey steps are fixed', () => {
-  assert.equal(JOURNEY_STEPS.length, 4)
-  assert.deepEqual(JOURNEY_STEPS.map((s) => s.number), [1, 2, 3, 4])
-  assert.deepEqual(JOURNEY_STEPS.map((s) => s.path), ['/find', '/devices-guide', '/setup-guide', '/after-opening'])
-  for (const s of JOURNEY_STEPS) assert.ok(s.slugs.length >= 4 && s.slugs.length <= 12)
+  assert.equal(JOURNEY_STEPS.length, 5)
+  assert.deepEqual(JOURNEY_STEPS.map((s) => s.number), [1, 2, 3, 4, 5])
+  assert.deepEqual(JOURNEY_STEPS.map((s) => s.path), ['/find', '/devices-guide', '/setup-guide', '/after-opening', '/shop-genre'])
+  // 1〜4 は記事の一覧で案内する。5 は業種のカテゴリーと、家具・豆知識のまとまりで紹介する
+  for (const s of JOURNEY_STEPS.slice(0, 4)) assert.ok(s.slugs.length >= 4 && s.slugs.length <= 12)
+  const genre = JOURNEY_STEPS[4]
+  assert.deepEqual(genre.sections.map((x) => x.title), ['家具', '豆知識'])
+  for (const x of genre.sections) assert.ok(x.slugs.length >= 4 && x.slugs.length <= 12)
+})
+
+test('genre step points to real categories and posts', () => {
+  const genre = JOURNEY_STEPS.find((s) => s.id === 'genre')
+  const siteJs = fs.readFileSync(`${ROOT}lib/site.js`, 'utf8')
+  for (const slug of genre.categories) assert.ok(siteJs.includes(`'${slug}':`) || siteJs.includes(`  ${slug}:`), `${slug} が CATEGORIES にありません`)
+  for (const slug of genre.sections.flatMap((x) => x.slugs)) {
+    const ok = fs.existsSync(`${ROOT}content/posts/${slug}.md`) || fs.existsSync(`${ROOT}scheduled/${slug}.md`)
+    assert.ok(ok, `${slug} が content/posts にも scheduled にもありません`)
+  }
 })

@@ -28,8 +28,8 @@ const mincho = Noto_Serif_JP({
   preload: false,
 });
 
-// ヘッダーのメニューに出す短い名前（道のりの 4 ステップ。パスは JOURNEY_STEPS から取る）
-const MENU_LABELS = { find: 'レジを探す', devices: '周辺機器', setup: '導入ガイド', after: '開業したあと' };
+// ヘッダーのメニューに出す短い名前（道のりの 5 ステップ。パスは JOURNEY_STEPS から取る）
+const MENU_LABELS = { find: 'レジの選び方', devices: '周辺機器', setup: '導入ガイド', after: '開業後・代行', genre: 'ジャンル別' };
 
 // ヘッダーの虫めがね（記事を探す）のアイコン。文字は aria-label で伝える
 function SearchIcon() {

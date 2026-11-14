@@ -7,8 +7,8 @@ import { JOURNEY_STEPS } from '@/lib/journey';
 const STEP = JOURNEY_STEPS.find((step) => step.id === 'after');
 
 export const metadata = {
-  title: '開業したあと（トラブルの直し方・相談）',
-  description: 'レシートが出ない・ドロアが開かないなど、開業後の POS レジのトラブルの直し方と、無料の AI 相談・有料の資料づくりの案内です。',
+  title: '開業したあと・作業代行（トラブルの直し方・相談・資料づくり）',
+  description: 'レシートが出ない・ドロアが開かないなど、開業後の POS レジのトラブルの直し方と、無料の AI 相談・有料の作業代行（資料づくり）の案内です。',
   alternates: { canonical: '/after-opening' },
 };
 
