@@ -24,7 +24,7 @@ export default function LegalPage() {
           <tbody>
             <tr>
               <th>サービスの提供者</th>
-              <td>mise &amp; register 運営者（店番）</td>
+              <td>mise &amp; register 運営者（まこと）</td>
             </tr>
             <tr>
               <th>氏名・所在地・電話番号</th>
