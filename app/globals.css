@@ -1278,3 +1278,14 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .post-toc a { color: var(--text); text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 3px; }
 .post-toc a:hover { text-decoration-color: var(--warm); }
 .post-body h2[id] { scroll-margin-top: 16px; }
+
+/* 記事の最後の「あわせて読みたい記事」（components/RelatedPosts） */
+.related-posts { margin-top: 48px; }
+.related-list { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 16px; }
+@media (min-width: 768px) { .related-list { grid-template-columns: repeat(3, 1fr); } }
+.related-card { display: grid; gap: 8px; height: 100%; padding: 10px; border: 1px solid var(--border); color: var(--text); text-decoration: none; transition: transform 0.15s, box-shadow 0.15s; }
+.related-card:hover { text-decoration: none; transform: translate(-3px, -3px); box-shadow: 3px 3px 0 var(--border); }
+.related-card .thumb { width: 100%; aspect-ratio: 16 / 9; height: auto; object-fit: cover; }
+.related-title { font-size: 0.9rem; font-weight: 700; line-height: 1.6; }
+.related-date { font-size: 0.75rem; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { .related-card, .related-card:hover { transition: none; transform: none; } }

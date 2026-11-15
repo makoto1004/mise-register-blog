@@ -13,9 +13,11 @@ import { XFollow, XShare } from '@/components/XLinks';
 import XPostEmbeds from '@/components/XPostEmbeds';
 import PostNav from '@/components/PostNav';
 import PostToc from '@/components/PostToc';
+import RelatedPosts from '@/components/RelatedPosts';
+import { pickRelated } from '@/lib/related';
 import AmazonSaleBanner from '@/components/AmazonSaleBanner';
 import RakutenSaleBanner from '@/components/RakutenSaleBanner';
-import { getPostSlugs, getPostBySlug, getAdjacentPosts } from '@/lib/posts';
+import { getPostSlugs, getPostBySlug, getAdjacentPosts, getAllPosts } from '@/lib/posts';
 import JsonLd from '@/components/JsonLd';
 import { SITE, CATEGORIES, OG_IMAGE, SERVICES_OPEN } from '@/lib/site';
 
@@ -232,6 +234,8 @@ export default async function PostPage({ params }) {
       <p className="price-note">
         ※ 価格・在庫・仕様は変わることがあります。購入前に各商品ページ・公式サイトで最新情報を確認してください。
       </p>
+      {/* 同じテーマの記事（タグの重なりと同じカテゴリで自動。フロントマターの related があれば先に出す） */}
+      <RelatedPosts posts={pickRelated(post, getAllPosts())} />
       <PostNav prev={prev} next={next} />
       <p className="back-link">
         <Link href="/">← 記事一覧に戻る</Link>
