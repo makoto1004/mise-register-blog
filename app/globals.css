@@ -1183,7 +1183,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .journey-step-name { font-weight: 800; }
 .journey-step-lead { font-size: 0.8rem; color: var(--muted); overflow-wrap: anywhere; }
 @media (min-width: 768px) { .journey-steps { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1260px) { .journey-steps { grid-template-columns: repeat(5, 1fr); } }
+@media (min-width: 1260px) { .journey-steps { grid-template-columns: repeat(4, 1fr); } }
 /* 道のりの 5（ジャンル別の記事）：業種・家具・豆知識の見出しで区切る */
 .genre-section { margin: 28px 0 0; }
 .genre-section h2 { font-size: 1.2rem; margin: 0 0 10px; padding-left: 10px; border-left: 4px solid var(--accent); }
@@ -1198,8 +1198,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .journey-steps-large .journey-step-name { font-family: var(--font-mincho), "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 1.35rem; line-height: 1.35; }
 .journey-steps-large .journey-step-lead { font-size: 0.95rem; }
 .journey-steps-large .journey-step-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-/* 5 つ並ぶと幅が細くなるので、大きい表示の名前を少し小さくして途中で折り返さないようにする */
-@media (min-width: 1260px) { .journey-steps-large .journey-step-link { padding: 18px 16px; gap: 12px; } .journey-steps-large .journey-step-name { font-size: 1.12rem; } .journey-steps-large .journey-step-lead { font-size: 0.85rem; } }
 @media (min-width: 1260px) { .journey-steps-large .journey-step-link { flex-direction: column; align-items: flex-start; min-height: 180px; } }
 @media (prefers-reduced-motion: reduce) { .journey-steps-large .journey-step { transition: none; } .journey-steps-large .journey-step:hover { transform: none; } }
 .journey-post-list { margin-top: 24px; }
@@ -1211,6 +1209,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .home-help { margin-top: 28px; }
 .home-help .help-heading { margin-top: 0; }
 .home-help .help-note { margin-top: 6px; }
+/* トップ：誰のためのサイトか・運営者の強み・準備中の診断（2026-11-15） */
+.home-hero-lead { margin: 14px 0 0; font-size: 1.05rem; color: var(--muted); }
+.home-strength { margin: 0 0 24px; padding: 14px 18px; background: var(--surface); border-left: 4px solid var(--accent); line-height: 1.8; }
+.home-help-pending { margin: 20px 0 0; font-size: 0.85rem; color: var(--muted); }
 
 /* 無料・有料の 2 つの枠 */
 .help-choices { margin-top: 36px; }
@@ -1261,10 +1263,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .pos-diagnosis-result-group ul { margin: 0; padding-left: 1.4em; }
 .pos-diagnosis-result-group li { margin-bottom: 4px; overflow-wrap: anywhere; }
 .pos-diagnosis-consult { margin: 14px 0 0; overflow-wrap: anywhere; }
-.find-industries { margin: 0 0 8px; }
-.find-industries ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 0; padding: 0; list-style: none; }
-.find-industries a { display: inline-block; padding: 8px 14px; color: var(--text); background: var(--surface); }
-.find-industries a:hover { text-decoration: none; background: var(--text); color: var(--bg); }
 
 /* /consult：相談は無料であることを目立たせる枠 */
 .consult-free-box { margin: 20px 0; padding: 16px 20px; background: var(--surface); border: 2px solid var(--accent); border-radius: 8px; font-size: 1.05rem; line-height: 1.7; }

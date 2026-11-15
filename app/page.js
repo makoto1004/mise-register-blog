@@ -32,9 +32,18 @@ export default function Home() {
           <br />
           「つながる組み合わせ」で選ぶ
         </h1>
+        {/* 誰のためのサイトか（2026-11-15 に追加） */}
+        <p className="home-hero-lead">初めて POS レジを入れる、開業準備中の人のためのブログです。</p>
       </section>
 
       <JourneySteps large />
+
+      {/* 強み：運営者の経験（about のページと同じ事実だけを書く） */}
+      <p className="home-strength">
+        運営者は POS レジ・周辺機器の検証と、ヘルプデスクの経験者です。
+        <br />
+        プリンターやドロアのつなぎ方まで確かめて書いています。
+      </p>
 
       {/* 記事を探す入力欄（JavaScript がなくても /search に言葉を渡せる、ふつうのフォーム） */}
       <form className="home-search" action="/search" method="get" role="search">
@@ -49,20 +58,20 @@ export default function Home() {
         </div>
       </form>
 
-      {/* AI無料POSレジ診断の小さな案内（受付先が未設定のときは「準備中」と出す） */}
-      <section className="help-box help-free home-help" aria-labelledby="home-help-heading">
-        <h2 id="home-help-heading" className="help-heading">
-          {CONSULT_NAME}
-        </h2>
-        <p className="help-note">{CONSULT_FREE_NOTE}</p>
-        {CONSULT_AVAILABLE ? (
+      {/* AI無料POSレジ診断の案内。受付を始めるまでは、目立たない 1 行だけにする */}
+      {CONSULT_AVAILABLE ? (
+        <section className="help-box help-free home-help" aria-labelledby="home-help-heading">
+          <h2 id="home-help-heading" className="help-heading">
+            {CONSULT_NAME}
+          </h2>
+          <p className="help-note">{CONSULT_FREE_NOTE}</p>
           <Link href="/consult" className="help-button">
             診断してみる
           </Link>
-        ) : (
-          <p className="help-pending">準備中です</p>
-        )}
-      </section>
+        </section>
+      ) : (
+        <p className="home-help-pending">{CONSULT_NAME}は準備中です。</p>
+      )}
       {/* 新着記事：全カテゴリーから新しい順に 3 本を目立たせて表示する */}
       {latest.length > 0 && (
         <section className="home-section latest-section" aria-labelledby="latest-heading">

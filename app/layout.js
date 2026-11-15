@@ -6,7 +6,7 @@ import { InstagramHeaderLink } from '@/components/XLinks';
 import XHeaderTimeline from '@/components/XHeaderTimeline';
 import SiteMotion from '@/components/SiteMotion';
 import AffiliateClickTracker from '@/components/AffiliateClickTracker';
-import { SITE, CATEGORIES, OG_IMAGE } from '@/lib/site';
+import { SITE, CATEGORIES, OG_IMAGE, CONSULT_AVAILABLE } from '@/lib/site';
 import { JOURNEY_STEPS } from '@/lib/journey';
 import './globals.css';
 
@@ -28,8 +28,8 @@ const mincho = Noto_Serif_JP({
   preload: false,
 });
 
-// ヘッダーのメニューに出す短い名前（道のりの 5 ステップ。パスは JOURNEY_STEPS から取る）
-const MENU_LABELS = { find: 'レジの選び方', devices: '周辺機器', setup: '導入ガイド', after: '開業後・代行', genre: 'ジャンル別' };
+// ヘッダーのメニューに出す短い名前（道のりの 4 ステップ。パスは JOURNEY_STEPS から取る）
+const MENU_LABELS = { find: 'レジの選び方', devices: '周辺機器', setup: '導入ガイド', after: '開業後・代行' };
 
 // ヘッダーの虫めがね（記事を探す）のアイコン。文字は aria-label で伝える
 function SearchIcon() {
@@ -111,11 +111,14 @@ export default function RootLayout({ children }) {
                   </Link>
                 </li>
               ))}
-              <li>
-                <Link href="/consult" className="underline-link menu-services">
-                  AIレジ診断
-                </Link>
-              </li>
+              {/* AIレジ診断は受付を始めるまでメニューに出さない（押しても「準備中」だと迷うため） */}
+              {CONSULT_AVAILABLE && (
+                <li>
+                  <Link href="/consult" className="underline-link menu-services">
+                    AIレジ診断
+                  </Link>
+                </li>
+              )}
             </ul>
           </nav>
         </header>
