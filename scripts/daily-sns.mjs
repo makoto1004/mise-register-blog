@@ -25,6 +25,7 @@ import path from 'node:path';
 import matter from 'gray-matter';
 import sharp from 'sharp';
 import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { SITE } from '../lib/site.js';
 
 const ROOT = process.cwd();
@@ -141,6 +142,14 @@ function cleanDeco(value) {
 // 記事の見出し（## の行）を集める。会話を作るときの材料にする
 const headings = (content) => [...content.matchAll(/^##\s+(.+)$/gm)].map((m) => m[1]).slice(0, 12);
 
+// claude -p に渡す環境変数。.env.local の ANTHROPIC_API_KEY（ブログの別の機能用）を渡すと、
+// ログイン（定額のプラン）ではなく有料の API キーで動いてしまうので、Claude 用のキーは外す
+export function claudeEnv(env = process.env) {
+  const out = { ...env };
+  for (const key of ['ANTHROPIC_API_KEY', 'ANTHROPIC_AUTH_TOKEN']) delete out[key];
+  return out;
+}
+
 // Claude Code に会話を書いてもらう（ツールは使わせない）
 function writeTalk(post) {
   const prompt = `${SYSTEM_PROMPT}
@@ -152,9 +161,14 @@ function writeTalk(post) {
 記事の説明: ${post.data.description ?? ''}
 見出し:
 ${headings(post.content).map((h) => `- ${h}`).join('\n')}`;
-  const result = spawnSync('claude', ['-p', prompt], { cwd: ROOT, encoding: 'utf8', timeout: 10 * 60 * 1000 });
+  const result = spawnSync('claude', ['-p', prompt], { cwd: ROOT, encoding: 'utf8', timeout: 10 * 60 * 1000, env: claudeEnv() });
   if (result.error) throw new Error(`Claude Code を起動できませんでした（${result.error.message}）`);
-  if (result.status !== 0) throw new Error(`終了コード ${result.status}（${(result.stderr ?? '').trim().split('\n')[0]}）`);
+  if (result.status !== 0) {
+    // 1 行目は「⚠」で始まる注意書きのことがあるので、それ以外の行を記録に残す
+    const lines = `${result.stderr ?? ''}\n${result.stdout ?? ''}`.split('\n').map((s) => s.trim()).filter(Boolean);
+    const reason = lines.filter((s) => !s.startsWith('⚠')).slice(-3).join(' / ') || lines[0] || '理由の表示なし';
+    throw new Error(`終了コード ${result.status}（${reason}）`);
+  }
   const json = (result.stdout ?? '').match(/\{[\s\S]*\}/);
   if (!json) throw new Error('返ってきた文章が JSON ではありません');
   const talk = JSON.parse(json[0]);
@@ -250,12 +264,21 @@ const mascot = (name) => path.join(ROOT, 'public', 'images', 'mascots', `${name}
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
 // タイトルを「｜」で行に分ける。いちばん長い行が幅に収まるように文字を小さくし、それでも長い行は折り返す
-function fitTitle(title, width, maxSize, minSize, maxLines) {
+// 折り返して maxLines を超えるときは、minSize の 4 分の 3 まで文字をさらに小さくする
+// それでも入らないときだけ、最後の行の終わりを「…」にする（黙って切ると、タイトルが途中で終わって見える）
+export function fitTitle(title, width, maxSize, minSize, maxLines) {
   const parts = String(title).split('｜');
-  const size = Math.max(minSize, Math.min(maxSize, Math.floor(width / Math.max(...parts.map((p) => p.length)))));
-  const perLine = Math.floor(width / size);
-  const lines = parts.flatMap((part) => wrapJa(part, perLine));
-  return { lines: lines.slice(0, maxLines), size };
+  const first = Math.max(minSize, Math.min(maxSize, Math.floor(width / Math.max(...parts.map((p) => jaWidth(p))))));
+  const floor = Math.round(minSize * 0.75);
+  const layout = (size) => parts.flatMap((part) => wrapJa(part, Math.floor(width / size)));
+  for (let size = first; size >= floor; size--) {
+    const lines = layout(size);
+    if (lines.length <= maxLines) return { lines, size, cut: false };
+  }
+  const lines = layout(floor).slice(0, maxLines);
+  const last = [...lines[maxLines - 1]];
+  lines[maxLines - 1] = `${last.slice(0, Math.max(0, Math.min(last.length, Math.floor(width / floor) - 1))).join('')}…`;
+  return { lines, size: floor, cut: true };
 }
 const textLines = (lines, x, y, size, lh, opt = '') =>
   lines.map((t, i) => `<text x="${x}" y="${y + i * lh}" font-size="${size}" ${opt}>${esc(t)}</text>`).join('');
@@ -532,7 +555,11 @@ async function main() {
   for (let i = 0; i < (COUNT || 1); i++) if (!(await makeOne(state))) break;
 }
 
-main().catch((err) => {
-  log(`失敗: ${err.message}`);
-  process.exit(1);
-});
+// テストから読み込んだときは動かさない（npm run sns:daily で直接動かしたときだけ main を呼ぶ）
+const isDirectRun = Boolean(process.argv[1]) && path.resolve(process.argv[1]).toLowerCase() === fileURLToPath(import.meta.url).toLowerCase();
+if (isDirectRun) {
+  main().catch((err) => {
+    log(`失敗: ${err.message}`);
+    process.exit(1);
+  });
+}
