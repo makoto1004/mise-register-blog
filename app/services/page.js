@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { SITE } from '@/lib/site';
+import { SITE, CONSULT_AVAILABLE } from '@/lib/site';
 import { OWN_SERVICES, COCONALA_CONSULT_URL } from '@/lib/ownServices';
 
 export const metadata = {
@@ -192,7 +192,11 @@ export default function ServicesPage() {
             作業には AI サービス（Anthropic の Claude）を使います。送った内容が AI の学習に使われない設定で使い、できあがったものは運営者がすべて確認し、実際に動かしてからお渡しします。
           </li>
           <li>⑤のメニュー表は Canva で作るため、メニューの文字と料理の写真を Canva に送ります。それ以外のご依頼のデータは Canva に送りません。</li>
-          <li>レジの不具合の修理や、メーカーのサポートの代わりはできません。故障やエラーの相談は、無料の<Link href="/consult">AI無料POSレジ診断</Link>（現在は準備中）や、各メーカーのサポート窓口をご利用ください。</li>
+          <li>レジの不具合の修理や、メーカーのサポートの代わりはできません。{CONSULT_AVAILABLE ? (
+              <>故障やエラーの相談は、無料の<Link href="/consult">AI無料POSレジ診断</Link>や、各メーカーのサポート窓口をご利用ください。</>
+            ) : (
+              <>故障やエラーの相談は、各メーカーのサポート窓口をご利用ください。</>
+            )}</li>
         </ul>
 
         <h2>よくある質問</h2>

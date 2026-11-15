@@ -1212,7 +1212,6 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 /* トップ：誰のためのサイトか・運営者の強み・準備中の診断（2026-11-15） */
 .home-hero-lead { margin: 14px 0 0; font-size: 1.05rem; color: var(--muted); }
 .home-strength { margin: 0 0 24px; padding: 14px 18px; background: var(--surface); border-left: 4px solid var(--accent); line-height: 1.8; }
-.home-help-pending { margin: 20px 0 0; font-size: 0.85rem; color: var(--muted); }
 
 /* 無料・有料の 2 つの枠 */
 .help-choices { margin-top: 36px; }

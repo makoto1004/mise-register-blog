@@ -58,8 +58,8 @@ export default function Home() {
         </div>
       </form>
 
-      {/* AI無料POSレジ診断の案内。受付を始めるまでは、目立たない 1 行だけにする */}
-      {CONSULT_AVAILABLE ? (
+      {/* AI無料POSレジ診断の案内。受付を始めるまでは出さない（「準備中」の文も行き止まりになるため） */}
+      {CONSULT_AVAILABLE && (
         <section className="help-box help-free home-help" aria-labelledby="home-help-heading">
           <h2 id="home-help-heading" className="help-heading">
             {CONSULT_NAME}
@@ -69,8 +69,6 @@ export default function Home() {
             診断してみる
           </Link>
         </section>
-      ) : (
-        <p className="home-help-pending">{CONSULT_NAME}は準備中です。</p>
       )}
       {/* 新着記事：全カテゴリーから新しい順に 3 本を目立たせて表示する */}
       {latest.length > 0 && (

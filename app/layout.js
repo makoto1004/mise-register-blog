@@ -172,12 +172,14 @@ export default function RootLayout({ children }) {
                       お問い合わせ
                     </Link>
                   </li>
-                  {/* AI無料POSレジ診断（準備中のあいだは、ページに「準備中」と出る） */}
-                  <li>
-                    <Link href="/consult" className="underline-link">
-                      AI無料POSレジ診断
-                    </Link>
-                  </li>
+                  {/* AI無料POSレジ診断は受付を始めるまで出さない（押しても「準備中」だと行き止まりになるため） */}
+                  {CONSULT_AVAILABLE && (
+                    <li>
+                      <Link href="/consult" className="underline-link">
+                        AI無料POSレジ診断
+                      </Link>
+                    </li>
+                  )}
                   {/* 作業代行は、受付の前も「できること・できないこと」として見られる */}
                   <li>
                     <Link href="/services" className="underline-link">

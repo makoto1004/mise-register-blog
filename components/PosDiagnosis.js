@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { DIAGNOSIS_QUESTIONS, diagnosePos } from '@/lib/posDiagnosis';
+import { CONSULT_AVAILABLE } from '@/lib/site';
 
 // 結果の見出しと、診断結果のキーの対応
 const RESULT_GROUPS = [
@@ -93,7 +94,12 @@ export default function PosDiagnosis({ posts }) {
             )}
             {result.fallbackToConsult && (
               <p className="pos-diagnosis-consult">
-                合う記事がまだありません。<Link href="/consult">AI無料POSレジ診断</Link>
+                {/* 診断の受付を始めるまでは、押すと「準備中」になるリンクを出さず、言葉で探す案内にする */}
+                {CONSULT_AVAILABLE ? (
+                  <>合う記事がまだありません。<Link href="/consult">AI無料POSレジ診断</Link></>
+                ) : (
+                  <>合う記事がまだありません。答えを変えるか、<Link href="/search">記事を探す</Link>から言葉で探してください。</>
+                )}
               </p>
             )}
           </>
