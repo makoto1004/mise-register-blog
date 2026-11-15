@@ -1270,3 +1270,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .map-journey { margin: 0; padding-left: 1.4em; display: grid; gap: 8px; }
 .map-journey li { overflow-wrap: anywhere; }
 .map-journey .map-category { margin-left: 8px; }
+
+/* 記事の目次（components/PostToc。見出しが 3 つ以上の記事だけ） */
+.post-toc { margin: 28px 0 8px; padding: 16px 20px; border: 1px solid var(--border); background: var(--surface); }
+.post-toc-heading { margin: 0 0 8px; font-weight: 800; }
+.post-toc ol { margin: 0; padding-left: 1.4em; display: grid; gap: 6px; font-size: 0.9rem; line-height: 1.6; }
+.post-toc a { color: var(--text); text-decoration: underline; text-decoration-color: var(--border); text-underline-offset: 3px; }
+.post-toc a:hover { text-decoration-color: var(--warm); }
+.post-body h2[id] { scroll-margin-top: 16px; }

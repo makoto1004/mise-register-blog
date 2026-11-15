@@ -12,6 +12,7 @@ import QuickSurvey from '@/components/QuickSurvey';
 import { XFollow, XShare } from '@/components/XLinks';
 import XPostEmbeds from '@/components/XPostEmbeds';
 import PostNav from '@/components/PostNav';
+import PostToc from '@/components/PostToc';
 import AmazonSaleBanner from '@/components/AmazonSaleBanner';
 import RakutenSaleBanner from '@/components/RakutenSaleBanner';
 import { getPostSlugs, getPostBySlug, getAdjacentPosts } from '@/lib/posts';
@@ -168,6 +169,9 @@ export default async function PostPage({ params }) {
           <TagList tags={post.tags} />
         </div>
       </header>
+
+      {/* 目次：本文の見出し（h2）が 3 つ以上ある記事だけ */}
+      {post.toc.length >= 3 && <PostToc items={post.toc} />}
 
       {post.sections.map((section, index) => {
         const nested = endsWithH2(post.sections[index - 1]);
