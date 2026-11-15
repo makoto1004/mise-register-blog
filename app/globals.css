@@ -99,7 +99,7 @@ a:hover { text-decoration: underline; }
 .footer-logo .logo-amp { font-size: 2.4rem; }
 .footer-logo .logo-register { font-size: 1.2rem; }
 
-/* スマホもパソコンも折り返して、メニューを全部見せる（スマホは 2 行になる） */
+/* メニュー。スマホ（767px 以下）の 1 行の並べ方は、下の「スマホのヘッダーを低くする」にある */
 .menu-bar { margin-top: 18px; border-bottom: 1px solid var(--line); }
 .menu-bar ul { display: flex; flex-wrap: wrap; gap: 6px 18px; list-style: none; margin: 0; padding: 0 0 12px; }
 .menu-bar li { white-space: nowrap; }
@@ -845,8 +845,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   .site-header { padding-top: 14px; }
   .header-top { flex-wrap: nowrap; gap: 12px; }
   .header-sns { display: none; }
-  .logo-mark { width: 26px; height: 26px; }
-  .logo { gap: 8px; }
+  .logo-link .logo-mark { width: 26px; height: 26px; }
+  .logo-link .logo { gap: 8px; }
   .logo-mise { font-size: 1.7rem; }
   .logo-amp { font-size: 1.5rem; }
   .logo-register { font-size: 0.85rem; letter-spacing: 0.12em; }
@@ -854,6 +854,15 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   .menu-bar::-webkit-scrollbar { display: none; }
   .menu-bar ul { flex-wrap: nowrap; gap: 16px; padding-bottom: 10px; }
   .menu-bar a { font-size: 0.8rem; }
+}
+/* 幅 360〜389px（Android に多い）でもメニュー 4 つが切れずに 1 行に入るよう、文字と間を少し詰める */
+@media (max-width: 389px) {
+  .menu-bar ul { gap: 10px; }
+  .menu-bar a { font-size: 0.75rem; letter-spacing: 0.02em; }
+}
+/* さらに狭い幅では、切れて見えないよう 2 行に折り返す */
+@media (max-width: 359px) {
+  .menu-bar ul { flex-wrap: wrap; row-gap: 4px; }
 }
 
 /* X（旧 Twitter）へのリンク */
