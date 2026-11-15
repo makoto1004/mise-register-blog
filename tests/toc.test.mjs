@@ -1,6 +1,8 @@
 // 記事の目次（lib/toc.js）のテスト：h2 に id を付けて、目次の項目を取り出す
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { remark } from 'remark';
+import remarkHtml from 'remark-html';
 import { addHeadingIds } from '../lib/toc.js';
 
 test('h2 に順番の id を付け、見出しの文字を返す', () => {
@@ -22,6 +24,12 @@ test('section をまたいでも番号が続く（同じ文の見出しでも id
 test('太字・リンク・文字参照は、目次ではふつうの文字にする', () => {
   const r = addHeadingIds('<h2><strong>A</strong> &amp; <a href="/x">B</a></h2>', { count: 0 });
   assert.equal(r.headings[0].text, 'A & B');
+});
+
+test('remark が書き出す数値の文字参照（& → &#x26;）も、目次ではふつうの文字にする', async () => {
+  const html = String(await remark().use(remarkHtml, { sanitize: false }).process('## レジ & 決済 <まとめ>'));
+  const r = addHeadingIds(html, { count: 0 });
+  assert.equal(r.headings[0].text, 'レジ & 決済 <まとめ>');
 });
 
 test('class や id が付いた h2 と h3 は触らない', () => {
