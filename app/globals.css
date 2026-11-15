@@ -42,11 +42,6 @@ body {
   font-feature-settings: "palt";
   letter-spacing: 0.06em;
   line-height: 1.8;
-  /* スマホの下部固定メニューにかぶらないように */
-  padding-bottom: 56px;
-}
-@media (min-width: 768px) {
-  body { padding-bottom: 0; }
 }
 
 a { color: var(--accent); text-decoration: none; }
@@ -827,24 +822,38 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   .reading-progress { display: none; }
 }
 
-/* スマホ用：画面下の固定メニュー */
-.bottom-bar {
+/* 右下の「ページの先頭へ」ボタン（スマホ・パソコン共通） */
+.to-top {
   position: fixed;
-  left: 0;
-  bottom: 0;
+  right: 16px;
+  bottom: 16px;
   z-index: 100;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 14px 6% 12px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
   background: var(--bg);
-  border-top: 1px solid var(--border);
-  font-size: 0.8rem;
+  border: 1px solid var(--border);
+  color: var(--text);
   font-weight: 800;
 }
-.bottom-bar a { color: var(--text); }
-@media (min-width: 768px) {
-  .bottom-bar { display: none; }
+.to-top:hover { background: var(--text); color: var(--bg); text-decoration: none; }
+
+/* スマホのヘッダーを低くする：1 行目＝ロゴと虫めがね、2 行目＝メニュー 4 つを 1 行 */
+.header-sns { display: contents; }
+@media (max-width: 767px) {
+  .site-header { padding-top: 14px; }
+  .header-top { flex-wrap: nowrap; gap: 12px; }
+  .header-sns { display: none; }
+  .logo-mark { width: 26px; height: 26px; }
+  .logo { gap: 8px; }
+  .logo-mise { font-size: 1.7rem; }
+  .logo-amp { font-size: 1.5rem; }
+  .logo-register { font-size: 0.85rem; letter-spacing: 0.12em; }
+  .menu-bar { margin-top: 10px; overflow-x: auto; scrollbar-width: none; }
+  .menu-bar::-webkit-scrollbar { display: none; }
+  .menu-bar ul { flex-wrap: nowrap; gap: 16px; padding-bottom: 10px; }
+  .menu-bar a { font-size: 0.8rem; }
 }
 
 /* X（旧 Twitter）へのリンク */

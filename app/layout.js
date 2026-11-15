@@ -98,8 +98,11 @@ export default function RootLayout({ children }) {
                 <SearchIcon />
                 <span className="header-search-label">記事を探す</span>
               </Link>
-              <InstagramHeaderLink />
-              <XHeaderTimeline account={SITE.xAccount} />
+              {/* スマホではヘッダーを低くするため隠す（フッターに X・Instagram のリンクがある） */}
+              <span className="header-sns">
+                <InstagramHeaderLink />
+                <XHeaderTimeline account={SITE.xAccount} />
+              </span>
             </div>
           </div>
           <nav className="menu-bar" aria-label="メインメニュー">
@@ -234,13 +237,10 @@ export default function RootLayout({ children }) {
           </div>
         </footer>
 
-        {/* スマホ用：画面下に固定するメニュー */}
-        <nav className="bottom-bar" aria-label="クイックメニュー">
-          <Link href="/site-map">サイトマップ</Link>
-          <Link href="/search">記事を探す</Link>
-          <Link href="/">トップ</Link>
-          <a href="#top" aria-label="ページの先頭へ">↑</a>
-        </nav>
+        {/* 右下の「ページの先頭へ」。記事を探すはヘッダーの虫めがね、サイトマップはフッターにある */}
+        <a href="#top" className="to-top" aria-label="ページの先頭へ">
+          ↑
+        </a>
       </body>
       {/^G-[A-Z0-9]+$/.test(GA_ID) && <GoogleAnalytics gaId={GA_ID} />}
     </html>
