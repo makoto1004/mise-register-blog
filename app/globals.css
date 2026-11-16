@@ -1252,6 +1252,14 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 /* AI無料POSレジ診断の名前の下のひと言（あなたに合ったレジを探します） */
 .consult-tagline { margin: 4px 0 0; font-family: var(--font-display), var(--font-mincho), "Yu Mincho", serif; font-size: 1.1rem; font-weight: 700; color: var(--accent); }
 .consult-tagline-lead { margin: -2px 0 12px; font-size: 1.25rem; }
+/* うすいオレンジのマーカー（文字の下 4 割に引く。折り返しても行ごとに引く）。使いすぎると目立たなくなるので、ひと言と運営者の強みだけに使う */
+.marker {
+  background: linear-gradient(transparent 60%, #f2c9a5 60%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+/* 運営者の強みの枠は背景がうすいベージュなので、マーカーを少し濃くする */
+.home-strength .marker { background: linear-gradient(transparent 60%, #e8b081 60%); }
 .help-button { display: inline-block; margin-top: 14px; padding: 10px 22px; font-weight: 800; color: #fff; background: var(--pros); }
 .help-button:hover { text-decoration: none; filter: brightness(0.92); }
 .help-link { display: inline-block; margin-top: 14px; font-weight: 700; text-decoration: underline; }

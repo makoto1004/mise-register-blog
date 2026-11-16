@@ -31,7 +31,7 @@ export default function ConsultPage() {
         <Link href="/">ホーム</Link> › <span>{CONSULT_NAME}</span>
       </nav>
       <h1 className="page-title">{CONSULT_NAME}</h1>
-      <p className="consult-tagline consult-tagline-lead">{CONSULT_TAGLINE}</p>
+      <p className="consult-tagline consult-tagline-lead"><span className="marker">{CONSULT_TAGLINE}</span></p>
       <div className="post-body">
         <p className="consult-free-box">
           <strong>{CONSULT_FREE_NOTE}</strong>

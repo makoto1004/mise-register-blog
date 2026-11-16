@@ -42,7 +42,7 @@ export default function Home() {
       <p className="home-strength">
         運営者は POS レジ・周辺機器の検証と、ヘルプデスクの経験者です。
         <br />
-        プリンターやドロアのつなぎ方まで確かめて書いています。
+        <span className="marker">プリンターやドロアのつなぎ方まで確かめて</span>書いています。
       </p>
 
       {/* 記事を探す入力欄（JavaScript がなくても /search に言葉を渡せる、ふつうのフォーム） */}
@@ -64,7 +64,7 @@ export default function Home() {
           <h2 id="home-help-heading" className="help-heading">
             {CONSULT_NAME}
           </h2>
-          <p className="consult-tagline">{CONSULT_TAGLINE}</p>
+          <p className="consult-tagline"><span className="marker">{CONSULT_TAGLINE}</span></p>
           <p className="help-note">{CONSULT_FREE_NOTE}</p>
           <Link href="/consult" className="help-button">
             診断してみる

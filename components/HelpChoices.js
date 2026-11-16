@@ -14,7 +14,7 @@ export default function HelpChoices() {
         <div className="help-box help-free">
           <p className="help-label">無料</p>
           <h3 className="help-heading">{CONSULT_NAME}</h3>
-          <p className="consult-tagline">{CONSULT_TAGLINE}</p>
+          <p className="consult-tagline"><span className="marker">{CONSULT_TAGLINE}</span></p>
           <p>選び方・使い方・エラー</p>
           <p className="help-note">{CONSULT_FREE_NOTE}</p>
           {consultOpen ? (
