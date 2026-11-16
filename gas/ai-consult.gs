@@ -323,6 +323,19 @@ function maskPersonalInfo(text, counts) {
 }
 
 // 伏せ字のテスト用（エディタで testMaskPersonalInfo を選んで実行し、ログで結果を確かめる。AI には送らない）
+// トリガー（自動で動くきっかけ）を 2 つ作る。1 回だけ実行する（何度実行しても、前のものを消して作り直すので 2 つのまま）
+//   onFormSubmit：フォームが送信されたとき
+//   monthlyResearch：毎月 1 日の午前 7 時台
+function setupTriggers() {
+  const names = ['onFormSubmit', 'monthlyResearch'];
+  ScriptApp.getProjectTriggers()
+    .filter((t) => names.includes(t.getHandlerFunction()))
+    .forEach((t) => ScriptApp.deleteTrigger(t));
+  ScriptApp.newTrigger('onFormSubmit').forSpreadsheet(SpreadsheetApp.getActiveSpreadsheet()).onFormSubmit().create();
+  ScriptApp.newTrigger('monthlyResearch').timeBased().onMonthDay(1).atHour(7).inTimezone('Asia/Tokyo').create();
+  Logger.log('トリガー：' + ScriptApp.getProjectTriggers().map((t) => `${t.getHandlerFunction()}（${t.getEventType()}）`).join('、'));
+}
+
 function testMaskPersonalInfo() {
   // 記事のスクリーンショットにも使うので、実在しない値だけを使う
   //   （0000 の電話番号、example.com のメール、カード会社が公開しているテスト用の番号、〇〇市の住所）
