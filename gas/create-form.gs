@@ -76,6 +76,24 @@ function createConsultForm() {
 
   form
     .addMultipleChoiceItem()
+    .setTitle('POSレジは初めてですか')
+    .setChoiceValues(['初めて使う', '今のレジから入れかえる'])
+    .setRequired(true);
+
+  form
+    .addMultipleChoiceItem()
+    .setTitle('レジに使う端末')
+    .setChoiceValues(['iPad', 'iPhone', '専用のPOSレジ（レジ用の機械）', 'まだ決めていない'])
+    .setRequired(true);
+
+  form
+    .addMultipleChoiceItem()
+    .setTitle('レシートプリンター')
+    .setChoiceValues(['もう持っている', 'これから買う', '使わない（紙のレシートを出さない）', '分からない'])
+    .setRequired(true);
+
+  form
+    .addMultipleChoiceItem()
     .setTitle('お店の大きさ')
     .setHelpText('レジに立つ人の数')
     .setChoiceValues(['1人で営業する', '2〜3人', '4人以上'])
@@ -105,6 +123,27 @@ function createConsultForm() {
       '特になし',
     ])
     .setRequired(true);
+
+  form
+    .addMultipleChoiceItem()
+    .setTitle('最初にかけられる費用')
+    .setHelpText('POSレジの端末と周辺機器をそろえる費用（月々の料金は別）')
+    .setChoiceValues(['5万円くらいまで', '5万〜15万円', '15万円より多い', 'まだ決めていない']);
+
+  form
+    .addCheckboxItem()
+    .setTitle('大事にしたいこと')
+    .setHelpText('当てはまるものを全部えらんでください（いくつでも）')
+    .setChoiceValues([
+      '月々の料金が安い',
+      '決済手数料が安い',
+      '操作がかんたん',
+      '在庫の管理',
+      '予約・お客様の管理',
+      '会計ソフトとの連携',
+      'ネットがなくても会計できる',
+      '困ったときのサポート',
+    ]);
 
   // ===== 3. トラブル・使い方のページ =====
   const troublePage = form
