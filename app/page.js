@@ -5,7 +5,7 @@ import NewBadge from '@/components/NewBadge';
 import PostTitle from '@/components/PostTitle';
 import JourneySteps from '@/components/JourneySteps';
 import { getLatestPosts } from '@/lib/posts';
-import { SITE, CATEGORIES, CONSULT_FREE_NOTE, CONSULT_NAME, CONSULT_AVAILABLE } from '@/lib/site';
+import { SITE, CATEGORIES, CONSULT_FREE_NOTE, CONSULT_NAME, CONSULT_TAGLINE, CONSULT_AVAILABLE } from '@/lib/site';
 
 // トップページ
 // 上から：見出しと道のり（1→4）、無料相談の案内、新着記事
@@ -64,6 +64,7 @@ export default function Home() {
           <h2 id="home-help-heading" className="help-heading">
             {CONSULT_NAME}
           </h2>
+          <p className="consult-tagline">{CONSULT_TAGLINE}</p>
           <p className="help-note">{CONSULT_FREE_NOTE}</p>
           <Link href="/consult" className="help-button">
             診断してみる

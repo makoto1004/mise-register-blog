@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { SITE, CONSULT_FREE_NOTE, CONSULT_NAME, CONSULT_AVAILABLE } from '@/lib/site';
+import { SITE, CONSULT_FREE_NOTE, CONSULT_NAME, CONSULT_TAGLINE, CONSULT_AVAILABLE } from '@/lib/site';
 import ConsultFormFrame from '@/components/ConsultFormFrame';
 
 export const metadata = {
@@ -31,6 +31,7 @@ export default function ConsultPage() {
         <Link href="/">ホーム</Link> › <span>{CONSULT_NAME}</span>
       </nav>
       <h1 className="page-title">{CONSULT_NAME}</h1>
+      <p className="consult-tagline consult-tagline-lead">{CONSULT_TAGLINE}</p>
       <div className="post-body">
         <p className="consult-free-box">
           <strong>{CONSULT_FREE_NOTE}</strong>

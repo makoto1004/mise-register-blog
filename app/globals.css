@@ -1245,6 +1245,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .help-paid .help-label { background: var(--text); }
 .help-heading { margin: 8px 0 0; font-size: 1.15rem; font-weight: 800; }
 .help-note { font-size: 0.875rem; color: var(--muted); }
+/* AI無料POSレジ診断の名前の下のひと言（あなたに合ったレジを探します） */
+.consult-tagline { margin: 4px 0 0; font-weight: 700; }
+.consult-tagline-lead { margin: -2px 0 12px; font-size: 1rem; }
 .help-button { display: inline-block; margin-top: 14px; padding: 10px 22px; font-weight: 800; color: #fff; background: var(--pros); }
 .help-button:hover { text-decoration: none; filter: brightness(0.92); }
 .help-link { display: inline-block; margin-top: 14px; font-weight: 700; text-decoration: underline; }
