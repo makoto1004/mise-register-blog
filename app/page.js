@@ -30,7 +30,7 @@ export default function Home() {
           <span className="sr-only">mise &amp; register </span>
           開業前に、POS レジと周辺機器を
           <br />
-          「つながる組み合わせ」で選ぶ
+          <span className="home-hero-key">「つながる組み合わせ」</span>で選ぶ
         </h1>
         {/* 誰のためのサイトか（2026-11-15 に追加） */}
         <p className="home-hero-lead">初めて POS レジを入れる、開業準備中の人のためのブログです。</p>

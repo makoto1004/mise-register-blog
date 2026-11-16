@@ -1225,6 +1225,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .journey-post-list li a { display: block; padding: 10px 2px; font-weight: 700; }
 .journey-more summary { padding: 10px 2px; font-weight: 800; color: var(--accent); cursor: pointer; }
 .home-help { margin-top: 28px; }
+/* トップの見出しで、いちばん伝えたい言葉（「つながる組み合わせ」）だけ色を付ける（2026-11-16 ユーザーが選んだ） */
+.home-hero-key { color: var(--accent); }
+/* 無料の枠の診断の名前は、枠とボタンと同じ緑にする */
+.help-free .help-heading { color: var(--pros); }
 .home-help .help-heading { margin-top: 0; font-family: var(--font-display), var(--font-mincho), "Yu Mincho", serif; font-size: 1.5rem; font-weight: 700; }
 .home-help .help-note { margin-top: 6px; }
 /* トップ：誰のためのサイトか・運営者の強み・準備中の診断（2026-11-15） */
