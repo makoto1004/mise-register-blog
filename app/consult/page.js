@@ -66,11 +66,11 @@ export default function ConsultPage() {
         <table>
           <tbody>
             <tr>
-              <th>相談の種類</th>
+              <th>診断してほしい機器</th>
               <td>プリンター・キャッシュドロア</td>
             </tr>
             <tr>
-              <th>相談内容</th>
+              <th>困っていること・知りたいこと</th>
               <td>混む時間に、レシートプリンターが急に印刷しなくなります。電源を入れ直すと一度は直ります。</td>
             </tr>
             <tr>

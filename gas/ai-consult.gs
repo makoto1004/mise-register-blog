@@ -24,8 +24,8 @@ const CONFIG = {
   fields: {
     email: 'メールアドレス',
     shopType: 'お店の種類',
-    topic: '相談の種類',
-    body: '相談内容',
+    topic: '診断してほしい機器',
+    body: '困っていること・知りたいこと',
   },
   // 任意の質問（フォームにあれば AI に渡す。空欄は「未記入」として渡す）
   detailFields: [
@@ -78,7 +78,7 @@ const CONFIG = {
   senderName: 'mise & register AI無料POSレジ診断',
   // 回答を作る AI の名前（署名に「回答作成：…（AI）」として出す。人の名前に見える名前にしない）
   // 相談者の前で話す AI のキャラクター（人の名前に見える名前にしない）
-  //   「相談の種類」の答えに topics の言葉が入っていれば、そのキャラクターが担当する。どれにも当てはまらなければ最初のキャラクター
+  //   「診断してほしい機器」の答えに topics の言葉が入っていれば、そのキャラクターが担当する。どれにも当てはまらなければ最初のキャラクター
   characters: [
     { name: 'レジまる', look: '顔と手のついたレシートプリンターのキャラクター', topics: ['プリンター', 'キャッシュドロア', 'ハンディ', 'スキャナー'] },
     { name: 'ポスタ', look: '顔の出る画面をもつ、タブレットのPOSレジのキャラクター', topics: ['POS', '決済', 'Android', 'ネットワーク'] },
@@ -542,7 +542,7 @@ function callClaude(system, userText, extra) {
 }
 
 // 下書きの本文（あいさつ・作業代行の案内・注意書きを付ける）
-// 「相談の種類」から、担当のキャラクターを決める
+// 「診断してほしい機器」から、担当のキャラクターを決める
 function pickCharacter(topic) {
   const found = CONFIG.characters.find((c) => c.topics.some((t) => String(topic || '').includes(t)));
   return found || CONFIG.characters[0];

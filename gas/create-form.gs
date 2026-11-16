@@ -8,7 +8,7 @@
  *   4. 「実行ログ」に出る 3 つの URL（フォームの編集・回答用・回答のスプレッドシート）を控える
  *
  * 質問のタイトルは ai-consult.gs の CONFIG.fields・CONFIG.detailFields と一字一句同じにしてある。
- * 変えるときは、両方を同じに直すこと（違うと、AI に相談内容が渡らない）。
+ * 変えるときは、両方を同じに直すこと（違うと、AI に入力した内容が渡らない）。
  * 2 回実行すると、フォームが 2 つできる。いらないほうはドライブから消す。
  */
 
@@ -19,7 +19,7 @@ const FORM_DESCRIPTION = [
   'AI が作った回答の下書きを運営者が確認し、メールでお返しします。回答まで数日かかることがあります。',
   '',
   '・氏名・住所・電話番号・カード番号・パスワードなどは書かないでください。',
-  '・相談内容は、回答を作るために AI サービス（Anthropic の Claude）に送ります。詳しくはサイトのプライバシーポリシー（https://www.mise-register.com/about）をご覧ください。',
+  '・入力した内容は、回答を作るために AI サービス（Anthropic の Claude）に送ります。詳しくはサイトのプライバシーポリシー（https://www.mise-register.com/about）をご覧ください。',
   '・診断できること：POSレジ・周辺機器・ネットワーク機器の選び方、使い方（設定・つなぎ方）、エラーや障害。',
   '・集客・経営・パソコンや Microsoft 365、税金・法律・許可などの個別の判断にはお答えできません。',
 ].join('\n');
@@ -49,14 +49,14 @@ function createConsultForm() {
 
   form
     .addMultipleChoiceItem()
-    .setTitle('相談の種類')
+    .setTitle('診断してほしい機器')
     .setChoiceValues(['POSレジ・決済端末', 'ハンディターミナル・スキャナー', 'プリンター・キャッシュドロア', '業務用Android端末', 'ネットワーク機器', 'その他'])
     .setRequired(true);
 
   form
     .addParagraphTextItem()
-    .setTitle('相談内容')
-    .setHelpText('例）混む時間に、レシートプリンターが急に印刷しなくなります。電源を入れ直すと一度は直ります。')
+    .setTitle('困っていること・知りたいこと')
+    .setHelpText('例）混む時間に、レシートプリンターが急に印刷しなくなります。電源を入れ直すと一度は直ります。／カフェを開くので、POSレジとそろえる機器を知りたいです。')
     .setRequired(true);
 
   // ===== 任意の質問（ai-consult.gs の CONFIG.detailFields） =====

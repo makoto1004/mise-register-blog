@@ -295,7 +295,7 @@ export default function OpeningChecklist({ stages, consultAvailable = false }) {
     try {
       await navigator.clipboard.writeText(text);
       setConsultFallback('');
-      showToast({ message: '相談文をコピーしました。AI無料POSレジ診断のフォームの相談内容に貼り付けてください' });
+      showToast({ message: '相談文をコピーしました。AI無料POSレジ診断のフォームの「困っていること・知りたいこと」に貼り付けてください' });
     } catch {
       setConsultFallback(text);
     }
@@ -457,7 +457,7 @@ export default function OpeningChecklist({ stages, consultAvailable = false }) {
         <section className="checklist-share checklist-consult" aria-labelledby="checklist-consult-heading">
           <h2 id="checklist-consult-heading">AI無料POSレジ診断（無料）</h2>
           <p>
-            今の進み具合・まだの項目・シミュレーターの合計を、相談文にしてコピーします。AI無料POSレジ診断のフォームの相談内容に貼り付けて、相談したいことを書き足してください。AIが作った回答を運営者が確かめてから、メールでお返しします。
+            今の進み具合・まだの項目・シミュレーターの合計を、相談文にしてコピーします。AI無料POSレジ診断のフォームの「困っていること・知りたいこと」に貼り付けて、相談したいことを書き足してください。AIが作った回答を運営者が確かめてから、メールでお返しします。
           </p>
           <p className="checklist-share-note">相談文に、名前・住所・電話番号などは入れないでください。</p>
           <div className="checklist-consult-actions">
