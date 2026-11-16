@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Cormorant_Garamond, Noto_Serif_JP } from 'next/font/google';
+import { Cormorant_Garamond, Kaisei_Opti, Noto_Serif_JP } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Logo from '@/components/Logo';
 import { InstagramHeaderLink } from '@/components/XLinks';
@@ -24,6 +24,15 @@ const mincho = Noto_Serif_JP({
   subsets: ['latin'],
   weight: ['600'],
   variable: '--font-mincho',
+  display: 'swap',
+  preload: false,
+});
+
+// トップの大きな見出しと、AI無料POSレジ診断の名前・ひと言に使う、手書きっぽさのある明朝体（2026-11-16 にユーザーが選んだ）
+const display = Kaisei_Opti({
+  subsets: ['latin'],
+  weight: ['700'],
+  variable: '--font-display',
   display: 'swap',
   preload: false,
 });
@@ -76,7 +85,7 @@ function googleVerifications() {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ja" className={`${serif.variable} ${mincho.variable}`}>
+    <html lang="ja" className={`${serif.variable} ${mincho.variable} ${display.variable}`}>
       <head>
         {/* Impact（Shopify のアフィリエイト）のサイト確認用のタグ。Impact は content ではなく value で読むため、そのまま書く */}
         <meta name="impact-site-verification" value="0a53640a-dc73-49f8-9b75-7d581548b146" />

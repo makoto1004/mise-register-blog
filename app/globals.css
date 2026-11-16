@@ -128,9 +128,9 @@ a:hover { text-decoration: underline; }
 .home-hero { padding: 8px 0 24px; }
 .home-hero h1 {
   margin: 0;
-  font-family: var(--font-mincho), "Yu Mincho", "Hiragino Mincho ProN", serif;
+  font-family: var(--font-display), var(--font-mincho), "Yu Mincho", "Hiragino Mincho ProN", serif;
   font-size: clamp(2.1rem, 3.9vw, 3.5rem);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.4;
   letter-spacing: 0.04em;
 }
@@ -1225,7 +1225,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .journey-post-list li a { display: block; padding: 10px 2px; font-weight: 700; }
 .journey-more summary { padding: 10px 2px; font-weight: 800; color: var(--accent); cursor: pointer; }
 .home-help { margin-top: 28px; }
-.home-help .help-heading { margin-top: 0; }
+.home-help .help-heading { margin-top: 0; font-family: var(--font-display), var(--font-mincho), "Yu Mincho", serif; font-size: 1.5rem; font-weight: 700; }
 .home-help .help-note { margin-top: 6px; }
 /* トップ：誰のためのサイトか・運営者の強み・準備中の診断（2026-11-15） */
 .home-hero-lead { margin: 14px 0 0; font-size: 1.05rem; color: var(--muted); }
@@ -1246,8 +1246,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .help-heading { margin: 8px 0 0; font-size: 1.15rem; font-weight: 800; }
 .help-note { font-size: 0.875rem; color: var(--muted); }
 /* AI無料POSレジ診断の名前の下のひと言（あなたに合ったレジを探します） */
-.consult-tagline { margin: 4px 0 0; font-weight: 700; }
-.consult-tagline-lead { margin: -2px 0 12px; font-size: 1rem; }
+.consult-tagline { margin: 4px 0 0; font-family: var(--font-display), var(--font-mincho), "Yu Mincho", serif; font-size: 1.1rem; font-weight: 700; color: var(--accent); }
+.consult-tagline-lead { margin: -2px 0 12px; font-size: 1.25rem; }
 .help-button { display: inline-block; margin-top: 14px; padding: 10px 22px; font-weight: 800; color: #fff; background: var(--pros); }
 .help-button:hover { text-decoration: none; filter: brightness(0.92); }
 .help-link { display: inline-block; margin-top: 14px; font-weight: 700; text-decoration: underline; }
