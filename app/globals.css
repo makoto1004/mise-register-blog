@@ -118,7 +118,7 @@ a:hover { text-decoration: underline; }
 }
 
 .page-title { font-size: 1.1rem; font-weight: 800; margin: 0 0 8px; }
-/* AI相談デスクのページの上に置く、レジまるとポスタの絵 */
+/* AI無料POSレジ診断のページの上に置く、レジまるとポスタの絵 */
 .consult-hero { display: block; width: 100%; height: auto; margin: 8px 0 16px; border-radius: 12px; }
 
 .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
@@ -1048,7 +1048,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .search-empty-title { font-weight: 800; }
 .search-empty-actions { margin-top: 12px !important; font-size: 0.9rem; }
 
-/* ===== AI相談デスクのフォーム：読み込み中の表示と、開けないときの案内 ===== */
+/* ===== AI無料POSレジ診断のフォーム：読み込み中の表示と、開けないときの案内 ===== */
 .consult-frame-wrap { position: relative; }
 .consult-frame-wrap .contact-frame { display: block; }
 .consult-frame-loading {
@@ -1156,7 +1156,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .checklist-diagnosis-good .checklist-diagnosis-mark, .checklist-diagnosis-info .checklist-diagnosis-mark { color: var(--muted); }
 .checklist-diagnosis-note { margin: 8px 0 0; font-size: 0.75rem; color: var(--muted); }
 
-/* AI相談デスクに相談する */
+/* AI無料POSレジ診断に相談する */
 .checklist-consult { border-color: var(--border); background: #fff; }
 .checklist-consult-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 6px; }
 .checklist-consult-actions .checklist-share-button { margin-top: 0; }
