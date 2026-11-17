@@ -16,6 +16,7 @@ reviewNotes:
   - 手順の図は、予約中の手順記事の配置図を使った（実際の画面ではない）。Airレジの会計の図は、別記事用の見出しと説明文を除いて切り抜いた（airregi-checkout-cash-steps.webp）。Squareの図は、場面を確かめられていないのでない
 services: [airregi, square, smaregi, postas, funfo, regichoice]
 ownServices: [manual]
+ownTemplates: [pos]
 ---
 
 カフェや飲食店のPOSレジは、**「お店の会計の形」**で選ぶと失敗しにくくなります。レジでの先払いが中心のカフェと、テーブルで注文を受けて後で会計する飲食店では、必要な機能が違うためです。名前はよく聞くけれど、違いがよく分からない…という方も多いと思います。

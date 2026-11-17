@@ -3,9 +3,9 @@ import { OWN_TEMPLATES } from '@/lib/ownTemplates';
 import { SERVICES_OPEN } from '@/lib/site';
 
 export const metadata = {
-  title: 'お店の Excel テンプレート（IT 管理台帳・売上集計シート）',
+  title: 'お店の Excel テンプレート（POSレジ選び・開店前の設定・売上集計・IT 管理台帳）',
   description:
-    'レジまわりの機器・障害・点検をまとめる「お店の IT 管理台帳」と、POS レジの売上明細を貼るだけで集計する「売上集計シート」。マクロを使わず、数式だけで動く Excel のテンプレートです（BOOTH で販売）。',
+    '開業前の「POSレジ選びワークシート」「開店前のレジ設定チェック表」、開業後の「売上集計シート」「お店の IT 管理台帳」。マクロを使わず、数式だけで動く Excel のテンプレートです（BOOTH で販売）。',
   alternates: { canonical: '/templates' },
 };
 
@@ -25,7 +25,7 @@ export default function TemplatesPage() {
           ヘルプデスクで POS レジの対応をしている運営者が作った、小さなお店向けの Excel のテンプレートです。どれもマクロ（自動で動くプログラム）を使わず、数式だけで動きます。開くときに、マクロを許可する画面は出ません。
         </p>
         <p>
-          購入とダウンロードは、ピクシブ株式会社が運営する BOOTH の商品ページで行います。画像は、架空のカフェの見本データです。
+          購入とダウンロードは、ピクシブ株式会社が運営する BOOTH の商品ページで行います。画像は、架空のお店（カフェ・キッチンカー）の見本データです。
         </p>
       </div>
 
@@ -59,7 +59,7 @@ export default function TemplatesPage() {
               </tbody>
             </table>
             <div className="own-service-samples">
-              <p className="own-service-samples-title">見本の画面（架空のカフェ）</p>
+              <p className="own-service-samples-title">見本の画面（架空のお店）</p>
               <div className="own-service-samples-list">
                 {t.images.map((img) => (
                   <a key={img.src} href={img.src} target="_blank" rel="noopener">

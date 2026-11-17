@@ -53,6 +53,7 @@ products:
       - 薄い生地には穴が目立つことがある
 services: [smaregi, square, airregi, postas, shopify]
 ownServices: [manual]
+ownTemplates: [pos]
 ---
 
 アパレルや雑貨店のPOSレジは、**「サイズ・カラー別の在庫管理」**ができるかどうかが最大のポイントです。同じ商品でもサイズや色が分かれるため、飲食店向けのシンプルなレジでは管理しきれないことがあります。色やサイズが増えるほど在庫の数え方に悩むので、ここは最初にしっかり見ておきたいところです。
