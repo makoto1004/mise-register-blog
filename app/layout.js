@@ -201,7 +201,7 @@ export default function RootLayout({ children }) {
                   {/* 運営者が BOOTH で販売しているテンプレートの紹介ページ */}
                   <li>
                     <Link href="/templates" className="underline-link">
-                      お店の Excel テンプレート
+                      お店のテンプレート
                     </Link>
                   </li>
                   <li>

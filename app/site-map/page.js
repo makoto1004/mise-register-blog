@@ -102,7 +102,7 @@ export default function SiteMapPage() {
         <ul>
           <li>
             <Link href="/templates" className="underline-link">
-              Excel テンプレート
+              お店のテンプレート
             </Link>
           </li>
           <li>

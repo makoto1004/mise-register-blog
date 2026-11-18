@@ -3,9 +3,9 @@ import { OWN_TEMPLATES } from '@/lib/ownTemplates';
 import { SERVICES_OPEN } from '@/lib/site';
 
 export const metadata = {
-  title: 'お店の Excel テンプレート（POSレジ選び・開店前の設定・売上集計・IT 管理台帳）',
+  title: 'お店のテンプレート（POSレジ選び・開店前の設定・売上集計・IT 管理台帳・AI に頼む文集）',
   description:
-    '開業前の「POSレジ選びワークシート」「開店前のレジ設定チェック表」、開業後の「売上集計シート」「お店の IT 管理台帳」。マクロを使わず、数式だけで動く Excel のテンプレートです（BOOTH で販売）。',
+    '開業前の「POSレジ選びワークシート」「開店前のレジ設定チェック表」、開業後の「売上集計シート」「お店の IT 管理台帳」、文章づくりの「AI に頼む文集」。マクロを使わない Excel と PDF のテンプレートです（BOOTH で販売）。',
   alternates: { canonical: '/templates' },
 };
 
@@ -16,13 +16,13 @@ export default function TemplatesPage() {
   return (
     <article className="article services-page">
       <nav className="breadcrumb" aria-label="パンくずリスト">
-        <Link href="/">ホーム</Link> › <span>お店の Excel テンプレート</span>
+        <Link href="/">ホーム</Link> › <span>お店のテンプレート</span>
       </nav>
-      <h1 className="page-title">お店の Excel テンプレート</h1>
+      <h1 className="page-title">お店のテンプレート</h1>
       <p className="own-service-label">運営者の有料テンプレート（BOOTH で販売）</p>
       <div className="post-body">
         <p>
-          ヘルプデスクで POS レジの対応をしている運営者が作った、小さなお店向けの Excel のテンプレートです。どれもマクロ（自動で動くプログラム）を使わず、数式だけで動きます。開くときに、マクロを許可する画面は出ません。
+          ヘルプデスクで POS レジの対応をしている運営者が作った、小さなお店向けのテンプレートです。Excel のテンプレートは、どれもマクロ（自動で動くプログラム）を使わず、数式だけで動きます。開くときに、マクロを許可する画面は出ません。「AI に頼む文集」は、PDF とテキストファイルです。
         </p>
         <p>
           購入とダウンロードは、ピクシブ株式会社が運営する BOOTH の商品ページで行います。画像は、架空のお店（カフェ・キッチンカー）の見本データです。
