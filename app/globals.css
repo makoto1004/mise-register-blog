@@ -198,6 +198,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   .sale-banners .sale-banner { padding: 10px; }
   .sale-banners .sale-banner-text { font-size: 0.72rem; }
 }
+.sale-banner-link { display: inline-block; padding: 10px 16px; border: 1px solid var(--border); font-weight: 700; }
 .sale-banner-text { margin: 10px 0 0; font-size: 0.85rem; color: var(--muted); }
 
 
