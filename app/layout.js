@@ -6,6 +6,7 @@ import { InstagramHeaderLink } from '@/components/XLinks';
 import XHeaderTimeline from '@/components/XHeaderTimeline';
 import SiteMotion from '@/components/SiteMotion';
 import AffiliateClickTracker from '@/components/AffiliateClickTracker';
+import OwnLinkClickTracker from '@/components/OwnLinkClickTracker';
 import { SITE, CATEGORIES, OG_IMAGE, CONSULT_AVAILABLE } from '@/lib/site';
 import { JOURNEY_STEPS } from '@/lib/journey';
 import './globals.css';
@@ -140,6 +141,8 @@ export default function RootLayout({ children }) {
         <SiteMotion />
         {/* 広告リンクが押された回数を、記事・広告ごとに Google アナリティクスで数える */}
         <AffiliateClickTracker />
+        {/* 運営者の販売ページ（BOOTH・ココナラなど）へのリンクが押された回数を、記事ごとに数える */}
+        <OwnLinkClickTracker />
 
         <footer id="footer" className="site-footer">
           <div className="footer-inner">
