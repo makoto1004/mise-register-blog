@@ -9,15 +9,29 @@ import { RANKING, RANKING_COUNT } from '@/lib/ranking';
 import { SITE, CATEGORIES, CONSULT_FREE_NOTE, CONSULT_NAME, CONSULT_TAGLINE, CONSULT_AVAILABLE } from '@/lib/site';
 
 // トップページ
-// 上から：見出しと道のり（1→4）、無料相談の案内、よく読まれている記事、新着記事
+// 上から：見出しと道のり（1→4）、無料相談の案内、注目の記事（人気 No.1・最新・今のおすすめ）、よく読まれている記事（2位〜）
 export default function Home() {
-  const latest = getLatestPosts();
-  // よく読まれている記事：公開済みの記事だけを、ランキングの順に並べる
+  // 公開済みの記事だけを使う（予約中・削除した記事は飛ばす）
   const postsBySlug = new Map(getAllPosts().map((post) => [post.slug, post]));
-  const ranking = RANKING.slugs
-    .map((slug) => postsBySlug.get(slug))
-    .filter(Boolean)
-    .slice(0, RANKING_COUNT);
+  const ranked = RANKING.slugs.map((slug, i) => ({ post: postsBySlug.get(slug), rank: i + 1 })).filter((r) => r.post);
+  const newest = getLatestPosts(10);
+
+  // 上の 3 枠：人気 No.1・最新・今のおすすめ（2026-11-20 運営者が決定）。同じ記事は2回出さない
+  // 空きが出たら（ランキングやおすすめがないとき）新しい順の記事で埋める
+  const used = new Set();
+  const cards = [];
+  const addCard = (post, label) => {
+    if (!post || used.has(post.slug) || cards.length >= 3) return;
+    used.add(post.slug);
+    cards.push({ post, label });
+  };
+  addCard(ranked[0]?.post, '人気 No.1');
+  addCard(newest.find((p) => !used.has(p.slug)), '最新');
+  addCard(postsBySlug.get(RANKING.pick), '今のおすすめ');
+  newest.forEach((p) => addCard(p, '新着'));
+
+  // 下の一覧：上の枠に出ていない記事を、ランキングの順位のまま（2位〜）
+  const ranking = ranked.filter((r) => !used.has(r.post.slug)).slice(0, RANKING_COUNT - 1);
   // '2026-11-20' → '11/20'
   const [, rankMonth, rankDay] = RANKING.updatedAt.split('-');
   const rankingDate = rankMonth && rankDay ? `${Number(rankMonth)}/${Number(rankDay)}` : '';
@@ -81,45 +95,21 @@ export default function Home() {
           </Link>
         </section>
       )}
-      {/* よく読まれている記事（lib/ranking.js）。3 本以上あるときだけ出す。迷っている人に、まず読まれている記事を案内するため */}
-      {ranking.length >= 3 && (
-        <section className="home-section ranking-section" aria-labelledby="ranking-heading">
-          <div className="section-head">
-            <h2 id="ranking-heading">よく読まれている記事</h2>
-            <p className="ranking-note">
-              {RANKING.periodLabel}
-              {rankingDate && `・${rankingDate} 時点`}
-            </p>
-          </div>
-          <ol className="ranking-list">
-            {ranking.map((post, index) => (
-              <li key={post.slug} className="ranking-item">
-                <Link href={`/posts/${post.slug}`} className="ranking-link">
-                  <span className="ranking-rank" aria-hidden="true">{index + 1}</span>
-                  <span className="ranking-title">
-                    <PostTitle title={post.title} />
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ol>
-        </section>
-      )}
-      {/* 新着記事：全カテゴリーから新しい順に 3 本を目立たせて表示する */}
-      {latest.length > 0 && (
+      {/* 上の 3 枠：人気 No.1・最新・今のおすすめ */}
+      {cards.length > 0 && (
         <section className="home-section latest-section" aria-labelledby="latest-heading">
           <div className="section-head">
-            <h2 id="latest-heading">新着記事</h2>
+            <h2 id="latest-heading">注目の記事</h2>
           </div>
           <ul className="latest-grid">
-            {latest.map((post, index) => (
+            {cards.map(({ post, label }, index) => (
               <li key={post.slug} className={index === 0 ? 'latest-card latest-card-top' : 'latest-card'}>
                 <Link href={`/posts/${post.slug}`} className="latest-link">
                   <span className="latest-thumb">
                     <PostThumbnail post={post} wide />
                   </span>
                   <span className="latest-meta">
-                    <span className="latest-label">{index === 0 ? '最新' : '新着'}</span>
+                    <span className="latest-label">{label}</span>
                     <NewBadge date={post.date} />
                     {CATEGORIES[post.category] && <span className="latest-category">{CATEGORIES[post.category]}</span>}
                   </span>
@@ -133,6 +123,30 @@ export default function Home() {
               </li>
             ))}
           </ul>
+        </section>
+      )}
+      {/* よく読まれている記事（lib/ranking.js）。上の枠に出ていない分を、順位のまま 2 本以上あるときだけ出す */}
+      {ranking.length >= 2 && (
+        <section className="home-section ranking-section" aria-labelledby="ranking-heading">
+          <div className="section-head">
+            <h2 id="ranking-heading">よく読まれている記事</h2>
+            <p className="ranking-note">
+              {RANKING.periodLabel}
+              {rankingDate && `・${rankingDate} 時点`}
+            </p>
+          </div>
+          <ol className="ranking-list">
+            {ranking.map(({ post, rank }) => (
+              <li key={post.slug} className="ranking-item" value={rank}>
+                <Link href={`/posts/${post.slug}`} className="ranking-link">
+                  <span className="ranking-rank" aria-hidden="true">{rank}</span>
+                  <span className="ranking-title">
+                    <PostTitle title={post.title} />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ol>
         </section>
       )}
     </>

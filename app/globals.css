@@ -1365,5 +1365,4 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .ranking-link:hover { text-decoration: none; background: var(--surface); }
 .ranking-link:hover .ranking-title { text-decoration: underline; }
 .ranking-rank { flex: none; width: 2.4rem; font-family: var(--font-mincho), "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 1.6rem; line-height: 1; color: var(--accent); text-align: center; }
-.ranking-item:nth-child(-n+3) .ranking-rank { font-size: 2rem; }
 .ranking-title { font-weight: 700; line-height: 1.5; }
