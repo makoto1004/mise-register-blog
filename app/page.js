@@ -4,13 +4,23 @@ import JsonLd from '@/components/JsonLd';
 import NewBadge from '@/components/NewBadge';
 import PostTitle from '@/components/PostTitle';
 import JourneySteps from '@/components/JourneySteps';
-import { getLatestPosts } from '@/lib/posts';
+import { getAllPosts, getLatestPosts } from '@/lib/posts';
+import { RANKING, RANKING_COUNT } from '@/lib/ranking';
 import { SITE, CATEGORIES, CONSULT_FREE_NOTE, CONSULT_NAME, CONSULT_TAGLINE, CONSULT_AVAILABLE } from '@/lib/site';
 
 // トップページ
-// 上から：見出しと道のり（1→4）、無料相談の案内、新着記事
+// 上から：見出しと道のり（1→4）、無料相談の案内、よく読まれている記事、新着記事
 export default function Home() {
   const latest = getLatestPosts();
+  // よく読まれている記事：公開済みの記事だけを、ランキングの順に並べる
+  const postsBySlug = new Map(getAllPosts().map((post) => [post.slug, post]));
+  const ranking = RANKING.slugs
+    .map((slug) => postsBySlug.get(slug))
+    .filter(Boolean)
+    .slice(0, RANKING_COUNT);
+  // '2026-11-20' → '11/20'
+  const [, rankMonth, rankDay] = RANKING.updatedAt.split('-');
+  const rankingDate = rankMonth && rankDay ? `${Number(rankMonth)}/${Number(rankDay)}` : '';
 
   return (
     <>
@@ -69,6 +79,30 @@ export default function Home() {
           <Link href="/consult" className="help-button">
             診断してみる
           </Link>
+        </section>
+      )}
+      {/* よく読まれている記事（lib/ranking.js）。3 本以上あるときだけ出す。迷っている人に、まず読まれている記事を案内するため */}
+      {ranking.length >= 3 && (
+        <section className="home-section ranking-section" aria-labelledby="ranking-heading">
+          <div className="section-head">
+            <h2 id="ranking-heading">よく読まれている記事</h2>
+            <p className="ranking-note">
+              {RANKING.periodLabel}
+              {rankingDate && `・${rankingDate} 時点`}
+            </p>
+          </div>
+          <ol className="ranking-list">
+            {ranking.map((post, index) => (
+              <li key={post.slug} className="ranking-item">
+                <Link href={`/posts/${post.slug}`} className="ranking-link">
+                  <span className="ranking-rank" aria-hidden="true">{index + 1}</span>
+                  <span className="ranking-title">
+                    <PostTitle title={post.title} />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ol>
         </section>
       )}
       {/* 新着記事：全カテゴリーから新しい順に 3 本を目立たせて表示する */}
