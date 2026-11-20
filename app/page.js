@@ -20,15 +20,15 @@ export default function Home() {
   // 空きが出たら（ランキングやおすすめがないとき）新しい順の記事で埋める
   const used = new Set();
   const cards = [];
-  const addCard = (post, label) => {
+  const addCard = (post, label, kind) => {
     if (!post || used.has(post.slug) || cards.length >= 3) return;
     used.add(post.slug);
-    cards.push({ post, label });
+    cards.push({ post, label, kind });
   };
-  addCard(ranked[0]?.post, '人気 No.1');
-  addCard(newest.find((p) => !used.has(p.slug)), '最新');
-  addCard(postsBySlug.get(RANKING.pick), '今のおすすめ');
-  newest.forEach((p) => addCard(p, '新着'));
+  addCard(ranked[0]?.post, '人気 No.1', 'popular');
+  addCard(newest.find((p) => !used.has(p.slug)), '最新', 'newest');
+  addCard(postsBySlug.get(RANKING.pick), '今のおすすめ', 'pick');
+  newest.forEach((p) => addCard(p, '新着', 'newest'));
 
   // 下の一覧：上の枠に出ていない記事を、ランキングの順位のまま（2位〜）
   const ranking = ranked.filter((r) => !used.has(r.post.slug)).slice(0, RANKING_COUNT - 1);
@@ -102,14 +102,15 @@ export default function Home() {
             <h2 id="latest-heading">注目の記事</h2>
           </div>
           <ul className="latest-grid">
-            {cards.map(({ post, label }, index) => (
+            {cards.map(({ post, label, kind }, index) => (
               <li key={post.slug} className={index === 0 ? 'latest-card latest-card-top' : 'latest-card'}>
                 <Link href={`/posts/${post.slug}`} className="latest-link">
+                  {/* 枠の役割の札（人気 No.1・最新・今のおすすめ）。カードの上の縁に大きく出す（2026-11-20 運営者の希望） */}
+                  <span className={`latest-ribbon latest-ribbon-${kind}`}>{label}</span>
                   <span className="latest-thumb">
                     <PostThumbnail post={post} wide />
                   </span>
                   <span className="latest-meta">
-                    <span className="latest-label">{label}</span>
                     <NewBadge date={post.date} />
                     {CATEGORIES[post.category] && <span className="latest-category">{CATEGORIES[post.category]}</span>}
                   </span>

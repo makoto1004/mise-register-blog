@@ -1366,3 +1366,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .ranking-link:hover .ranking-title { text-decoration: underline; }
 .ranking-rank { flex: none; width: 2.4rem; font-family: var(--font-mincho), "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 1.6rem; line-height: 1; color: var(--accent); text-align: center; }
 .ranking-title { font-weight: 700; line-height: 1.5; }
+
+/* 注目の記事の札（人気 No.1・最新・今のおすすめ）：カードの上の縁に、役割ごとの色で大きく出す（2026-11-20） */
+.latest-section .latest-grid { margin-top: 30px; row-gap: 40px; }
+.latest-section .latest-card { position: relative; padding-top: 26px; }
+.latest-ribbon { position: absolute; top: -16px; left: 12px; display: inline-flex; align-items: center; min-height: 32px; padding: 0 16px; font-family: var(--font-mincho), "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: 1.05rem; font-weight: 700; letter-spacing: 0.08em; color: #fff; box-shadow: 3px 3px 0 var(--border); }
+.latest-ribbon-popular { background: var(--warm); }
+.latest-ribbon-newest { background: var(--text); }
+.latest-ribbon-pick { background: var(--pros); }
