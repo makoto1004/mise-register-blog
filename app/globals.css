@@ -1332,3 +1332,26 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .related-title { font-size: 0.9rem; font-weight: 700; line-height: 1.6; }
 .related-date { font-size: 0.75rem; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { .related-card, .related-card:hover { transition: none; transform: none; } }
+
+/* 2026-11-20 動きの見直し（参考：「流行をそのまま使わず、目的に合わせる」）
+   ① トップの見出しだけを、開いたときに1回ふわっと出す
+   ② 道のり 1→4 のカードを、順番どおりに少しずつ出す（もともと順番のある内容のため）
+   ③ 押したときに少し沈む（押せた手ごたえ）
+   CSS だけで動かすので、JavaScript がなくても中身は見える。動きを減らす設定の人には出さない */
+@keyframes home-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: no-preference) {
+  .home-hero h1 { animation: home-rise 0.7s ease-out both; }
+  .home-hero-lead { animation: home-rise 0.7s ease-out 0.15s both; }
+  .journey-steps-large .journey-step { animation: home-rise 0.5s ease-out both; }
+  .journey-steps-large .journey-step:nth-child(1) { animation-delay: 0.3s; }
+  .journey-steps-large .journey-step:nth-child(2) { animation-delay: 0.42s; }
+  .journey-steps-large .journey-step:nth-child(3) { animation-delay: 0.54s; }
+  .journey-steps-large .journey-step:nth-child(4) { animation-delay: 0.66s; }
+  .journey-steps-large .journey-step:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--accent); }
+  .home-search-button, .help-button { transition: transform 0.1s; }
+  .home-search-button:active, .help-button:active { transform: translateY(2px); }
+  .latest-card { transition: transform 0.15s, box-shadow 0.15s; }
+  .latest-card:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--line); }
+  .latest-card-top:hover { box-shadow: 6px 6px 0 var(--warm); }
+  .latest-card:active { transform: translate(1px, 1px); }
+}
