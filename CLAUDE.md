@@ -107,7 +107,7 @@ npm run og      # OGP 画像（public/og-image.png）を作り直す
 - 記事の挿絵は Canva で作り、`public/images/posts/<slug>-1.webp` に置く
 - **机・テーブル・カウンター・棚の上に、植物（鉢植え・花びん・観葉植物）を描かない**。不自然に見えるため。Canva に頼むときは、プロンプトに「no plants, no flowers, no vase on the table/counter」を入れる
 - タッチは、ラフな手描きのスケッチ（セピアのペンの線を重ねた描き方、斜線の影、線から少しはみ出す薄いコーヒー色の水彩）。陰影がなめらかな塗り・光沢・リアルな質感など、AI が作ったような絵にしない
-- **挿絵のタッチの基準は、居酒屋の記事の挿絵（public/images/posts/izakaya-pos-1.webp、Canva の media MAHaUSbbSKs）**（2026-11-21 運営者が決定）。細いペンの線に、温かい水彩でしっかり色を付ける（提灯の赤・ビールの琥珀色・木の茶色など、自然な色）。紙の白を少し残し、小物まで手描きにする。Canva の generate-image では、imageReferences にこの画像を入れ、「Match the drawing style of the reference image exactly, but do not copy its objects or layout」と書く。セピア1色にはしない
+- **挿絵のタッチの基準は、Canva の media MAHbiZYYat8（在庫の棚と段ボール箱・瓶・豆の袋・踏み台の絵）**（2026-11-21 運営者が決定。居酒屋の絵から変更）。細い茶色のペンの線（少し揺れて閉じきらない）、形は少し簡単にし、水彩のむら・にじみ・紙の白を残す。色は温かい茶色とベージュが中心。木目や細かい質感は描かない。Canva の generate-image では、imageReferences にこの画像を入れ、「Match the drawing style of the reference image exactly (do not copy its objects or layout): a loose hand-painted sketchbook illustration, thin brown fineliner lines that sometimes don't close, simplified shapes, uneven watercolor washes with visible blooms, plenty of white paper. No realistic wood grain or detailed textures, no smooth gradients, no photorealism, no glossy shine, no bold outlines」と書く
 - **Canva に頼むときは、AI みたいな光沢を出しすぎない・線を太く、しっかり描きすぎない**（2026-11-21 運営者が追加）。プロンプトに「thin light pen lines (not bold, no heavy outlines), no shine, no gloss, no highlights, no reflections on screens, no realistic wood grain, wobbly lines that do not fully close, imperfect hand-drawn perspective」を入れる。線がきれいに閉じすぎ・木目や影がなめらか・定規で描いたような形は AI っぽく見える
 - 道具や機械は、実物どおりの形にする（時計・電話・スタンドなど、形がくずれていないかを確かめる）。値段を描くときは円（¥）にする
 - **虫めがねは描かない**。プロンプトに「no magnifying glass」を入れる
