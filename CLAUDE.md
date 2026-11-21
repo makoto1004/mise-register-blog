@@ -107,6 +107,7 @@ npm run og      # OGP 画像（public/og-image.png）を作り直す
 - 記事の挿絵は Canva で作り、`public/images/posts/<slug>-1.webp` に置く
 - **机・テーブル・カウンター・棚の上に、植物（鉢植え・花びん・観葉植物）を描かない**。不自然に見えるため。Canva に頼むときは、プロンプトに「no plants, no flowers, no vase on the table/counter」を入れる
 - タッチは、ラフな手描きのスケッチ（セピアのペンの線を重ねた描き方、斜線の影、線から少しはみ出す薄いコーヒー色の水彩）。陰影がなめらかな塗り・光沢・リアルな質感など、AI が作ったような絵にしない
+- **Canva に頼むときは、AI みたいな光沢を出しすぎない・線を太く、しっかり描きすぎない**（2026-11-21 運営者が追加）。プロンプトに「thin light pen lines (not bold, no heavy outlines), no shine, no gloss, no highlights, no reflections on screens, no realistic wood grain, wobbly lines that do not fully close, imperfect hand-drawn perspective」を入れる。線がきれいに閉じすぎ・木目や影がなめらか・定規で描いたような形は AI っぽく見える
 - 道具や機械は、実物どおりの形にする（時計・電話・スタンドなど、形がくずれていないかを確かめる）。値段を描くときは円（¥）にする
 - **虫めがねは描かない**。プロンプトに「no magnifying glass」を入れる
 - **キャッシュドロアの上にレシートプリンターを置かない**（ドロアとプリンターは横に並べて描く）。プロンプトに「the receipt printer stands next to the cash drawer, not on top of it」を入れる
