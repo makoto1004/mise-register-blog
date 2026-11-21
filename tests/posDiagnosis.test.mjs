@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import { fileURLToPath } from 'node:url'
+import { execFileSync } from 'node:child_process'
 import {
   DIAGNOSIS_QUESTIONS,
   DIAGNOSIS_RULES,
@@ -12,6 +13,22 @@ import { JOURNEY_STEPS } from '../lib/journey.js'
 // プロジェクトのルート（テストを実行する場所に左右されないようにする）
 const ROOT = fileURLToPath(new URL('../', import.meta.url))
 const GROUPS = ['choose', 'devices', 'setup']
+
+// scheduled/ は git に入れない予約記事の置き場で、運営者のパソコンの本体のフォルダー（markdown-blog）にだけある。
+// worktree（markdown-blog-redraw など）でテストするときは、本体のフォルダーの scheduled/ も見る
+function mainRepoRoot() {
+  try {
+    const common = execFileSync('git', ['rev-parse', '--path-format=absolute', '--git-common-dir'], { cwd: ROOT, encoding: 'utf8' }).trim()
+    return common.replace(/[\\/]\.git[\\/]?$/, '/')
+  } catch {
+    return ROOT
+  }
+}
+const SCHEDULED_DIRS = [...new Set([`${ROOT}scheduled`, `${mainRepoRoot()}scheduled`])]
+
+function postExists(slug) {
+  return fs.existsSync(`${ROOT}content/posts/${slug}.md`) || SCHEDULED_DIRS.some((dir) => fs.existsSync(`${dir}/${slug}.md`))
+}
 const journeySlugs = JOURNEY_STEPS.flatMap((s) => s.slugs)
 // 対応表（DIAGNOSIS_RULES）の中の slug をすべて集める
 const ruleSlugs = Object.values(DIAGNOSIS_RULES).flatMap((byValue) =>
@@ -91,7 +108,7 @@ test('falls back when a group is empty', () => {
 test('every rule slug exists', () => {
   for (const slug of everySlug) {
     // scheduled/ は git に入れない予約記事の置き場（運営者のパソコンにだけある）も見る
-    const ok = fs.existsSync(`${ROOT}content/posts/${slug}.md`) || fs.existsSync(`${ROOT}scheduled/${slug}.md`)
+    const ok = postExists(slug)
     assert.ok(ok, `${slug} が content/posts にも scheduled にもありません`)
   }
 })
@@ -109,7 +126,7 @@ test('after-opening shows furniture and tips posts that exist', () => {
   assert.deepEqual(after.sections.map((x) => x.title), ['家具', '豆知識'])
   for (const x of after.sections) assert.ok(x.slugs.length >= 4 && x.slugs.length <= 12)
   for (const slug of after.sections.flatMap((x) => x.slugs)) {
-    const ok = fs.existsSync(`${ROOT}content/posts/${slug}.md`) || fs.existsSync(`${ROOT}scheduled/${slug}.md`)
+    const ok = postExists(slug)
     assert.ok(ok, `${slug} が content/posts にも scheduled にもありません`)
   }
 })
