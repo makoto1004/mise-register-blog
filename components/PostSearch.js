@@ -113,14 +113,23 @@ export default function PostSearch({ posts, categories, fixedCategory = '' }) {
         <ul className="search-results">
           {results.map((post) => (
             <li key={post.slug} className="search-result">
-              <Link href={`/posts/${post.slug}`} className="search-result-title">
-                {post.title}
-              </Link>
-              {post.description && <p className="search-result-desc">{post.description}</p>}
-              <p className="search-result-meta">
-                <time dateTime={post.date}>{post.date.replaceAll('-', '/')}</time>
-                {!fixedCategory && CATEGORIES[post.category] && <span>{CATEGORIES[post.category]}</span>}
-              </p>
+              {/* 記事の挿絵（なければ画像を出さない）。題名のリンクと同じ先なので、読み上げでは飛ばす */}
+              {(post.illustration || post.image) && (
+                <Link href={`/posts/${post.slug}`} className="search-result-thumb" tabIndex={-1} aria-hidden="true">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- 静的書き出しのため next/image を使わない */}
+                  <img src={post.illustration || post.image} alt="" width={160} height={90} loading="lazy" decoding="async" />
+                </Link>
+              )}
+              <div className="search-result-body">
+                <Link href={`/posts/${post.slug}`} className="search-result-title">
+                  {post.title}
+                </Link>
+                {post.description && <p className="search-result-desc">{post.description}</p>}
+                <p className="search-result-meta">
+                  <time dateTime={post.date}>{post.date.replaceAll('-', '/')}</time>
+                  {!fixedCategory && CATEGORIES[post.category] && <span>{CATEGORIES[post.category]}</span>}
+                </p>
+              </div>
             </li>
           ))}
         </ul>
