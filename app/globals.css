@@ -94,6 +94,17 @@ a:hover { text-decoration: underline; }
   letter-spacing: 0.16em;
   text-transform: lowercase;
 }
+/* ロゴの読みがな（ルビ）。小さく、アクセント色で、ロゴの文字を邪魔しない */
+.logo-mise, .logo-register { ruby-position: over; }
+.logo-ruby {
+  font-style: normal;
+  font-weight: 700;
+  color: var(--warm);
+  text-transform: none;
+  line-height: 1.2;
+}
+.logo-mise .logo-ruby { font-size: 0.3em; letter-spacing: 0.25em; }
+.logo-register .logo-ruby { font-size: 0.55em; letter-spacing: 0.1em; }
 .footer-logo { margin: 4px 0 16px; }
 .footer-logo .logo-mise { font-size: 2.7rem; }
 .footer-logo .logo-amp { font-size: 2.4rem; }

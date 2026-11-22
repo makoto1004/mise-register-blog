@@ -20,9 +20,10 @@ export default function Logo({ as: Tag = 'span', className = '' }) {
     <Tag className={`logo ${className}`}>
       <AwningMark />
       <span className="logo-text">
-        <span className="logo-mise">mise</span>
+        {/* 読みがなのルビ（2026-11-23 運営者が決定：mise＝ミーズ） */}
+        <ruby className="logo-mise">mise<rt className="logo-ruby">ミーズ</rt></ruby>
         <span className="logo-amp">&amp;</span>
-        <span className="logo-register">register</span>
+        <ruby className="logo-register">register<rt className="logo-ruby">レジスター</rt></ruby>
       </span>
     </Tag>
   );
