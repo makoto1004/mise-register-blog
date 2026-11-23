@@ -73,7 +73,19 @@ a:hover { text-decoration: underline; }
 .logo-link:hover, .footer-logo:hover { text-decoration: none; }
 .logo { display: inline-flex; align-items: center; gap: 10px; color: var(--text); line-height: 1; }
 .logo-mark { width: 34px; height: 34px; flex: 0 0 auto; color: var(--warm); }
-.logo-text { display: inline-flex; align-items: baseline; gap: 0.18em; white-space: nowrap; }
+/* 上の段＝読みがな、下の段＝ロゴの文字。読みがなを同じ段に置き、高さとフォントをそろえる */
+.logo-text {
+  --logo-yomi-size: 0.6rem;
+  display: inline-grid;
+  grid-template-columns: auto auto auto;
+  column-gap: 0.18em;
+  row-gap: 0.12rem;
+  align-items: baseline;
+  white-space: nowrap;
+}
+.logo-mise { grid-area: 2 / 1; }
+.logo-amp { grid-area: 2 / 2; }
+.logo-register { grid-area: 2 / 3; }
 .logo-mise {
   font-family: var(--font-serif), "Times New Roman", serif;
   font-size: 2.35rem;
@@ -94,17 +106,22 @@ a:hover { text-decoration: underline; }
   letter-spacing: 0.16em;
   text-transform: lowercase;
 }
-/* ロゴの読みがな（ルビ）。小さく、アクセント色で、ロゴの文字を邪魔しない */
-.logo-mise, .logo-register { ruby-position: over; }
-.logo-ruby {
+/* ロゴの読みがな（2026-11-23 運営者の依頼で、2 つの高さ・フォント・大きさをそろえた）
+   小さく、アクセント色で、ロゴの文字を邪魔しない。それぞれの語の真上の中央に置く */
+.logo-yomi {
+  grid-row: 1;
+  justify-self: center;
+  align-self: end;
+  font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic Medium", "YuGothic", "Meiryo", sans-serif; /* 本文と同じ */
+  font-size: var(--logo-yomi-size);
   font-style: normal;
   font-weight: 700;
+  letter-spacing: 0.12em;
   color: var(--warm);
-  text-transform: none;
-  line-height: 1.2;
+  line-height: 1;
 }
-.logo-mise .logo-ruby { font-size: 0.3em; letter-spacing: 0.25em; }
-.logo-register .logo-ruby { font-size: 0.55em; letter-spacing: 0.1em; }
+.logo-yomi-mise { grid-column: 1; }
+.logo-yomi-register { grid-column: 3; }
 .footer-logo { margin: 4px 0 16px; }
 .footer-logo .logo-mise { font-size: 2.7rem; }
 .footer-logo .logo-amp { font-size: 2.4rem; }
@@ -868,6 +885,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   .header-top { flex-wrap: nowrap; gap: 12px; }
   .header-sns { display: none; }
   .logo-link .logo-mark { width: 26px; height: 26px; }
+  .logo-link .logo-text { --logo-yomi-size: 0.5rem; }
   .logo-link .logo { gap: 8px; }
   .logo-mise { font-size: 1.7rem; }
   .logo-amp { font-size: 1.5rem; }

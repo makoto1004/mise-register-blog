@@ -19,11 +19,14 @@ export default function Logo({ as: Tag = 'span', className = '' }) {
   return (
     <Tag className={`logo ${className}`}>
       <AwningMark />
+      {/* 上の段に読みがな、下の段にロゴの文字。読みがなの高さ・フォントをそろえるため、ruby ではなく 2 段の並びにした
+          読みがな：2026-11-23 運営者が決定（mise＝ミーズ）。読み上げは「mise ミーズ & register レジスター」の順 */}
       <span className="logo-text">
-        {/* 読みがなのルビ（2026-11-23 運営者が決定：mise＝ミーズ） */}
-        <ruby className="logo-mise">mise<rt className="logo-ruby">ミーズ</rt></ruby>
+        <span className="logo-mise">mise</span>
+        <span className="logo-yomi logo-yomi-mise">ミーズ</span>
         <span className="logo-amp">&amp;</span>
-        <ruby className="logo-register">register<rt className="logo-ruby">レジスター</rt></ruby>
+        <span className="logo-register">register</span>
+        <span className="logo-yomi logo-yomi-register">レジスター</span>
       </span>
     </Tag>
   );
