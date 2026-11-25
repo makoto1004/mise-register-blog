@@ -19,6 +19,10 @@
   --badge-text: #9a4d00;
   /* ロゴの & などに使う差し色（テラコッタ） */
   --warm: #b4532a;
+  /* 見出しの書体の基本。使うページでは MinchoScope・DisplayScope が上書きする。
+     ここで決めておかないと、囲んでいないページで font-family の指定ごと無効になる */
+  --font-mincho: "Yu Mincho";
+  --font-display: "Yu Mincho";
   /* サムネイルの背景（カテゴリー別） */
   --thumb-cafe: #efe3d3;
   --thumb-salon: #f3e1e4;
