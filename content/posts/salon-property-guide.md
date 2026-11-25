@@ -96,7 +96,7 @@ reviewNotes:
 - [ ] 内装工事の見積もりを取った
 - [ ] 看板を出してよい場所・大きさを確認した
 
-開業にかかる費用全体は、記事の最後の初期費用シミュレーターで計算できます。POSレジの選び方は[美容院・サロン向けPOSレジ比較](/posts/salon-pos-comparison)で解説しています。
+開業にかかる費用全体は、[初期費用シミュレーター](/opening-checklist#cost-salon)で計算できます。POSレジの選び方は[美容院・サロン向けPOSレジ比較](/posts/salon-pos-comparison)で解説しています。
 
 ## よくある質問
 

@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 
 // 初期費用シミュレーター（ブラウザで動く計算機）
@@ -134,30 +133,6 @@ const SOURCES = {
   ],
 };
 
-// 合計を見たあとに読むとよい記事（業種ごとの記事 + 全業種共通の記事）
-const NEXT_STEPS = {
-  cafe: [
-    { slug: 'cafe-opening-equipment', label: 'カフェ開業に必要な機材を確かめる' },
-    { slug: 'cafe-pos-comparison', label: 'カフェ向けのPOSレジを比べる' },
-  ],
-  salon: [
-    { slug: 'salon-styling-chair-mirror', label: 'スタイリングチェアと鏡の選び方を見る' },
-    { slug: 'salon-pos-comparison', label: '美容院・サロン向けのPOSレジを比べる' },
-  ],
-  'kitchen-car': [
-    { slug: 'kitchen-car-build-franchise', label: 'キッチンカーの始め方を確かめる' },
-    { slug: 'kitchen-car-pos-comparison', label: 'キッチンカー向けのPOSレジを比べる' },
-  ],
-  apparel: [
-    { slug: 'apparel-opening-checklist', label: 'アパレルショップ開業に必要なものを確かめる' },
-    { slug: 'apparel-pos-comparison', label: 'アパレル向けのPOSレジを比べる' },
-  ],
-};
-const COMMON_NEXT_STEPS = [
-  { slug: 'pos-low-cost-start', label: 'POSレジの初期費用を抑える方法を見る' },
-  { slug: 'pos-peripherals-guide', label: 'タブレットPOSレジに必要な周辺機器を確かめる' },
-];
-
 const QTY_OPTIONS = Array.from({ length: 10 }, (_, i) => i + 1);
 
 const yen = (n) => `${Math.round(n).toLocaleString('ja-JP')}円`;
@@ -243,13 +218,11 @@ export function calcCostTotals(category, data) {
   return { initialTotal, monthlyTotal };
 }
 
-// savedData / onDataChange：開業準備チェックリストの中で使うときに、入れた金額を保存・復元するためのもの（記事の中では使わない）
-// embedded：チェックリストの中に置くとき。見出しを 1 段下げ、「次はこちら」の記事の案内を出さない
-export default function CostSimulator({ category, slug, servicesOpen, savedData, onDataChange, embedded = false }) {
+// 開業準備チェックリスト（/opening-checklist）の中だけで使う。記事の中に置くと長くなりすぎるので、2026-11-25 に記事からは外した
+// savedData / onDataChange：入れた金額を保存・復元するためのもの
+export default function CostSimulator({ category, savedData, onDataChange }) {
   const { initialItems, monthlyItems } = useMemo(() => itemsFor(category), [category]);
   const sources = [...(SOURCES[category] ?? []), ...SOURCES.common];
-  // 今読んでいる記事へのリンクは出さない
-  const nextSteps = [...(NEXT_STEPS[category] ?? []), ...COMMON_NEXT_STEPS].filter((step) => step.slug !== slug);
 
   // 初期費用と毎月の費用で同じ id（例: kitchen）があっても混ざらないよう、別々に持つ
   const [init, setInit] = useState(() => savedData?.init ?? initialState(initialItems));
@@ -261,9 +234,6 @@ export default function CostSimulator({ category, slug, servicesOpen, savedData,
   useEffect(() => {
     onDataChange?.({ init, monthly, sales, rate });
   }, [onDataChange, init, monthly, sales, rate]);
-
-  const Title = embedded ? 'h3' : 'h2';
-  const Sub = embedded ? 'h4' : 'h3';
 
   const handlers = (setter) => ({
     setValue: (id) => (v) => setter((s) => ({ ...s, values: { ...s.values, [id]: v } })),
@@ -306,7 +276,7 @@ export default function CostSimulator({ category, slug, servicesOpen, savedData,
 
   return (
     <section className="cost-sim" aria-labelledby="cost-sim-title">
-      <Title id="cost-sim-title">初期費用シミュレーター</Title>
+      <h3 id="cost-sim-title">初期費用シミュレーター</h3>
       <p className="sim-lead">
         はじめから入っている金額は、<strong>10坪前後の小さなお店</strong>を想定した目安です（下の出典の金額レンジの中ほど）。
         必要なものにチェックを入れ、見積もりの金額や数量に書き換えると、初期費用と毎月の費用の合計を計算できます。空欄の項目は、お店に合わせて入力してください。
@@ -320,10 +290,10 @@ export default function CostSimulator({ category, slug, servicesOpen, savedData,
         </button>
       </div>
 
-      <Sub className="sim-heading">初期費用</Sub>
+      <h4 className="sim-heading">初期費用</h4>
       <ul className="sim-list">{renderRows(initialItems, init, initH)}</ul>
 
-      <Sub className="sim-heading">毎月の費用</Sub>
+      <h4 className="sim-heading">毎月の費用</h4>
       <ul className="sim-list">
         {renderRows(monthlyItems, monthly, monthlyH)}
         <li className="sim-row sim-fee">
@@ -375,23 +345,6 @@ export default function CostSimulator({ category, slug, servicesOpen, savedData,
           <dd>{yen(firstYear)}</dd>
         </div>
       </dl>
-      {!embedded && (
-      <div className="sim-next">
-        <h3 className="sim-heading">合計を見たら、次はこちら</h3>
-        <ul>
-          {nextSteps.map((step) => (
-            <li key={step.slug}>
-              <Link href={`/posts/${step.slug}`}>{step.label}</Link>
-            </li>
-          ))}
-          {servicesOpen && (
-            <li>
-              <Link href="/services">レジの初期設定や商品登録の準備を、作業代行に頼む（有料）</Link>
-            </li>
-          )}
-        </ul>
-      </div>
-      )}
       <p className="sim-note">
         ※ 目安は公開情報の金額レンジから選んだ参考値で、地域・物件・機種によって大きく変わります。実際の費用は、各サービス・販売店・工事業者の見積もりで確認してください。
       </p>

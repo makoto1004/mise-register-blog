@@ -7,7 +7,6 @@ import OwnServiceBox from '@/components/OwnServiceBox';
 import OwnTemplateBox from '@/components/OwnTemplateBox';
 import PickCard from '@/components/PickCard';
 import ThemeBackground from '@/components/ThemeBackground';
-import CostSimulator from '@/components/CostSimulator';
 import QuickSurvey from '@/components/QuickSurvey';
 import { XFollow, XShare } from '@/components/XLinks';
 import XPostEmbeds from '@/components/XPostEmbeds';
@@ -190,12 +189,12 @@ export default async function PostPage({ params }) {
         return <div key={index} className="post-body" dangerouslySetInnerHTML={{ __html: section.html }} />;
       })}
 
-      <NextStep slug={post.slug} hasCostGuide={getPostSlugs().includes('pos-cost-guide-2026')} />
-
-      {/* 開業に関する記事だけに出す（lib/posts.js の costSimulator） */}
-      {post.costSimulator && (
-        <CostSimulator category={post.category} slug={post.slug} servicesOpen={SERVICES_OPEN} />
-      )}
+      {/* 開業に関する記事（lib/posts.js の costSimulator）では、開業費用の計算（/opening-checklist）も案内する */}
+      <NextStep
+        slug={post.slug}
+        hasCostGuide={getPostSlugs().includes('pos-cost-guide-2026')}
+        costCategory={post.costSimulator ? post.category : null}
+      />
 
       {/* フロントマターの xPosts で選んだ投稿だけを埋め込む（最大 3 件） */}
       {post.xPosts.length > 0 && (

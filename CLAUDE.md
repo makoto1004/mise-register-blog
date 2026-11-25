@@ -7,10 +7,10 @@
 - サイト名: mise & register（業種別の POS レジ・周辺機器・開業準備のブログ）
 - 公開先: https://www.mise-register.com/ （Vercel。GitHub の main にプッシュすると自動で公開される。旧 URL の https://mise-register-blog-bice.vercel.app/ は `vercel.json` で新しいドメインへ 308 リダイレクト）
 - 技術: Next.js（Static Export）。記事は `content/posts/*.md`（フロントマターで title / date / category / tags / products / services / picks などを管理）
-- 初期費用シミュレーターは、タグに「開業」を含む記事にだけ記事の下に出る。それ以外に出す・消すときはフロントマターに `costSimulator: true / false` を書く
+- 初期費用シミュレーターは /opening-checklist の中だけに置く（記事の中は長くなるので 2026-11-25 に外した）。タグに「開業」を含む記事には、最後の「次の一歩」（`components/NextStep.js`）に「開業費用の目安を計算する」のリンクが出る（`/opening-checklist#cost-cafe` のように # を付けると、開いた状態になる）。それ以外に出す・消すときはフロントマターに `costSimulator: true / false` を書く
 - 開業準備チェックリスト（`/opening-checklist`、2026年11月8日に追加）：4段階15項目。項目は `lib/openingChecklist.js`（id はブラウザの保存と結びつくので変えない。links は公開済みの記事だけが自動でリンクになる）。チェックと開業予定日はブラウザの localStorage（キー `mise-opening-checklist-v1`）だけに保存し、ログインはなし。プライバシーポリシーにも記載済み
   - トップページの見出しのすぐ下に、チェックリストの案内の帯（`.home-checklist`）を置いている
-  - 「初期費用の目安を出す」の中で、記事と同じ初期費用シミュレーター（`components/CostSimulator.js`、`embedded` で見出しを 1 段下げる）を開ける。業種を選べて、金額も同じ localStorage に保存する
+  - 「初期費用の目安を出す」の中で、初期費用シミュレーター（`components/CostSimulator.js`）を開ける。業種を選べて、金額も同じ localStorage に保存する
   - 「引き継ぎ用のURLをコピー」で、状態を URL の `#data=` の後ろ（base64url の JSON）に入れて、ほかの端末で続けられる。# の後ろはサーバーに送られない。読み込んだら # を消し、数秒「元に戻す」を出す
   - 「かんたん診断」は AI を使わず、開業予定日までの日数と残りの項目から決まった文を出す（`lib/openingDiagnosis.js` の `diagnose`。文は「〜ことがあります」までにして、具体的な日数や料金は書かない）
   - 「AI無料POSレジ診断に相談する」は、状況を相談文にしてコピーするだけ（`buildConsultText`。自動では送らない）。相談フォームの URL があるときだけ出す

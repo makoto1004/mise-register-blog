@@ -6,8 +6,15 @@ import { JOURNEY_STEPS } from '@/lib/journey';
 const AFTER = JOURNEY_STEPS.find((step) => step.id === 'after');
 const AFTER_SLUGS = new Set([...AFTER.slugs, ...AFTER.sections.flatMap((section) => section.slugs)]);
 const COST_SLUG = 'pos-cost-guide-2026';
+// 開業費用のシミュレーターで、お店の種類を選んだ状態で開けるカテゴリー
+const SIM_CATEGORIES = ['cafe', 'salon', 'kitchen-car', 'apparel'];
 
-export default function NextStep({ slug, hasCostGuide }) {
+// costCategory：開業に関する記事のときだけ、その記事のカテゴリー（ほかの記事は null）
+export default function NextStep({ slug, hasCostGuide, costCategory = null }) {
+  const costLink = costCategory && {
+    href: `/opening-checklist#cost${SIM_CATEGORIES.includes(costCategory) ? `-${costCategory}` : ''}`,
+    label: '開業費用の目安を計算する',
+  };
   const links = AFTER_SLUGS.has(slug)
     ? [
         { href: AFTER.path, label: '開業したあとの記事をまとめて見る' },
@@ -15,10 +22,9 @@ export default function NextStep({ slug, hasCostGuide }) {
       ]
     : [
         { href: '/find', label: '3つの質問でレジを探す' },
-        slug !== COST_SLUG && hasCostGuide
-          ? { href: `/posts/${COST_SLUG}`, label: 'POSレジの費用を表で比べる' }
-          : { href: '/opening-checklist', label: '開業準備チェックリスト' },
-      ];
+        slug !== COST_SLUG && hasCostGuide && { href: `/posts/${COST_SLUG}`, label: 'POSレジの費用を表で比べる' },
+        costLink || (slug === COST_SLUG && { href: '/opening-checklist', label: '開業準備チェックリスト' }),
+      ].filter(Boolean);
   return (
     <nav className="next-step" aria-label="次の一歩">
       <p className="next-step-title">次の一歩</p>

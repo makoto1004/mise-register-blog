@@ -19,6 +19,8 @@ const STORAGE_KEY = 'mise-opening-checklist-v1';
 const SHARE_PREFIX = '#data=';
 // お知らせを出しておく時間
 const TOAST_DURATION_MS = 4000;
+// 記事からシミュレーターを開くときの # の後ろ（#cost または #cost-cafe のように、お店の種類を付ける）
+const COST_HASH = /^#cost(?:-([a-z-]+))?$/;
 // 1 日のミリ秒
 const DAY_MS = 24 * 60 * 60 * 1000;
 // シミュレーターを置く項目
@@ -208,6 +210,14 @@ export default function OpeningChecklist({ stages, consultAvailable = false }) {
     } else {
       applyState(saved);
       setWelcomeBack(saved.done.length > 0);
+      // 記事の「開業費用の目安を計算する」から来たときは、シミュレーターを開いて、そこまで移動する。
+      // お店の種類は、まだ金額を入れていないときだけ合わせる（入れた金額を消さないため）
+      const cost = hash.match(COST_HASH);
+      if (cost) {
+        if (!saved.sim && SIM_CATEGORIES.some((c) => c.value === cost[1])) setSimCategory(cost[1]);
+        setSimOpen(true);
+        setTimeout(() => simRef.current?.scrollIntoView({ block: 'start' }), 100);
+      }
       if (hash.startsWith(SHARE_PREFIX)) showToast({ message: '引き継ぎ用のURLを読み込めませんでした。URLが最後までコピーされているか確かめてください' });
     }
     setReady(true);
@@ -318,7 +328,6 @@ export default function OpeningChecklist({ stages, consultAvailable = false }) {
         category={simCategory}
         savedData={sim}
         onDataChange={changeSim}
-        embedded
       />
     </div>
   );
