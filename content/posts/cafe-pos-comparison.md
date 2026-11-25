@@ -43,15 +43,16 @@ ownTemplates: [pos]
 | 月額 | 0円（一部に有料機能） | フリー0円 | スタンダード0円（1店舗のみ） |
 | 飲食店向けの月額 | Airレジ オーダー 13,200円〜 | プラス 13,000円（1店舗） | フードビジネス 15,400円（1店舗） |
 | カードの手数料 | Airペイ 3.24% | 2.5%〜（条件あり） | 1.98%〜（条件あり） |
-| 決済端末 | カードリーダー0円（貸与） | リーダー 4,980円〜 | 39,600円 |
+| 決済端末 | リーダー 27,720円（条件で0円） | リーダー 4,980円〜 | 39,600円 |
 | 店内10%・持ち帰り8% | 「注文時に選択」にできる | 店内・持ち帰りの条件で自動にできる | 会計で「店内飲食」「テイクアウト」を選ぶ |
 
-確認日：2026年11月25日（Square のリーダーの値段だけ11月13日）。Airレジ オーダー・スマレジの月額と、端末の値段は税込です。Square のプラスの税の扱いは、公式で確かめてください。
+確認日：2026年11月25日。Airレジ オーダー・スマレジの月額と、端末の値段は税込です。Square のプラスの税の扱いは、公式で確かめてください。
 
 **手数料の条件**
 
 - Square の2.5%は、年間のキャッシュレス決済額が3,000万円未満で、主なカードブランドの対面決済の場合です。それ以外は3.25%〜です。飲食店向けのページには3.25%とも書かれているので、申し込む前に確かめてください。
 - スマレジの1.98%は、年間のVisa・Mastercardの売上が2,500万円以内の中小事業者などの条件があります。
+- Airペイのリーダーが0円になるのは、新しく申し込んだ1台目で、申し込んだ月の6か月後の月末までに審査を通った場合などです。スマレジの端末は、月額も公式で確かめてください。
 - Airペイには、条件を満たすとVisa・Mastercardなどが2.48%になるプログラムがあります。条件は公式で確かめてください。
 
 機器まで入れた1年目の合計は、[POSレジの費用の目安](/posts/pos-cost-guide-2026)で計算しています。
@@ -81,7 +82,7 @@ ownTemplates: [pos]
 
 - Airレジ：[商品登録](/posts/airregi-product-registration)・[1日の流れ](/posts/airregi-daily-workflow)
 - スマレジ：[会計のしかた](/posts/smaregi-checkout-basics)・[商品登録](/posts/smaregi-product-group-code)
-- Square：公式ヘルプの[商品を登録・編集する](https://squareup.com/help/jp/ja/article/8335-create-and-edit-items)・[Squareアカウントを設定する](https://squareup.com/help/jp/ja/article/5123-square-get-started-guide)
+- Square：[Squareの使い始め](/posts/square-getting-started)・公式ヘルプの[Squareアカウントを設定する](https://squareup.com/help/jp/ja/article/5123-square-get-started-guide)
 - どのレジにも共通：[開店前にやる初期設定](/posts/pos-initial-setup-guide)
 
 ## よくある質問
@@ -108,9 +109,9 @@ POSレジの公式ストアのほか、Amazonでも購入できます。どち�
 
 確認日：2026年11月25日
 
-- Airレジ「[料金](https://airregi.jp/jp/cost/)」、Airペイ「[料金](https://airregi.jp/payment/cost/)」、Airレジ オーダー「[料金プラン](https://airregi.jp/order/plan_guide/)」、Airレジ FAQ「[商品の登録方法](https://faq.airregi.jp/hc/ja/articles/202788570)」
+- Airレジ「[料金](https://airregi.jp/jp/cost/)」、Airペイ「[料金](https://airregi.jp/payment/cost/)」「[カードリーダーの条件](https://airregi.jp/payment/campaign/cashback/201704/)」、Airレジ オーダー「[料金プラン](https://airregi.jp/order/plan_guide/)」、Airレジ FAQ「[商品の登録方法](https://faq.airregi.jp/hc/ja/articles/202788570)」
 - Square「[料金](https://squareup.com/jp/ja/pricing)」「[飲食店向けPOSレジ](https://squareup.com/jp/ja/point-of-sale/restaurants)」「[軽減税率とは？飲食店の2027年「食料品1％」への対応も解説](https://squareup.com/jp/ja/townsquare/what-is-the-reduced-tax-rate-for-restaurants)」
-- スマレジ「[料金プラン](https://smaregi.jp/price/)」「[決済の料金](https://smaregi.jp/payment/price.php)」「[税率の設定](https://smaregi.jp/product/taxrate.php)」
+- スマレジ「[料金プラン](https://smaregi.jp/price/)」「[決済の料金](https://smaregi.jp/payment/price.php)」「[キャッシュレス決済](https://smaregi.jp/product/cashless.php)」「[税率の設定](https://smaregi.jp/product/taxrate.php)」
 - 国税庁「[消費税の軽減税率制度・インボイス制度](https://www.nta.go.jp/taxes/shiraberu/zeimokubetsu/shohi/keigenzeiritsu/index.htm)」（2026年10月17日に確認）
 
 制度や料金は変わることがあります。契約の前に、各公式サイトで確かめてください。
