@@ -1,111 +1,157 @@
 ---
 title: POSレジ用レシートプリンター比較｜Airレジ・Square・スマレジ対応
 date: 2026-10-16
-updated: 2026-10-29
+updated: 2026-11-25
 category: devices
 order: 2
-tags: [レシートプリンター, Airレジ, Square, スマレジ]
-description: タブレットPOSレジで使うレシートプリンターを、用紙幅・接続方式・対応アプリで比較します。初めて導入するときに確認したい、使っているPOSアプリとの相性や選び方のポイントもまとめています。
+tags: [レシートプリンター, Airレジ, Square, スマレジ, mC-Print3, mPOP, RP-F10]
+description: レシートプリンターは、使うレジの公式の一覧にある機種から選びます。Airレジ・Square・スマレジで使える機種と、つなぎ方・型番の条件を、公式の一覧で確かめて表にしました（2026年11月25日確認）。
+related: [airregi-printer-drawer-setup, cash-drawer-comparison, receipt-printer-not-printing]
+reviewNotes:
+  - 2026-11-25 に運営者の指示（B の8）で、公式の対応一覧をもとに書き直した。前の版の「迷ったら TM-m30III」は、Airレジ・Square の一覧になかったのでやめた
+  - 対応は、Airレジ FAQ「対応プリンター一覧」、Square の互換性のページ、スマレジの周辺機器のページの原文で確認（サブエージェントが調べ、Claude も HTML を直接読んだ）。スマレジの help は読めない（403）ので、周辺機器のページにない機種は「要確認」とした
+  - Square の Android＋Bluetooth は、公式のページどうしで書き方が違うので書いていない
+  - 公式の一覧にない TSP100IV と MUNBYN は外した。実機では試していない
+  - 通販のボタンは Amazon の検索結果。型番ごとの商品ページ（ASIN）は、運営者が商品ページで型番を確かめてから入れる
 products:
-  - name: EPSON TM-m30III
-    keyword: EPSON TM-m30III
-    badge: 迷ったらこれ
-    summary: 国内のタブレットPOSで広く使われている定番モデル。主要なPOSアプリの対応機種に入っていることが多く、初めての1台に選びやすい製品です。
-    specs:
-      用紙幅: 80mm / 58mm
-      接続方式: USB・有線LAN・Bluetooth・Wi-Fi（モデルにより異なる）
-      向いているお店: 飲食店・小売店全般
-    pros:
-      - 対応しているPOSアプリが多い
-      - 用紙幅を80mm・58mmで切り替えられる
-    cons:
-      - 小型機より設置スペースが必要
   - name: スター精密 mC-Print3
-    keyword: スター精密 mC-Print3
-    badge: 多機能
-    summary: USBでiPadやスマホを充電できるなど、レジ周りの配線をまとめやすいモデル。クラウド経由の印刷にも対応しています。
+    keyword: スター精密 mC-Print3 MCP31LB
+    badge: 3つの一覧にある
+    summary: 3つのレジの公式の一覧・周辺機器のページにある据え置き型。レジによって型番とつなぎ方が違うので、買う前に型番を確かめてください。
     specs:
-      用紙幅: 80mm / 58mm
-      接続方式: USB・有線LAN・Bluetooth
-      向いているお店: カウンターをすっきりさせたいお店
+      紙の幅: 80mm・58mm
+      Airレジ: MCP31LB（Bluetooth・USB）
+      Square: MCP30・MCP31（USB・有線LAN）
+      スマレジ: 周辺機器のページにある
     pros:
-      - タブレットへの給電ができ、配線を減らせる
-      - キャッシュドロアと連動できる
+      - レジを変えても使える可能性がある
+      - キャッシュドロアをつなげる（Airレジの一覧）
     cons:
-      - 機能が多いぶん価格は高め
-  - name: スター精密 TSP100IV
-    keyword: スター精密 TSP100IV
-    summary: 長年使われているTSP100シリーズの現行モデル。有線LANでの安定した運用に向いています。
+      - 型番で、つなげるレジと方法が変わる
+  - name: スター精密 mPOP
+    keyword: スター精密 mPOP POP10CBI
+    badge: ドロア一体
+    summary: プリンターとキャッシュドロアが1台になった機器。3つのレジの公式のページにあります。つなぎ方は型番で違います。
     specs:
-      用紙幅: 80mm
-      接続方式: USB・有線LAN（Wi-Fiモデルあり）
-      向いているお店: 据え置きで安定運用したいお店
+      紙の幅: 58mm
+      Airレジ: Bluetooth・USB
+      Square: POP10CiはUSB、POP10・POP10CBiはUSB・Bluetooth
+      スマレジ: Bluetooth・USB
     pros:
-      - シリーズとしての実績が長く情報が多い
+      - ドロアを別に買わなくてよい
+      - 置き場所が1か所で済む
     cons:
-      - Bluetoothで手軽に使いたい場合は他機種が候補
-  - name: EPSON TM-m10
-    keyword: EPSON TM-m10
-    badge: コンパクト
-    summary: 58mm幅専用の小型モデル。移動販売や小さなカウンターなど、置き場所が限られるお店向けです。
+      - 80mmの紙は使えない
+      - ドロアは4札6硬貨（Airレジの一覧）
+  - name: セイコーインスツル RP-F10
+    keyword: RP-F10-W27J1-5
+    summary: Airレジの一覧とスマレジの周辺機器のページにある据え置き型。Airレジで使えるのは、型番の最後が27J1-5のものです。
     specs:
-      用紙幅: 58mm
-      接続方式: USB・Bluetooth・有線LAN（モデルにより異なる）
-      向いているお店: 小規模店・移動販売
+      紙の幅: 80mm・58mm
+      Airレジ: RP-F10-W27J1-5・K27J1-5（Bluetooth・USB）
+      Square: 一覧にない
+      スマレジ: 周辺機器のページにある
     pros:
-      - 設置面積が小さい
+      - キャッシュドロアをつなげる（Airレジの一覧）
     cons:
-      - 80mm幅のレシートは印刷できない
-  - name: MUNBYN サーマルレシートプリンター（80mm）
-    asin: B0D492L82N
-    summary: 80mm幅の感熱紙に対応したサーマルプリンター。商品名ではインボイス制度への対応をうたっています。使いたいPOSアプリの対応機種一覧に入っているかを、買う前に必ず確かめてください。
+      - iOS 27に更新すると、Airレジで印刷のエラーが起きる案内がある
+      - 型番が違うとAirレジの対象外になる
+  - name: EPSON TM-m30III-H
+    keyword: EPSON TM-m30III-H
+    summary: スマレジの周辺機器のページにある据え置き型。AirレジとSquareの一覧にはありません。スマレジで使う人向けです。
     specs:
-      用紙幅: 80mm
-      接続方式: 商品ページで確認
-      向いているお店: 対応機種を確かめたうえで費用を抑えたいお店
+      紙の幅: 80mm・58mm
+      Airレジ: 一覧にない
+      Square: 一覧にない
+      スマレジ: Bluetooth・Wi-Fi
     pros:
-      - 80mm幅のレシートを印刷できる
+      - つなぎ方の種類が多い
     cons:
-      - POSアプリの対応機種一覧に入っていないことがある
+      - Airレジ・Squareの一覧にない
+  - name: セイコーインスツル MP-B20（持ち運び）
+    keyword: セイコーインスツル MP-B20 モバイルプリンター
+    badge: 持ち運び
+    summary: 約180gの持ち運び用。Airレジの一覧とスマレジの周辺機器のページにあります。
+    specs:
+      紙の幅: 58mm
+      Airレジ: Bluetooth
+      Square: 一覧にない
+      スマレジ: Bluetooth
+    pros:
+      - 屋外やイベントに持っていける
+    cons:
+      - キャッシュドロアはつなげない（Airレジの一覧）
+  - name: スター精密 SM-S210i（持ち運び）
+    keyword: スター精密 SM-S210i
+    badge: 持ち運び
+    summary: 持ち運び用。AirレジとSquareの一覧にあります。Airレジでは、型番SM-S210I2-DB2-40 JPは使えません。
+    specs:
+      紙の幅: 58mm
+      Airレジ: Bluetooth
+      Square: Bluetooth（SM-S210i・i2）
+      スマレジ: 要確認
+    pros:
+      - 屋外やイベントに持っていける
+    cons:
+      - キャッシュドロアはつなげない（Airレジの一覧）
+      - Airレジで使えない型番がある
 picks:
   - name: 'EPSON レシートプリンター TM-m30III-H'
     url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsmaregi%2Fc001-07501%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
     image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=298833&item_id=10000331&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fsmaregi%2Fcabinet%2Fprinter_bluetooth%2Ftm-m30lll%2Ftm-m30lll-h%2Ftmm30lll-h.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
     shop: 楽天市場
-    note: '使っているPOSレジに対応しているかは、レジの会社の対応機種の一覧で確かめてから選びましょう。'
+    note: 'スマレジの周辺機器のページにある機種です。Airレジ・Squareの一覧にはありません（2026年11月25日確認）。'
   - name: 'スター精密 レシートプリンター mC-Print3（Bluetooth対応）'
     url: 'https://hb.afl.rakuten.co.jp/ichiba/588e6f0e.bdc980c1.588e6f0f.1c0783df/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsmaregi%2Fm000-00000%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D'
     image: 'https://hbb.afl.rakuten.co.jp/hgb/588e6f0e.bdc980c1.588e6f0f.1c0783df/?me_id=298833&item_id=10000561&pc=https%3A%2F%2Fthumbnail.image.rakuten.co.jp%2F%400_mall%2Fsmaregi%2Fcabinet%2Fmc_print%2Fmc-print3%2Fimgrc0119892061.jpg%3F_ex%3D240x240&s=240x240&t=picttext'
     shop: 楽天市場
-    note: 'ロール紙が付いたセットです。つなぎ方（Bluetooth・USB・LAN）は、使うレジに合わせて選びましょう。'
+    note: 'ロール紙が付いたセットです。Airレジで使うなら型番がMCP31LBか、商品ページで確かめてください。'
 ---
 
-タブレットで使うPOSレジ（Airレジ・Square・スマレジなど）を導入するとき、最初に悩むのがレシートプリンター選びです。この記事では、Amazonで購入できる代表的なモデルを比較し、選び方のポイントをまとめます。
+レシートプリンターは種類が多くて、どれが自分のレジで動くのか迷いますよね。決め方は1つで、**使うレジの公式の一覧にある機種から選びます**。一覧にない機種は、動かなくてもレジの会社に相談しにくくなります。
 
 ![カウンターに並んだ形の違う3台のレシートプリンターのイラスト](/images/posts/receipt-printer-comparison-1.webp)
 
-## レシートプリンターの選び方
+## 先に結論
 
-### 1. 使うPOSアプリの「対応機種」に入っているか
+| 使うレジ | まず見る機種 | 気をつけること |
+| --- | --- | --- |
+| Airレジ | **mC-Print3**（MCP31LB）か**RP-F10** | RP-F10はiOS 27への更新を待つ |
+| Square | **mC-Print3**か**mPOP** | つなぎ方が端末と型番で違う |
+| スマレジ | **mC-Print3**・**TM-m30III-H**・**mPOP** | くわしい条件は公式で確かめる |
+| レジを変えるかもしれない | **mC-Print3**か**mPOP** | 3つの公式のページにある |
+| 屋外・イベント | Airレジ：**MP-B20**・**SM-S210i**／Square：**SM-S210i**／スマレジ：**MP-B20** | ドロアはつなげない |
 
-いちばん大切なポイントです。POSアプリごとに動作を確認しているプリンターが決まっており、対応外の機種は印刷できないことがあります。**購入前に、使うPOSアプリの公式サイトで対応機種一覧を必ず確かめてみてください。**
+## 対応の表
 
-### 2. 用紙幅（80mm か 58mm か）
+| 機種 | Airレジ | Square | スマレジ |
+| --- | --- | --- | --- |
+| mC-Print3 | ○ MCP31LBだけ | ○ MCP30・MCP31 | ○ |
+| mPOP | ○ | ○ | ○ |
+| RP-F10 | ○ 27J1-5だけ | — | ○ |
+| mC-Print2 | ○ MCP21LB | — | 要確認 |
+| TM-m30III | — | — | ○ TM-m30III-H |
+| TM-m30・TM-m30II | — | ○ | 要確認 |
+| TM-m10 | — | ○ USB・有線LAN | 要確認 |
+| TM-T20II | ○ Bluetooth | 要確認 | 要確認 |
+| MP-B20（持ち運び） | ○ Bluetooth | — | ○ Bluetooth |
+| SM-S210i（持ち運び） | ○ Bluetooth | ○ Bluetooth | 要確認 |
 
-- **80mm**：一般的なお店のレシートサイズ。品目の多いお店や領収書を出す機会が多いお店向け
-- **58mm**：本体が小さく、置き場所を取らない。品目の少ないお店向け
+○＝公式の一覧・周辺機器のページにある、—＝一覧にない。確認日：2026年11月25日。スマレジはくわしい一覧を読めなかったので、周辺機器のページにない機種は「要確認」としました。**「—」「要確認」の機種は、買う前にレジの会社へ聞いてください。**
 
-### 3. 接続方式
+## つなぎ方で気をつけること
 
-| 接続方式 | 特徴 |
-| --- | --- |
-| Bluetooth | 配線が少なく手軽。タブレット1台の運用向け |
-| 有線LAN | 通信が安定。複数台のタブレットから印刷するお店向け |
-| USB | iPad によっては使えない構成もあるため要確認 |
+- **Airレジ**：一覧のつなぎ方は、BluetoothとUSBです。USBは、iPadの端子（LightningかUSB Type-C）に合うケーブルが要ります。
+- **Square**：同じプリンターでも、スタンド・レジスター・ターミナル・スマホで、使えるつなぎ方が違います。互換性のページで、使う端末の欄を見てください。
+- **iOS 27**：RP-F10は、Airレジで印刷のエラーが起きると案内されています。くわしくは[iOS 27とPOSレジ](/posts/pos-ipad-os-update)で紹介しています。
 
-### 4. キャッシュドロアと連動させるか
+## 紙の幅とドロア
 
-プリンターとキャッシュドロアをケーブルでつなぐと、会計時に自動でドロアが開きます。連動させる場合は、プリンターにドロア接続端子があるか確認しましょう。
+- **80mm**：品目の多いお店や、領収書を出すことが多いお店向け
+- **58mm**：本体が小さめで、置き場所が限られるお店向け
+- **ドロアを会計で開けたい**：プリンターにドロアをつなげる機種を選ぶ。持ち運び用のMP-B20・SM-S210iはつなげません（Airレジの一覧）。ドロアは[キャッシュドロアの比較](/posts/cash-drawer-comparison)で紹介しています
+
+RP-F10をAirレジにつなぐ手順は、[AirレジとRP-F10・ドロアの接続方法](/posts/airregi-printer-drawer-setup)にまとめています。
 
 <!-- products -->
 
@@ -113,8 +159,17 @@ picks:
 
 ## まとめ
 
-- 迷ったら、主要POSアプリの多くが対応している **EPSON TM-m30III**
-- 配線をすっきりさせたいなら **スター精密 mC-Print3**
-- 置き場所が限られるなら58mm幅の **EPSON TM-m10**
+- 使うレジの公式の一覧にある機種から、型番まで合わせて選ぶ
+- レジを変えるかもしれないなら、3つの公式のページにあるmC-Print3かmPOP
+- 一覧にない機種は、買う前にレジの会社へ聞く
 
-どの機種でも、**使うPOSアプリの対応機種に入っているか**を最初に確認しておくと安心です。
+## 参考にした情報
+
+確認日：2026年11月25日
+
+- Airレジ FAQ「[対応プリンター一覧](https://faq.airregi.jp/hc/ja/articles/202827760)」
+- Square「[プリンターの互換性](https://squareup.com/jp/ja/compatibility/accessories/printers)」
+- スマレジ「[周辺機器](https://smaregi.jp/hardware/)」「[mPOP](https://smaregi.jp/hardware/mpop.php)」
+- エプソン「[TM-m30III-H](https://www.epson.jp/products/receiptprinter/tmm303h/spec.htm)」、スター精密「[mPOP](https://star-m.jp/products/s_print/mpop/index.html)」「[mC-Print3](https://star-m.jp/products/s_print/mcprint3/index.html)」、セイコーインスツル「[RP-F10](https://www.sii.co.jp/sps/product/unit/rp-f10/spec.html)」
+
+公式の資料をもとにしたもので、実機では試していません。対応機種は変わることがあるので、買う前に各社の一覧で確かめてください。
