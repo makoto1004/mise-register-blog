@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import DisplayScope from '@/components/DisplayScope';
 import { SITE, CONSULT_FREE_NOTE, CONSULT_NAME, CONSULT_TAGLINE, CONSULT_AVAILABLE } from '@/lib/site';
 import ConsultFormFrame from '@/components/ConsultFormFrame';
 
@@ -26,6 +27,7 @@ export default function ConsultPage() {
   const src = CONSULT_AVAILABLE ? embedUrl(SITE.consultFormUrl) : '';
 
   return (
+    <DisplayScope>
     <article className="article">
       <nav className="breadcrumb" aria-label="パンくずリスト">
         <Link href="/">ホーム</Link> › <span>{CONSULT_NAME}</span>
@@ -91,5 +93,6 @@ export default function ConsultPage() {
         </ul>
       </div>
     </article>
+    </DisplayScope>
   );
 }

@@ -8,6 +8,7 @@
 - 公開先: https://www.mise-register.com/ （Vercel。GitHub の main にプッシュすると自動で公開される。旧 URL の https://mise-register-blog-bice.vercel.app/ は `vercel.json` で新しいドメインへ 308 リダイレクト）
 - 技術: Next.js（Static Export）。記事は `content/posts/*.md`（フロントマターで title / date / category / tags / products / services / picks などを管理）
 - 初期費用シミュレーターは /opening-checklist の中だけに置く（記事の中は長くなるので 2026-11-25 に外した）。タグに「開業」を含む記事には、最後の「次の一歩」（`components/NextStep.js`）に「開業費用の目安を計算する」のリンクが出る（`/opening-checklist#cost-cafe` のように # を付けると、開いた状態になる）。それ以外に出す・消すときはフロントマターに `costSimulator: true / false` を書く
+- 見出しの日本語の書体は `app/layout.js` に置かず、使うページだけを `components/MinchoScope.js`・`DisplayScope.js` で囲む（全ページに置くと、使わない記事でも CSS が約 60KB 増える。2026-11-25）。スクロールの動きは `components/SiteMotion.js`（GSAP は使わない）。本文の画像の幅・高さと遅延読み込みは、ビルド時に `lib/imageSize.js` が付ける
 - 開業準備チェックリスト（`/opening-checklist`、2026年11月8日に追加）：4段階15項目。項目は `lib/openingChecklist.js`（id はブラウザの保存と結びつくので変えない。links は公開済みの記事だけが自動でリンクになる）。チェックと開業予定日はブラウザの localStorage（キー `mise-opening-checklist-v1`）だけに保存し、ログインはなし。プライバシーポリシーにも記載済み
   - トップページの見出しのすぐ下に、チェックリストの案内の帯（`.home-checklist`）を置いている
   - 「初期費用の目安を出す」の中で、初期費用シミュレーター（`components/CostSimulator.js`）を開ける。業種を選べて、金額も同じ localStorage に保存する

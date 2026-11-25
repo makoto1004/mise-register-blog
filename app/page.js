@@ -3,6 +3,8 @@ import PostThumbnail from '@/components/PostThumbnail';
 import JsonLd from '@/components/JsonLd';
 import NewBadge from '@/components/NewBadge';
 import PostTitle from '@/components/PostTitle';
+import MinchoScope from '@/components/MinchoScope';
+import DisplayScope from '@/components/DisplayScope';
 import JourneySteps from '@/components/JourneySteps';
 import { getAllPosts, getLatestPosts } from '@/lib/posts';
 import { RANKING, RANKING_COUNT } from '@/lib/ranking';
@@ -37,7 +39,8 @@ export default function Home() {
   const rankingDate = rankMonth && rankDay ? `${Number(rankMonth)}/${Number(rankDay)}` : '';
 
   return (
-    <>
+    <MinchoScope>
+    <DisplayScope>
       <JsonLd
         data={{
           '@context': 'https://schema.org',
@@ -150,6 +153,7 @@ export default function Home() {
           </ol>
         </section>
       )}
-    </>
+    </DisplayScope>
+    </MinchoScope>
   );
 }

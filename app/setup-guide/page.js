@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import MinchoScope from '@/components/MinchoScope';
 import JourneySteps from '@/components/JourneySteps';
 import JourneyPostList from '@/components/JourneyPostList';
 import { OPENING_STAGES } from '@/lib/openingChecklist';
@@ -17,7 +18,7 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <>
+    <MinchoScope>
       <nav className="breadcrumb" aria-label="パンくずリスト">
         <Link href="/">ホーム</Link> › <span>{STEP.name}</span>
       </nav>
@@ -42,6 +43,6 @@ export default function Page() {
         </Link>
       </section>
       <JourneyPostList slugs={STEP.slugs} />
-    </>
+    </MinchoScope>
   );
 }

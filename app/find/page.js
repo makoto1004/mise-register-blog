@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import MinchoScope from '@/components/MinchoScope';
 import JourneySteps from '@/components/JourneySteps';
 import JourneyPostList from '@/components/JourneyPostList';
 import PosDiagnosis from '@/components/PosDiagnosis';
@@ -22,7 +23,7 @@ export default function Page() {
   const worksheet = OWN_TEMPLATES.pos && { name: OWN_TEMPLATES.pos.name, price: OWN_TEMPLATES.pos.price };
 
   return (
-    <>
+    <MinchoScope>
       <nav className="breadcrumb" aria-label="パンくずリスト">
         <Link href="/">ホーム</Link> › <span>{STEP.name}</span>
       </nav>
@@ -31,6 +32,6 @@ export default function Page() {
       <p className="category-description">{STEP.lead}</p>
       <PosDiagnosis posts={posts} worksheet={worksheet} />
       <JourneyPostList slugs={STEP.slugs} />
-    </>
+    </MinchoScope>
   );
 }

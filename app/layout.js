@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Cormorant_Garamond, Kaisei_Opti, Noto_Serif_JP } from 'next/font/google';
+import { Cormorant_Garamond } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import Logo from '@/components/Logo';
 import { InstagramHeaderLink } from '@/components/XLinks';
@@ -20,23 +20,7 @@ const serif = Cormorant_Garamond({
   display: 'swap',
 });
 
-// トップの大きな見出しと、業種の見出しに使う明朝体
-const mincho = Noto_Serif_JP({
-  subsets: ['latin'],
-  weight: ['600'],
-  variable: '--font-mincho',
-  display: 'swap',
-  preload: false,
-});
-
-// トップの大きな見出しと、AI無料POSレジ診断の名前・ひと言に使う、手書きっぽさのある明朝体（2026-11-16 にユーザーが選んだ）
-const display = Kaisei_Opti({
-  subsets: ['latin'],
-  weight: ['700'],
-  variable: '--font-display',
-  display: 'swap',
-  preload: false,
-});
+// 日本語の見出しの書体は、使うページだけで読む（components/MinchoScope.js・DisplayScope.js。2026-11-25 に layout から移した）
 
 // ヘッダーのメニューに出す短い名前（道のりの 4 ステップ。パスは JOURNEY_STEPS から取る）
 const MENU_LABELS = { find: 'レジの選び方', devices: '周辺機器', setup: '導入ガイド', after: '開業後・代行' };
@@ -86,7 +70,7 @@ function googleVerifications() {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ja" className={`${serif.variable} ${mincho.variable} ${display.variable}`}>
+    <html lang="ja" className={serif.variable}>
       <head>
         {/* Impact（Shopify のアフィリエイト）のサイト確認用のタグ。Impact は content ではなく value で読むため、そのまま書く */}
         <meta name="impact-site-verification" value="0a53640a-dc73-49f8-9b75-7d581548b146" />
@@ -98,6 +82,10 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body id="top">
+        {/* キーボードで使う人が、メニューを飛ばして本文へ移れるリンク（フォーカスしたときだけ見える） */}
+        <a href="#main" className="skip-link">
+          本文へ移動
+        </a>
         <header className="site-header">
           <div className="header-top">
             <Link href="/" className="logo-link" aria-label={`${SITE.name} トップページ`}>
@@ -136,8 +124,10 @@ export default function RootLayout({ children }) {
           </nav>
         </header>
 
-        <main className="container">{children}</main>
-        {/* スクロールでふわっと出す動き・記事の読んだ位置のバー（GSAP） */}
+        <main id="main" className="container" tabIndex={-1}>
+          {children}
+        </main>
+        {/* スクロールでふわっと出す動き・記事の読んだ位置のバー */}
         <SiteMotion />
         {/* 広告リンクが押された回数を、記事・広告ごとに Google アナリティクスで数える */}
         <AffiliateClickTracker />

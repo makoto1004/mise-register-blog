@@ -87,9 +87,9 @@ function ProductsBlock({ products, nested }) {
   const Heading = nested ? 'h3' : 'h2';
   return (
     <>
-      <Heading className="products-heading">比較表</Heading>
+      <Heading id="comparison" className="products-heading">比較表</Heading>
       <ComparisonTable products={products} />
-      <Heading className="products-heading">おすすめ製品の紹介</Heading>
+      <Heading id="products" className="products-heading">おすすめ製品の紹介</Heading>
       {products.map((product, index) => (
         <ProductCard key={product.name} product={product} rank={index + 1} headingLevel={nested ? 'h4' : 'h3'} />
       ))}

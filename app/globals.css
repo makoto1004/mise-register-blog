@@ -46,6 +46,15 @@ body {
 
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
+/* 本文のリンクは、色だけでなく下線でも分かるようにする */
+.post-body a:not([class]), .feedback-box a, .next-step a { text-underline-offset: 3px; }
+.post-body a:not([class]), .feedback-box a { text-decoration: underline; }
+/* 日本語の見出しの書体を、使うページだけに渡す囲み（並びには影響しない） */
+.font-scope { display: contents; }
+/* 本文へ移動（キーボードでフォーカスしたときだけ見える） */
+.skip-link { position: absolute; left: 8px; top: -60px; z-index: 200; padding: 10px 16px; background: var(--text); color: var(--bg); font-weight: 800; }
+.skip-link:focus { top: 8px; }
+#main:focus { outline: none; }
 
 /* 下線が左から伸びるリンク */
 .underline-link { color: var(--text); position: relative; }
@@ -129,15 +138,15 @@ a:hover { text-decoration: underline; }
 
 /* メニュー。スマホ（767px 以下）の 1 行の並べ方は、下の「スマホのヘッダーを低くする」にある */
 .menu-bar { margin-top: 18px; border-bottom: 1px solid var(--line); }
-.menu-bar ul { display: flex; flex-wrap: wrap; gap: 6px 18px; list-style: none; margin: 0; padding: 0 0 12px; }
+.menu-bar ul { display: flex; flex-wrap: wrap; gap: 0 18px; list-style: none; margin: 0; padding: 0 0 4px; }
 .menu-bar li { white-space: nowrap; }
 @media (min-width: 768px) {
-  .menu-bar ul { gap: 4px 20px; }
+  .menu-bar ul { gap: 0 20px; }
   .menu-bar ul a { font-size: 0.8rem; }
   /* サイトマップはフッターにあるので、パソコンの上のメニューからは外す */
   .menu-sitemap { display: none; }
 }
-.menu-bar a { font-size: 0.85rem; font-weight: 800; }
+.menu-bar a { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.85rem; font-weight: 800; }
 
 /* メイン */
 .container { margin: 0 6%; padding: 32px 0 80px; }
@@ -224,7 +233,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 @media (max-width: 480px) {
   .sale-banners { gap: 8px; }
   .sale-banners .sale-banner { padding: 10px; }
-  .sale-banners .sale-banner-text { font-size: 0.72rem; }
+  .sale-banners .sale-banner-text { font-size: 0.75rem; }
 }
 .sale-banner-link { display: inline-block; padding: 10px 16px; border: 1px solid var(--border); font-weight: 700; }
 .sale-banner-text { margin: 10px 0 0; font-size: 0.85rem; color: var(--muted); }
@@ -258,10 +267,10 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   display: inline-block;
   margin-right: 6px;
   padding: 0 6px;
-  border: 1px solid var(--warm);
+  border: 1px solid var(--accent);
   border-radius: 3px;
-  color: var(--warm);
-  font-size: 0.65rem;
+  color: var(--accent);
+  font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.05em;
   line-height: 1.6;
@@ -395,19 +404,20 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .tags { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; margin: 0; padding: 0; }
 .tag { border: 1px solid var(--line); border-radius: 999px; padding: 0 10px; font-size: 0.75rem; }
 
+/* 広告の表示は、小さい・薄い文字にしない（2026-11-25） */
 .pr-notice {
-  font-size: 0.8rem;
-  color: var(--muted);
+  font-size: 0.9rem;
+  color: var(--text);
   background: var(--surface);
   padding: 6px 12px;
 }
 .pr-label {
   display: inline-block;
   font-weight: 800;
-  border: 1px solid var(--muted);
+  border: 1px solid var(--text);
   padding: 0 6px;
   margin-right: 8px;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 .post-body { margin-top: 24px; }
@@ -534,7 +544,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 @media (hover: hover) {
   .amazon-button:hover { transform: translate(-3px, -3px); box-shadow: 3px 3px 0 var(--amazon-text); }
 }
-.amazon-button.small { display: inline-block; padding: 4px 10px; font-size: 0.75rem; white-space: nowrap; }
+.amazon-button.small { display: inline-flex; align-items: center; min-height: 44px; padding: 4px 10px; font-size: 0.75rem; white-space: nowrap; }
 
 /* 記事末尾の Amazon ボタン（scripts/generate-draft.mjs が差し込む） */
 .affiliate-buttons {
@@ -654,7 +664,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   padding: 0 4px;
   border: 1px solid currentColor;
   border-radius: 3px;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 800;
   line-height: 1.4;
   vertical-align: 0.1em;
@@ -669,7 +679,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .amazon-price { margin: 10px 0 0; }
 .amazon-price p { margin: 0; }
 .amazon-price-time { font-size: 0.8rem; color: var(--muted); margin-left: 4px; }
-.amazon-price-note { font-size: 0.72rem; line-height: 1.5; color: var(--muted); margin-top: 4px !important; }
+.amazon-price-note { font-size: 0.75rem; line-height: 1.5; color: var(--muted); margin-top: 4px !important; }
 .product-thumb {
   display: block;
   width: 96px;
@@ -749,7 +759,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 }
 .sim-check { display: flex; align-items: flex-start; gap: 8px; cursor: pointer; flex: 1 1 260px; }
 .sim-check input { margin-top: 5px; }
-.sim-hint { display: block; font-size: 0.72rem; color: var(--muted); }
+.sim-hint { display: block; font-size: 0.75rem; color: var(--muted); }
 .sim-input { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
 .sim-input input {
   width: 9.5em;
@@ -774,7 +784,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .sim-result dd { margin: 0; font-weight: 800; white-space: nowrap; }
 .sim-total { border-top: 2px solid var(--border); padding-top: 8px; font-size: 1rem !important; }
 .sim-total dd { font-size: 1.2rem; }
-.sim-note { margin: 10px 0 0; font-size: 0.72rem; color: var(--muted); }
+.sim-note { margin: 10px 0 0; font-size: 0.75rem; color: var(--muted); }
 .sim-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 8px; }
 .sim-actions button {
   font: inherit;
@@ -795,7 +805,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   color: var(--text);
 }
 .sim-qty:disabled { opacity: 0.4; }
-.sim-sources { margin: 4px 0 0; padding-left: 1.2em; font-size: 0.72rem; }
+.sim-sources { margin: 4px 0 0; padding-left: 1.2em; font-size: 0.75rem; }
 .sim-sources a { color: var(--muted); }
 
 /* 簡易アンケート */
@@ -811,14 +821,15 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   color: var(--text);
   background: var(--bg);
   border: 1px solid var(--border);
+  min-height: 44px;
   padding: 4px 14px;
   cursor: pointer;
 }
 .survey-options button:hover:not(:disabled) { background: var(--text); color: var(--bg); }
 .survey-options button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
 .survey-options button:disabled { cursor: default; }
-.survey-thanks { margin: 6px 0 0; font-size: 0.8rem; color: var(--warm); font-weight: 700; }
-.survey-note { margin: 12px 0 0; font-size: 0.72rem; color: var(--muted); }
+.survey-thanks { margin: 6px 0 0; font-size: 0.8rem; color: var(--accent); font-weight: 700; }
+.survey-note { margin: 12px 0 0; font-size: 0.75rem; color: var(--muted); }
 
 /* お問い合わせ・ご意見 */
 .feedback-box { margin: 24px 0 0; padding: 14px 18px; background: var(--surface); font-size: 0.85rem; }
@@ -840,12 +851,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .site-footer { border-top: 1px solid var(--border); margin-top: 80px; padding: 40px 6% 64px; font-size: 0.85rem; }
 .footer-inner { max-width: 620px; margin: 0 auto; }
 .footer-heading { margin: 0 0 8px; font-weight: 800; }
-.footer-group ul { display: flex; flex-wrap: wrap; gap: 6px 20px; list-style: none; margin: 0; padding: 0; }
+.footer-group ul { display: flex; flex-wrap: wrap; gap: 0 20px; list-style: none; margin: 0; padding: 0; }
+.footer-group li a { display: inline-flex; align-items: center; min-height: 40px; }
 .footer-groups { display: grid; gap: 24px; margin-bottom: 28px; }
 
 .footer-note { margin: 4px 0; font-size: 0.75rem; color: var(--muted); }
 
-/* 記事のページの「どこまで読んだか」のバー（SiteMotion が GSAP で横に伸ばす） */
+/* スクロールで見えたときにふわっと出す部品（SiteMotion がクラスを付ける） */
+@keyframes reveal-in { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.reveal-wait { opacity: 0; transform: translateY(24px); }
+.reveal-in { animation: reveal-in 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) backwards; }
+@media (prefers-reduced-motion: reduce) { .reveal-wait { opacity: 1; transform: none; } .reveal-in { animation: none; } }
+/* 記事のページの「どこまで読んだか」のバー（SiteMotion が横に伸ばす） */
 .reading-progress {
   position: fixed;
   top: 0;
@@ -856,6 +873,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   background: var(--warm);
   transform: scaleX(0);
   transform-origin: left center;
+  transition: transform 0.15s linear;
   pointer-events: none;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -891,19 +909,19 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   .logo-mise { font-size: 1.7rem; }
   .logo-amp { font-size: 1.5rem; }
   .logo-register { font-size: 0.85rem; letter-spacing: 0.12em; }
-  .menu-bar { margin-top: 10px; overflow-x: auto; scrollbar-width: none; }
-  .menu-bar::-webkit-scrollbar { display: none; }
-  .menu-bar ul { flex-wrap: nowrap; gap: 16px; padding-bottom: 10px; }
+  .menu-bar { margin-top: 2px; }
+  /* 受付中は「AIレジ診断」を足した 5 つになる。横に隠れて気づかれないより、入らないときは折り返す */
+  .menu-bar ul { gap: 0 16px; padding-bottom: 2px; }
   .menu-bar a { font-size: 0.8rem; }
 }
-/* 幅 360〜389px（Android に多い）でもメニュー 4 つが切れずに 1 行に入るよう、文字と間を少し詰める */
-@media (max-width: 389px) {
-  .menu-bar ul { gap: 10px; }
-  .menu-bar a { font-size: 0.75rem; letter-spacing: 0.02em; }
+/* 幅 360〜479px のスマホでも、メニュー 5 つが 1 行に入るよう、文字と間を少し詰める（360px より狭いと 2 行に折り返す） */
+@media (max-width: 479px) {
+  .menu-bar ul { gap: 0 9px; }
+  .menu-bar a { font-size: 0.75rem; letter-spacing: -0.02em; }
 }
-/* さらに狭い幅では、切れて見えないよう 2 行に折り返す */
-@media (max-width: 359px) {
-  .menu-bar ul { flex-wrap: wrap; row-gap: 4px; }
+@media (max-width: 374px) {
+  .menu-bar ul { gap: 0 6px; }
+  .menu-bar a { letter-spacing: -0.045em; }
 }
 
 /* X（旧 Twitter）へのリンク */
@@ -913,15 +931,15 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 /* 虫めがねと「記事を探す」を横に並べる（.x-header-link の grid のままだと、文字が虫めがねの下に落ちて枠からはみ出す） */
 .x-header-link.header-search-link { display: inline-flex; align-items: center; justify-content: center; width: auto; gap: 6px; padding: 0 10px; font-size: 15px; white-space: nowrap; }
 .header-search-label { font-size: 0.8rem; font-weight: 700; }
-@media (max-width: 399px) { .x-header-link.header-search-link { width: 34px; padding: 0; } .header-search-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
+@media (max-width: 399px) { .x-header-link.header-search-link { width: 44px; padding: 0; } .header-search-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
 .x-header-link {
   display: inline-grid;
   cursor: pointer;
   background: var(--bg);
   font: inherit;
   place-items: center;
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   border: 1px solid var(--border);
   color: var(--text);
   font-size: 15px;
@@ -1069,7 +1087,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .search-chip[aria-pressed='true'] { background: var(--text); color: var(--bg); }
 .search-input { max-width: none; font-size: 1.1rem; }
 .search-words { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
-.search-words .search-chip { padding: 5px 9px; font-size: 0.78rem; }
+.search-words .search-chip { min-height: 44px; padding: 5px 12px; font-size: 0.8rem; }
 .search-select-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
 .search-select-row .search-label { flex: none; }
 .search-select { flex: 1; min-width: 0; max-width: 320px; padding: 8px 10px; border: 1px solid var(--border); background: #fffdf9; color: var(--text); font: inherit; font-size: 0.9rem; }

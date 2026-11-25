@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import MinchoScope from '@/components/MinchoScope';
+import DisplayScope from '@/components/DisplayScope';
 import JourneySteps from '@/components/JourneySteps';
 import JourneyPostList from '@/components/JourneyPostList';
 import HelpChoices from '@/components/HelpChoices';
@@ -15,7 +17,8 @@ export const metadata = {
 // 上から：トラブルの記事 → 困ったら（無料の相談・有料の作業代行）→ 家具 → 豆知識
 export default function Page() {
   return (
-    <>
+    <MinchoScope>
+    <DisplayScope>
       <nav className="breadcrumb" aria-label="パンくずリスト">
         <Link href="/">ホーム</Link> › <span>{STEP.name}</span>
       </nav>
@@ -30,6 +33,7 @@ export default function Page() {
           <JourneyPostList slugs={section.slugs} />
         </section>
       ))}
-    </>
+    </DisplayScope>
+    </MinchoScope>
   );
 }
