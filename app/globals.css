@@ -1174,8 +1174,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .checklist-stage.is-complete .checklist-stage-count { color: var(--accent); }
 .checklist-stage ul { list-style: none; margin: 0; padding: 0; }
 .checklist-item { padding: 12px 0; border-bottom: 1px solid var(--line); }
-.checklist-item label { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; }
-.checklist-item input { flex-shrink: 0; width: 20px; height: 20px; margin: 4px 0 0; accent-color: var(--accent); cursor: pointer; }
+.checklist-item > label { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; }
+.checklist-item > label input { flex-shrink: 0; width: 20px; height: 20px; margin: 4px 0 0; accent-color: var(--accent); cursor: pointer; }
 .checklist-item-title { font-weight: 700; }
 .checklist-item.is-done .checklist-item-title { color: var(--muted); text-decoration: line-through; }
 .checklist-item-text { margin: 2px 0 0 30px; font-size: 0.85rem; color: var(--muted); }
@@ -1187,7 +1187,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .checklist-sim { margin: 12px 0 4px; scroll-margin-top: 16px; }
 .checklist-sim-category { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-bottom: 10px; font-size: 0.85rem; font-weight: 700; }
 .checklist-sim-category select { min-height: 40px; padding: 4px 10px; font: inherit; font-weight: 400; color: var(--text); background: #fff; border: 1px solid var(--border); }
-.checklist-sim .cost-sim { margin: 0; }
+.checklist-sim .cost-sim { margin: 0; accent-color: var(--accent); }
 .checklist-sim .cost-sim h3#cost-sim-title { margin: 0 0 6px; font-size: 1.1rem; font-weight: 800; }
 @media (max-width: 560px) { .checklist-sim-toggle { margin-left: 0; } }
 
