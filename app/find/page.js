@@ -4,6 +4,7 @@ import JourneyPostList from '@/components/JourneyPostList';
 import PosDiagnosis from '@/components/PosDiagnosis';
 import { JOURNEY_STEPS } from '@/lib/journey';
 import { getAllPosts } from '@/lib/posts';
+import { OWN_TEMPLATES } from '@/lib/ownTemplates';
 
 const STEP = JOURNEY_STEPS.find((step) => step.id === 'find');
 
@@ -18,6 +19,8 @@ export default function Page() {
   // クライアント側では fs を使えないので、公開済みの記事の slug と title だけを渡す
   const posts = getAllPosts().map((post) => ({ slug: post.slug, title: post.title }));
 
+  const worksheet = OWN_TEMPLATES.pos && { name: OWN_TEMPLATES.pos.name, price: OWN_TEMPLATES.pos.price };
+
   return (
     <>
       <nav className="breadcrumb" aria-label="パンくずリスト">
@@ -26,7 +29,7 @@ export default function Page() {
       <JourneySteps current="find" />
       <h1 className="page-title">{STEP.name}</h1>
       <p className="category-description">{STEP.lead}</p>
-      <PosDiagnosis posts={posts} />
+      <PosDiagnosis posts={posts} worksheet={worksheet} />
       <JourneyPostList slugs={STEP.slugs} />
     </>
   );

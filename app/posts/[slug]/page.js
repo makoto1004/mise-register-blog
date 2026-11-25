@@ -11,6 +11,7 @@ import CostSimulator from '@/components/CostSimulator';
 import QuickSurvey from '@/components/QuickSurvey';
 import { XFollow, XShare } from '@/components/XLinks';
 import XPostEmbeds from '@/components/XPostEmbeds';
+import NextStep from '@/components/NextStep';
 import PostNav from '@/components/PostNav';
 import PostToc from '@/components/PostToc';
 import RelatedPosts from '@/components/RelatedPosts';
@@ -188,6 +189,8 @@ export default async function PostPage({ params }) {
         }
         return <div key={index} className="post-body" dangerouslySetInnerHTML={{ __html: section.html }} />;
       })}
+
+      <NextStep slug={post.slug} hasCostGuide={getPostSlugs().includes('pos-cost-guide-2026')} />
 
       {/* 開業に関する記事だけに出す（lib/posts.js の costSimulator） */}
       {post.costSimulator && (

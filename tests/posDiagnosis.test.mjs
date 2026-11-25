@@ -47,12 +47,12 @@ test('returns null when an answer is missing', () => {
   assert.equal(diagnosePos({ shop: 'food', flow: 'prepay' }, everySlug), null)
 })
 
-test('returns at most two slugs per group', () => {
+test('limits the number of slugs per group', () => {
   const combos = allCombos()
   assert.equal(combos.length, 36)
   for (const a of combos) {
     const r = diagnosePos(a, everySlug)
-    for (const g of GROUPS) assert.ok(r[g].length <= 2)
+    for (const g of GROUPS) assert.ok(r[g].length <= { choose: 3, devices: 2, setup: 2 }[g])
   }
 })
 
@@ -68,15 +68,39 @@ test('filters unpublished slugs', () => {
   }
 })
 
-test('keeps shop, flow, budget order and removes duplicates', () => {
+test('takes one slug from each answer in turn', () => {
   const a = { shop: 'food', flow: 'prepay', budget: 'full' }
-  // 飲食→先払い→本格 の順に連結し、重複（receipt-printer-comparison など）を除いた先頭2本
-  assert.deepEqual(diagnosePos(a, everySlug).devices, ['pos-peripherals-guide', 'receipt-printer-comparison'])
-  // 先頭2本が未公開なら、次の2本（連結順どおり）が繰り上がる
+  // 選び方は、お店の種類・会計・予算から1本ずつ
+  assert.deepEqual(diagnosePos(a, everySlug).choose, ['cafe-pos-comparison', 'pos-benefits-by-industry', 'pos-subsidy-2026'])
+  // 周辺機器は2本なので、お店の種類と予算を先に見る
+  assert.deepEqual(diagnosePos(a, everySlug).devices, ['pos-peripherals-guide', 'cash-drawer-comparison'])
+  // 未公開なら次が繰り上がり、同じ記事は2回出ない
   const rest = new Set(everySlug)
   rest.delete('pos-peripherals-guide')
-  rest.delete('receipt-printer-comparison')
-  assert.deepEqual(diagnosePos(a, rest).devices, ['cash-drawer-comparison', 'scanner-phone-screen-code'])
+  rest.delete('cash-drawer-comparison')
+  assert.deepEqual(diagnosePos(a, rest).devices, ['receipt-printer-comparison', 'scanner-phone-screen-code'])
+})
+
+test('every answer changes the result', () => {
+  // 2026-11-25 まで、36通りの答えで結果が4種類しかなかった（会計と予算が効いていなかった）
+  const all = new Set(allCombos().map((a) => JSON.stringify(diagnosePos(a, everySlug))))
+  assert.ok(all.size >= 30, `結果が ${all.size} 種類しかありません`)
+  for (const a of allCombos()) {
+    const base = JSON.stringify(diagnosePos(a, everySlug))
+    for (const q of DIAGNOSIS_QUESTIONS) {
+      const changed = q.options.some((o) => o.value !== a[q.id] && JSON.stringify(diagnosePos({ ...a, [q.id]: o.value }, everySlug)) !== base)
+      assert.ok(changed, `${q.id} を変えても結果が同じです：${JSON.stringify(a)}`)
+    }
+  }
+})
+
+test('shows two candidates and no posts for another kind of shop', () => {
+  for (const a of allCombos()) {
+    const r = diagnosePos(a, everySlug)
+    assert.equal(r.candidates.length, 2)
+    if (a.shop !== 'food') for (const s of ['cafe-mobile-order', 'izakaya-pos']) assert.ok(!r.choose.includes(s))
+    if (a.shop !== 'beauty') for (const s of ['salon-reservation-crm', 'salon-pos-comparison']) assert.ok(!r.choose.includes(s))
+  }
 })
 
 test('fills only the empty group from the matching journey step', () => {

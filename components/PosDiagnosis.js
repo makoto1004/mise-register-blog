@@ -13,12 +13,14 @@ const RESULT_GROUPS = [
 ];
 
 // 3つの質問に答えると合う記事を案内する。答えはこの画面の state だけに持ち、どこにも送らない
-export default function PosDiagnosis({ posts }) {
+// worksheet：結果の最後に案内する運営者のテンプレート（{ name, price }）
+export default function PosDiagnosis({ posts, worksheet }) {
   const [answers, setAnswers] = useState({});
   // null: まだ押していない / 'missing': 未選択あり / 'done': 結果を表示
   const [status, setStatus] = useState(null);
   const [result, setResult] = useState(null);
 
+  const published = new Set(posts.map((post) => post.slug));
   const titleBySlug = new Map(posts.map((post) => [post.slug, post.title]));
 
   // 読み込みが終わる（JavaScript が動く）まではボタンを押せないようにする
@@ -33,7 +35,7 @@ export default function PosDiagnosis({ posts }) {
   }
 
   function handleSubmit() {
-    const found = diagnosePos(answers, new Set(posts.map((post) => post.slug)));
+    const found = diagnosePos(answers, published);
     if (!found) {
       setResult(null);
       setStatus('missing');
@@ -45,11 +47,11 @@ export default function PosDiagnosis({ posts }) {
 
   return (
     <section className="pos-diagnosis" aria-labelledby="pos-diagnosis-heading">
-      <h2 id="pos-diagnosis-heading" className="pos-diagnosis-title">3つの質問で記事を探す</h2>
-      <p className="pos-diagnosis-note">答えはどこにも送りません。</p>
+      <h2 id="pos-diagnosis-heading" className="pos-diagnosis-title">3つの質問でレジを探す</h2>
+      <p className="pos-diagnosis-note">その場で結果が出ます。答えはどこにも送りません。</p>
       {/* form は使わない（読み込み前に送信されて、答えが URL やアクセス記録に残るのを防ぐため） */}
       <noscript>
-        <p className="pos-diagnosis-note">診断には JavaScript が必要です。下の「業種から探す」をお使いください。</p>
+        <p className="pos-diagnosis-note">診断には JavaScript が必要です。下の記事の一覧をお使いください。</p>
       </noscript>
       <div>
         {DIAGNOSIS_QUESTIONS.map((question) => (
@@ -78,6 +80,19 @@ export default function PosDiagnosis({ posts }) {
         {status === 'missing' && <p className="pos-diagnosis-error">3つとも選んでください</p>}
         {status === 'done' && result && (
           <>
+            {result.candidates.length > 0 && (
+              <div className="pos-diagnosis-result-group pos-diagnosis-candidates">
+                <h3>まず比べたい候補</h3>
+                <ul>
+                  {result.candidates.map((c) => (
+                    <li key={c.name}>
+                      <strong>{c.name}</strong>：{c.reason}
+                    </li>
+                  ))}
+                </ul>
+                <p className="pos-diagnosis-note">料金と機能は変わります。決める前に公式で確かめてください。</p>
+              </div>
+            )}
             {RESULT_GROUPS.map((group) =>
               result[group.key].length > 0 ? (
                 <div key={group.key} className="pos-diagnosis-result-group">
@@ -91,6 +106,28 @@ export default function PosDiagnosis({ posts }) {
                   </ul>
                 </div>
               ) : null
+            )}
+            {!result.fallbackToConsult && (
+              <div className="pos-diagnosis-result-group">
+                <h3>次にすること</h3>
+                <ul>
+                  {published.has('pos-cost-guide-2026') && (
+                    <li>
+                      <Link href="/posts/pos-cost-guide-2026">費用を表で比べる</Link>
+                    </li>
+                  )}
+                  {CONSULT_AVAILABLE && (
+                    <li>
+                      まだ迷うなら <Link href="/consult">AI無料POSレジ診断</Link>（無料・メールで回答）
+                    </li>
+                  )}
+                  {worksheet && (
+                    <li>
+                      自分で比べるなら <Link href="/templates">{worksheet.name}</Link>（運営者の有料テンプレート・{worksheet.price}）
+                    </li>
+                  )}
+                </ul>
+              </div>
             )}
             {result.fallbackToConsult && (
               <p className="pos-diagnosis-consult">
