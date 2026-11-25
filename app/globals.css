@@ -573,6 +573,14 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 }
 .own-service-box { margin: 32px 0 0; padding: 16px 18px 18px; border: 1px dashed var(--text); background: var(--surface); }
 .own-service-lead { margin: 0 0 10px; font-size: 0.85rem; }
+/* 記事の途中に出すテンプレートの案内：見本の画像を左、説明を右に置き、ボタンは下に幅いっぱい */
+.own-template-inline { margin: 20px 0 28px; }
+.own-template-inline-item { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 12px 14px; align-items: center; font-size: 0.85rem; }
+.own-template-inline-item img { width: 100%; height: auto; display: block; border: 1px solid var(--border); }
+.own-template-inline-item p { margin: 0 0 4px; }
+.own-template-inline-item .own-service-name { font-size: 1rem; }
+.own-template-inline-item .own-service-button { grid-column: 1 / -1; min-height: 44px; }
+.own-template-inline-more { grid-column: 1 / -1; display: flex; justify-content: center; align-items: center; min-height: 44px; text-decoration: underline; }
 .own-service-list { margin: 0 0 14px; padding: 0; list-style: none; font-size: 0.85rem; }
 .own-service-list li { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--border); }
 .own-service-name { font-weight: 700; }

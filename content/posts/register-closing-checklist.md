@@ -7,6 +7,7 @@ order: 2
 tags: [レジ締め, 現金管理, チェック表, 無料ダウンロード, POSレジ]
 ownServices: [manual]
 ownTemplates: [sales]
+ownTemplatesLead: レジ締めは、上の無料のチェック表だけでもできます。毎日の差額の記録を残しながら、月ごとの売上もまとめて見たいお店には、こちらの Excel があります。
 description: 閉店後のレジ締めを、毎日同じ順番で迷わず進めるための無料のチェック表です。金種表、あるはずの現金の計算、キャッシュレスの見比べ、差額が出たときの確認、店じまいまでを1枚にまとめました。印刷用PDFとExcel版の使い方を表で紹介します。
 reviewNotes:
   - チェック表の中身は public/downloads の PDF・Excel と同じ。表やファイルを直したら、この記事の表も直す
@@ -50,6 +51,8 @@ products:
 | [Excel版（自動計算つき）](/downloads/register-closing-checklist.xlsx) | 枚数と金額を入れると、合計と差額が出る（Google スプレッドシートでも開けます） |
 
 お店の中で自由にコピーして使えます。再配布・販売はご遠慮ください。
+
+<!-- templates -->
 
 ## チェック表でできること
 

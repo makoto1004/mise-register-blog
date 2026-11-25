@@ -272,6 +272,7 @@ npm run og      # OGP 画像（public/og-image.png）を作り直す
 - お店の Excel テンプレート（有料・BOOTH で販売） → 導入済み（2026年11月9日）。BOOTH のショップ https://mise-register.booth.pm/ （「mise & register」）で、売上集計シート（items/9123677）とお店の IT 管理台帳（items/9123442）を各 1,980円で販売
   - ページは `/templates`。中身・価格・BOOTH の URL・画像は `lib/ownTemplates.js` にまとめている。画像は `public/images/templates/`（BOOTH の商品画像を 900px の webp にしたもの。架空のカフェの見本）。**有料のファイルそのものはブログに置かない**（BOOTH の商品ページへのリンクだけ）
   - 記事の最後の案内は、フロントマターに `ownTemplates: [ledger]`／`[sales]` を書いた記事だけに出す（`components/OwnTemplateBox.js`）。ledger は機器が止まる話（キャッシュドロア・バーコードリーダー・オフライン決済など）、sales はレジ締め・売上の話に付ける。「運営者の有料テンプレート（BOOTH で販売）」と明示し、アフィリエイトの見た目と分ける
+  - 本文の途中にも出すときは、出したい所に `<!-- templates -->` を書き、フロントマターの `ownTemplatesLead` に説明の文を入れる（`components/OwnTemplateInline.js`。画像・値段・BOOTH へのボタン）。2026年11月25日に、一番読まれている register-closing-checklist に付けた。無料のファイルを配る記事では、無料だけでも使えることを先に書く
   - 中身は BOOTH の販売ページ（元の文：`ドキュメント\templates\B-sales-summary`・`C-store-it-ledger` の `販売ページ.md`）と同じ事実だけにする。どちらかを直したら、もう一方も直す。POS レジの機種名・サービス名は書かない
   - **BOOTH の商品ページ・ココナラの出品ページには、ブログの URL を書かない**（BOOTH のガイドライン「外部サイトへの誘導、案内のみを行っているもの」の禁止、ココナラの外部サイトの決まり）。BOOTH のショップの設定の「Web サイト」欄にだけブログの URL を入れている
   - 売上集計シートと作業代行の②（お店に合わせて作る）は、「まずテンプレートを試して、合わなければ②」の順で案内する

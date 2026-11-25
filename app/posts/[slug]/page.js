@@ -5,6 +5,7 @@ import ProductCard from '@/components/ProductCard';
 import ServiceCard from '@/components/ServiceCard';
 import OwnServiceBox from '@/components/OwnServiceBox';
 import OwnTemplateBox from '@/components/OwnTemplateBox';
+import OwnTemplateInline from '@/components/OwnTemplateInline';
 import PickCard from '@/components/PickCard';
 import ThemeBackground from '@/components/ThemeBackground';
 import QuickSurvey from '@/components/QuickSurvey';
@@ -185,6 +186,9 @@ export default async function PostPage({ params }) {
         }
         if (section.type === 'picks') {
           return <PicksBlock key={index} picks={post.picks} nested={nested} />;
+        }
+        if (section.type === 'templates') {
+          return <OwnTemplateInline key={index} templates={post.ownTemplates} lead={post.ownTemplatesLead} />;
         }
         return <div key={index} className="post-body" dangerouslySetInnerHTML={{ __html: section.html }} />;
       })}
