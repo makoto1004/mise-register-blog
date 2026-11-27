@@ -1,7 +1,47 @@
 // 毎日の SNS 投稿づくり（scripts/daily-sns.mjs）のテスト：タイトルの収め方・claude -p に渡す環境変数・投稿文の形
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { fitTitle, claudeEnv, buildXText, buildCaption, buildReelCaption, templateTalk, normalizeTalk, readTalkFromFiles, buildPrompt, xLength } from '../scripts/daily-sns.mjs';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fitTitle, claudeEnv, buildXText, buildCaption, buildReelCaption, templateTalk, normalizeTalk, readTalkFromFiles, buildPrompt, xLength, personFor, PERSON_RULES } from '../scripts/daily-sns.mjs';
+
+// ---- SNS の画像の人物（2026-11-28 にマスコットから差し替え） ----
+const p = (slug, category, tags = [], title = '') => personFor({ slug, data: { category, tags, title } });
+
+test('記事の業種に合う人物を選ぶ', () => {
+  assert.equal(p('kitchen-car-cashless', 'kitchen-car', ['キッチンカー']).genre, 'kitchen-car');
+  assert.equal(p('salon-pos', 'salon', ['美容院']).genre, 'salon');
+  assert.equal(p('apparel-fitting-room', 'apparel', ['アパレル']).genre, 'apparel');
+  assert.equal(p('small-hotel-pos', 'industries', ['ホテル']).genre, 'hotel');
+  assert.equal(p('izakaya-pos', 'industries', ['飲食店'], '居酒屋のPOSレジ').genre, 'dining');
+});
+
+test('業種が決まらない記事と、「バー」を含むだけの言葉はカフェの人にする', () => {
+  assert.equal(p('airregi-daily-workflow', 'devices', ['Airレジ']).genre, 'cafe');
+  assert.equal(p('barcode-reader', 'devices', ['バーコードリーダー'], 'バーコードリーダーの選び方').genre, 'cafe');
+  assert.equal(p('pos-printer-driver', 'devices', ['周辺機器'], 'プリンターのドライバーとサーバー').genre, 'cafe');
+  assert.equal(p('cafe-bar-for-adults', 'cafe', ['カフェ', 'バー']).genre, 'cafe');
+  assert.equal(p('bar-pos', 'industries', ['バー']).genre, 'dining');
+});
+
+test('トラブル・防犯の記事は考える顔、ほかは笑顔', () => {
+  assert.equal(p('cash-drawer-not-opening', 'devices', ['トラブル対応']).mood, 'think');
+  assert.equal(p('store-crime-prevention', 'management', ['防犯']).mood, 'think');
+  assert.equal(p('cafe-cashless', 'cafe', ['カフェ']).mood, 'smile');
+});
+
+test('対応表のどの業種・表情にも、人物画のファイルがある', () => {
+  for (const genre of ['cafe', ...PERSON_RULES.map(([g]) => g)])
+    for (const mood of ['smile', 'think'])
+      assert.ok(fs.existsSync(path.join('public', 'images', 'sns-people', `${genre}-${mood}.webp`)), `${genre}-${mood}`);
+});
+
+test('「役立つ」カルーセルの短い見出しは、X に多めに入れられる（280 以内）', () => {
+  const t = { hook: 'キャッシュドロアが開かない、まず鍵の位置から', hook_deco: '', caption_points: ['鍵の位置', 'レシート用紙', 'ケーブル', 'POSアプリの設定', 'それでもだめなら再起動', '開かない間の会計'], hashtags: ['#キャッシュドロア', '#POSレジ'] };
+  const text = buildXText({ slug: 'cash-drawer-not-opening', data: {} }, t, true, 6);
+  assert.ok(xLength(text) <= 280);
+  assert.match(text, /^・ケーブル$/m);
+});
 
 const joined = (lines) => lines.join('');
 

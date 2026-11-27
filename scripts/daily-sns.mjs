@@ -15,7 +15,7 @@
 // - 古い記事から順に作る。作った記事は logs/daily-sns.json に記録し、2 回作らない
 // - 保存先の SNS投稿 フォルダーに x-<slug>.png か instagram-<slug>/ がある記事は、手で作ったものとみなして飛ばす
 // - 投稿文（1 行目の文・要点・ハッシュタグ）は Claude Code（claude -p）で作る。有料の Claude API は使わない
-//   2026-11-28 にマスコット 2 人の会話の形をやめた。マスコットの絵は X の画像・表紙・最後の画像の飾りとして残している
+//   2026-11-28 にマスコット 2 人の会話の形をやめた。画像にはマスコットの代わりに、記事の業種に合う人物画を 1 人出す（personFor）
 //   Claude Code が使えないときは、記事のタイトルを使ったひな形の文章にする
 // - 保存先は SNS_OUT_DIR（.env.local）。なければ OneDrive のデスクトップの「SNS投稿\毎日」
 // - 結果は logs/daily-sns.log に残る
@@ -233,10 +233,11 @@ const postUrl = (post) => {
 };
 
 // X：1 行目で困りごと・得することを書き、要点を 2 個まで本文に入れる（投稿だけでも役に立つように）。280 を超えるときは要点を減らす
-export function buildXText(post, talk, ads) {
+// maxPoints：要点の数の上限。ふつうは 2 個。「役立つ」カルーセルの短い見出し（「鍵の位置」など）は多めに入れる
+export function buildXText(post, talk, ads, maxPoints = 2) {
   const tags = [...talk.hashtags.slice(0, 2), ...(ads ? ['#PR'] : [])].join(' ');
   const head = `${talk.hook}${talk.hook_deco ?? ''}`;
-  for (let n = Math.min(2, talk.caption_points.length); n >= 0; n--) {
+  for (let n = Math.min(maxPoints, talk.caption_points.length); n >= 0; n--) {
     const points = talk.caption_points.slice(0, n).map((p) => `・${p}`);
     const text = [head, ...(points.length ? ['', ...points] : []), '', postUrl(post), tags].join('\n');
     if (xLength(text) <= X_LIMIT) return text;
@@ -292,7 +293,49 @@ async function whiten(file, w, h) {
   return sharp(data, { raw: info }).png().toBuffer();
 }
 const put = async (file, w, h, left, top) => ({ input: await whiten(file, w, h), left, top, blend: 'multiply' });
-const mascot = (name) => path.join(ROOT, 'public', 'images', 'mascots', `${name}.webp`);
+
+// ---- SNS の画像に出す人物（2026-11-28 にマスコット 2 体から差し替え） ----
+// 絵は「mise & ひとふでノート」の POP 用の人物画（Canva の AI で作成。使ってよいことは運営者が確認済み）を
+// public/images/sns-people/<業種>-<表情>.webp に縮小してコピーしたもの。絵そのものは加工しない
+// 記事の業種に合う人を 1 人出す。上から順に見て、最初に当てはまった業種にする。どれでもなければカフェの人
+export const PERSON_RULES = [
+  ['hotel', /ホテル|旅館|宿泊|hotel|simphony/i],
+  ['florist', /花屋|フラワー|florist/i],
+  ['school', /教室|スクール|レッスン|school/i],
+  ['bakery', /パン屋|ベーカリー|bakery/i],
+  ['sweets', /スイーツ|洋菓子|ケーキ|和菓子|sweets/i],
+  ['relax', /整体|リラク|マッサージ|治療院|relax/i],
+  ['park', /テーマパーク|遊園地|theme-?park/i],
+  ['kitchen-car', /キッチンカー|移動販売|kitchen-car/i],
+  ['salon', /サロン|美容院|美容室|エステ|ネイル|まつげ|salon|esthe|nail/i],
+  ['apparel', /アパレル|雑貨|セレクトショップ|試着|古着|apparel|zakka/i],
+  // カテゴリがカフェの記事（カフェバー・夜カフェなど）は、バーの話でもカフェの人にする
+  ['cafe', /^cafe\b/],
+  // 「バー」は「バーコード」「サーバー」「ドライバー」にも含まれるので、タグがちょうど「バー」のときだけ当てる
+  ['dining', /レストラン|居酒屋|ダイニング|#バー#|ラーメン|焼肉|restaurant|izakaya|dining/i],
+  ['life', /クリーニング|清掃業|修理店|便利屋/i],
+];
+// 表情：トラブル・注意の記事は考える顔、ほかは笑顔
+const THINK_RULE = /トラブル対応|防犯|セキュリティ|not-opening|mismatch|trouble|error|broken|crime/i;
+// 規則では合わない記事だけ、slug で決める（ペットホテルの話が出るペットショップ、業種をまたぐ記事など）
+export const PERSON_BY_SLUG = { 'pet-shop-pos': 'apparel', 'pos-benefits-by-industry': 'cafe', 'cafe-concept-types': 'cafe' };
+export function personFor(post) {
+  const d = post.data ?? {};
+  const fixed = PERSON_BY_SLUG[post.slug];
+  // タグは「#タグ#」の形でつなぐ（タグがちょうどその言葉のときだけ当てたい規則のため）
+  const text = [d.category, ...(d.tags ?? []).map((t) => `#${t}#`), post.slug, d.title].filter(Boolean).join(' ');
+  const genre = fixed ?? PERSON_RULES.find(([, re]) => re.test(text))?.[0] ?? 'cafe';
+  const mood = THINK_RULE.test(text) ? 'think' : 'smile';
+  return { genre, mood, file: path.join(ROOT, 'public', 'images', 'sns-people', `${genre}-${mood}.webp`) };
+}
+// 人物画を boxW×boxH の中に縦横比を保って収める（背景はもとから透明）。alignX で左右、alignY で上下の寄せ方を決める
+async function placePerson(post, boxW, boxH, x, y, { alignX = 'center', alignY = 'bottom' } = {}) {
+  const input = await sharp(personFor(post).file).resize(boxW, boxH, { fit: 'inside' }).png().toBuffer();
+  const { width, height } = await sharp(input).metadata();
+  const left = alignX === 'left' ? x : alignX === 'right' ? x + boxW - width : x + Math.round((boxW - width) / 2);
+  const top = alignY === 'top' ? y : y + boxH - height;
+  return { input, left, top };
+}
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
 // タイトルを「｜」で行に分ける。いちばん長い行が幅に収まるように文字を小さくし、それでも長い行は折り返す
@@ -320,8 +363,10 @@ export async function makeXImage(post, illus, file) {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675"><rect width="1200" height="675" fill="${C.bg}"/>
 <g font-family="${FONT}" fill="${C.ink}">${textLines(lines, 60, 80, size, Math.round(size * 1.45), 'font-weight="800"')}</g>
 <rect x="60" y="160" width="90" height="6" fill="${C.accent}"/></svg>`;
-  const layers = [await put(mascot('rejimaru'), 150, 150, 880, 20), await put(mascot('posuta'), 150, 150, 1030, 20)];
+  // 人物は左下（タイトルの下・挿絵の左）に、下の端にそろえて置く
+  const layers = [];
   if (illus) layers.push(await put(illus, 860, 482, 340, 193));
+  layers.push(await placePerson(post, 290, 420, 40, 255));
   await sharp(Buffer.from(svg)).composite(layers).png().toFile(file);
 }
 
@@ -332,7 +377,8 @@ async function makeInstagramCover(post, illus, file) {
 ${textLines(lines, 80, 860, size, Math.round(size * 1.4), 'font-weight="800"')}
 <rect x="80" y="1110" width="120" height="8" fill="${C.accent}"/>
 <text x="80" y="1290" font-size="30" fill="${C.muted}" font-weight="700">mise &amp; register</text></g></svg>`;
-  const layers = [await put(mascot('rejimaru'), 140, 140, 720, 1080), await put(mascot('posuta'), 140, 140, 860, 1080)];
+  // 人物は右下（タイトルの 3 行目より下）に、下の端にそろえて置く
+  const layers = [await placePerson(post, 250, 290, 760, 1060, { alignX: 'right' })];
   if (illus) layers.unshift(await put(illus, 1080, 606, 0, 160));
   await sharp(Buffer.from(svg)).composite(layers).png().toFile(file);
 }
@@ -431,7 +477,7 @@ export async function makeReelFrames(post, talk, illus, ads, dir) {
     t(cx, S.top + 210, 'ブログ「mise & register」に', 46, C.muted, 600, 'middle') + t(cx, S.top + 280, 'まとめています', 46, C.muted, 600, 'middle') +
     `<rect x="${cx - 330}" y="${S.top + 360}" width="660" height="116" rx="58" fill="${C.accent}"/>` + t(cx, S.top + 435, 'プロフィールのリンクから', 44, '#ffffff', 700, 'middle') +
     (ads ? t(cx, S.bottom - 80, 'この投稿には広告（PR）を含む記事の紹介があります', 28, C.muted, 500, 'middle') : '') + brand))
-    .composite([await put(mascot('rejimaru'), 260, 260, cx - 290, S.top + 560), await put(mascot('posuta'), 260, 260, cx + 30, S.top + 560)]).png().toFile(files[3]);
+    .composite([await placePerson(post, 360, 500, cx - 180, S.top + 540)]).png().toFile(files[3]);
   return files;
 }
 
@@ -483,7 +529,7 @@ export async function makeInstagramCarousel(post, talk, illus, ads, dir) {
   // 5. 保存とプロフィールへの案内
   await sharp(frame(t(cx, 260, 'あとで見返すなら', 70, C.ink, 800, 'middle') + t(cx, 360, '右下の保存ボタンを', 50, C.muted, 600, 'middle') +
     `<rect x="${cx - 400}" y="470" width="800" height="116" rx="58" fill="${C.accent}"/>` + t(cx, 543, 'くわしくはプロフィールのリンクから', 36, '#ffffff', 700, 'middle'), 5))
-    .composite([await put(mascot('rejimaru'), 240, 240, cx - 270, 700), await put(mascot('posuta'), 240, 240, cx + 30, 700)]).png().toFile(files[4]);
+    .composite([await placePerson(post, 380, 520, cx - 190, 680)]).png().toFile(files[4]);
 }
 
 // slug を指定したときはその記事を今日の日付で作る（公開したばかりの記事をすぐ投稿したいとき）
