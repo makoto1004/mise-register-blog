@@ -37,7 +37,7 @@ function SearchIcon() {
 
 export const metadata = {
   metadataBase: new URL(SITE.url),
-  title: { default: SITE.name, template: `%s | ${SITE.name}` },
+  title: { default: `${SITE.name}｜${SITE.catchphrase}`, template: `%s | ${SITE.name}` },
   description: SITE.description,
   openGraph: { siteName: SITE.name, locale: 'ja_JP', type: 'website', images: [OG_IMAGE] },
   twitter: {
@@ -88,9 +88,13 @@ export default function RootLayout({ children }) {
         </a>
         <header className="site-header">
           <div className="header-top">
-            <Link href="/" className="logo-link" aria-label={`${SITE.name} トップページ`}>
-              <Logo />
-            </Link>
+            <div className="header-brand">
+              <Link href="/" className="logo-link" aria-label={`${SITE.name} トップページ`}>
+                <Logo />
+              </Link>
+              {/* 名前だけでは何のサイトか分からないので、ロゴの下に一言を添える */}
+              <p className="site-tagline">{SITE.catchphrase}</p>
+            </div>
             <div className="header-social">
               <Link href="/search" className="x-header-link header-search-link">
                 <SearchIcon />

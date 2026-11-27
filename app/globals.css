@@ -1440,3 +1440,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .latest-ribbon-popular { background: var(--warm); }
 .latest-ribbon-newest { background: var(--text); }
 .latest-ribbon-pick { background: var(--pros); }
+
+/* ロゴの下の一言（何のサイトかを伝える） */
+.header-brand { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.site-tagline { margin: 0; font-size: 0.8rem; line-height: 1.4; color: var(--muted); }
+@media (max-width: 639px) { .site-tagline { font-size: 0.7rem; } }
