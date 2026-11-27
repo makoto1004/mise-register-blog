@@ -42,6 +42,47 @@ function git(...args) {
   }
 }
 
+// GitHub に送る。送る前に GitHub の新しい変更（別のセッションが先に送ったものなど）を取り込む。
+// 2026-11-23・11-27 に、GitHub 側が先に進んでいたせいで送るのを断られ、記事の公開が遅れたため。
+// 取り込みはマージ（履歴を書き換えない）。ぶつかったときは取り込みを取り消して失敗にする（無理に直さない）
+function pushWithSync(branch) {
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    git('fetch', 'origin', branch);
+    const behind = Number(git('rev-list', '--count', `${branch}..origin/${branch}`));
+    if (behind > 0) {
+      try {
+        execFileSync('git', ['merge', '--no-edit', `origin/${branch}`], { cwd: ROOT, encoding: 'utf8', stdio: 'pipe' });
+        log(`GitHub に先に送られた変更が ${behind} 件あったので、取り込みました`);
+      } catch (error) {
+        try {
+          execFileSync('git', ['merge', '--abort'], { cwd: ROOT, stdio: 'pipe' });
+        } catch {
+          // 取り込みが始まっていなければ、取り消すものはない
+        }
+        throw new Error(`GitHub の変更の取り込みに失敗しました。手で git pull してから git push してください（${String(error.message).split('\n')[0]}）`);
+      }
+    }
+    try {
+      execFileSync('git', ['push', 'origin', branch], { cwd: ROOT, encoding: 'utf8', stdio: 'pipe' });
+      return;
+    } catch (error) {
+      // 取り込んでから送るまでのあいだに、また別の変更が送られたときなど。少し待ってやり直す
+      if (attempt === 3) throw error;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 10000);
+    }
+  }
+}
+
+// まだ GitHub に送っていないコミットの数（前の回に送るのに失敗した記事など）
+function unpushedCount(branch) {
+  try {
+    git('fetch', 'origin', branch);
+    return Number(git('rev-list', '--count', `origin/${branch}..${branch}`));
+  } catch {
+    return 0;
+  }
+}
+
 // 同時に 2 回動かないようにする（タスク スケジューラと手動の実行が重なったときなど）
 // 10 分より古い印は、前の実行が途中で止まった残りとみなして無視する
 const LOCK_FILE = path.join(ROOT, 'logs', 'publish-scheduled.lock');
@@ -63,8 +104,32 @@ function parsePublishAt(value) {
   return { text, date: new Date(`${text}:00+09:00`) };
 }
 
+// main 以外のブランチで記事をコミットすると、公開されないうえに別の作業に混ざる（ほかのセッションが git switch していることがある）
+const BRANCH = 'main';
+if (!DRY_RUN) {
+  const current = git('rev-parse', '--abbrev-ref', 'HEAD');
+  if (current !== BRANCH) {
+    log(`失敗: 今のブランチが ${current} です。main に戻してから実行してください（記事は動かしていません）`);
+    process.exit(1);
+  }
+}
+
+// 公開する記事がなくても、前の回に送れなかったコミットが残っていれば送る
+function pushLeftovers() {
+  const ahead = unpushedCount(BRANCH);
+  if (ahead === 0) return;
+  try {
+    pushWithSync(BRANCH);
+    log(`前の回に送れなかったコミット ${ahead} 件を GitHub に送りました`);
+  } catch (error) {
+    log(`失敗: 前の回に送れなかったコミットを、今回も送れませんでした（${String(error.message).split('\n')[0]}）`);
+    process.exit(1);
+  }
+}
+
 if (!fs.existsSync(SCHEDULED_DIR)) {
   log('予約の記事はありません（scheduled/ がありません）');
+  if (!DRY_RUN) pushLeftovers();
   process.exit(0);
 }
 
@@ -105,6 +170,7 @@ for (const e of timeReached.filter((x) => !x.reviewed)) {
 }
 if (due.length === 0) {
   log('公開時刻を過ぎた記事はありません');
+  pushLeftovers();
   process.exit(0);
 }
 
@@ -137,10 +203,9 @@ for (const e of due) {
 }
 
 try {
-  const branch = git('rev-parse', '--abbrev-ref', 'HEAD');
-  git('push', 'origin', branch);
+  pushWithSync(BRANCH);
   log(`プッシュしました（${due.length} 件）`);
 } catch (error) {
-  log(`失敗: プッシュに失敗しました。次回の実行か、手動の git push で公開されます（${error.message.split('\n')[0]}）`);
+  log(`失敗: プッシュに失敗しました。次の回の実行でもう一度送ります（${String(error.message).split('\n')[0]}）`);
   process.exit(1);
 }
