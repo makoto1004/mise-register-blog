@@ -14,7 +14,8 @@
 //
 // - 古い記事から順に作る。作った記事は logs/daily-sns.json に記録し、2 回作らない
 // - 保存先の SNS投稿 フォルダーに x-<slug>.png か instagram-<slug>/ がある記事は、手で作ったものとみなして飛ばす
-// - 2 人の会話の文章は Claude Code（claude -p）で作る。有料の Claude API は使わない
+// - 投稿文（1 行目の文・要点・ハッシュタグ）は Claude Code（claude -p）で作る。有料の Claude API は使わない
+//   2026-11-28 にマスコット 2 人の会話の形をやめた。マスコットの絵は X の画像・表紙・最後の画像の飾りとして残している
 //   Claude Code が使えないときは、記事のタイトルを使ったひな形の文章にする
 // - 保存先は SNS_OUT_DIR（.env.local）。なければ OneDrive のデスクトップの「SNS投稿\毎日」
 // - 結果は logs/daily-sns.log に残る
@@ -101,7 +102,7 @@ const hasAds = (post) =>
   /amazon\.co\.jp|moshimo\.com|rakuten|a8\.net|valuecommerce/.test(post.content);
 
 // X の文字数（日本語などは 2、URL は 23 と数える）
-function xLength(text) {
+export function xLength(text) {
   let n = 0;
   for (const ch of text.replace(/https?:\/\/\S+/g, 'x'.repeat(23))) {
     const c = ch.codePointAt(0);
@@ -110,20 +111,22 @@ function xLength(text) {
   return n;
 }
 
-const SYSTEM_PROMPT = `あなたは、小さなお店向けのブログ「mise & register」の SNS 投稿の文章を書きます。
-ブログのマスコット 2 人が、記事を紹介する会話を書いてください。
-- レジまる：レシートプリンターから生まれたキャラクター。プリンター・キャッシュドロア・バーコードリーダーの担当
-- ポスタ：タブレットの POS レジのキャラクター。POS レジ・キャッシュレス決済・お店の Wi-Fi の担当
+// 2026-11-28 にマスコット 2 人の会話の形をやめ、ふつうの文にした（初めて見た人には、誰が話しているのか分からなかったため）
+// 1 行目（hook）で読む人の困りごと・得することが分かるようにし、要点（points）を本文に書いて、投稿だけでも役に立つようにする
+const SYSTEM_PROMPT = `あなたは、小さなお店を開く前の人に向けたブログ「mise & register」の、X と Instagram の投稿文を書きます。
+キャラクターのセリフや会話の形にはしないでください。ふつうの短い文で書きます。
 決まり:
-- やさしい「です・ます」で書く。くだけた話し方、語尾の「〜まる」は使わない
-- rejimaru・posuta・caption_points の本文には絵文字・顔文字を入れない（画像にも使うため）
-- rejimaru_deco・posuta_deco：セリフの最後に付ける絵文字か顔文字を、1 人 1 個まで。話の内容に合う、面白いものを選ぶ。合うものがなければ空文字にする。法律・資格・料金の注意が中心の記事は、どちらも空文字にする
-- おじさん構文にしない：絵文字や記号を重ねない、語尾をカタカナにしない（「〜ネ」「〜カナ」）、馴れ馴れしくしない。😅😘❣️、ハート、！の連続は使わない。顔文字に @ # \\ は使わない
+- hook：投稿の 1 行目。読む人の困りごとか、読むと得することが、ひと目で分かる文（35 文字以内）。
+  例「4万円台のPOSレジ、買う前に確かめたい5つ」「キャッシュドロアが開かないときは、この順に確かめます」
+  「〜について記事にまとめました」「〜を紹介しています」のような紹介の言い方にしない。カギかっこ（「」）やキャラクターの名前は使わない
+- points：記事の要点を 3〜4 個（1 個 30 文字以内）。それだけ読んでも役に立つ、具体的な中身にする（「〜が分かります」ではなく、中身そのもの）。
+  例「最初の日はテストデータの精算から」「伝票の訂正は営業中にレジ締め前伝票一覧から」
+- hook と points には絵文字・顔文字を入れない（画像にも使うため）
+- hook_deco：hook の最後に付ける絵文字を 1 個まで。内容に合うものがなければ空文字にする。法律・資格・料金・安全の注意が中心の記事は空文字にする
+- おじさん構文にしない：絵文字や記号を重ねない、語尾をカタカナにしない（「〜ネ」「〜カナ」）、馴れ馴れしくしない。😅😘❣️、ハート、！の連続は使わない
+- やさしい「です・ます」か、言い切らない短い文で書く。むずかしい言葉を使わない
 - 記事に書かれていることだけを書く。記事にない数字・効果・体験談を足さない
-- 「必ず」「絶対」「いちばん安い」のような言い切りはしない
-- rejimaru：記事が役に立つ場面や、読む人の困りごとを 1〜2 文で（45 文字以内）
-- posuta：記事で分かることを 1〜2 文で（55 文字以内）
-- caption_points：Instagram の投稿文に入れる、記事の要点を 3〜4 個（1 個 30 文字以内）
+- 「必ず」「絶対」「いちばん安い」のような言い切りや大げさな言い方はしない
 - hashtags：記事に合うハッシュタグを 2 個（# をつける。#PR は入れない）`;
 
 // セリフの最後に付ける絵文字・顔文字を確かめる。決まりに合わないものは付けない
@@ -139,7 +142,7 @@ function cleanDeco(value) {
   return deco;
 }
 
-// 記事の見出し（## の行）を集める。会話を作るときの材料にする
+// 記事の見出し（## の行）を集める。投稿文を作るときの材料にする
 const headings = (content) => [...content.matchAll(/^##\s+(.+)$/gm)].map((m) => m[1]).slice(0, 12);
 
 // claude -p に渡す環境変数。.env.local の ANTHROPIC_API_KEY（ブログの別の機能用）を渡すと、
@@ -150,17 +153,53 @@ export function claudeEnv(env = process.env) {
   return out;
 }
 
-// Claude Code に会話を書いてもらう（ツールは使わせない）
-function writeTalk(post) {
-  const prompt = `${SYSTEM_PROMPT}
+// 要点を記事の中身から選べるように、本文の初めのほうを渡す（画像・リンクの URL・HTML のタグは外す。コマンドの長さの上限があるので 3500 文字まで）
+export function articleExcerpt(content, max = 3500) {
+  return String(content)
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+    .slice(0, max);
+}
 
-次の記事を紹介する文章を、JSON だけで返してください（前後に説明やコードブロックの記号をつけない）。
-形: {"rejimaru": "...", "rejimaru_deco": "...", "posuta": "...", "posuta_deco": "...", "caption_points": ["..."], "hashtags": ["#...", "#..."]}
+// Claude Code に投稿文を書いてもらう（ツールは使わせない）
+export function buildPrompt(post) {
+  return `${SYSTEM_PROMPT}
+
+次の記事の投稿文を、JSON だけで返してください（前後に説明やコードブロックの記号をつけない）。
+形: {"hook": "...", "hook_deco": "...", "points": ["...", "...", "..."], "hashtags": ["#...", "#..."]}
 
 記事のタイトル: ${post.data.title}
 記事の説明: ${post.data.description ?? ''}
 見出し:
-${headings(post.content).map((h) => `- ${h}`).join('\n')}`;
+${headings(post.content).map((h) => `- ${h}`).join('\n')}
+
+記事の本文（初めのほう）:
+${articleExcerpt(post.content)}`;
+}
+
+// claude -p から返ってきた JSON を確かめて、投稿文に使う形にそろえる
+export function normalizeTalk(raw) {
+  const talk = { ...raw };
+  const points = Array.isArray(talk.points) ? talk.points : talk.caption_points;
+  if (!talk.hook || !Array.isArray(points) || !points.length || !Array.isArray(talk.hashtags)) throw new Error('返ってきた JSON の形が違います');
+  talk.hook = String(talk.hook).trim();
+  talk.caption_points = points.map((p) => String(p).trim()).filter(Boolean);
+  delete talk.points;
+  // 1 行目と要点は画像にも使うので、絵文字を入れない。絵文字は投稿文の 1 行目の最後にだけ付ける
+  if (/\p{Extended_Pictographic}/u.test(talk.hook + talk.caption_points.join(''))) throw new Error('1 行目か要点に絵文字が入っています');
+  // マスコットのセリフの形に戻らないようにする
+  if (/レジまる|ポスタ|「/.test(talk.hook)) throw new Error('1 行目がセリフの形になっています');
+  talk.hook_deco = cleanDeco(talk.hook_deco);
+  // ハッシュタグは「#」をつけ、#PR は広告のある記事だけにあとでつける
+  talk.hashtags = talk.hashtags.map((t) => `#${String(t).replace(/^#/, '').trim()}`).filter((t) => t !== '#' && t !== '#PR');
+  return talk;
+}
+
+function writeTalk(post) {
+  const prompt = buildPrompt(post);
   const result = spawnSync('claude', ['-p', prompt], { cwd: ROOT, encoding: 'utf8', timeout: 10 * 60 * 1000, env: claudeEnv() });
   if (result.error) throw new Error(`Claude Code を起動できませんでした（${result.error.message}）`);
   if (result.status !== 0) {
@@ -171,69 +210,62 @@ ${headings(post.content).map((h) => `- ${h}`).join('\n')}`;
   }
   const json = (result.stdout ?? '').match(/\{[\s\S]*\}/);
   if (!json) throw new Error('返ってきた文章が JSON ではありません');
-  const talk = JSON.parse(json[0]);
-  if (!talk.rejimaru || !talk.posuta || !Array.isArray(talk.caption_points) || !Array.isArray(talk.hashtags)) throw new Error('返ってきた JSON の形が違います');
-  // セリフの本文は画像にも使うので、絵文字を入れない。絵文字と顔文字は投稿文だけに付ける
-  if (/\p{Extended_Pictographic}/u.test(talk.rejimaru + talk.posuta)) throw new Error('セリフの本文に絵文字が入っています');
-  talk.rejimaru_deco = cleanDeco(talk.rejimaru_deco);
-  talk.posuta_deco = cleanDeco(talk.posuta_deco);
-  // ハッシュタグは「#」をつけ、#PR は広告のある記事だけにあとでつける
-  talk.hashtags = talk.hashtags.map((t) => `#${String(t).replace(/^#/, '').trim()}`).filter((t) => t !== '#' && t !== '#PR');
-  return talk;
+  return normalizeTalk(JSON.parse(json[0]));
 }
 
 // Claude Code が使えないときのひな形
-function templateTalk(post) {
-  // 記事の説明文は「〜を解説。」のような言い切りもあるので、タイトルから「です・ます」の文を作る
-  const [main, sub] = String(post.data.title).split('｜');
+// 1 行目はタイトルの前半（「Amazonの4万円台のPOSレジは買っていい？」など、読む人の疑問の形が多い）。要点は記事の見出しから取る
+export function templateTalk(post) {
+  const [main] = String(post.data.title).split('｜');
   return {
-    rejimaru: `『${main}』について、記事にまとめました。`,
-    posuta: sub ? `${sub}を紹介しています。くわしくは、ブログの記事でどうぞ。` : 'くわしくは、ブログの記事にまとめています。',
-    caption_points: headings(post.content).filter((h) => !/よくある質問|まとめ|参考/.test(h)).slice(0, 4),
+    hook: main.trim(),
+    hook_deco: '',
+    // 見出しの先頭の番号（「1. 」など）は、箇条書きの「・」と重なるので外す
+    caption_points: headings(post.content).filter((h) => !/よくある質問|まとめ|参考/.test(h)).slice(0, 4).map((h) => h.replace(/^\d+[.．、]\s*/, '')),
     hashtags: ['#小さなお店', '#開業準備'],
   };
 }
 
-function buildXText(post, talk, ads) {
+const postUrl = (post) => {
   // パソコンで動かすと SITE.url が仮の URL になることがあるため、そのときは本番の URL を使う
   const base = SITE.url.includes('example.com') ? 'https://www.mise-register.com' : SITE.url.replace(/\/$/, '');
-  const url = `${base}/posts/${post.slug}`;
+  return `${base}/posts/${post.slug}`;
+};
+
+// X：1 行目で困りごと・得することを書き、要点を 2 個まで本文に入れる（投稿だけでも役に立つように）。280 を超えるときは要点を減らす
+export function buildXText(post, talk, ads) {
   const tags = [...talk.hashtags.slice(0, 2), ...(ads ? ['#PR'] : [])].join(' ');
-  const rejimaru = `レジまる「${talk.rejimaru}」${talk.rejimaru_deco ?? ''}`;
-  const full = `${rejimaru}\nポスタ「${talk.posuta}」${talk.posuta_deco ?? ''}\n${url}\n${tags}`;
-  if (xLength(full) <= X_LIMIT) return full;
-  // 長すぎるときは、ポスタのひとことを短くする
-  return `${rejimaru}\nポスタ「くわしくは、ブログの記事で紹介しています」\n${url}\n${tags}`;
+  const head = `${talk.hook}${talk.hook_deco ?? ''}`;
+  for (let n = Math.min(2, talk.caption_points.length); n >= 0; n--) {
+    const points = talk.caption_points.slice(0, n).map((p) => `・${p}`);
+    const text = [head, ...(points.length ? ['', ...points] : []), '', postUrl(post), tags].join('\n');
+    if (xLength(text) <= X_LIMIT) return text;
+  }
+  return [head, postUrl(post), tags].join('\n');
 }
 
-// Instagram の投稿文の 1 行目（一覧では最初の 1〜2 行しか見えないので、何の記事かを先に書く）
-const captionHook = (post) => `【${String(post.data.title).split('｜')[0]}】`;
-
-// Instagram はフォロワーが多いので、カルーセル（めくる画像）を主にする。投稿文は 1 行目で何の記事か分かるようにする
-function buildCaption(post, talk, ads) {
+// Instagram はフォロワーが多いので、カルーセル（めくる画像）を主にする
+// 一覧では最初の 1〜2 行しか見えないので、1 行目に困りごと・得することを書く
+export function buildCaption(post, talk, ads) {
   const tags = [...talk.hashtags, '#小さなお店', '#お店づくり', '#開業準備', ...(ads ? ['#PR'] : [])];
-  return `${captionHook(post)}
-画像を横にめくると、要点と目次が見られます。
+  return `${talk.hook}${talk.hook_deco ?? ''}
 
-レジまる「${talk.rejimaru}」${talk.rejimaru_deco ?? ''}
-
-ポスタ「${talk.posuta}」${talk.posuta_deco ?? ''}
-
-▼この記事で分かること
+▼要点
 ${talk.caption_points.map((p) => `・${p}`).join('\n')}
 
+画像を横にめくると、要点と記事の目次が見られます。
 あとで見返せるように、保存しておいてください。
-記事は、プロフィールのリンク（mise & register）から見られます。
+記事「${String(post.data.title).split('｜')[0]}」は、プロフィールのリンク（mise & register）から見られます。
 
 ${[...new Set(tags)].join(' ')}
 `;
 }
 
 // リールの投稿文：動画で中身を見せるので短くする
-function buildReelCaption(post, talk, ads) {
+export function buildReelCaption(post, talk, ads) {
   const tags = [...talk.hashtags, '#小さなお店', '#開業準備', ...(ads ? ['#PR'] : [])];
-  return `${captionHook(post)}
-${talk.posuta}${talk.posuta_deco ?? ''}
+  return `${talk.hook}${talk.hook_deco ?? ''}
+${talk.caption_points.slice(0, 2).map((p) => `・${p}`).join('\n')}
 
 くわしくは、プロフィールのリンク（mise & register）から。
 保存しておくと、あとで見返せます。
@@ -283,7 +315,7 @@ export function fitTitle(title, width, maxSize, minSize, maxLines) {
 const textLines = (lines, x, y, size, lh, opt = '') =>
   lines.map((t, i) => `<text x="${x}" y="${y + i * lh}" font-size="${size}" ${opt}>${esc(t)}</text>`).join('');
 
-async function makeXImage(post, illus, file) {
+export async function makeXImage(post, illus, file) {
   const { lines, size } = fitTitle(post.data.title, 800, 40, 30, 2);
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675"><rect width="1200" height="675" fill="${C.bg}"/>
 <g font-family="${FONT}" fill="${C.ink}">${textLines(lines, 60, 80, size, Math.round(size * 1.45), 'font-weight="800"')}</g>
@@ -357,7 +389,7 @@ function wrapJa(str, n) {
 // プロフィールの一覧やフィードでは上下が切り取られる。文字と絵は、この範囲の中だけに置く
 const REEL_SAFE = { top: 300, bottom: 1500, left: 80, right: 940 };
 
-async function makeReelFrames(post, talk, illus, ads, dir) {
+export async function makeReelFrames(post, talk, illus, ads, dir) {
   const S = REEL_SAFE;
   const t = (x, y, s, size, color, weight = 700, anchor = 'start') =>
     `<text x="${x}" y="${y}" font-family="${FONT}" font-size="${size}" font-weight="${weight}" fill="${color}" text-anchor="${anchor}">${esc(s)}</text>`;
@@ -379,14 +411,12 @@ async function makeReelFrames(post, talk, illus, ads, dir) {
   await sharp(frame(t(S.left, S.top + 37, '新しい記事', 42, C.accent) + pr + textLines(lines, S.left, S.top + 90 + size, size, lh, `font-family="${FONT}" font-weight="800" fill="${C.ink}"`) + brand))
     .composite(layers1).png().toFile(files[0]);
 
-  // 2. 2 人の会話（キャラクターは左、吹き出しは右のボタンにかからない幅にする）
-  const bx = 270, bw = S.right - bx, perLine = Math.floor((bw - 70) / 44);
-  const bubble = (y, n) => `<rect x="${bx}" y="${y}" width="${bw}" height="${120 + n * 60}" rx="28" fill="${box}" stroke="${line}" stroke-width="3"/>`;
-  const r = wrapJa(talk.rejimaru, perLine), p = wrapJa(talk.posuta, perLine);
-  const y1 = S.top + 20, y2 = y1 + 120 + r.length * 60 + 70;
-  const say = (y, name, rows) => t(bx + 35, y + 65, name, 36, C.accent) + rows.map((s, i) => t(bx + 35, y + 130 + i * 60, s, 44, C.ink, 600)).join('');
-  await sharp(frame(bubble(y1, r.length) + say(y1, 'レジまる', r) + bubble(y2, p.length) + say(y2, 'ポスタ', p) + brand))
-    .composite([await put(mascot('rejimaru'), 190, 190, S.left - 30, y1 + 20), await put(mascot('posuta'), 190, 190, S.left - 30, y2 + 20)]).png().toFile(files[1]);
+  // 2. 1 行目の文（読む人の困りごと・得すること）を大きく。2026-11-28 にマスコットの会話のコマから置き換えた
+  const hookRows = wrapJa(talk.hook, Math.floor(width / 72));
+  const hookTop = S.top + 260;
+  await sharp(frame(`<rect x="${S.left}" y="${hookTop - 120}" width="120" height="10" fill="${C.accent}"/>` +
+    hookRows.map((s, i) => t(S.left, hookTop + i * 104, s, 72, C.ink, 800)).join('') +
+    t(S.left, hookTop + hookRows.length * 104 + 90, 'このあと、要点を順に見せます', 40, C.muted, 600) + brand)).png().toFile(files[1]);
 
   // 3. この記事で分かること
   // 2 行目からは「・」のぶん字下げする
@@ -417,8 +447,8 @@ async function makeInstagramReel(post, talk, illus, ads, dir) {
 }
 
 // ---- Instagram のカルーセル（縦長 1080×1350・5 枚） ----
-// 1 枚目は表紙（instagram.png と同じ）、2 枚目は会話、3 枚目は要点、4 枚目は記事の目次、5 枚目は保存とプロフィールへの案内
-async function makeInstagramCarousel(post, talk, illus, ads, dir) {
+// 1 枚目は表紙（instagram.png と同じ）、2 枚目は 1 行目の文（困りごと・得すること）、3 枚目は要点、4 枚目は記事の目次、5 枚目は保存とプロフィールへの案内
+export async function makeInstagramCarousel(post, talk, illus, ads, dir) {
   const W = 1080, H = 1350, L = 80, R = 1000, cx = W / 2;
   const t = (x, y, s, size, color, weight = 700, anchor = 'start') =>
     `<text x="${x}" y="${y}" font-family="${FONT}" font-size="${size}" font-weight="${weight}" fill="${color}" text-anchor="${anchor}">${esc(s)}</text>`;
@@ -431,14 +461,12 @@ async function makeInstagramCarousel(post, talk, illus, ads, dir) {
   // 1. 表紙
   await makeInstagramCover(post, illus, files[0]);
 
-  // 2. 会話
-  const bx = 250, bw = R - bx, perLine = Math.floor((bw - 70) / 42);
-  const r = wrapJa(talk.rejimaru, perLine), p = wrapJa(talk.posuta, perLine);
-  const y1 = 150, y2 = y1 + 120 + r.length * 58 + 80;
-  const bubble = (y, n) => `<rect x="${bx}" y="${y}" width="${bw}" height="${120 + n * 58}" rx="28" fill="${box}" stroke="${line}" stroke-width="3"/>`;
-  const say = (y, name, rows) => t(bx + 35, y + 62, name, 34, C.accent) + rows.map((s, i) => t(bx + 35, y + 124 + i * 58, s, 42, C.ink, 600)).join('');
-  await sharp(frame(bubble(y1, r.length) + say(y1, 'レジまる', r) + bubble(y2, p.length) + say(y2, 'ポスタ', p), 2))
-    .composite([await put(mascot('rejimaru'), 170, 170, L - 20, y1 + 10), await put(mascot('posuta'), 170, 170, L - 20, y2 + 10)]).png().toFile(files[1]);
+  // 2. 1 行目の文（読む人の困りごと・得すること）を大きく。2026-11-28 にマスコットの会話から置き換えた
+  const hookRows = wrapJa(talk.hook, Math.floor((R - L) / 68));
+  const hookTop = Math.round((H - hookRows.length * 98) / 2) - 40;
+  await sharp(frame(`<rect x="${L}" y="${hookTop - 110}" width="120" height="10" fill="${C.accent}"/>` +
+    hookRows.map((s, i) => t(L, hookTop + i * 98, s, 68, C.ink, 800)).join('') +
+    t(L, hookTop + hookRows.length * 98 + 80, '次の画像から、要点と目次を見られます', 38, C.muted, 600), 2)).png().toFile(files[1]);
 
   // 3・4. 要点と目次（どちらも「・」の箇条書き。2 行目からは字下げ）
   const listSlide = async (title, items, n, file) => {
@@ -477,7 +505,7 @@ async function makeOne(state, slug) {
   try {
     talk = writeTalk(next);
   } catch (err) {
-    log(`会話の作成に失敗したため、ひな形の文章にします: ${err.message}`);
+    log(`投稿文の作成に失敗したため、ひな形の文章にします: ${err.message}`);
   }
   talk ??= templateTalk(next);
 
@@ -510,7 +538,18 @@ async function makeOne(state, slug) {
   return true;
 }
 
-// 作ってあるフォルダーの x.txt と instagram-caption.txt から会話と要点を読み直し、リール動画だけを作り直す
+// 作ってあるフォルダーの x.txt と instagram-caption.txt から 1 行目の文と要点を読み直す
+// 2026-11-28 より前の会話の形（レジまる「…」）のファイルは、レジまるのセリフを 1 行目の文として使う
+export function readTalkFromFiles(x, cap) {
+  const old = x.match(/^レジまる「(.*)」/m)?.[1];
+  const firstLine = x.split('\n')[0].trim();
+  return {
+    hook: old ?? firstLine.replace(/\p{Extended_Pictographic}️?$/u, '').trim(),
+    caption_points: [...cap.matchAll(/^・(.+)$/gm)].map((m) => m[1]),
+  };
+}
+
+// 作ってあるフォルダーの文章から、リール動画だけを作り直す
 async function rebuildReels() {
   const dirs = fs.existsSync(OUT_DIR) ? fs.readdirSync(OUT_DIR).filter((d) => /^\d{4}-\d{2}-\d{2}-/.test(d) && d.slice(0, 10) >= today()) : [];
   const posts = listPosts();
@@ -523,11 +562,7 @@ async function rebuildReels() {
       continue;
     }
     const x = fs.readFileSync(xFile, 'utf8'), cap = fs.readFileSync(capFile, 'utf8');
-    const talk = {
-      rejimaru: x.match(/^レジまる「(.*)」$/m)?.[1] ?? '',
-      posuta: cap.match(/^ポスタ「(.*)」$/m)?.[1] ?? '',
-      caption_points: [...cap.matchAll(/^・(.+)$/gm)].map((m) => m[1]),
-    };
+    const talk = readTalkFromFiles(x, cap);
     const illusFile = path.join(ROOT, 'public', 'images', 'posts', `${post.slug}-1.webp`);
     await makeInstagramReel(post, talk, fs.existsSync(illusFile) ? illusFile : null, /#PR\b/.test(x), dir);
     log(`リールを作り直しました: ${d}`);
