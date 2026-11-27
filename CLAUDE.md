@@ -227,7 +227,7 @@ npm run og      # OGP 画像（public/og-image.png）を作り直す
 - 公開の時間帯: 8:00 / 12:00 / 18:00 のいずれか
 - 記事の作り方: 運営者が Claude Code で「〇〇の記事を書いて」と頼んで作る。8:00 / 12:00 / 18:00 の公開スケジュールに合わせて、何本かまとめて作る
 - 有料の Claude API を使った下書きの自動生成（`npm run draft:daily`・タスク スケジューラへの登録）は使わない
-- 予約公開: 確認済みの記事は `scheduled/`（Git に入れない）に置き、フロントマターに `publishAt: 2026-10-18T12:00`（日本時間）を書く。`npm run publish:scheduled` を実行すると、時刻を過ぎた記事を `content/posts/` に移してプッシュする（`-- --dry` で予定の一覧だけ表示）
+- 予約公開: 確認済みの記事は `scheduled/`（Git に入れない）に置き、フロントマターに `publishAt: 2026-10-18T12:00`（日本時間）を書く。`npm run publish:scheduled` を実行すると、時刻を過ぎた記事を `content/posts/` に移してプッシュする（`-- --dry` で予定の一覧だけ表示）。送る前に GitHub の新しい変更をマージで取り込む（別のセッションが先に送っていると、11/23・11/27 のように送るのを断られたため）。前の回に送れなかったコミットは、公開する記事がない回でも送る。main 以外のブランチでは記事を動かさずに止まる（テストは `tests/publishScheduled.test.mjs`）
 - 毎日 18:00 の記事づくり: 上位のアフィリエイトサイト・比較サイトをリサーチし、上位サイトが扱っていない具体的な悩みのキーワードで記事を 2〜3 本作って予約する（`npm run research:daily`。指示は `scripts/daily-research-prompt.md`、報告は `logs/daily-research/日付.md`）
   - 自動で作った記事には `reviewed: false` を付ける。運営者が内容を確認して `reviewed: false` を消すまで、公開時刻になっても公開しない
   - 自動の作業ではコミット・プッシュをしない。書き込むのは `scheduled/` と `logs/` だけ
