@@ -1,7 +1,73 @@
 // 毎日の SNS 投稿づくり（scripts/daily-sns.mjs）のテスト：タイトルの収め方・claude -p に渡す環境変数・投稿文の形
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { fitTitle, claudeEnv, buildXText, buildCaption, buildReelCaption, templateTalk, normalizeTalk, readTalkFromFiles, buildPrompt, xLength } from '../scripts/daily-sns.mjs';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fitTitle, claudeEnv, buildXText, buildCaption, buildReelCaption, templateTalk, normalizeTalk, readTalkFromFiles, buildPrompt, xLength, personFor, PERSON_RULES, PERSON_BY_SLUG } from '../scripts/daily-sns.mjs';
+
+// ---- SNS の画像の人物（2026-11-28 にマスコットから差し替え） ----
+const p = (slug, category, tags = [], title = '') => personFor({ slug, data: { category, tags, title } });
+
+test('記事の業種に合う人物を選ぶ', () => {
+  assert.equal(p('kitchen-car-cashless', 'kitchen-car', ['キッチンカー']).genre, 'kitchen-car');
+  assert.equal(p('salon-pos', 'salon', ['美容院']).genre, 'salon');
+  assert.equal(p('apparel-fitting-room', 'apparel', ['アパレル']).genre, 'apparel');
+  assert.equal(p('small-hotel-pos', 'industries', ['ホテル']).genre, 'hotel');
+  assert.equal(p('izakaya-pos', 'industries', ['飲食店'], '居酒屋のPOSレジ').genre, 'dining');
+});
+
+test('業種が決まらない記事はカフェの人。「バー」を含むだけの言葉では居酒屋・バーの人にしない', () => {
+  assert.equal(p('pos-benefits-overview', 'industries', ['POSレジ']).genre, 'cafe');
+  assert.equal(p('barcode-reader', 'devices', ['バーコードリーダー'], 'バーコードリーダーの選び方').genre, 'register');
+  assert.equal(p('pos-printer-driver', 'devices', ['周辺機器'], 'プリンターのドライバーとサーバー').genre, 'register');
+  assert.equal(p('cafe-bar-for-adults', 'cafe', ['カフェ', 'バー']).genre, 'cafe');
+  assert.equal(p('bar-pos', 'industries', ['バー']).genre, 'dining');
+});
+
+test('POS・周辺機器の記事はレジ担当、トラブルの記事はレジ担当の困った顔', () => {
+  assert.deepEqual([p('airregi-daily-workflow', 'devices', ['Airレジ']).genre, p('airregi-daily-workflow', 'devices', ['Airレジ']).mood], ['register', 'smile']);
+  const t = p('cash-drawer-not-opening', 'devices', ['キャッシュドロア', 'トラブル対応']);
+  assert.deepEqual([t.genre, t.mood], ['register', 'think']);
+  assert.match(t.file, /register-think\.webp$/);
+});
+
+test('レジ締め・Excel・補助金・売上の記事（management）は店主の事務の人', () => {
+  assert.equal(p('register-closing-checklist', 'management', ['レジ締め']).genre, 'office');
+  assert.equal(p('excel-sales-report', 'management', ['Excel', '売上']).genre, 'office');
+});
+
+test('業種のカテゴリが付いた周辺機器の記事は、その業種の人のまま', () => {
+  assert.equal(p('oracle-simphony-pos', 'devices', ['ホテル']).genre, 'hotel');
+});
+
+test('ジム・ペットショップ・直売所・ゴルフ練習場・リサイクルショップ・歯科医院は、その業種の人', () => {
+  assert.equal(p('gym-pos', 'industries', ['ジム']).genre, 'gym');
+  assert.equal(p('pet-shop-pos', 'industries', ['ペットショップ', 'ペットホテル']).genre, 'pet');
+  assert.equal(p('farm-stand-pos', 'industries', ['農産物直売所']).genre, 'farm');
+  assert.equal(p('golf-range-pos', 'industries', ['ゴルフ練習場']).genre, 'golf');
+  assert.equal(p('recycle-shop-pos', 'industries', ['リサイクルショップ']).genre, 'recycle');
+  assert.equal(p('simple-shop-repair-buyback', 'industries', ['修理', '買取']).genre, 'recycle');
+  assert.equal(p('dental-clinic-pos', 'industries', ['歯科医院']).genre, 'dental');
+});
+
+test('トラブル・防犯の記事は考える顔、ほかは笑顔', () => {
+  assert.equal(p('cash-drawer-not-opening', 'devices', ['トラブル対応']).mood, 'think');
+  assert.equal(p('store-crime-prevention', 'management', ['防犯']).mood, 'think');
+  assert.equal(p('cafe-cashless', 'cafe', ['カフェ']).mood, 'smile');
+});
+
+test('対応表のどの業種・表情にも、人物画のファイルがある', () => {
+  for (const genre of new Set(['cafe', ...PERSON_RULES.map(([g]) => g), ...Object.values(PERSON_BY_SLUG)]))
+    for (const mood of ['smile', 'think'])
+      assert.ok(fs.existsSync(path.join('public', 'images', 'sns-people', `${genre}-${mood}.webp`)), `${genre}-${mood}`);
+});
+
+test('「役立つ」カルーセルの短い見出しは、X に多めに入れられる（280 以内）', () => {
+  const t = { hook: 'キャッシュドロアが開かない、まず鍵の位置から', hook_deco: '', caption_points: ['鍵の位置', 'レシート用紙', 'ケーブル', 'POSアプリの設定', 'それでもだめなら再起動', '開かない間の会計'], hashtags: ['#キャッシュドロア', '#POSレジ'] };
+  const text = buildXText({ slug: 'cash-drawer-not-opening', data: {} }, t, true, 6);
+  assert.ok(xLength(text) <= 280);
+  assert.match(text, /^・ケーブル$/m);
+});
 
 const joined = (lines) => lines.join('');
 
