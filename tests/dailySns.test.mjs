@@ -24,6 +24,10 @@ test('業種が決まらない記事と、「バー」を含むだけの言葉�
   assert.equal(p('bar-pos', 'industries', ['バー']).genre, 'dining');
 });
 
+test('ジムの記事は整体の人にする', () => {
+  assert.equal(p('gym-pos', 'industries', ['ジム']).genre, 'relax');
+});
+
 test('トラブル・防犯の記事は考える顔、ほかは笑顔', () => {
   assert.equal(p('cash-drawer-not-opening', 'devices', ['トラブル対応']).mood, 'think');
   assert.equal(p('store-crime-prevention', 'management', ['防犯']).mood, 'think');
