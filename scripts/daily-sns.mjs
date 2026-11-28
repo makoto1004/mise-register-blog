@@ -296,6 +296,7 @@ const put = async (file, w, h, left, top) => ({ input: await whiten(file, w, h),
 
 // ---- SNS の画像に出す人物（2026-11-28 にマスコット 2 体から差し替え） ----
 // 年配に見える人は使わない（運営者の決まり）。school・dining・florist・life・relax は若い人の別の絵（表情ちがいがないので smile・think は同じ絵）、bakery は p-bakery2
+// 2026-11-28 に記事用の人を足した：register（smile と think は別の絵）・office・gym・pet・farm・golf・recycle（この 6 つと dental は smile・think が同じ絵）
 // 絵は「mise & ひとふでノート」の POP 用の人物画（Canva の AI で作成。使ってよいことは運営者が確認済み）を
 // public/images/sns-people/<業種>-<表情>.webp に縮小してコピーしたもの。絵そのものは加工しない
 // 記事の業種に合う人を 1 人出す。上から順に見て、最初に当てはまった業種にする。どれでもなければカフェの人
@@ -315,12 +316,25 @@ export const PERSON_RULES = [
   // 「バー」は「バーコード」「サーバー」「ドライバー」にも含まれるので、タグがちょうど「バー」のときだけ当てる
   ['dining', /レストラン|居酒屋|ダイニング|#バー#|ラーメン|焼肉|restaurant|izakaya|dining/i],
   ['life', /クリーニング|清掃業|修理店|便利屋/i],
+  // 業種の言葉がない記事は、カテゴリで決める（2026-11-28 に追加）。POS・周辺機器はレジ担当、レジ締め・Excel・補助金・売上は店主の事務
+  ['register', /^devices\b/],
+  ['office', /^management\b/],
 ];
 // 表情：トラブル・注意の記事は考える顔、ほかは笑顔
 const THINK_RULE = /トラブル対応|防犯|セキュリティ|not-opening|mismatch|trouble|error|broken|crime/i;
 // 規則では合わない記事だけ、slug で決める（ペットホテルの話が出るペットショップ、業種をまたぐ記事など）
-// ジムの人はいないので、体を動かす仕事に近い整体の人にする（2026-11-28 に運営者が決定）
-export const PERSON_BY_SLUG = { 'pet-shop-pos': 'apparel', 'pos-benefits-by-industry': 'cafe', 'cafe-concept-types': 'cafe', 'gym-pos': 'relax' };
+// 2026-11-28：ジム・ペットショップ・直売所・ゴルフ練習場・リサイクルショップ（買取）の人を新しく描いた。歯科医院は歯科医の絵
+export const PERSON_BY_SLUG = {
+  'pos-benefits-by-industry': 'cafe',
+  'cafe-concept-types': 'cafe',
+  'gym-pos': 'gym',
+  'pet-shop-pos': 'pet',
+  'farm-stand-pos': 'farm',
+  'golf-range-pos': 'golf',
+  'recycle-shop-pos': 'recycle',
+  'simple-shop-repair-buyback': 'recycle',
+  'dental-clinic-pos': 'dental',
+};
 export function personFor(post) {
   const d = post.data ?? {};
   const fixed = PERSON_BY_SLUG[post.slug];
